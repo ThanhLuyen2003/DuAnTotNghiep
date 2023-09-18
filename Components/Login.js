@@ -16,6 +16,7 @@ const Login = (props) => {
                     </View>
                 </View>
             </View>
+           
         </ImageBackground>
     );
 }
