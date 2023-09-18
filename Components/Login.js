@@ -13,9 +13,7 @@ const Login = (props) => {
                 <View style={{ backgroundColor: "#99FF99", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <Image style={{ width: 250, height: 250, borderRadius: 50, marginTop: 30 }} source={require('../Images/Barbershop.png')} />
-
                         <Button title="hi" onPress={hi} />
-
                     </View>
                 </View>
             </View>
