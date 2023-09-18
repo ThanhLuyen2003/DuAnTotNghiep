@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+
+
 const SignUp = (props) => {
 
     return (
