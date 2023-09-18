@@ -5,7 +5,7 @@ const DatLich = (props) => {
 
     return (
         <View>
-            {/* <Text>ok</Text> */}
+            <Text>DatLich</Text>
         </View>
     );
 }
