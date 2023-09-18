@@ -11,7 +11,7 @@ import LienHe from './Components/LienHe';
 import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 
 const Tabb = createBottomTabNavigator();
