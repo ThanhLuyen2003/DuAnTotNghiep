@@ -10,19 +10,22 @@ import Home from './Components/Home';
 import LienHe from './Components/LienHe';
 import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const Tabb = createBottomTabNavigator();
+const getIconColor = (focus) => ({
+  tintColor: focus ? Colors.primary : Colors.dark,
 
+})
 export default function App() {
 
   const Stack = createNativeStackNavigator();
-
-
   return (
 
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='ManChao'>
+    <NavigationContainer >
+      <Stack.Navigator initialRouteName='ManChao' >
 
         <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} />
 
@@ -38,45 +41,77 @@ export default function App() {
   );
 }
 
-
+// screenOptions={{headerShown:false,tabBarStyle:styles.tabBar}}
 const HomeTab = () => {
   return (
-    <Tabb.Navigator >
-
+    <Tabb.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar,tabBarShowLabel:false }}>
       <Tabb.Screen name='Home' component={Home}
-
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Image source={require('./Images/home.png')} style={{ width: 25, height: 25, }} resizeMode="stretch" />
-          ),
-          title: "Trang chủ"
+         tabBarIcon:({focused})=>(
+            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
+              <Image source={require('./Images/homee.png')} style={{width:25,height:25,tintColor:focused?'#CD853F':'gray'}} resizeMode="stretch"/>
+              <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Home</Text>
+            </View>
+         ),
+          
         }}
       />
 
       <Tabb.Screen name='DatLich' component={DatLich}
         options={{
-          tabBarIcon: () =>
-            <Image source={require('./Images/DatLich.png')} style={{ width: 30, height: 30 }} resizeMode="stretch" />,
-          title: "Đặt lịch"
+          tabBarIcon: ({focused}) =>(
+            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
+               <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
+               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Đặt lịch</Text>
+            </View>
+          ),             
         }}
       />
 
       <Tabb.Screen name='MuaSam' component={MuaSam}
         options={{
-          tabBarIcon: () =>
-            <Image source={require('./Images/MuaSam.png')} style={{ width: 25, height: 25 }} resizeMode="stretch" />,
-          title: "Mua sắm"
+          tabBarIcon: ({focused}) =>(
+            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
+               <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
+               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Mua sắm</Text>
+            </View>
+          ),             
         }}
       />
 
       <Tabb.Screen name='LienHe' component={LienHe}
         options={{
-          tabBarIcon: () =>
-            <Image source={require('./Images/LienHe.png')} style={{ width: 25, height: 25 }} resizeMode="stretch" />,
-          title: "Liên hệ"
+          tabBarIcon: ({focused}) =>(
+            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
+               <Image source={require('./Images/phone.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
+               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Liên hệ</Text>
+            </View>
+          ),         
         }}
       />
 
     </Tabb.Navigator>
   );
 }
+const styles = StyleSheet.create({
+  tabBar: {
+    position: "absolute",
+    padding: 0,
+    left: 16,
+    right: 16,
+    bottom: 16,
+    height: 66,
+    borderRadius: 16,
+    backgroundColor: "white",
+    borderTopColor: "transparent",
+    shadowColor: "dark",
+    shadowOffset: {
+      height: 6,
+      width: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3
+  },
+  
+})
