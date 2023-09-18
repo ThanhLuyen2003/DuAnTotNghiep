@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, Touc
 
 const Login = (props) => {
     const hi = () => {
-        props.navigation.navigate('HomeTab');
+        props.navigation.navigate('SignUp');
     }
 
     const SignUp = () => {
@@ -46,6 +46,7 @@ const Login = (props) => {
             </TouchableHighlight>
 
             <Text style={{ color: 'white', marginTop: 30, alignSelf: 'center' }} onPress={SignUp} >Bạn chưa có tài khoản?</Text>
+
 
         </ImageBackground>
     );

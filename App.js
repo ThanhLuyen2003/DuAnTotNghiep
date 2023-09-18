@@ -15,10 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const Tabb = createBottomTabNavigator();
-const getIconColor = (focus) => ({
-  tintColor: focus ? Colors.primary : Colors.dark,
 
-})
 export default function App() {
 
   const Stack = createNativeStackNavigator();
