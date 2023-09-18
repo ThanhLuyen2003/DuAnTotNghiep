@@ -7,11 +7,13 @@ const Login = (props) => {
     }
 
     return (
-        <View>
+        <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
             {/* <Image source={require('../Images/Barbershop.png')}/> */}
             {/* <Button onPress={hi} title="Hi" /> */}
-            <ImageBackground  blurRadius={2} style={{flex:1,height:690}} source={require('../Images/image.png')}>
-
+            <ImageBackground  blurRadius={2}  source={require('../Images/bannerLog.png')}>
+            <View style={{flex:1}}>
+            <Image style={{width:300,height:300,borderRadius:50}} source={require('../Images/Barbershop.png')}/>
+            </View>
             </ImageBackground>
 
         </View>
