@@ -14,7 +14,7 @@ const ManChao = (props) => {
     return (
         <View>
 
-            <Image source={require('../Images/home.png')} style={{ width: "100%", height: 300, marginTop: 300 }} />
+            <Image source={require('../Images/homee.png')} style={{ width: "100%", height: 300, marginTop: 300 }} />
 
         </View>
     )
