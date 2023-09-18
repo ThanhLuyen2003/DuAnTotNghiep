@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } from "react-native";
-
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 const SignUp = (props) => {
 
     return (
-        <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
+        <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
+
                 <View style={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
@@ -17,21 +18,21 @@ const SignUp = (props) => {
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5 }}>
                         <Text style={{ color: "white" }}>Họ và tên</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/user.png')} />
+                            <Icons name="account" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
                             <TextInput placeholder="Nhập họ và tên" placeholderTextColor='#C2C2C2' style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 25 }}>
                         <Text style={{ color: "white" }}>Email</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/message.png')} />
+                            <Icons name="email" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
                             <TextInput placeholder="Nhập email" placeholderTextColor='#C2C2C2' style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 50 }}>
                         <Text style={{ color: "white" }}>Số điện thoại</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/phonee.png')} />
+                            <Icons name="phone" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
                             <TextInput placeholder="Nhập số điện thoại" placeholderTextColor='#C2C2C2' style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
@@ -39,6 +40,8 @@ const SignUp = (props) => {
                         <Text style={{ color: "white" }}>Mật khẩu</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
+
+                            <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
                             <TextInput placeholder="Nhập mật khẩu" placeholderTextColor='#C2C2C2' style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
