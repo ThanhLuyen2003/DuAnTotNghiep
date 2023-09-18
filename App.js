@@ -44,49 +44,49 @@ export default function App() {
 // screenOptions={{headerShown:false,tabBarStyle:styles.tabBar}}
 const HomeTab = () => {
   return (
-    <Tabb.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar,tabBarShowLabel:false }}>
+    <Tabb.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar, tabBarShowLabel: false }}>
       <Tabb.Screen name='Home' component={Home}
         options={{
-         tabBarIcon:({focused})=>(
-            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
-              <Image source={require('./Images/homee.png')} style={{width:25,height:25,tintColor:focused?'#CD853F':'gray'}} resizeMode="stretch"/>
-              <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Home</Text>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
+              <Image source={require('./Images/homee.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Home</Text>
             </View>
-         ),
-          
+          ),
+
         }}
       />
 
       <Tabb.Screen name='DatLich' component={DatLich}
         options={{
-          tabBarIcon: ({focused}) =>(
-            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
-               <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
-               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Đặt lịch</Text>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
+              <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Đặt lịch</Text>
             </View>
-          ),             
+          ),
         }}
       />
 
       <Tabb.Screen name='MuaSam' component={MuaSam}
         options={{
-          tabBarIcon: ({focused}) =>(
-            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
-               <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
-               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Mua sắm</Text>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
+              <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Mua sắm</Text>
             </View>
-          ),             
+          ),
         }}
       />
 
       <Tabb.Screen name='LienHe' component={LienHe}
         options={{
-          tabBarIcon: ({focused}) =>(
-            <View style={{alignItems:"center",justifyContent:"center",top:3}}>
-               <Image source={require('./Images/phone.png')} style={{ width: 25, height: 25,tintColor:focused?'#CD853F':'gray' }} resizeMode="stretch" />
-               <Text style={{color:focused?'#CD853F':'gray',fontSize:12}}>Liên hệ</Text>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
+              <Image source={require('./Images/phone.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Liên hệ</Text>
             </View>
-          ),         
+          ),
         }}
       />
 
@@ -113,5 +113,5 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3
   },
-  
+
 })
