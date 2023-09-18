@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Button, ImageBackground, Text } from "react-na
 
 const Login = (props) => {
     const hi = () => {
-        props.navigation.navigate('HomeTab');
+        props.navigation.navigate('SignUp');
     }
     return (
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
