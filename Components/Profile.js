@@ -7,7 +7,7 @@ const Profile = (props) => {
     const editProfile = () => {
         navigation.navigate("EditProfile")
     }
-   
+
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
@@ -27,33 +27,33 @@ const Profile = (props) => {
                             <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Tài khoản</Text>
                         </View>
                         <Pressable onPress={editProfile}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5,borderBottomWidth:1,borderBottomColor:'#CD853F' }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='border-color' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Chỉnh sửa tài khoản</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5,borderBottomWidth:1,borderBottomColor:'#CD853F' }}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='shopping' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Đơn hàng</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5 ,borderBottomWidth:1,borderBottomColor:'#CD853F'}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='sale' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Ưu đãi</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5 ,borderBottomWidth:1,borderBottomColor:'#CD853F'}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='face-agent' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Trợ giúp, hỗ trợ yêu cầu</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5,borderBottomWidth:1,borderBottomColor:'#CD853F' }}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='map-marker-check' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Địa điểm salon</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5 ,borderBottomWidth:1,borderBottomColor:'#CD853F'}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='bell-badge' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Thông báo</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -61,16 +61,16 @@ const Profile = (props) => {
                         <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
                             <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Cài đặt</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5 ,borderBottomWidth:1,borderBottomColor:'#CD853F'}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='information' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Điều khoản và dịch vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5 ,borderBottomWidth:1,borderBottomColor:'#CD853F'}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='logout' size={25} color={'#CD853F'} />
-                            
-                                 <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
-                        
+
+                            <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
+
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                     </ScrollView>
