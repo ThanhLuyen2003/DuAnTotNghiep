@@ -11,11 +11,11 @@ const Login = (props) => {
     }
     return (
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
-            <View style={{ justifyContent: 'center', width: "100%", alignItems: "center" }}>
-                        <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
-                    </View>
+            <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 20 }}>
+                <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
+            </View>
 
-            <View style={{ height: 30 }}></View>
+            <View style={{ height: 80 }}></View>
 
 
             <View style={style.btn}>
