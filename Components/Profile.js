@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Toast from 'react-native-toast-message'
+// import Toast from 'react-native-toast-message'
 const Profile = (props) => {
     const { navigation } = props;
     const editProfile = () => {
