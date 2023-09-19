@@ -26,10 +26,9 @@ export default function App() {
 
     <NavigationContainer >
       <Stack.Navigator initialRouteName='ManChao' >
+        <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} />
 
       <Stack.Screen name='GioiThieu' component={GioiThieu} options={{ headerShown: false }} />
-
-        {/* <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} /> */}
 
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
 
