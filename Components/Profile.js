@@ -1,22 +1,13 @@
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
-// import Toast from 'react-native-toast-message'
+
 const Profile = (props) => {
     const { navigation } = props;
     const editProfile = () => {
         navigation.navigate("EditProfile")
     }
-    // const showToat=()=>{
-    //     Toast.show({
-    //         type:"success",
-    //         text1:"Toast mess1",
-    //         text2:"Toast mess2",
-    //         autoHide:false,
-    //         visibilityTime:2500,
-    //         position:"bottom"
-    //     })
-    // }
+   
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
@@ -79,8 +70,7 @@ const Profile = (props) => {
                             <Icons name='logout' size={25} color={'#CD853F'} />
                             
                                  <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
-                         {/* <Button title='click' onPress={showToat}/> */}
-                           {/* <Toast/> */}
+                        
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                     </ScrollView>
