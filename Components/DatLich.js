@@ -15,7 +15,6 @@ const DatLich = (props) => {
         "10:70", "10:00", "10:00", "10:00", "10:00"
     ])
 
-
     const itemm = ({ item }) => {
         return (
             <View style={{ borderColor: '#CD853F', borderWidth: 1, padding: 10, width: 100, margin: 5, alignItems: 'center', borderRadius: 20 }}>
