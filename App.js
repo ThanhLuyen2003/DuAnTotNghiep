@@ -12,6 +12,7 @@ import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Profile from './Components/Profile';
+import EditProfile from './Components/EditProfile';
 
 
 
@@ -34,6 +35,8 @@ export default function App() {
         <Stack.Screen name="HomeTab" component={HomeTab} options={{ headerShown: false }} />
 
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+
+        <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
 
