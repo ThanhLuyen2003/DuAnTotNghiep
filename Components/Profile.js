@@ -22,6 +22,11 @@ const Profile = (props) => {
                         <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Tài khoản</Text>
                     </View>
                     <View style={{ flexDirection: 'row', margin: 10, padding: 5 }}>
+                        <Icons name='border-color' size={25} color={'#CD853F'} />
+                        <Text style={{ marginLeft: 10, width: 200 }}>Chỉnh sửa tài khoản</Text>
+                        <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                    </View>
+                    <View style={{ flexDirection: 'row', margin: 10, padding: 5 }}>
                         <Icons name='shopping' size={25} color={'#CD853F'} />
                         <Text style={{ marginLeft: 10, width: 200 }}>Đơn hàng</Text>
                         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -47,7 +52,7 @@ const Profile = (props) => {
                         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                     </View>
                     <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
-                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Settings</Text>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Cài đặt</Text>
                     </View>
                     <View style={{ flexDirection: 'row', margin: 10, padding: 5 }}>
                         <Icons name='information' size={25} color={'#CD853F'} />
