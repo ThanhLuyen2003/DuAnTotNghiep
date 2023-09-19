@@ -10,7 +10,7 @@ const SignUp = (props) => {
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
 
-                <View style={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                <View style={{ borderTopLeftRadius: 20, borderTopRightRadius: 20, marginTop: 20 }}>
                     <View style={{ justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
                     </View>

@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Onboarding from 'react-native-onboarding-swiper';
+
+
 const GioiThieu = (props) => {
     const { navigation } = props;
     const DoneAndSkip = () => {
@@ -59,5 +61,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    
+
 })
