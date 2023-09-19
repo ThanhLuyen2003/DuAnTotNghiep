@@ -5,8 +5,8 @@ import { View, Image, StyleSheet,Text } from "react-native";
 const Home = (props) => {
 
     return (
-        <View>
-            <Text>Home</Text>
+        <View style={{flex:1}}>
+            <Text></Text>
         </View>
     );
 }
