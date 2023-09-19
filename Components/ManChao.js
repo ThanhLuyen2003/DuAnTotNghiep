@@ -6,9 +6,9 @@ const ManChao = (props) => {
 
     React.useEffect(() => {
 
-        setTimeout(() => {
-            props.navigation.navigate('Login');
-        }, 2000);
+        // setTimeout(() => {
+        //     props.navigation.navigate('Login');
+        // }, 2000);
     });
 
     return (
