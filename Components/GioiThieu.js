@@ -7,11 +7,10 @@ const GioiThieu = (props) => {
         setTimeout(() => {
             navigation.navigate("Login")
         }, 1000);
-
     }
     const donButton = ({ ...props }) => {
         return (
-            <TouchableOpacity style={{ padding: 20, backgroundColor: "#CD853F", borderTopLeftRadius: 100, borderBottomLeftRadius: 100,opacity:0.7 }} {...props} >
+            <TouchableOpacity style={{ padding: 20, backgroundColor: "#CD853F", borderTopLeftRadius: 100, borderBottomLeftRadius: 100, opacity: 0.7 }} {...props} >
                 <Text >Done</Text>
             </TouchableOpacity>
         )
@@ -26,8 +25,8 @@ const GioiThieu = (props) => {
                     {
                         backgroundColor: 'rgba(0,0,0,0.5)',
                         image: <Image style={{ width: 300, height: 380, borderRadius: 50, opacity: 0.7 }} source={require('../Images/imgGioiThieu/barber1.jpg')} />,
-                        title: 'Cắt tóc đê',
-                        subtitle: 'Hair cut',
+                        title: 'Poly Barber',
+                        subtitle: 'Thợ cắt tóc',
                     },
                     {
                         backgroundColor: 'rgba(0,0,0,0.5)',
@@ -49,7 +48,6 @@ const GioiThieu = (props) => {
                     },
 
                 ]}
-
             />
         </ImageBackground>
     )
