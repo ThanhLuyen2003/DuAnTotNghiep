@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput,Pressable } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -52,7 +52,7 @@ const EditProfile = () => {
                     </View>
                 </View>
                 <View >
-                    <Text style={{ fontSize: 15, fontWeight: "bold",bottom: 50 }}>Giới tính</Text>
+                    <Text style={{ fontSize: 15, fontWeight: "bold", bottom: 50 }}>Giới tính</Text>
                     <DropDownPicker style={styles.containerDropDown}
                         open={open}
                         value={value}
@@ -62,8 +62,8 @@ const EditProfile = () => {
                         setItems={setItems} />
                 </View>
                 <Pressable style={{ justifyContent: "center", bottom: 10 }}>
-                        <Text style={styles.press}>Cập nhật</Text>
-                    </Pressable>
+                    <Text style={styles.press}>Cập nhật</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -73,7 +73,7 @@ export default EditProfile
 
 const styles = StyleSheet.create({
     containerDropDown: {
-        backgroundColor:"#F5F5F5",
+        backgroundColor: "#F5F5F5",
         width: "100%",
         zIndex: 100, // quy định thứ tự xếp chồng các phần tử trên giao diện
         height: 50,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     },
     press: {
         backgroundColor: "#CD853F",
-        fontWeight:"bold",
+        fontWeight: "bold",
         color: "white",
         padding: 10,
         margin: 10,
