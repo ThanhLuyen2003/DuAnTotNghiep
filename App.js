@@ -10,9 +10,10 @@ import Home from './Components/Home';
 import LienHe from './Components/LienHe';
 import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 import Profile from './Components/Profile';
 import EditProfile from './Components/EditProfile';
+import GioiThieu from './Components/GioiThieu';
 
 
 
@@ -26,7 +27,9 @@ export default function App() {
     <NavigationContainer >
       <Stack.Navigator initialRouteName='ManChao' >
 
-        <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} />
+      <Stack.Screen name='GioiThieu' component={GioiThieu} options={{ headerShown: false }} />
+
+        {/* <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} /> */}
 
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
 
