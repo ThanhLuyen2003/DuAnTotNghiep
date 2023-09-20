@@ -40,43 +40,42 @@ const DatLich = (props) => {
     }
 
     return (
-        <ScrollView style={{ flex: 1,height:"100%" }}>
+        <ScrollView style={{ flex: 1, height: "100%" }}>
             <View style={{ padding: 20, backgroundColor: 'white', height: '94%' }}>
-            <View >
-                <Calendar
-                    enableSwipeMonths
-                    theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
-                    style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
-                    onDayPress={(date) => { setchonNgay(date.dateString) }}
-                    markedDates={{
-                        [chonNgay]: { selected: true }
-                    }}
-                    minDate={startDay}
-                />
-            </View>
+                <View >
+                    <Calendar
+                        enableSwipeMonths
+                        theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
+                        style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
+                        onDayPress={(date) => { setchonNgay(date.dateString) }}
+                        markedDates={{
+                            [chonNgay]: { selected: true }
+                        }}
+                        minDate={startDay}
+                    />
+                </View>
 
 
                 <View >
                     <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5 }}>Chọn  khung giờ</Text>
                 </View>
 
-                
-                    <FlatList
-                        data={khungGio}
-                        renderItem={itemm}
-                        numColumns={3}
-                        
-                    />
-                
+
+                <FlatList
+                    data={khungGio}
+                    renderItem={itemm}
+                    numColumns={3}
+                />
+
 
                 <TouchableOpacity onPress={hi} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
-            
-        </View>
+
+            </View>
         </ScrollView>
-        
+
 
     );
 }
