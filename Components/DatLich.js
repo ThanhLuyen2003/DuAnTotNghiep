@@ -32,7 +32,9 @@ const DatLich = (props) => {
             </View>
 
             <Calendar
-                style={{ borderRadius: 10, borderColor: 'black', borderWidth: 1, shadowOpacity: 0.2 }}
+                enableSwipeMonths
+                theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
+                style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2, padding: 20 }}
                 onDayPress={(date) => { setchonNgay(date.dateString) }}
                 hideExtraDays={true}
                 markedDates={{
