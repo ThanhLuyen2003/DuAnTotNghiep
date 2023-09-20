@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight } from "react-native";
+import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight, TouchableOpacity } from "react-native";
 
 const Login = (props) => {
     const hi = () => {
@@ -43,9 +43,9 @@ const Login = (props) => {
                 </View>
             </View>
 
-            <TouchableHighlight onPress={hi} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+            <TouchableOpacity onPress={hi} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                 <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Đăng nhập</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
             <Text style={{ color: 'white', marginTop: 20, alignSelf: 'center' }} onPress={SignUp} >Bạn chưa có tài khoản?</Text>
 

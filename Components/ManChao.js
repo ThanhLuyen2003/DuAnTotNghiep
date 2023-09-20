@@ -11,7 +11,7 @@ const ManChao = (props) => {
     }
     setTimeout(() => {
         props.navigation.navigate('GioiThieu')
-    }, 3000);
+    }, 1000);
 
 
     return (
