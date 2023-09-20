@@ -1,7 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import ManChao from './Components/ManChao';
 import Login from './Components/Login';
@@ -14,21 +16,24 @@ import DatLich from './Components/DatLich';
 import Profile from './Components/Profile';
 import EditProfile from './Components/EditProfile';
 import GioiThieu from './Components/GioiThieu';
+import TinNhan from './Components/TinNhan';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import TabGroup from './Components/Navigation/TabGroup';
 
 
-
+const Stack = createNativeStackNavigator();
 const Tabb = createBottomTabNavigator();
-
+const topTap = createMaterialTopTabNavigator();
 export default function App() {
 
-  const Stack = createNativeStackNavigator();
+
   return (
 
     <NavigationContainer >
       <Stack.Navigator initialRouteName='ManChao' >
         <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} />
 
-      <Stack.Screen name='GioiThieu' component={GioiThieu} options={{ headerShown: false }} />
+        <Stack.Screen name='GioiThieu' component={GioiThieu} options={{ headerShown: false }} />
 
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
 
@@ -39,11 +44,15 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
 
         <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
+
       </Stack.Navigator>
     </NavigationContainer>
 
   );
 }
+
+
+
 
 // screenOptions={{headerShown:false,tabBarStyle:styles.tabBar}}
 const HomeTab = () => {
@@ -83,7 +92,7 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='LienHe' component={LienHe}
+      <Tabb.Screen name='TabGroup' component={TabGroup}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
