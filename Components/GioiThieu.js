@@ -60,6 +60,10 @@ export default GioiThieu
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
+
+
+        
 
 })
