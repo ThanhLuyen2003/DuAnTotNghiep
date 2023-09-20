@@ -1,8 +1,9 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { useState } from 'react'
+import DatePicker from '@react-native-community/datetimepicker'
 const EditProfile = () => {
 
     const [open, setOpen] = useState(false); // xổ list xuống hay không
@@ -11,10 +12,24 @@ const EditProfile = () => {
         { label: 'Nam', value: 1 },
         { label: 'Nữ', value: 2 }
     ]);
-
-
-
-
+    const [dateBirth, setdateBirth] = useState("");
+    const [date, setdate] = useState(new Date());
+    const [showPicker, setshowPicker] = useState(false)
+    const toggleDatePicker = () => {
+        setshowPicker(!showPicker);
+    }
+    const onChange = ({ type }, selectedDate) => {
+        if (type == "set") {
+            const currentDate = selectedDate;
+            setdate(currentDate);
+            if (Platform.OS === "android") {
+                toggleDatePicker();
+                setdateBirth(currentDate.toDateString());
+            }
+        } else {
+            toggleDatePicker();
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={{ margin: 20 }}>
@@ -41,7 +56,22 @@ const EditProfile = () => {
                     <Text style={{ fontSize: 15, fontWeight: "bold" }}>Ngày sinh</Text>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
                         <Icons name="calendar-blank" size={35} style={{ position: "absolute", left: 10 }} />
-                        <TextInput placeholder="Nhập tên" style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                        {
+                            showPicker && (
+                                <DatePicker
+                                    mode='date'
+                                    display="spinner"
+                                    value={date}
+                                    onChange={onChange}
+                                />
+                            )
+                        }
+
+                        <Pressable onPress={toggleDatePicker}>
+                            <TextInput placeholder="12/12/2003" placeholderTextColor="black" onChangeText={setdateBirth} value={dateBirth} editable={false} style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                        </Pressable>
+
+
                     </View>
                 </View>
                 <View style={{ flexDirection: 'column', padding: 5, bottom: 50 }}>
