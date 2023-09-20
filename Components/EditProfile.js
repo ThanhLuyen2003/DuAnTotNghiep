@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -34,7 +34,7 @@ const EditProfile = () => {
         <View style={styles.container}>
             <View style={{ margin: 20 }}>
                 <View style={{ alignItems: "center" }}>
-                    <TouchableHighlight onPress={() => { }}>
+                    <TouchableOpacity onPress={() => { }}>
                         <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
                             <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={require('../Images/anime.jpg')}>
                                 <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
@@ -42,7 +42,7 @@ const EditProfile = () => {
                                 </View>
                             </ImageBackground>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={{ flexDirection: 'column', padding: 5, bottom: 50, marginTop: 50 }}>
