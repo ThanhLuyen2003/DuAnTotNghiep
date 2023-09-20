@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight, TouchableOpacity } from "react-native";
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Login = (props) => {
     const hi = () => {
@@ -26,7 +27,7 @@ const Login = (props) => {
             <View style={{ height: 30 }}></View>
 
             <View style={style.btn}>
-                <Image source={require('../Images/pass.png')} style={style.img} />
+                <Icons name="lock" color="#FFF" size={30} style={{ marginTop: 8 }} />
                 <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { }} />
             </View>
 
