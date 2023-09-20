@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 import DatePicker from "react-native-date-picker";
@@ -40,9 +40,9 @@ const DatLich = (props) => {
     }
 
     return (
-        <View style={{ padding: 20, backgroundColor: 'white', height: '100%' }}>
-            <View style={{ flex: 1 }}>
-
+        <ScrollView style={{ flex: 1,height:"100%" }}>
+            <View style={{ padding: 20, backgroundColor: 'white', height: '94%' }}>
+            <View >
                 <Calendar
                     enableSwipeMonths
                     theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
@@ -55,29 +55,28 @@ const DatLich = (props) => {
                 />
             </View>
 
-            <View style={{ flex: 1 }}>
 
-                <View style={{ height: '10%', width: "100%", marginTop: 20 }}>
+                <View >
                     <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5 }}>Chọn  khung giờ</Text>
                 </View>
 
-                <View style={{ width: '100%', height: "55%" }}>
+                
                     <FlatList
                         data={khungGio}
                         renderItem={itemm}
                         numColumns={3}
-                        style={{ height: 50 }}
+                        
                     />
-                </View>
+                
 
                 <TouchableOpacity onPress={hi} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
-            </View>
-
-
+            
         </View>
+        </ScrollView>
+        
 
     );
 }
