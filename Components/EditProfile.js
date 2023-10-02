@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -31,7 +31,7 @@ const EditProfile = () => {
         }
     }
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={{ margin: 20 }}>
                 <View style={{ alignItems: "center" }}>
                     <TouchableOpacity onPress={() => { }}>
@@ -95,7 +95,7 @@ const EditProfile = () => {
                     <Text style={styles.press}>Cập nhật</Text>
                 </Pressable>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     containerDropDown: {
         backgroundColor: "#F5F5F5",
         width: "100%",
-        zIndex: 100, // quy định thứ tự xếp chồng các phần tử trên giao diện
+        zIndex: 1000, // quy định thứ tự xếp chồng các phần tử trên giao diện
         height: 50,
         bottom: 50
     },
