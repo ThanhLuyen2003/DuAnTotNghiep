@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight, TouchableOpacity, SafeAreaView } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Login = (props) => {
@@ -11,45 +11,49 @@ const Login = (props) => {
         props.navigation.navigate('SignUp');
     }
     return (
+
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
-            <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 20 }}>
-                <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
-            </View>
+            <SafeAreaView>
 
-            <View style={{ height: 80 }}></View>
-
-
-            <View style={style.btn}>
-                <Image source={require('../Images/Vector.png')} style={{ width: 20, height: 20, marginTop: 10, marginLeft: 8 }} />
-                <TextInput style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' />
-            </View>
-
-            <View style={{ height: 30 }}></View>
-
-            <View style={style.btn}>
-                <Icons name="lock" color="#FFF" size={30} style={{ marginTop: 8 }} />
-                <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { }} />
-            </View>
-
-            <View style={{ width: '88%', marginTop: 20, marginRight: 50, alignItems: 'flex-end', }}>
-                <Text style={{ color: 'white', }}>Quên mật khẩu?</Text>
-            </View>
-
-            <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={require('../Images/gg.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
-                    <Text style={{ color: 'white', margin: 20 }}>OR</Text>
-                    <Image source={require('../Images/fb.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
-
+                <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 20 }}>
+                    <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
                 </View>
-            </View>
 
-            <TouchableOpacity onPress={hi} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
-                <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Đăng nhập</Text>
-            </TouchableOpacity>
+                <View style={{ height: 80 }}></View>
 
-            <Text style={{ color: 'white', marginTop: 20, alignSelf: 'center' }} onPress={SignUp} >Bạn chưa có tài khoản?</Text>
 
+                <View style={style.btn}>
+                    <Image source={require('../Images/Vector.png')} style={{ width: 20, height: 20, marginTop: 10, marginLeft: 8 }} />
+                    <TextInput style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' />
+                </View>
+
+                <View style={{ height: 30 }}></View>
+
+                <View style={style.btn}>
+                    <Icons name="lock" color="#FFF" size={30} style={{ marginTop: 8 }} />
+                    <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { }} />
+                </View>
+
+                <View style={{ width: '88%', marginTop: 20, marginRight: 50, alignItems: 'flex-end', }}>
+                    <Text style={{ color: 'white', }}>Quên mật khẩu?</Text>
+                </View>
+
+                <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image source={require('../Images/gg.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
+                        <Text style={{ color: 'white', margin: 20 }}>OR</Text>
+                        <Image source={require('../Images/fb.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
+
+                    </View>
+                </View>
+
+                <TouchableOpacity onPress={hi} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                    <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Đăng nhập</Text>
+                </TouchableOpacity>
+
+                <Text style={{ color: 'white', marginTop: 20, alignSelf: 'center' }} onPress={SignUp} >Bạn chưa có tài khoản?</Text>
+
+            </SafeAreaView>
 
         </ImageBackground>
     );
