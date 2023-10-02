@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 import DatePicker from "react-native-date-picker";
@@ -7,6 +7,8 @@ import DatePicker from "react-native-date-picker";
 const numColumn = 4;
 
 const DatLich = (props) => {
+
+
 
     const [chonNgay, setchonNgay] = useState("");
     const [chonGio, setchonGio] = useState("");
@@ -16,32 +18,51 @@ const DatLich = (props) => {
     const startDay = today.getFullYear() + "-" + 0 + (today.getMonth() + 1) + "-" + today.getDate();
 
     const [khungGio, setkhungGio] = useState([
-        "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
-        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
-        "18:00", "18:30", "19:00", "19:30", "20:00", "20:30",
+        { "id": "1", "time": "09:00" }, { "id": "2", "time": "09:30" }, { "id": "3", "time": "10:00" }, { "id": "4", "time": "10:30" },
+        { "id": "5", "time": "11:00" }, { "id": "6", "time": "11:30" }, { "id": "7", "time": "12:00" }, { "id": "8", "time": "12:30" },
+        { "id": "9", "time": "13:00" }, { "id": "10", "time": "13:30" }, { "id": "11", "time": "14:00" }, { "id": "12", "time": "14:30" },
+        { "id": "13", "time": "15:00" }, { "id": "14", "time": "15:30" }, { "id": "15", "time": "16:00" }, { "id": "16", "time": "16:30" },
+        { "id": "17", "time": "17:00" }, { "id": "18", "time": "17:30" }, { "id": "19", "time": "18:00" }, { "id": "20", "time": "18:30" },
+        { "id": "21", "time": "19:00" }, { "id": "22", "time": "19:30" }, { "id": "23", "time": "20:00" }, { "id": "24", "time": "20:30" },
 
     ])
 
-    const hi = (item, index) => {
-        selected: true
+
+    selectedItemm = (item, index) => {
+
+        const newData = khungGio.map((e, index) => {
+
+            if (item.id == e.id) {
+                return {
+                    ...e,
+                    selected: true
+                }
+            }
+            return {
+                ...e,
+                selected: false
+            }
+
+
+        })
+        setchonGio(item.time);
+
+        setkhungGio(newData);
     }
 
 
-    const itemm = ({ item }) => {
-
-        let { itemm } = stylee;
+    const renderItemm = ({ item, index }) => {
 
         return (
-            <TouchableOpacity onPress={hi(item)} style={[stylee.itemm, { backgroundColor: item.selected ? '#CD853F' : 'white' }]}>
-                <Text > {item}</Text>
+            <TouchableOpacity onPress={() => selectedItemm(item, index)} style={[stylee.itemm, { backgroundColor: item.selected ? '#CD853F' : 'white', }]}>
+                <Text style={{ color: item.selected ? 'white' : 'black' }}> {item.time}</Text>
             </TouchableOpacity>
         )
     }
 
     return (
-        <ScrollView style={{ flex: 1, height: "100%" }}>
-            <View style={{ padding: 20, backgroundColor: 'white', height: '94%' }}>
+        <SafeAreaView>
+            <View style={{ padding: 15, backgroundColor: 'white', height: '96%' }}>
                 <View >
                     <Calendar
                         enableSwipeMonths
@@ -57,25 +78,26 @@ const DatLich = (props) => {
 
 
                 <View >
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5 }}>Chọn  khung giờ</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5 }}>Chọn  khung giờ   {chonGio}</Text>
                 </View>
 
 
                 <FlatList
                     data={khungGio}
-                    renderItem={itemm}
+                    renderItem={renderItemm}
                     numColumns={3}
                 />
 
 
-                <TouchableOpacity onPress={hi} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
 
             </View>
-        </ScrollView>
 
+
+        </SafeAreaView>
 
     );
 }
