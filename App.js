@@ -19,6 +19,7 @@ import GioiThieu from './Components/GioiThieu';
 import TinNhan from './Components/TinNhan';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import TabGroup from './Components/Navigation/TabGroup';
+import ChonSalon from './Components/ChonSalon';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,9 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
 
         <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
+
+        <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ headerShown: true }} />
+
 
       </Stack.Navigator>
     </NavigationContainer>
