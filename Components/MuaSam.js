@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, SafeAreaView } from "react-native";
 
 const MuaSam = (props) => {
 
     return (
-        <View>
+        <SafeAreaView>
             <Text >Mua Sam</Text>
-        </View>
+        </SafeAreaView>
     );
 }
 
