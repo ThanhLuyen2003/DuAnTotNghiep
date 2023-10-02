@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput, SafeAreaView } from 'react-native'
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -12,9 +12,9 @@ const TabGroup = (props) => {
     navigation.navigate("Profile")
   }
   return (
-    <View style={{ flex: 1, width: "100%" }}>
-      <View style={{ backgroundColor: 'rgba(251, 154, 69, 0.8)', width: "100%", height: 80, flexDirection: "row", alignItems: "center" }}>
-        <View style={{ marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, width: "100%" }}>
+      <View style={{ backgroundColor: 'rgba(251, 154, 69, 0.8)', width: "100%", height: 60, flexDirection: "row", alignItems: "center" }}>
+        <View>
           <Icons style={{ position: "absolute", left: 25, zIndex: 1, top: 7 }} name="magnify" size={25} color="#363636" />
           <TextInput placeholder="Tìm kiếm cuộc gọi" style={{ width: 250, height: 40, backgroundColor: "#F8F8FF", left: 20, borderRadius: 10, paddingLeft: 28 }} />
 
@@ -60,8 +60,10 @@ const TabGroup = (props) => {
             </View>
           )
         }} />
+
+
       </topTap.Navigator>
-    </View>
+    </SafeAreaView>
   )
 }
 
