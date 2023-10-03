@@ -60,6 +60,10 @@ const DatLich = (props) => {
         )
     }
 
+    const salon = () => {
+        props.navigation.navigate('ChonSalon');
+    }
+
     return (
         <SafeAreaView>
             <View style={{ padding: 15, backgroundColor: 'white', height: '96%' }}>
@@ -89,7 +93,7 @@ const DatLich = (props) => {
                 />
 
 
-                <TouchableOpacity style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={salon} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
