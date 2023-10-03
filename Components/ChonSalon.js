@@ -61,7 +61,7 @@ const ChonSalon = (props) => {
             <View >
                 {
                     (isLoading)
-                        ? (<ActivityIndicator />)
+                        ? (<ActivityIndicator style={{ marginTop: 300, }} />)
                         : <FlatList data={dssl} renderItem={renderSalon} keyExtractor={(item) => { return item.id }} />
 
                 }
@@ -84,6 +84,8 @@ const stylee = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3,
         elevation: 3,
+
+
 
     }
 
