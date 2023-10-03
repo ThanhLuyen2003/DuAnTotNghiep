@@ -46,7 +46,7 @@ export default function App() {
 
         <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
 
-        <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ headerShown: true }} />
+        <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
 
 
       </Stack.Navigator>
