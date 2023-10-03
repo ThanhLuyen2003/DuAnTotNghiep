@@ -3,6 +3,8 @@ import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableO
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 import DatePicker from "react-native-date-picker";
+import { disabled } from "deprecated-react-native-prop-types/DeprecatedTextPropTypes";
+import { style } from "deprecated-react-native-prop-types/DeprecatedTextInputPropTypes";
 
 const numColumn = 4;
 
@@ -16,6 +18,18 @@ const DatLich = (props) => {
     const today = new Date();
 
     const startDay = today.getFullYear() + "-" + 0 + (today.getMonth() + 1) + "-" + today.getDate();
+
+    const timeee = today.getHours();
+
+    const hi = "11:00";
+    const ho = "50:00";
+    var hii = hi.slice(0, 2);
+
+    //console.log(timeee);
+
+
+
+
 
     const [khungGio, setkhungGio] = useState([
         { "id": "1", "time": "09:00" }, { "id": "2", "time": "09:30" }, { "id": "3", "time": "10:00" }, { "id": "4", "time": "10:30" },
@@ -47,14 +61,21 @@ const DatLich = (props) => {
         })
         setchonGio(item.time);
 
+        //console.log(item.time.slice(0, 2));
+
         setkhungGio(newData);
     }
+
 
 
     const renderItemm = ({ item, index }) => {
 
         return (
-            <TouchableOpacity onPress={() => selectedItemm(item, index)} style={[stylee.itemm, { backgroundColor: item.selected ? '#CD853F' : 'white', }]}>
+            <TouchableOpacity
+
+                onPress={() => selectedItemm(item, index)}
+                style={[stylee.itemm, { backgroundColor: item.selected ? '#CD853F' : 'white', }]}
+            >
                 <Text style={{ color: item.selected ? 'white' : 'black' }}> {item.time}</Text>
             </TouchableOpacity>
         )
