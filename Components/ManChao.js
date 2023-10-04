@@ -16,7 +16,7 @@ const ManChao = (props) => {
 
     return (
         <ImageBackground blurRadius={5} style={style.container} source={require('../Images/nenbarber.jpg')}>
-            <Image blurRadius={0.5} source={require('../Images/Barbershop.png')} />
+            <Image blurRadius={0.5} source={require('../Images/Barbershop.png')} style={{ marginTop: 100 }} />
             <Text style={style.txt}>Welcome to our Barber service shop</Text>
         </ImageBackground>
     )
