@@ -2,33 +2,34 @@ import React from "react";
 import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
-import DatePicker from "react-native-date-picker";
-import { disabled } from "deprecated-react-native-prop-types/DeprecatedTextPropTypes";
-import { style } from "deprecated-react-native-prop-types/DeprecatedTextInputPropTypes";
-
-const numColumn = 4;
-
 const DatLich = (props) => {
 
 
 
     const [chonNgay, setchonNgay] = useState("");
+    const [ngayChon, setngayChon] = useState("")
     const [chonGio, setchonGio] = useState("");
 
     const today = new Date();
 
-    const startDay = today.getFullYear() + "-" + 0 + (today.getMonth() + 1) + "-" + today.getDate();
+    const startDay = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-    const timeee = today.getHours();
+    const timetoday = today.getHours();
 
-    const hi = "11:00";
-    const ho = "50:00";
-    var hii = hi.slice(0, 2);
+    const ngayHnay = startDay.slice(8, 10);
+
+    // console.log(hnay);
+    // console.log(chonNgay);
+    // console.log(chonNgay2);
+
+
+    // if (hnay == ngayChon) {
+    //     console.log("done");
+    // } else {
+    //     console.log("cut");
+    // }
 
     //console.log(timeee);
-
-
-
 
 
     const [khungGio, setkhungGio] = useState([
@@ -67,17 +68,18 @@ const DatLich = (props) => {
     }
 
 
-
     const renderItemm = ({ item, index }) => {
+
+        const timeItem = item.time.slice(0, 2)
 
         return (
             <TouchableOpacity
-
+                disabled={ngayChon == ngayHnay ? (timetoday > timeItem ? true : false) : false}
                 onPress={() => selectedItemm(item, index)}
-                style={[stylee.itemm, { backgroundColor: item.selected ? '#CD853F' : 'white', }]}
+                style={[stylee.itemm, { backgroundColor: (item.selected) ? '#CD853F' : 'white', opacity: item.disabled ? 0.2 : 1 }]}
             >
                 <Text style={{ color: item.selected ? 'white' : 'black' }}> {item.time}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity >
         )
     }
 
@@ -93,7 +95,7 @@ const DatLich = (props) => {
                         enableSwipeMonths
                         theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
                         style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
-                        onDayPress={(date) => { setchonNgay(date.dateString) }}
+                        onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day) }}
                         markedDates={{
                             [chonNgay]: { selected: true }
                         }}
@@ -102,8 +104,11 @@ const DatLich = (props) => {
                 </View>
 
 
-                <View >
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5 }}>Chọn  khung giờ   {chonGio}</Text>
+                <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5, flex: 3 }}>Ngày: {chonNgay}</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'flex-start', marginTop: 5, flex: 2 }}>Giờ: {chonGio}</Text>
+
                 </View>
 
 
