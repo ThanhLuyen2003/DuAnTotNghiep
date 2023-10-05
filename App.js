@@ -74,23 +74,23 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='DatLich' component={DatLich}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Đặt lịch</Text>
-            </View>
-          ),
-        }}
-      />
-
       <Tabb.Screen name='MuaSam' component={MuaSam}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
               <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
               <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Mua sắm</Text>
+            </View>
+          ),
+        }}
+      />
+
+      <Tabb.Screen name='DatLich' component={DatLich}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", bottom: 3, tintColor: focused ? 'black' : 'white', backgroundColor: '#CD853F', borderRadius: 100, height: 60, width: 60 }}>
+              <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25, tintColor: focused ? 'black' : 'white' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? 'black' : 'white', fontSize: 12 }}>Đặt lịch</Text>
             </View>
           ),
         }}
@@ -106,6 +106,19 @@ const HomeTab = () => {
           ),
         }}
       />
+
+      <Tabb.Screen name='Profile' component={Profile}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
+              <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Tài khoản</Text>
+            </View>
+          ),
+        }}
+      />
+
+
 
     </Tabb.Navigator>
   );
