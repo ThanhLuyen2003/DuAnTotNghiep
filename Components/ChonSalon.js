@@ -10,7 +10,7 @@ const ChonSalon = (props) => {
 
     const getList = async () => {
 
-        let apiSalon = 'http://192.168.88.103:3000/apisalon/salon';
+        let apiSalon = 'http://192.168.1.117:3000/apisalon/salon';
 
         try {
             const response = await fetch(apiSalon);
