@@ -9,7 +9,6 @@ const ChonSalon = (props) => {
     const [isLoading, setisLoading] = useState(true);
 
     const getList = async () => {
-        let url_api = 'http://192.168.88.103:3000/apisalon/salon';
 
         try {
             const response = await fetch(url_api);
