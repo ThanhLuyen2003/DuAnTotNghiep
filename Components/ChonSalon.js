@@ -10,6 +10,8 @@ const ChonSalon = (props) => {
 
     const getList = async () => {
 
+        let apiSalon = 'http://192.168.88.103:3000/apisalon/salon';
+
         try {
             const response = await fetch(apiSalon);
             const json = await response.json(); //chuyen du lieu thanh json
@@ -61,7 +63,7 @@ const ChonSalon = (props) => {
                 {
                     (isLoading)
                         ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                        : <FlatList data={dssl} renderItem={renderSalon} keyExtractor={(item) => { return item.id }} />
+                        : <FlatList data={dssl} renderItem={renderSalon} />
 
                 }
             </View>
@@ -76,13 +78,8 @@ const stylee = StyleSheet.create({
         margin: 6,
         borderRadius: 20,
         shadowColor: "dark",
-        shadowOffset: {
-            height: 6,
-            width: 0,
-        },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 3,
+        elevation: 4,
 
 
 
