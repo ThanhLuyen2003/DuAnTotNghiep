@@ -111,7 +111,7 @@ const HomeTab = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Image source={require('./Images/ava.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
               <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Tài khoản</Text>
             </View>
           ),
