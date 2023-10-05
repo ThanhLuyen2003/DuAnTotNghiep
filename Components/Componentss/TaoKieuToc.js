@@ -1,6 +1,7 @@
 import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, } from "react-native";
 import { useState } from "react";
 import React from 'react'
+import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 
 const TaoKieuToc = () => {
@@ -38,9 +39,9 @@ const renderProductSalon = ({ item }) => {
     <View >
       <View style={styles.gridItem}>
         <Image  style={{width:150,height:250,alignSelf:"center"}} source={{uri:item.avatar}}/>
-           <Text style={{fontSize:15,fontWeight:"bold"}} numberOfLines={2}>{item.name}</Text>       
-           <Text style={{fontSize:15,fontWeight:"bold",color:"red"}} >{item.price} Đ</Text> 
-           <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20,fontWeight:"bold"}}>Xem chi tiết</Text>
+           <Text style={{fontSize:15}} numberOfLines={2}>{item.name}</Text>       
+           <Text style={{fontSize:15,color:"red"}} >{item.price} Đ</Text> 
+           <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text>
             
       </View>
     </View>
@@ -50,7 +51,7 @@ const renderProductSalon = ({ item }) => {
 }
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{height:"88%"}}>
     <View >
         {
             (isLoading)
