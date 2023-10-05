@@ -9,22 +9,22 @@ import ManChao from './Components/ManChao';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Home from './Components/Home';
-import LienHe from './Components/LienHe';
+
 import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
 
 import Profile from './Components/Profile';
 import EditProfile from './Components/EditProfile';
 import GioiThieu from './Components/GioiThieu';
-import TinNhan from './Components/TinNhan';
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import TabGroup from './Components/Navigation/TabGroup';
 import ChonSalon from './Components/ChonSalon';
+import TabGroupProduct from './Components/Navigation/TabGroupProduct';
 
 
 const Stack = createNativeStackNavigator();
 const Tabb = createBottomTabNavigator();
-const topTap = createMaterialTopTabNavigator();
+
 export default function App() {
 
 
@@ -74,7 +74,7 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='MuaSam' component={MuaSam}
+      <Tabb.Screen name='TabGroupProduct' component={TabGroupProduct}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
