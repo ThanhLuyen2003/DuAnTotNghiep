@@ -11,7 +11,7 @@ const ChonSalon = (props) => {
     const getList = async () => {
 
         try {
-            const response = await fetch(url_api);
+            const response = await fetch(apiSalon);
             const json = await response.json(); //chuyen du lieu thanh json
 
             setDssl(json);// do du lieu vao state
