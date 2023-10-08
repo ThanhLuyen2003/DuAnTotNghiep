@@ -10,7 +10,7 @@ const Home = (props) => {
     }
     return (
 
-        <View>
+        <SafeAreaView>
             <View style={{ backgroundColor: 'rgba(251, 154, 69, 0.8)', width: "100%", height: 60, flexDirection: "row", alignItems: "center" }}>
                 <View >
                     <Icons style={{ position: "absolute", left: 25, zIndex: 1, top: 7 }} name="magnify" size={25} color="#363636" />
@@ -23,15 +23,13 @@ const Home = (props) => {
             </View>
 
             <ScrollView horizontal>
-                <Text>hifsifds</Text>
-                <Text>hifsifds</Text>
 
             </ScrollView>
 
 
 
 
-        </View>
+        </SafeAreaView>
 
     );
 }
