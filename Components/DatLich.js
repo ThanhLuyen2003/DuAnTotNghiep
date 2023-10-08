@@ -33,6 +33,7 @@ const DatLich = (props) => {
 
 
     const [khungGio, setkhungGio] = useState([
+
         { "id": "1", "time": "09:00" }, { "id": "2", "time": "09:30" }, { "id": "3", "time": "10:00" }, { "id": "4", "time": "10:30" },
         { "id": "5", "time": "11:00" }, { "id": "6", "time": "11:30" }, { "id": "7", "time": "12:00" }, { "id": "8", "time": "12:30" },
         { "id": "9", "time": "13:00" }, { "id": "10", "time": "13:30" }, { "id": "11", "time": "14:00" }, { "id": "12", "time": "14:30" },
@@ -75,8 +76,9 @@ const DatLich = (props) => {
         return (
             <TouchableOpacity
                 disabled={ngayChon == ngayHnay ? (timetoday > timeItem ? true : false) : false}
+
                 onPress={() => selectedItemm(item, index)}
-                style={[stylee.itemm, { backgroundColor: (item.selected) ? '#CD853F' : 'white', opacity: item.disabled ? 0.2 : 1 }]}
+                style={[stylee.itemm, { backgroundColor: (item.selected) ? '#CD853F' : 'white', }]}
             >
                 <Text style={{ color: item.selected ? 'white' : 'black' }}> {item.time}</Text>
             </TouchableOpacity >
