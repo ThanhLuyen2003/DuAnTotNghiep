@@ -19,8 +19,6 @@ const Login = (props) => {
                     <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
                 </View>
 
-                <View style={{ height: 80 }}></View>
-
 
                 <View style={style.btn}>
                     <Image source={require('../Images/Vector.png')} style={{ width: 20, height: 20, marginTop: 10, marginLeft: 8 }} />

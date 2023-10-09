@@ -128,7 +128,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     padding: 0,
     height: 66,
-    borderRadius: 16,
+
+    borderTopRightRadius: 16,
+    borderTopLeftRadius: 16,
     backgroundColor: "white",
     borderTopColor: "transparent",
     shadowColor: "dark",
