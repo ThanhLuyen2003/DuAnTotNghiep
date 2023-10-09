@@ -10,7 +10,7 @@ const ChonSalon = (props) => {
 
     const getList = async () => {
 
-        let apiSalon = 'http://192.168.1.117:3000/apisalon/salon';
+        let apiSalon = 'http://192.168.88.103:3000/apisalon/salon';
 
         try {
             const response = await fetch(apiSalon);
@@ -25,11 +25,16 @@ const ChonSalon = (props) => {
     }
 
 
+    const service = () => {
+        props.navigation.navigate('ChonDichVu');
+    }
+
+
     const renderSalon = ({ item }) => {
 
         return (
             <View  >
-                <TouchableOpacity style={stylee.container}>
+                <TouchableOpacity onPress={service} style={stylee.container}  >
 
                     <Image source={{ uri: item.image }} style={{ height: 120, margin: 10, borderRadius: 20, flex: 3, }} />
 
