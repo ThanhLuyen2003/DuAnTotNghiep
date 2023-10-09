@@ -2,6 +2,7 @@ import React from "react";
 import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const DatLich = (props) => {
 
 
@@ -92,12 +93,22 @@ const DatLich = (props) => {
         )
     }
 
-    const salon = () => {
+    const salon = async () => {
         if (chonGio.length == 0) {
             alert("Vui lòng chọn giờ")
             return;
         }
-        props.navigation.navigate('ChonSalon');
+        try {
+
+            await AsyncStorage.setItem('day', chonNgay);
+            await AsyncStorage.setItem('hour', chonGio);
+            props.navigation.navigate('ChonSalon');
+
+        } catch (e) {
+            console.log(e);
+        }
+
+
     }
 
     return (
