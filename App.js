@@ -17,10 +17,11 @@ import Profile from './Components/Profile';
 import EditProfile from './Components/EditProfile';
 import GioiThieu from './Components/GioiThieu';
 
-import TabGroup from './Components/Navigation/TabGroup';
 import ChonSalon from './Components/ChonSalon';
 import TabGroupProduct from './Components/Navigation/TabGroupProduct';
-import ChiTietItemShop from './Components/Componentss/ChiTietItemShop';
+import ChonDichVu from './Components/ChonDichVu';
+import ComfirmData from './Components/ComfirmData';
+import LienHe from './Components/LienHe';
 
 
 const Stack = createNativeStackNavigator();
@@ -49,7 +50,10 @@ export default function App() {
 
         <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
 
-        <Stack.Screen name="ChiTietItemShop" component={ChiTietItemShop} options={{ title: "Barber Shop" }} />
+        <Stack.Screen name="ChonDichVu" component={ChonDichVu} options={{ title: "Chọn dịch vụ" }} />
+
+        <Stack.Screen name="ComfirmData" component={ComfirmData} options={{ title: "Xác nhận thông tin" }} />
+
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -98,7 +102,7 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='TabGroup' component={TabGroup}
+      <Tabb.Screen name='LienHe' component={LienHe}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
