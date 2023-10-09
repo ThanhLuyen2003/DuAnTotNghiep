@@ -22,6 +22,7 @@ import TabGroupProduct from './Components/Navigation/TabGroupProduct';
 import ChonDichVu from './Components/ChonDichVu';
 import ComfirmData from './Components/ComfirmData';
 import LienHe from './Components/LienHe';
+import ChiTietItemShop from './Components/Componentss/ChiTietItemShop';
 
 
 const Stack = createNativeStackNavigator();
@@ -53,6 +54,8 @@ export default function App() {
         <Stack.Screen name="ChonDichVu" component={ChonDichVu} options={{ title: "Chọn dịch vụ" }} />
 
         <Stack.Screen name="ComfirmData" component={ComfirmData} options={{ title: "Xác nhận thông tin" }} />
+
+        <Stack.Screen name="ChiTietItemShop" component={ChiTietItemShop} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>
