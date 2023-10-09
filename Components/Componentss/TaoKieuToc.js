@@ -40,51 +40,41 @@ const TaoKieuToc = (props) => {
   const renderProductSalon = ({ item }) => {
 
     return (
-      <TouchableOpacity >
-        <View style={styles.gridItem}>
-          <Image style={{ width: 200, height: 200, alignSelf: "center" }} source={{ uri: item.avatar }} />
-          <Text style={{ fontSize: 15, }} numberOfLines={2}>{item.name}</Text>
-          <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
+      <SafeAreaView style={{ height: "89%" }}>
+        <View >
+          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
+            <View style={styles.gridItem}>
+              <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
+              <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
+              <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
+              {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
+
+            </View>
+          </TouchableHighlight>
 
         </View>
-      </TouchableOpacity>
+      </SafeAreaView>
 
     );
 
   }
 
+
   return (
-    <SafeAreaView style={{ height: "89%" }}>
+    <SafeAreaView style={{ height: "88%" }}>
       <View >
-        <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
-          <View style={styles.gridItem}>
-            <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
-            <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
-            <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
-            {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
+        {
+          (isLoading)
+            ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+            : <FlatList numColumns={numColumns} data={dsProduct} renderItem={renderProductSalon} />
 
-          </View>
-        </TouchableHighlight>
-
+        }
       </View>
     </SafeAreaView>
-
-  );
-
+  )
 }
 
-return (
-  <SafeAreaView style={{ height: "88%" }}>
-    <View >
-      {
-        (isLoading)
-          ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-          : <FlatList numColumns={numColumns} data={dsProduct} renderItem={renderProductSalon} />
 
-      }
-    </View>
-  </SafeAreaView>
-)
 
 
 export default TaoKieuToc
