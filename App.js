@@ -20,6 +20,7 @@ import GioiThieu from './Components/GioiThieu';
 import TabGroup from './Components/Navigation/TabGroup';
 import ChonSalon from './Components/ChonSalon';
 import TabGroupProduct from './Components/Navigation/TabGroupProduct';
+import ChiTietItemShop from './Components/Componentss/ChiTietItemShop';
 
 
 const Stack = createNativeStackNavigator();
@@ -48,6 +49,7 @@ export default function App() {
 
         <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
 
+        <Stack.Screen name="ChiTietItemShop" component={ChiTietItemShop} options={{ title: "Barber Shop" }} />
 
       </Stack.Navigator>
     </NavigationContainer>
