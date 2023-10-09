@@ -49,7 +49,7 @@ const ChiTietItemShop = ({ route }) => {
         </View>
         <View style={{ flexDirection: "column" }}>
           <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
-         
+
 
         </View>
 
@@ -171,12 +171,12 @@ const ChiTietItemShop = ({ route }) => {
 
 
           <View style={{ width: "100%", height: 200, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
-              <View style={{flexDirection:"row",backgroundColor:"red",width:"100%",height:70,justifyContent:"center",alignItems:"center"}}>
-                <Text style={{fontSize:15}}>
-                  Bình luận
-                </Text>
-                <TextInput style={{backgroundColor:"yellow",width:100,height:40}}/>
-              </View>
+            <View style={{ flexDirection: "row", backgroundColor: "red", width: "100%", height: 70, justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 15 }}>
+                Bình luận
+              </Text>
+              <TextInput style={{ backgroundColor: "yellow", width: 100, height: 40 }} />
+            </View>
 
 
             <ScrollView horizontal={true} style={{ width: "100%" }}>
