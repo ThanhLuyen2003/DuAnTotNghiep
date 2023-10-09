@@ -40,7 +40,6 @@ const TaoKieuToc = (props) => {
   const renderProductSalon = ({ item }) => {
 
     return (
-<<<<<<< HEAD
       <TouchableOpacity >
         <View style={styles.gridItem}>
           <Image style={{ width: 200, height: 200, alignSelf: "center" }} source={{ uri: item.avatar }} />
@@ -56,7 +55,6 @@ const TaoKieuToc = (props) => {
 
   return (
     <SafeAreaView style={{ height: "89%" }}>
-=======
       <View >
         <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
           <View style={styles.gridItem}>
@@ -69,25 +67,25 @@ const TaoKieuToc = (props) => {
         </TouchableHighlight>
 
       </View>
-
-    );
-
-  }
-
-  return (
-    <SafeAreaView style={{ height: "88%" }}>
->>>>>>> 7b65d03184a1a8c481cc43b47cac8bc2eef29bcc
-      <View >
-        {
-          (isLoading)
-            ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-            : <FlatList numColumns={numColumns} data={dsProduct} renderItem={renderProductSalon} />
-
-        }
-      </View>
     </SafeAreaView>
-  )
+
+  );
+
 }
+
+return (
+  <SafeAreaView style={{ height: "88%" }}>
+    <View >
+      {
+        (isLoading)
+          ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+          : <FlatList numColumns={numColumns} data={dsProduct} renderItem={renderProductSalon} />
+
+      }
+    </View>
+  </SafeAreaView>
+)
+
 
 export default TaoKieuToc
 
@@ -96,19 +94,16 @@ const styles = StyleSheet.create({
   gridItem: {
     backgroundColor: "#fff",
     flex: 1,
-<<<<<<< HEAD
     padding: 10,
     margin: 2,
     width: 210,
     fontSize: 12,
-=======
     padding: 5,
     margin: 1,
     width: 210,
     fontSize: 12,
     borderColor: "#F8F8FF",
     borderWidth: 1
->>>>>>> 7b65d03184a1a8c481cc43b47cac8bc2eef29bcc
   },
 
 })
