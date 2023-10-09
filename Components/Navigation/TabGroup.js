@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import LienHe from '../LienHe';
 import TinNhan from '../TinNhan';
-const topTap = createMaterialTopTabNavigator();
+  const topTap = createMaterialTopTabNavigator();
 const TabGroup = (props) => {
   const { navigation } = props
   const profile = () => {
