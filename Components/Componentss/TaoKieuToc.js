@@ -77,7 +77,7 @@ const TaoKieuToc = (props) => {
 
 
 
-export default TaoKieuToc
+export default TaoKieuToc;
 
 const styles = StyleSheet.create({
 
