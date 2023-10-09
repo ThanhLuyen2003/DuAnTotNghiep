@@ -15,7 +15,7 @@ const TaoKieuToc = (props) => {
 
   const getList = async () => {
 
-    let apiSalon = 'http://192.168.1.117:3000/apiProduct/productsalon';
+    let apiSalon = 'http://192.168.88.103:3000/apiProduct/productsalon';
 
     try {
       const response = await fetch(apiSalon);
@@ -40,22 +40,25 @@ const TaoKieuToc = (props) => {
   const renderProductSalon = ({ item }) => {
 
     return (
-      <View >
-        <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
-          <View style={styles.gridItem}>
-            <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
-            <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
-            <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
-            {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
+      <SafeAreaView style={{ height: "89%" }}>
+        <View >
+          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
+            <View style={styles.gridItem}>
+              <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
+              <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
+              <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
+              {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
 
-          </View>
-        </TouchableHighlight>
+            </View>
+          </TouchableHighlight>
 
-      </View>
+        </View>
+      </SafeAreaView>
 
     );
 
   }
+
 
   return (
     <SafeAreaView style={{ height: "88%" }}>
@@ -71,13 +74,20 @@ const TaoKieuToc = (props) => {
   )
 }
 
-export default TaoKieuToc
+
+
+
+export default TaoKieuToc;
 
 const styles = StyleSheet.create({
 
   gridItem: {
     backgroundColor: "#fff",
     flex: 1,
+    padding: 10,
+    margin: 2,
+    width: 210,
+    fontSize: 12,
     padding: 5,
     margin: 1,
     width: 210,
