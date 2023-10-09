@@ -3,6 +3,7 @@ import { useState } from "react";
 import React from 'react'
 import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
+import { FontVariant } from "react-native";
 
 const TaoKieuToc = () => {
 
@@ -39,7 +40,7 @@ const renderProductSalon = ({ item }) => {
     <View >
       <View style={styles.gridItem}>
         <Image  style={{width:150,height:250,alignSelf:"center"}} source={{uri:item.avatar}}/>
-           <Text style={{fontSize:15,fontFamily:"DancingScript-Bold"}} numberOfLines={2}>{item.name}</Text>       
+           <Text style={{fontSize:15,fontFamily:"OpenSans_Condensed-Bold"}} numberOfLines={2}>{item.name}</Text>       
            <Text style={{fontSize:15,color:"red"}} >{item.price} Đ</Text> 
            <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text>
             
