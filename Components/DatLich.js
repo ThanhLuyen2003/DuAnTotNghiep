@@ -17,7 +17,6 @@ const DatLich = (props) => {
     const timetoday = today.getHours();
 
     const ngayHnay = startDay.slice(8, 10);
-
     // console.log(hnay);
     // console.log(chonNgay);
     // console.log(chonNgay2);
@@ -44,6 +43,11 @@ const DatLich = (props) => {
 
 
     selectedItemm = (item, index) => {
+
+        if (chonNgay.length == 0) {
+            alert("Vui lòng chọn ngày")
+            return;
+        }
 
         const newData = khungGio.map((e, index) => {
 
