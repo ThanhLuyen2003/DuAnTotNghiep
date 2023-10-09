@@ -2,6 +2,7 @@ import React from "react";
 import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, } from "react-native";
 import { useState } from "react";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ChonSalon = (props) => {
 
@@ -25,8 +26,20 @@ const ChonSalon = (props) => {
     }
 
 
-    const service = () => {
-        props.navigation.navigate('ChonDichVu');
+    service = async (item) => {
+
+        try {
+
+            await AsyncStorage.setItem('name', item.name);
+            await AsyncStorage.setItem('address', item.address);
+            await AsyncStorage.setItem('describe', item.describe);
+            await AsyncStorage.setItem('phone', item.phone);
+
+            props.navigation.navigate('ChonDichVu');
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 
@@ -34,7 +47,7 @@ const ChonSalon = (props) => {
 
         return (
             <View  >
-                <TouchableOpacity onPress={service} style={stylee.container}  >
+                <TouchableOpacity onPress={() => service(item)} style={stylee.container}  >
 
                     <Image source={{ uri: item.image }} style={{ height: 120, margin: 10, borderRadius: 20, flex: 3, }} />
 
