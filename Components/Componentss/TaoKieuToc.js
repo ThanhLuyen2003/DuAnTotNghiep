@@ -1,14 +1,17 @@
-import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, } from "react-native";
+import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, TouchableHighlight, } from "react-native";
 import { useState } from "react";
 import React from 'react'
 import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 import { FontVariant } from "react-native";
 
-const TaoKieuToc = () => {
-
+const TaoKieuToc = (props) => {
+  const { navigation } = props;
   const [dsProduct, setdsProduct] = useState([])
   const [isLoading, setisLoading] = useState(true);
+
+
+
 
   const getList = async () => {
 
@@ -37,6 +40,7 @@ const TaoKieuToc = () => {
   const renderProductSalon = ({ item }) => {
 
     return (
+<<<<<<< HEAD
       <TouchableOpacity >
         <View style={styles.gridItem}>
           <Image style={{ width: 200, height: 200, alignSelf: "center" }} source={{ uri: item.avatar }} />
@@ -52,6 +56,27 @@ const TaoKieuToc = () => {
 
   return (
     <SafeAreaView style={{ height: "89%" }}>
+=======
+      <View >
+        <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
+          <View style={styles.gridItem}>
+            <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
+            <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
+            <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
+            {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
+
+          </View>
+        </TouchableHighlight>
+
+      </View>
+
+    );
+
+  }
+
+  return (
+    <SafeAreaView style={{ height: "88%" }}>
+>>>>>>> 7b65d03184a1a8c481cc43b47cac8bc2eef29bcc
       <View >
         {
           (isLoading)
@@ -71,10 +96,19 @@ const styles = StyleSheet.create({
   gridItem: {
     backgroundColor: "#fff",
     flex: 1,
+<<<<<<< HEAD
     padding: 10,
     margin: 2,
     width: 210,
     fontSize: 12,
+=======
+    padding: 5,
+    margin: 1,
+    width: 210,
+    fontSize: 12,
+    borderColor: "#F8F8FF",
+    borderWidth: 1
+>>>>>>> 7b65d03184a1a8c481cc43b47cac8bc2eef29bcc
   },
 
 })
