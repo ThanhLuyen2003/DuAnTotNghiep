@@ -2,14 +2,12 @@ import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity,
 import React from 'react'
 import { useState } from "react";
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
-import CheckBox from 'react-native-check-box';
 
 
 const ChonDichVu = (props) => {
 
     const [dsdv, setDsdv] = useState([]);
     const [isLoading, setisLoading] = useState(true);
-    const [dataSelected, setdataSelected] = useState([]);
 
     const getList = async () => {
 
@@ -77,7 +75,7 @@ const ChonDichVu = (props) => {
         let price = '';
 
         listSelected.forEach(item => {
-            content = content + item.name + " \n";
+            content = content + "- " + item.name + " \n";
             price = Number(price) + Number(item.price);
         })
 
