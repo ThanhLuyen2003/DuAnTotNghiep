@@ -1,19 +1,69 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Describe from './Describe';
 import Ingredient from './Ingredient';
+import { useState } from 'react';
 const topTap = createMaterialTopTabNavigator();
 const ChiTietItemShop = ({ route }) => {
   // console.log(route);
   let describe = route.params.describe;
   let ingredient = route.params.ingredient;
+
+  const [dsComment, setdsComment] = useState([])
+  const [isLoading, setisLoading] = useState(true);
+
+  const getList = async () => {
+
+    let apiComment = 'http://192.168.1.117:3000/apiComment/comment';
+
+    try {
+      const response = await fetch(apiComment);
+      const json = await response.json(); //chuyen du lieu thanh json
+
+      setdsComment(json);// do du lieu vao state
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setisLoading(false); // khong con load nua
+    }
+  }
+
+  React.useEffect(() => {
+
+    getList();
+
+  }, []);
+
+
+  const renderComment = ({ item }) => {
+
+    return (
+      <View >
+        <View style={{ flexDirection: "row", alignItems: "stretch" }}>
+          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
+          <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
+
+        </View>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
+         
+
+        </View>
+
+
+      </View>
+
+    );
+
+  }
+
   return (
 
     <View>
-      <ScrollView style={{ height: "90%" }}>
+      <ScrollView style={{ height: "90%" }} nestedScrollEnabled={true}>
 
 
         <View style={styles.container}>
@@ -115,14 +165,41 @@ const ChiTietItemShop = ({ route }) => {
             </topTap.Navigator>
           </View>
 
+          <View style={{ width: 220, height: 55, justifyContent: "center", alignItems: "center", borderTopWidth: 1, marginTop: 20, borderLeftWidth: 1, borderRightWidth: 1, borderTopLeftRadius: 5, borderTopRightRadius: 5, borderColor: "#CCCCCC" }}>
+            <Text style={{ fontSize: 20 }}>Phản hồi khách hàng</Text>
+          </View>
+
+
+          <View style={{ width: "100%", height: 200, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
+              <View style={{flexDirection:"row",backgroundColor:"red",width:"100%",height:70,justifyContent:"center",alignItems:"center"}}>
+                <Text style={{fontSize:15}}>
+                  Bình luận
+                </Text>
+                <TextInput style={{backgroundColor:"yellow",width:100,height:40}}/>
+              </View>
+
+
+            <ScrollView horizontal={true} style={{ width: "100%" }}>
+              {
+                (isLoading)
+                  ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                  : <FlatList style={{ width: "100%" }} data={dsComment} renderItem={renderComment} />
+
+              }
+            </ScrollView>
+          </View>
+
+
         </View>
       </ScrollView>
       <View style={{ flexDirection: "row" }}>
         <View style={{ backgroundColor: "white", width: "50%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+
           <Icons name='cart-plus' size={20} style={{ right: 5 }} />
           <Pressable onPress={() => { alert("gio hang") }}><Text style={{ fontWeight: "bold" }}>ThÊM GIỎ HÀNG</Text></Pressable>
 
         </View>
+
 
         <View style={{ backgroundColor: "#CD853F", width: "50%", height: 60, justifyContent: "center", alignItems: "center" }}>
 
