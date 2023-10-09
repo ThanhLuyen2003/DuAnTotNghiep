@@ -20,6 +20,8 @@ import GioiThieu from './Components/GioiThieu';
 import TabGroup from './Components/Navigation/TabGroup';
 import ChonSalon from './Components/ChonSalon';
 import TabGroupProduct from './Components/Navigation/TabGroupProduct';
+import ChonDichVu from './Components/ChonDichVu';
+import ComfirmData from './Components/ComfirmData';
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +49,10 @@ export default function App() {
         <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
 
         <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
+
+        <Stack.Screen name="ChonDichVu" component={ChonDichVu} options={{ title: "Chọn dịch vụ" }} />
+
+        <Stack.Screen name="ComfirmData" component={ComfirmData} options={{ title: "Xác nhận thông tin" }} />
 
 
       </Stack.Navigator>
