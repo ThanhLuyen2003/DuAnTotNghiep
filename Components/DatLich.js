@@ -15,6 +15,7 @@ const DatLich = (props) => {
     const startDay = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
     const timetoday = today.getHours();
+    const minToday = today.getMinutes();
 
     const ngayHnay = startDay.slice(8, 10);
     // console.log(hnay);
@@ -71,24 +72,31 @@ const DatLich = (props) => {
         setkhungGio(newData);
     }
 
+    const [isDisable, setisDisable] = useState(false);
+
 
     const renderItemm = ({ item, index }) => {
 
-        const timeItem = item.time.slice(0, 2)
+        const timeItem = item.time.slice(0, 2);
+        const minItem = item.time.slice(3, 5);
 
         return (
             <TouchableOpacity
-                disabled={ngayChon == ngayHnay ? (timetoday > timeItem ? true : false) : false}
-
+                disabled={isDisable}
+                touchSoundDisabled={ngayChon == ngayHnay ? (timetoday > timeItem && minToday > minItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)}
                 onPress={() => selectedItemm(item, index)}
-                style={[stylee.itemm, { backgroundColor: (item.selected) ? '#CD853F' : 'white', }]}
+                style={[stylee.itemm, { backgroundColor: (item.selected || isDisable == true) ? '#CD853F' : 'white', opacity: isDisable == true ? 0.7 : 1 }]}
             >
-                <Text style={{ color: item.selected ? 'white' : 'black' }}> {item.time}</Text>
+                <Text style={{ color: (item.selected || isDisable == true) ? 'white' : 'black' }}> {item.time}</Text>
             </TouchableOpacity >
         )
     }
 
     const salon = () => {
+        if (chonGio.length == 0) {
+            alert("Vui lòng chọn giờ")
+            return;
+        }
         props.navigation.navigate('ChonSalon');
     }
 
@@ -100,7 +108,7 @@ const DatLich = (props) => {
                         enableSwipeMonths
                         theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
                         style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
-                        onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day) }}
+                        onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day), setchonGio("") }}
                         markedDates={{
                             [chonNgay]: { selected: true }
                         }}
