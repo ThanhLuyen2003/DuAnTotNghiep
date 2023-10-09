@@ -15,7 +15,7 @@ const Login = (props) => {
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <SafeAreaView>
 
-                <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 20 }}>
+                <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 50 }}>
                     <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
                 </View>
 
