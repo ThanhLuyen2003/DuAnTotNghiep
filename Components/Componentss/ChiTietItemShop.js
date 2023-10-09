@@ -1,9 +1,15 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Describe from './Describe';
+import Ingredient from './Ingredient';
+const topTap = createMaterialTopTabNavigator();
 const ChiTietItemShop = ({ route }) => {
-  console.log(route);
+  // console.log(route);
+  let describe=route.params.describe;
+  let ingredient=route.params.ingredient;
   return (
 
     <View>
@@ -66,7 +72,7 @@ const ChiTietItemShop = ({ route }) => {
 
           </View>
 
-          <View style={{ width: "100%", height: 100, top: 5, borderRadius: 10, borderWidth: 1, borderColor: "#CCCCCC" }}>
+          <View style={{ width: "100%", height: 100, top: 5, borderRadius: 5, borderWidth: 1, borderColor: "#CCCCCC" }}>
 
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
 
@@ -79,7 +85,35 @@ const ChiTietItemShop = ({ route }) => {
             </View>
 
           </View>
-
+{/* tabb */}
+        <View style={{height:500,marginTop:20}} >
+          <topTap.Navigator
+           screenOptions={{
+            tabBarAndroidRipple: { borderless: false },
+            tabBarStyle: {
+               
+              borderWidth: 1,
+              borderColor: "#CCCCCC",
+              borderTopLeftRadius:20,
+              borderTopRightRadius:20
+            },
+            tabBarLabelStyle: {
+              textTransform: "capitalize",
+              fontWeight: "bold"
+            },
+            tabBarIndicatorStyle: {
+              backgroundColor: "#CD853F",
+              height: 5,
+              borderRadius: 5,
+              width: "47%",
+              marginLeft: 5
+            },
+          }}
+          >
+              <topTap.Screen name='Describe' component={Describe} options={{title:"Thông tin sản phẩm"}} initialParams={{describe}} />
+              <topTap.Screen name='Ingredient' component={Ingredient} options={{title:"Thành phần"}} initialParams={{ingredient}}/>
+          </topTap.Navigator>
+        </View>
 
         </View>
       </ScrollView>
