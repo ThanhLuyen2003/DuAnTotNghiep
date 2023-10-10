@@ -44,7 +44,7 @@ const TaoKieuToc = (props) => {
         <View >
           <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
             <View style={styles.gridItem}>
-              <Image style={{ width: 150, height: 250, alignSelf: "center" }} source={{ uri: item.avatar }} />
+              <Image style={{ width: 180, height: 180, alignSelf: "center" }} source={{ uri: item.avatar }} />
               <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
               <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
               {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
