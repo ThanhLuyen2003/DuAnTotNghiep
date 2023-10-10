@@ -32,7 +32,7 @@ const ChonSalon = (props) => {
 
             await AsyncStorage.setItem('name', item.name);
             await AsyncStorage.setItem('address', item.address);
-            await AsyncStorage.setItem('describe', item.describe);
+            await AsyncStorage.setItem('image', item.image);
             await AsyncStorage.setItem('phone', item.phone);
 
             props.navigation.navigate('ChonDichVu');
