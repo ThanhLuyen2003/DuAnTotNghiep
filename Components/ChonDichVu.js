@@ -71,11 +71,12 @@ const ChonDichVu = (props) => {
 
     onShowSelectedItem = () => {
         const listSelected = dsdv.filter(item => item.selected == true);
+
         let content = '';
         let price = '';
 
-        listSelected.forEach(item => {
-            content = content + "- " + item.name + " \n";
+        listSelected.forEach((item, index) => {
+            content = content + (index + 1) + ". " + item.name + " ( " + item.price + " đ )" + " \n";
             price = Number(price) + Number(item.price);
         })
 
