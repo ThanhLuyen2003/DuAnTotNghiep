@@ -4,20 +4,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
 
 
+
 const ComfirmData = (props) => {
+
+    const ip = '192.168.88.103';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
     const [hour, setHour] = useState();
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
-    const [describe, setDescribe] = useState();
+    const [image, setImage] = useState();
 
     const getData = async () => {
 
         const m_address = await AsyncStorage.getItem('address');
         const m_name = await AsyncStorage.getItem('name');
-        const m_describe = await AsyncStorage.getItem('describe');
+        const m_image = await AsyncStorage.getItem('image');
         const m_phone = await AsyncStorage.getItem('phone');
         const m_day = await AsyncStorage.getItem('day');
         const m_hour = await AsyncStorage.getItem('hour');
@@ -25,9 +28,44 @@ const ComfirmData = (props) => {
         setHour(m_hour);
         setday(m_day);
         setaddress(m_address);
-        setDescribe(m_describe);
+        setImage(m_image);
         setPhone(m_phone);
         setName(m_name);
+    }
+
+    const addBill = () => {
+
+        let obj = {
+            nameSalon: name,
+            addressSalon: address,
+            hour: hour,
+            day: day,
+            phone: phone,
+            imageSalon: image,
+            services: props.route.params.content,
+            price: props.route.params.price,
+            status: "Đang chờ",
+            idUser: "65257b58d5d8ba7b645a13cf"
+        }
+
+        let url = 'http://' + ip + ':3000/addBill';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj)
+        }).catch((ex) => {
+            console.log(ex);
+        })
+
+        alert("Đặt lịch thành công");
+
+        props.navigation.navigate('Home');
+
+
     }
 
 
@@ -45,8 +83,9 @@ const ComfirmData = (props) => {
             <View style={styles.con}>
 
                 <View style={styles.time}>
-                    <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} </Text>
+                    <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
                 </View>
+
                 <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>
 
                 <ScrollView>
@@ -55,8 +94,10 @@ const ComfirmData = (props) => {
                             <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
                         </View>
 
-                        <View style={{ flex: 3 }}>
-                            <Text style={{ fontSize: 18 }}>{props.route.params.content}</Text>
+                        <View style={{ borderWidth: 1, }}></View>
+
+                        <View style={{ flex: 5 }}>
+                            <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.content}</Text>
                         </View>
                     </View>
                 </ScrollView>
@@ -70,7 +111,7 @@ const ComfirmData = (props) => {
 
             </View>
 
-            <TouchableOpacity onPress={() => props.navigation.navigate('Home')} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
+            <TouchableOpacity onPress={addBill} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
                 <Text style={{ color: 'white', fontSize: 20, marginTop: 5 }}>Xác nhận</Text>
             </TouchableOpacity>
 
@@ -89,6 +130,8 @@ const styles = StyleSheet.create({
         elevation: 5,
         alignSelf: 'center',
         fontWeight: '700',
+        textAlign: 'center',
+
     },
     address: {
         alignSelf: 'center',
