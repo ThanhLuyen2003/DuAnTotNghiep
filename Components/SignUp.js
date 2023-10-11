@@ -84,8 +84,7 @@ const SignUp = (props) => {
                             <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-                        <TextInput onChangeText={(txt) => { setavatar(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-                        <TextInput onChangeText={(txt) => { setandress(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                        
 
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
