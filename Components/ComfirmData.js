@@ -57,19 +57,13 @@ const ComfirmData = (props) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(obj)
-        }).then(res => {
-            if (res.status == 200) {
-                alert("Đặt lịch thành công");
-
-                props.navigation.navigate('Home');
-            }
         }).catch((ex) => {
             console.log(ex);
-            alert("Cook");
-
         })
 
+        alert("Đặt lịch thành công");
 
+        props.navigation.navigate('Home');
 
 
     }
