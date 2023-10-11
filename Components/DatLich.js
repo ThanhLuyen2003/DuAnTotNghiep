@@ -35,6 +35,7 @@ const DatLich = (props) => {
 
     selectedItemm = (item, index) => {
 
+
         if (chonNgay.length == 0) {
             alert("Vui lòng chọn ngày")
             return;
@@ -73,6 +74,7 @@ const DatLich = (props) => {
         return (
             <TouchableOpacity
                 disabled={isDisable}
+                onFocus={ngayChon == ngayHnay ? (timetoday > timeItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)}
                 onPress={() => selectedItemm(item, index)}
                 style={[stylee.itemm, { backgroundColor: (item.selected || isDisable == true) ? '#CD853F' : 'white', opacity: isDisable == true ? 0.7 : 1 }]}
             >
