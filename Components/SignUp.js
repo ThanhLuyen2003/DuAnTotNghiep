@@ -17,7 +17,7 @@ const SignUp = (props) => {
 
     const addUser = () => {
         let objSP = { name: name, email: email, phone: phone, pass: pass, avatar: avatar, andress: andress };
-        let url_ = 'http://192.168.88.103:3000/adduser';
+        let url_ = 'http://192.168.88.103:3000/addUser';
         fetch(url_, {
             method: 'POST',
             headers: {
