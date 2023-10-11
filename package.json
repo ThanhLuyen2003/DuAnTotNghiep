@@ -45,7 +45,8 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^10.0.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "yet": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
