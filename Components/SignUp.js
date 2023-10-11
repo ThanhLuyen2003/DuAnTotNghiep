@@ -3,35 +3,46 @@ import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } 
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-
-
 const SignUp = (props) => {
 
-    const { navigation } = props;
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
     const [phone, setphone] = useState('');
     const [pass, setpass] = useState('');
-    const [avatar, setavatar] = useState('');
-    const [andress, setandress] = useState('');
+    const [avatar, setavatar] = useState("");
+    const [andress, setandress] = useState("");
 
     const addUser = () => {
-        let objSP = { name: name, email: email, phone: phone, pass: pass, avatar: avatar, andress: andress };
-        let url_ = 'http://192.168.88.103:3000/addUser';
-        fetch(url_, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(objSP)
-        })
-            .catch((ex) => {
-                console.log(ex);
-            })
-            .then((res) => {
-                if (res.status == 200) {
-                    alert("Ừ")
+
+        let obj = { name: name, email: email, phone: phone, pass: pass, avatar: avatar, andress: andress };
+
+        let url = 'http://192.168.88.103:3000/login/' + phone;
+
+        fetch(url)
+            .then((res) => { return res.json(); })
+            .then(async (res_json) => {
+                if (res_json.length == 1) {
+                    alert("Username đã tồn tại"); return;
+                } else {
+
+
+                    let url2 = 'http://192.168.88.103:3000/addUser';
+
+                    fetch(url2, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(obj)
+                    }).catch((ex) => {
+                        console.log(ex);
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    alert("Đăng kí thành công")
+                    props.navigation.navigate('Login');
                 }
             })
     }
