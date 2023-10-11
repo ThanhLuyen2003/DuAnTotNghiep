@@ -16,8 +16,8 @@ const SignUp = (props) => {
     const [andress, setandress] = useState('');
 
     const addUser = () => {
-        let objSP = { name: name, email: email, phone: phone, pass: pass, avatar: avatar, andress: andress };
-        let url_ = 'http://192.168.88.103:3000/addUser';
+        let objSP = { name: name, email: email, phone: phone, pass: pass,avatar:avatar,andress:andress};
+        let url_ = 'http://192.168.1.117:3000/addUser';
         fetch(url_, {
             method: 'POST',
             headers: {
@@ -30,8 +30,12 @@ const SignUp = (props) => {
                 console.log(ex);
             })
             .then((res) => {
-                if (res.status == 200) {
-                    alert("Ừ")
+                if (res.status === 201) {
+                    console.log(res);
+                    alert("Thêm thành công")
+                }else{
+                    console.log(res);
+                    alert("Thêm thất bại")
                 }
             })
     }
@@ -80,7 +84,8 @@ const SignUp = (props) => {
                             <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-
+                        <TextInput onChangeText={(txt) => { setavatar(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                        <TextInput onChangeText={(txt) => { setandress(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
