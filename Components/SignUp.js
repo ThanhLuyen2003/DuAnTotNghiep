@@ -6,6 +6,8 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const SignUp = (props) => {
 
+
+
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
