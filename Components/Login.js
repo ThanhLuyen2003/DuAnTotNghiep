@@ -24,7 +24,7 @@ const Login = (props) => {
 
         }
 
-        let url = 'http://192.168.88.103:3000/login/' + phone;
+        let url = 'http://192.168.1.117:3000/login/' + phone;
 
         fetch(url)
             .then((res) => { return res.json(); })
