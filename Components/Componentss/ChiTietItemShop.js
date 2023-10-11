@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal, Button } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Describe from './Describe';
 import Ingredient from './Ingredient';
 import { useState } from 'react';
+
 const topTap = createMaterialTopTabNavigator();
 const ChiTietItemShop = ({ route }) => {
   // console.log(route);
@@ -15,9 +16,11 @@ const ChiTietItemShop = ({ route }) => {
   const [dsComment, setdsComment] = useState([])
   const [isLoading, setisLoading] = useState(true);
 
+  const [moDalComment, setmoDalComment] = useState(false);
+
   const getList = async () => {
 
-    let apiComment = 'http://192.168.1.117:3000/apiComment/comment';
+    let apiComment = 'http://192.168.0.104:3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
@@ -42,18 +45,16 @@ const ChiTietItemShop = ({ route }) => {
 
     return (
       <View >
-        <View style={{ flexDirection: "row", alignItems: "stretch" }}>
+        <View style={{ flexDirection: "row", alignItems: "stretch" ,borderBottomWidth:1,padding:6,borderColor:"#CCCCCC" }}>
           <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
           <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
 
         </View>
+
         <View style={{ flexDirection: "column" }}>
           <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
 
-
         </View>
-
-
       </View>
 
     );
@@ -170,23 +171,55 @@ const ChiTietItemShop = ({ route }) => {
           </View>
 
 
-          <View style={{ width: "100%", height: 200, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
-            <View style={{ flexDirection: "row", backgroundColor: "red", width: "100%", height: 70, justifyContent: "center", alignItems: "center" }}>
-              <Text style={{ fontSize: 15 }}>
+          <View style={{ width: "100%", height: 220, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
+            <View style={{ flexDirection: "row", width: "100%", height: 70, justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 15, right: 5 }}>
                 Bình luận
               </Text>
-              <TextInput style={{ backgroundColor: "yellow", width: 100, height: 40 }} />
+              <TextInput style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
+
+              <Icons name='send' size={25} onPress={() => { alert("hi") }} />
             </View>
 
 
-            <ScrollView horizontal={true} style={{ width: "100%" }}>
+            
               {
                 (isLoading)
                   ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                  : <FlatList style={{ width: "100%" }} data={dsComment} renderItem={renderComment} />
+                  : <FlatList style={{width:"100%"}}  scrollEnabled={false}  data={dsComment} renderItem={renderComment} />
 
               }
-            </ScrollView>
+
+            
+            <View >
+              <Modal
+                animationType='slide'
+                visible={moDalComment}
+                transparent={true}
+              >
+                <View style={styles.modalView}>
+                  <Pressable onPress={()=>{setmoDalComment(false)}} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
+
+                  </Pressable>
+                  
+                  {
+                    (isLoading)
+                      ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                      : <FlatList style={{ width: "100%", marginTop: 10 }} data={dsComment} renderItem={renderComment} />
+                  }
+
+
+                </View>
+              </Modal>
+
+            </View>
+
+
+
+            <TouchableOpacity onPress={() => { setmoDalComment(true) }}>
+              <Text style={{ fontSize: 18, alignSelf: "center" }}>Xem chi tiết</Text>
+            </TouchableOpacity>
+
           </View>
 
 
@@ -220,5 +253,24 @@ const styles = StyleSheet.create({
     margin: 2,
 
 
-  }
+  },
+  modalView: {
+    padding: 10,
+    backgroundColor: 'white',
+    borderTopLeftRadius:20,
+    borderTopRightRadius:20,
+
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginTop: "auto",
+    height: "100%",
+    flex: 0.7
+  },
 })
