@@ -11,7 +11,7 @@ const ChonDichVu = (props) => {
 
     const getList = async () => {
 
-        let apiService = 'http://192.168.88.103:3000/service/service';
+        let apiService = 'http://192.168.1.117:3000/service/service';
 
         try {
             const response = await fetch(apiService);
