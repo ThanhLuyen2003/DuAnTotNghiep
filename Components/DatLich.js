@@ -62,6 +62,7 @@ const DatLich = (props) => {
 
     const [isDisable, setisDisable] = useState(false);
 
+    // ngayChon == ngayHnay ? (timetoday > timeItem && minToday > minItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)
 
     const renderItemm = ({ item, index }) => {
 
@@ -71,7 +72,6 @@ const DatLich = (props) => {
         return (
             <TouchableOpacity
                 disabled={isDisable}
-                touchSoundDisabled={ngayChon == ngayHnay ? (timetoday > timeItem && minToday > minItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)}
                 onPress={() => selectedItemm(item, index)}
                 style={[stylee.itemm, { backgroundColor: (item.selected || isDisable == true) ? '#CD853F' : 'white', opacity: isDisable == true ? 0.7 : 1 }]}
             >
