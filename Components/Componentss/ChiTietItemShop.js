@@ -22,6 +22,7 @@ const ChiTietItemShop = ({ route }) => {
 
     let apiComment = 'http://192.168.88.103:3000/apiComment/comment';
 
+
     try {
       const response = await fetch(apiComment);
       const json = await response.json(); //chuyen du lieu thanh json
