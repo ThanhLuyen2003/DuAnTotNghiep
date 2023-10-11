@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal, Button } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -45,17 +45,16 @@ const ChiTietItemShop = ({ route }) => {
 
     return (
       <View >
-        <View style={{ flexDirection: "row", alignItems: "stretch" }}>
+        <View style={{ flexDirection: "row", alignItems: "stretch" ,borderBottomWidth:1,padding:6,borderColor:"#CCCCCC" }}>
           <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
           <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
 
         </View>
+
         <View style={{ flexDirection: "column" }}>
           <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
 
         </View>
-
-
       </View>
 
     );
@@ -183,27 +182,41 @@ const ChiTietItemShop = ({ route }) => {
             </View>
 
 
-            <ScrollView horizontal={true} style={{ width: "100%" }}>
+            
               {
                 (isLoading)
                   ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                  : <FlatList style={{ width: "100%" }} data={dsComment} renderItem={renderComment} />
+                  : <FlatList style={{width:"100%"}}  scrollEnabled={false}  data={dsComment} renderItem={renderComment} />
 
               }
 
-            </ScrollView>
-            <View>
+            
+            <View >
               <Modal
-              
+                animationType='slide'
+                visible={moDalComment}
+                transparent={true}
               >
+                <View style={styles.modalView}>
+                  <Pressable onPress={()=>{setmoDalComment(false)}} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
 
+                  </Pressable>
+                  
+                  {
+                    (isLoading)
+                      ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                      : <FlatList style={{ width: "100%", marginTop: 10 }} data={dsComment} renderItem={renderComment} />
+                  }
+
+
+                </View>
               </Modal>
 
             </View>
 
 
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => { setmoDalComment(true) }}>
               <Text style={{ fontSize: 18, alignSelf: "center" }}>Xem chi tiết</Text>
             </TouchableOpacity>
 
@@ -241,11 +254,23 @@ const styles = StyleSheet.create({
 
 
   },
-  khungComment: {
-    flex: 1,
-    backgroundColor: "yellow",
-    margin: 50,
-    borderRadius: 10
+  modalView: {
+    padding: 10,
+    backgroundColor: 'white',
+    borderTopLeftRadius:20,
+    borderTopRightRadius:20,
 
-  }
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginTop: "auto",
+    height: "100%",
+    flex: 0.7
+  },
 })
