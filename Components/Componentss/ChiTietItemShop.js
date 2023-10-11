@@ -20,7 +20,7 @@ const ChiTietItemShop = ({ route }) => {
 
   const getList = async () => {
 
-    let apiComment = 'http://192.168.0.104:3000/apiComment/comment';
+    let apiComment = 'http://192.168.1.117:3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
