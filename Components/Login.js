@@ -44,7 +44,7 @@ const Login = (props) => {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
 
-                    console.log(JSON.stringify(objU));
+                    //console.log(JSON.stringify(objU));
                     // chuyển màn hình
                     props.navigation.navigate('HomeTab');
                 } catch (e) {
