@@ -62,12 +62,13 @@ const DatLich = (props) => {
 
     const [isDisable, setisDisable] = useState(false);
 
-    // ngayChon == ngayHnay ? (timetoday > timeItem && minToday > minItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)
+    // ngayChon == ngayHnay ? (timetoday > timeItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)
 
     const renderItemm = ({ item, index }) => {
 
         const timeItem = item.time.slice(0, 2);
         const minItem = item.time.slice(3, 5);
+
 
         return (
             <TouchableOpacity
