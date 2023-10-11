@@ -65,11 +65,15 @@ const ComfirmData = (props) => {
             body: JSON.stringify(obj)
         }).catch((ex) => {
             console.log(ex);
-        })
+        }).then((res) => {
+            if (res.status == 200) {
 
-        alert("Đặt lịch thành công");
+                alert("Đặt lịch thành công");
 
-        props.navigation.navigate('Home');
+                props.navigation.navigate('Home');
+            }
+        });
+
 
 
     }
