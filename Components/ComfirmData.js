@@ -15,7 +15,7 @@ const ComfirmData = (props) => {
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
     const [image, setImage] = useState();
-    const [idUser, setIdUser] = useState();
+    const [userInfo, setuserInfo] = useState({});
 
     const getData = async () => {
 
@@ -25,7 +25,10 @@ const ComfirmData = (props) => {
         const m_phone = await AsyncStorage.getItem('phone');
         const m_day = await AsyncStorage.getItem('day');
         const m_hour = await AsyncStorage.getItem('hour');
-        const user = await AsyncStorage.getItem('loginInfo');
+
+        const value = await AsyncStorage.getItem('loginInfo');
+
+        setuserInfo(JSON.parse(value))
 
         setHour(m_hour);
         setday(m_day);
@@ -33,10 +36,10 @@ const ComfirmData = (props) => {
         setImage(m_image);
         setPhone(m_phone);
         setName(m_name);
-        setIdUser(user._id);
     }
 
     const addBill = () => {
+        console.log(userInfo._id);
 
         let obj = {
             nameSalon: name,
@@ -48,7 +51,7 @@ const ComfirmData = (props) => {
             services: props.route.params.content,
             price: props.route.params.price,
             status: "Đang chờ",
-            idUser: idUser
+            idUser: userInfo._id
         }
 
         let url = 'http://' + ip + ':3000/addBill';
@@ -74,6 +77,8 @@ const ComfirmData = (props) => {
 
     React.useEffect(() => {
         getData();
+        console.log(userInfo._id);
+
     }, [])
 
     return (
