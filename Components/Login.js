@@ -1,10 +1,61 @@
 import React from "react";
 import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, TouchableHighlight, TouchableOpacity, SafeAreaView } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const Login = (props) => {
-    const hi = () => {
-        props.navigation.navigate('HomeTab');
+
+    const [phone, setPhone] = useState("");
+    const [pass, setPass] = useState("");
+
+
+
+    const checkLogin = () => {
+
+        if (phone.length == 0) {
+            alert("Chưa nhập số điện thoại");
+            return;
+        }
+        if (pass.length == 0) {
+            alert("Chưa nhập Password");
+            return;
+
+        }
+
+        let url = 'http://192.168.88.103:3000/login/' + phone;
+
+        fetch(url)
+            .then((res) => { return res.json(); })
+            .then(async (res_json) => {
+                if (res_json.length != 1) {
+                    alert("Không tồn tại username hoặc bị trùng lặp dữ liệu");
+                    return;
+                }
+                // đến đây là tồn tại 1 bản ghi, kiểm tra password
+                let objU = res_json[0];
+                if (objU.pass != pass) {
+                    alert("Sai password"); return;
+                }
+
+                // đến đây là đúng thông tin, thì lưu vào storage và chuyển màn hình
+                try {
+
+                    await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
+
+                    console.log(JSON.stringify(objU));
+                    // chuyển màn hình
+                    props.navigation.navigate('HomeTab');
+                } catch (e) {
+                    // saving error
+                    console.log(e);
+                }
+
+
+            })
+
+
     }
 
     const SignUp = () => {
@@ -22,14 +73,14 @@ const Login = (props) => {
 
                 <View style={style.btn}>
                     <Image source={require('../Images/Vector.png')} style={{ width: 20, height: 20, marginTop: 10, marginLeft: 8 }} />
-                    <TextInput style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' />
+                    <TextInput style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' onChangeText={txt => { setPhone(txt) }} />
                 </View>
 
                 <View style={{ height: 30 }}></View>
 
                 <View style={style.btn}>
                     <Icons name="lock" color="#FFF" size={30} style={{ marginTop: 8 }} />
-                    <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { }} />
+                    <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { setPass(txt) }} />
                 </View>
 
                 <View style={{ width: '88%', marginTop: 20, marginRight: 50, alignItems: 'flex-end', }}>
@@ -45,7 +96,7 @@ const Login = (props) => {
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={hi} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={checkLogin} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Đăng nhập</Text>
                 </TouchableOpacity>
 
