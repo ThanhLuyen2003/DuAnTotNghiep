@@ -1,12 +1,34 @@
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button } from 'react-native'
 import React from 'react'
+import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = (props) => {
+
     const { navigation } = props;
     const editProfile = () => {
         navigation.navigate("EditProfile")
     }
+
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+
+    const getLoginInfor = async () => {
+        const user = await AsyncStorage.getItem('loginInfo');
+
+        setName(user.name);
+        setEmail(user.email);
+        setPhone(user.phone);
+
+    }
+
+
+    React.useEffect(() => {
+        getLoginInfor();
+    }, [])
+
 
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
@@ -17,9 +39,9 @@ const Profile = (props) => {
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>Nguyễn Quang Huy</Text>
-                        <Text style={{ fontSize: 15 }}>huynqph23996@fpt.edu.vn</Text>
-                        <Text style={{ fontSize: 15 }}>+84 45628285</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{name}</Text>
+                        <Text style={{ fontSize: 15 }}>{email}</Text>
+                        <Text style={{ fontSize: 15 }}>{phone}</Text>
                     </View>
 
                     <ScrollView style={{ marginTop: 120 }}>
@@ -68,10 +90,10 @@ const Profile = (props) => {
                         </View>
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='logout' size={25} color={'#CD853F'} />
-                            
-                                 <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
-                         {/* <Button title='click' onPress={showToat}/> */}
-                           {/* <Toast/> */}
+
+                            <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
+                            {/* <Button title='click' onPress={showToat}/> */}
+                            {/* <Toast/> */}
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                     </ScrollView>
