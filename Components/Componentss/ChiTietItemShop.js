@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Describe from './Describe';
 import Ingredient from './Ingredient';
 import { useState } from 'react';
+
 const topTap = createMaterialTopTabNavigator();
 const ChiTietItemShop = ({ route }) => {
   // console.log(route);
@@ -15,9 +16,11 @@ const ChiTietItemShop = ({ route }) => {
   const [dsComment, setdsComment] = useState([])
   const [isLoading, setisLoading] = useState(true);
 
+  const [moDalComment, setmoDalComment] = useState(false);
+
   const getList = async () => {
 
-    let apiComment = 'http://192.168.1.117:3000/apiComment/comment';
+    let apiComment = 'http://192.168.0.104:3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
@@ -49,7 +52,6 @@ const ChiTietItemShop = ({ route }) => {
         </View>
         <View style={{ flexDirection: "column" }}>
           <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
-
 
         </View>
 
@@ -170,12 +172,14 @@ const ChiTietItemShop = ({ route }) => {
           </View>
 
 
-          <View style={{ width: "100%", height: 200, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
-            <View style={{ flexDirection: "row", backgroundColor: "red", width: "100%", height: 70, justifyContent: "center", alignItems: "center" }}>
-              <Text style={{ fontSize: 15 }}>
+          <View style={{ width: "100%", height: 220, padding: 8, borderColor: "#CCCCCC", borderWidth: 1 }}>
+            <View style={{ flexDirection: "row", width: "100%", height: 70, justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 15, right: 5 }}>
                 Bình luận
               </Text>
-              <TextInput style={{ backgroundColor: "yellow", width: 100, height: 40 }} />
+              <TextInput style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
+
+              <Icons name='send' size={25} onPress={() => { alert("hi") }} />
             </View>
 
 
@@ -186,7 +190,23 @@ const ChiTietItemShop = ({ route }) => {
                   : <FlatList style={{ width: "100%" }} data={dsComment} renderItem={renderComment} />
 
               }
+
             </ScrollView>
+            <View>
+              <Modal
+              
+              >
+
+              </Modal>
+
+            </View>
+
+
+
+            <TouchableOpacity>
+              <Text style={{ fontSize: 18, alignSelf: "center" }}>Xem chi tiết</Text>
+            </TouchableOpacity>
+
           </View>
 
 
@@ -219,6 +239,13 @@ const styles = StyleSheet.create({
     padding: 3,
     margin: 2,
 
+
+  },
+  khungComment: {
+    flex: 1,
+    backgroundColor: "yellow",
+    margin: 50,
+    borderRadius: 10
 
   }
 })
