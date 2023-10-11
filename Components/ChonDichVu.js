@@ -51,7 +51,9 @@ const ChonDichVu = (props) => {
     const renderItem = ({ item, index }) => {
 
         return (
-            <View style={[styles.container, { backgroundColor: (item.selected) ? '#CD853F' : 'white', }]}
+            <View style={[styles.container, {
+                backgroundColor: (item.selected) ? '#CD853F' : 'white', borderColor: (item.selected) ? 'white' : 'gray',
+            }]}
             >
 
                 <TouchableOpacity
@@ -124,7 +126,6 @@ const styles = StyleSheet.create({
         padding: 5,
         alignItems: 'center',
         borderRadius: 10,
-        borderColor: 'gray',
         height: 'auto'
 
     }

@@ -19,18 +19,7 @@ const DatLich = (props) => {
     const minToday = today.getMinutes();
 
     const ngayHnay = startDay.slice(8, 10);
-    // console.log(hnay);
-    // console.log(chonNgay);
-    // console.log(chonNgay2);
 
-
-    // if (hnay == ngayChon) {
-    //     console.log("done");
-    // } else {
-    //     console.log("cut");
-    // }
-
-    //console.log(timeee);
 
 
     const [khungGio, setkhungGio] = useState([
@@ -64,11 +53,9 @@ const DatLich = (props) => {
                 selected: false
             }
 
-
         })
         setchonGio(item.time);
 
-        //console.log(item.time.slice(0, 2));
 
         setkhungGio(newData);
     }
