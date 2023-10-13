@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, SafeAreaView, TouchableHighlightBase, TouchableOpacity, Button, Alert } from "react-native";
 
 const LienHe = (props) => {
 
     return (
-        <View>
+        <SafeAreaView>
             <Text>Lien he</Text>
-        </View>
+
+        </SafeAreaView>
     );
 }
 
