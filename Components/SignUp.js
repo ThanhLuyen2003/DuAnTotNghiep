@@ -6,34 +6,37 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
-    const {navigation} = props;
+    const { navigation } = props;
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
     const [phone, setphone] = useState('');
     const [pass, setpass] = useState('');
     const [avatar, setavatar] = useState('');
-    const [andress, setandress] = useState(''); 
+    const [andress, setandress] = useState('');
 
-    const addUser=()=>{      
-        let objSP = { name: name, email: email,phone:phone,pass:pass,avatar:avatar,andress:andress };
+    const addUser = () => {
+        let user = { name: name, phone: phone, email: email, pass: pass, avatar: avatar, andress: andress };
         let url_ = 'http://192.168.0.104:3000/addUser';
         fetch(url_, {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(
-              objSP
+                user
             ),
-          })
+        })
             .then((res) => {
-              (res.status == 201)
-              console.log(res);
-              alert('Thêm thành công')
+                if (res.status === 201) {
+                    console.log(res);
+                    alert('User added successfully');
+                } else {
+                    console.error('Error adding user');
+                }
             })
             .catch((ex) => {
-              console.log(ex);
+                console.log(ex);
             })
             ;
     }
@@ -56,21 +59,21 @@ const SignUp = (props) => {
                         <Text style={{ color: "white" }}>Họ và tên</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="account" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt)=>{setname(txt)}} placeholder="Nhập họ và tên" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setname(txt) }} placeholder="Nhập họ và tên" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 25 }}>
                         <Text style={{ color: "white" }}>Email</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="email" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt)=>{setemail(txt)}} placeholder="Nhập email" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setemail(txt) }} placeholder="Nhập email" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 50 }}>
                         <Text style={{ color: "white" }}>Số điện thoại</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="phone" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt)=>{setphone(txt)}} placeholder="Nhập số điện thoại" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setphone(txt) }} placeholder="Nhập số điện thoại" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 75 }}>
@@ -79,11 +82,11 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt)=>{setpass(txt)}} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-                       
-                       
+                        <TextInput onChangeText={(txt) => { setavatar(txt) }} />
+                        <TextInput onChangeText={(txt) => { setandress(txt) }} />
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
                         <Text style={style.press}>Đăng kí</Text>
