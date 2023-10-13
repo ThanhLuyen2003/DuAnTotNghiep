@@ -29,7 +29,7 @@ const ChonSalon = (props) => {
     service = async (item) => {
 
         try {
-
+            await AsyncStorage.setItem('idSalon', item._id);
             await AsyncStorage.setItem('name', item.name);
             await AsyncStorage.setItem('address', item.address);
             await AsyncStorage.setItem('image', item.image);
