@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView, Button } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -68,18 +68,22 @@ const DatLich = (props) => {
     const renderItemm = ({ item, index }) => {
 
         const timeItem = item.time.slice(0, 2);
-        const minItem = item.time.slice(3, 5);
+        const minItem = Number(item.time.slice(3, 5));
 
 
         return (
-            <TouchableOpacity
-                disabled={isDisable}
-                onFocus={ngayChon == ngayHnay ? (timetoday > timeItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)}
-                onPress={() => selectedItemm(item, index)}
-                style={[stylee.itemm, { backgroundColor: (item.selected || isDisable == true) ? '#CD853F' : 'white', opacity: isDisable == true ? 0.7 : 1 }]}
+
+            <View
+                style={[stylee.itemm, { backgroundColor: (item.selected) ? 'aqua' : 'white', }]}
             >
-                <Text style={{ color: (item.selected || isDisable == true) ? 'white' : 'black' }}> {item.time}</Text>
-            </TouchableOpacity >
+                <Button
+                    disabled={ngayChon == ngayHnay ? ((timetoday > timeItem) ? true : false) : false}
+                    color={(item.selected || isDisable == true) ? 'red' : '#CD853F'}
+                    title={item.time}
+                    onPress={() => selectedItemm(item, index)}
+                />
+
+            </View>
         )
     }
 
@@ -133,7 +137,7 @@ const DatLich = (props) => {
                 />
 
 
-                <TouchableOpacity onPress={salon} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={salon} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
@@ -150,12 +154,7 @@ const stylee = StyleSheet.create({
     itemm: {
         borderColor: '#CD853F',
         borderWidth: 1,
-        padding: 10,
-        width: 100,
         margin: 5,
-        alignItems: 'center',
-        borderRadius: 20,
-        height: 'auto',
         flex: 1,
 
     }
