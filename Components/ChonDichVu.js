@@ -76,10 +76,12 @@ const ChonDichVu = (props) => {
 
         let content = '';
         let price = '';
+        let idService = [];
 
         listSelected.forEach((item, index) => {
             content = content + (index + 1) + ". " + item.name + " ( " + item.price + " đ )" + " \n";
             price = Number(price) + Number(item.price);
+            idService.push(item._id);
         })
 
         if (content.length == 0) {
@@ -87,7 +89,7 @@ const ChonDichVu = (props) => {
             return;
         }
 
-        props.navigation.navigate('ComfirmData', { content, price });
+        props.navigation.navigate('ComfirmData', { content, price, idService });
     }
 
 
