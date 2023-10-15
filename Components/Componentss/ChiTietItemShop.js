@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal, Button } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -6,9 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Describe from './Describe';
 import Ingredient from './Ingredient';
 import { useState } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const topTap = createMaterialTopTabNavigator();
 const ChiTietItemShop = ({ route }) => {
+  const ip = '192.168.1.117';
+
   // console.log(route);
   let describe = route.params.describe;
   let ingredient = route.params.ingredient;
@@ -17,6 +19,31 @@ const ChiTietItemShop = ({ route }) => {
   const [isLoading, setisLoading] = useState(true);
 
   const [moDalComment, setmoDalComment] = useState(false);
+
+
+  const [userInfo, setuserInfo] = useState({})
+  const [Comment, setComment] = useState("")
+  const [TimeComment, setTimeComment] = useState("")
+
+
+
+
+  const getLoginInfor = async () => {
+
+    const value = await AsyncStorage.getItem('loginInfo');
+
+    setuserInfo(JSON.parse(value))
+
+  }
+
+
+  React.useEffect(() => {
+    getLoginInfor();
+    console.log(userInfo.name);
+
+  }, [])
+
+
 
   const getList = async () => {
 
@@ -40,26 +67,59 @@ const ChiTietItemShop = ({ route }) => {
 
   }, []);
 
+  const addComment = () => {
+    console.log(userInfo._id);
+
+    let obj = {
+      Comment: Comment,
+      idUser: userInfo._id
+    }
+
+    let url = 'http://' + ip + ':3000/addComment';
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj)
+    }).catch((ex) => {
+      console.log(ex);
+    })
+      .then((res) => {
+        if (res.status == 200) {
+          
+          alert("Thêm thành công")
+          getList();
+        } else {
+          
+          alert("Thêm thất bại")
+        }
+      })
+  }
 
   const renderComment = ({ item }) => {
 
     return (
       <View >
-        <View style={{ flexDirection: "row", alignItems: "stretch" ,borderBottomWidth:1,padding:6,borderColor:"#CCCCCC" }}>
-          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
+        <View style={{ flexDirection: "row", alignItems: "stretch", borderBottomWidth: 1, padding: 6, borderColor: "#CCCCCC" }}>
+          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: userInfo.avatar }} />
           <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
 
         </View>
 
-        <View style={{ flexDirection: "column" }}>
+        {/* <View style={{ flexDirection: "column" }}>
           <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
 
-        </View>
+        </View> */}
       </View>
 
     );
 
   }
+
+
 
   return (
 
@@ -176,21 +236,21 @@ const ChiTietItemShop = ({ route }) => {
               <Text style={{ fontSize: 15, right: 5 }}>
                 Bình luận
               </Text>
-              <TextInput style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
+              <TextInput onChangeText={(txt)=>{setComment(txt)}} style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
 
-              <Icons name='send' size={25} onPress={() => { alert("hi") }} />
+              <Icons name='send' size={25} onPress={addComment} />
             </View>
 
 
-            
-              {
-                (isLoading)
-                  ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                  : <FlatList style={{width:"100%"}}  scrollEnabled={false}  data={dsComment} renderItem={renderComment} />
 
-              }
+            {
+              (isLoading)
+                ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment} />
 
-            
+            }
+
+
             <View >
               <Modal
                 animationType='slide'
@@ -198,10 +258,10 @@ const ChiTietItemShop = ({ route }) => {
                 transparent={true}
               >
                 <View style={styles.modalView}>
-                  <Pressable onPress={()=>{setmoDalComment(false)}} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
+                  <Pressable onPress={() => { setmoDalComment(false) }} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
 
                   </Pressable>
-                  
+
                   {
                     (isLoading)
                       ? (<ActivityIndicator style={{ marginTop: 300, }} />)
@@ -257,8 +317,8 @@ const styles = StyleSheet.create({
   modalView: {
     padding: 10,
     backgroundColor: 'white',
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
 
     alignItems: 'center',
     shadowColor: '#000',
