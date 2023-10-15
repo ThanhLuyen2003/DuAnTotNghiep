@@ -11,16 +11,11 @@ const Profile = (props) => {
         navigation.navigate("EditProfile")
     }
 
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
+    const [userInfor, setUserInfor] = useState({});
 
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');
-
-        setName(user.name);
-        setEmail(user.email);
-        setPhone(user.phone);
+        setUserInfor(JSON.parse(user))
 
     }
 
@@ -39,9 +34,9 @@ const Profile = (props) => {
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{name}</Text>
-                        <Text style={{ fontSize: 15 }}>{email}</Text>
-                        <Text style={{ fontSize: 15 }}>{phone}</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
+                        <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
+                        <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text>
                     </View>
 
                     <ScrollView style={{ marginTop: 120 }}>
