@@ -15,7 +15,8 @@ const ComfirmData = (props) => {
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
     const [image, setImage] = useState();
-    const [idUser, setIdUser] = useState();
+    const [userInfo, setuserInfo] = useState({});
+    const [idSalon, setIdSalon] = useState();
 
     const getData = async () => {
 
@@ -25,15 +26,18 @@ const ComfirmData = (props) => {
         const m_phone = await AsyncStorage.getItem('phone');
         const m_day = await AsyncStorage.getItem('day');
         const m_hour = await AsyncStorage.getItem('hour');
-        const user = await AsyncStorage.getItem('loginInfo');
+        const m_idSalon = await AsyncStorage.getItem('idSalon');
+        const value = await AsyncStorage.getItem('loginInfo');
 
+        setuserInfo(JSON.parse(value))
         setHour(m_hour);
         setday(m_day);
         setaddress(m_address);
         setImage(m_image);
         setPhone(m_phone);
         setName(m_name);
-        setIdUser(user._id);
+        setIdSalon(m_idSalon);
+
     }
 
     const addBill = () => {
@@ -48,10 +52,20 @@ const ComfirmData = (props) => {
             services: props.route.params.content,
             price: props.route.params.price,
             status: "Đang chờ",
-            idUser: idUser
+            idUser: userInfo._id
+        }
+
+        let obj2 = {
+            idSalon: idSalon,
+            hour: hour,
+            day: day,
+            idServices: props.route.params.idService,
+            idUser: userInfo._id
         }
 
         let url = 'http://' + ip + ':3000/addBill';
+        let url2 = 'http://' + ip + ':3000/addBillDetail';
+
 
         fetch(url, {
             method: 'POST',
@@ -64,9 +78,21 @@ const ComfirmData = (props) => {
             console.log(ex);
         })
 
-        alert("Đặt lịch thành công");
-
-        props.navigation.navigate('Home');
+        fetch(url2, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj2)
+        }).catch((ex) => {
+            console.log(ex);
+        }).then(res => {
+            if (res.status == 200) {
+                alert("Đặt lịch thành công")
+                props.navigation.navigate('Home');
+            }
+        });
 
 
     }
