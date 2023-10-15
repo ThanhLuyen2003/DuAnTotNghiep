@@ -3,49 +3,42 @@ import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } 
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const SignUp = (props) => {
 
+
+const SignUp = (props) => {
+    const { navigation } = props;
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
     const [phone, setphone] = useState('');
     const [pass, setpass] = useState('');
-    const [avatar, setavatar] = useState("");
-    const [andress, setandress] = useState("");
+    const [avatar, setavatar] = useState('');
+    const [andress, setandress] = useState('');
 
     const addUser = () => {
-
-        let obj = { name: name, email: email, phone: phone, pass: pass, avatar: avatar, andress: andress };
-
-        let url = 'http://192.168.88.103:3000/login/' + phone;
-
-        fetch(url)
-            .then((res) => { return res.json(); })
-            .then(async (res_json) => {
-                if (res_json.length == 1) {
-                    alert("Username đã tồn tại"); return;
+        let user = { name: name, phone: phone, email: email, pass: pass, avatar: avatar, andress: andress };
+        let url_ = 'http://192.168.0.104:3000/addUser';
+        fetch(url_, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                user
+            ),
+        })
+            .then((res) => {
+                if (res.status === 201) {
+                    console.log(res);
+                    alert('User added successfully');
                 } else {
-
-
-                    let url2 = 'http://192.168.88.103:3000/addUser';
-
-                    fetch(url2, {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(obj)
-                    }).catch((ex) => {
-                        console.log(ex);
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
-                    alert("Đăng kí thành công")
-                    props.navigation.navigate('Login');
+                    console.error('Error adding user');
                 }
-            }
-            )
+            })
+            .catch((ex) => {
+                console.log(ex);
+            })
+            ;
     }
 
 
@@ -92,9 +85,7 @@ const SignUp = (props) => {
                             <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-                        <TextInput onChangeText={(txt) => { setavatar(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-                        <TextInput onChangeText={(txt) => { setandress(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-
+                       
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
                         <Text style={style.press}>Đăng kí</Text>

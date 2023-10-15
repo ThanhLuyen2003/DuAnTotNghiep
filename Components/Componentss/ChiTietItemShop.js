@@ -20,8 +20,7 @@ const ChiTietItemShop = ({ route }) => {
 
   const getList = async () => {
 
-    let apiComment = 'http://192.168.88.103:3000/apiComment/comment';
-
+    let apiComment = 'http://192.168.0.104:3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
@@ -46,7 +45,7 @@ const ChiTietItemShop = ({ route }) => {
 
     return (
       <View >
-        <View style={{ flexDirection: "row", alignItems: "stretch", borderBottomWidth: 1, padding: 6, borderColor: "#CCCCCC" }}>
+        <View style={{ flexDirection: "row", alignItems: "stretch" ,borderBottomWidth:1,padding:6,borderColor:"#CCCCCC" }}>
           <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
           <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
 
@@ -183,15 +182,15 @@ const ChiTietItemShop = ({ route }) => {
             </View>
 
 
+            
+              {
+                (isLoading)
+                  ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                  : <FlatList style={{width:"100%"}}  scrollEnabled={false}  data={dsComment} renderItem={renderComment} />
 
-            {
-              (isLoading)
-                ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment} />
+              }
 
-            }
-
-
+            
             <View >
               <Modal
                 animationType='slide'
@@ -199,10 +198,10 @@ const ChiTietItemShop = ({ route }) => {
                 transparent={true}
               >
                 <View style={styles.modalView}>
-                  <Pressable onPress={() => { setmoDalComment(false) }} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
+                  <Pressable onPress={()=>{setmoDalComment(false)}} style={{ width: "30%", backgroundColor: "black", borderRadius: 10, height: 10, opacity: 0.10 }}>
 
                   </Pressable>
-
+                  
                   {
                     (isLoading)
                       ? (<ActivityIndicator style={{ marginTop: 300, }} />)
@@ -258,8 +257,8 @@ const styles = StyleSheet.create({
   modalView: {
     padding: 10,
     backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius:20,
+    borderTopRightRadius:20,
 
     alignItems: 'center',
     shadowColor: '#000',

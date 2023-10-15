@@ -11,7 +11,7 @@ const ChonSalon = (props) => {
 
     const getList = async () => {
 
-        let apiSalon = 'http://192.168.88.103:3000/apisalon/salon';
+        let apiSalon = 'http://192.168.0.104:3000/apisalon/salon';
 
         try {
             const response = await fetch(apiSalon);
@@ -29,7 +29,7 @@ const ChonSalon = (props) => {
     service = async (item) => {
 
         try {
-            await AsyncStorage.setItem('idSalon', item._id);
+
             await AsyncStorage.setItem('name', item.name);
             await AsyncStorage.setItem('address', item.address);
             await AsyncStorage.setItem('image', item.image);

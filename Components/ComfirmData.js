@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.88.103';
+    const ip = '192.168.0.104';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
@@ -15,8 +15,7 @@ const ComfirmData = (props) => {
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
     const [image, setImage] = useState();
-    const [idSalon, setIdSalon] = useState();
-    const [userInfo, setuserInfo] = useState({});
+    const [idUser, setIdUser] = useState();
 
     const getData = async () => {
 
@@ -26,20 +25,15 @@ const ComfirmData = (props) => {
         const m_phone = await AsyncStorage.getItem('phone');
         const m_day = await AsyncStorage.getItem('day');
         const m_hour = await AsyncStorage.getItem('hour');
-        const m_idSalon = await AsyncStorage.getItem('idSalon');
+        const user = await AsyncStorage.getItem('loginInfo');
 
-
-        const value = await AsyncStorage.getItem('loginInfo');
-
-        setuserInfo(JSON.parse(value))
         setHour(m_hour);
         setday(m_day);
         setaddress(m_address);
         setImage(m_image);
         setPhone(m_phone);
         setName(m_name);
-        setIdSalon(m_idSalon);
-
+        setIdUser(user._id);
     }
 
     const addBill = () => {
@@ -54,19 +48,10 @@ const ComfirmData = (props) => {
             services: props.route.params.content,
             price: props.route.params.price,
             status: "Đang chờ",
-            idUser: userInfo._id
-        }
-
-        let obj2 = {
-            idSalon: idSalon,
-            hour: hour,
-            day: day,
-            idServices: props.route.params.idService,
-            idUser: userInfo._id
+            idUser: idUser
         }
 
         let url = 'http://' + ip + ':3000/addBill';
-        let url2 = 'http://' + ip + ':3000/addBillDetail';
 
         fetch(url, {
             method: 'POST',
@@ -79,26 +64,9 @@ const ComfirmData = (props) => {
             console.log(ex);
         })
 
+        alert("Đặt lịch thành công");
 
-        fetch(url2, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(obj2)
-        }).catch((ex) => {
-            console.log(ex);
-        }).then(res => {
-            if (res.status == 200) {
-                alert("Đặt lịch thành công")
-                props.navigation.navigate('Home');
-            }
-        }
-        )
-
-
-
+        props.navigation.navigate('Home');
 
 
     }
@@ -106,7 +74,6 @@ const ComfirmData = (props) => {
 
     React.useEffect(() => {
         getData();
-
     }, [])
 
     return (

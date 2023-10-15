@@ -15,7 +15,7 @@ const TaoKieuToc = (props) => {
 
   const getList = async () => {
 
-    let apiSalon = 'http://192.168.88.103:3000/apiProduct/productsalon';
+    let apiSalon = 'http://192.168.0.104:3000/apiProduct/productsalon';
 
     try {
       const response = await fetch(apiSalon);

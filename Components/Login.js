@@ -24,7 +24,7 @@ const Login = (props) => {
 
         }
 
-        let url = 'http://192.168.88.103:3000/login/' + phone;
+        let url = 'http://192.168.0.104:3000/login/' + phone;
 
         fetch(url)
             .then((res) => { return res.json(); })
@@ -44,7 +44,7 @@ const Login = (props) => {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
 
-                    //console.log(JSON.stringify(objU));
+                    console.log(JSON.stringify(objU));
                     // chuyển màn hình
                     props.navigation.navigate('HomeTab');
                 } catch (e) {
