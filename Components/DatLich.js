@@ -14,6 +14,7 @@ const DatLich = (props) => {
     const today = new Date();
 
     const startDay = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    const maxDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() + 5);
 
     const timetoday = today.getHours();
     const minToday = today.getMinutes();
@@ -67,6 +68,7 @@ const DatLich = (props) => {
 
     const renderItemm = ({ item, index }) => {
 
+
         const timeItem = item.time.slice(0, 2);
         const minItem = Number(item.time.slice(3, 5));
 
@@ -77,7 +79,7 @@ const DatLich = (props) => {
                 style={[stylee.itemm, { backgroundColor: (item.selected) ? 'aqua' : 'white', }]}
             >
                 <Button
-                    disabled={ngayChon == ngayHnay ? ((timetoday > timeItem) ? true : false) : false}
+                    disabled={(ngayChon == ngayHnay ? ((timetoday > timeItem) ? true : false) : false)}
                     color={(item.selected || isDisable == true) ? 'red' : '#CD853F'}
                     title={item.time}
                     onPress={() => selectedItemm(item, index)}
@@ -118,6 +120,7 @@ const DatLich = (props) => {
                             [chonNgay]: { selected: true }
                         }}
                         minDate={startDay}
+                        maxDate={maxDate}
                     />
                 </View>
 
