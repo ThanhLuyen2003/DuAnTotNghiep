@@ -8,15 +8,15 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 const SignUp = (props) => {
 
     const { navigation } = props;
-    const [name, setname] = useState('');
-    const [email, setemail] = useState('');
-    const [phone, setphone] = useState('');
-    const [pass, setpass] = useState('');
-    const [avatar, setavatar] = useState('');
-    const [andress, setandress] = useState('');
+    const [name, setname] = useState("");
+    const [email, setemail] = useState("");
+    const [phone, setphone] = useState("");
+    const [pass, setpass] = useState("");
+    const [avatar, setavatar] = useState("");
+    const [andress, setandress] = useState("");
 
     const addUser = () => {
-        let objSP = { name: name, email: email, phone: phone, pass: pass,avatar:avatar,andress:andress};
+        let objSP = { name: name, phone: phone, email: email, pass: pass,avatar:avatar,andress:andress};
         let url_ = 'http://192.168.1.117:3000/addUser';
         fetch(url_, {
             method: 'POST',
@@ -30,9 +30,10 @@ const SignUp = (props) => {
                 console.log(ex);
             })
             .then((res) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
                     console.log(res);
                     alert("Thêm thành công")
+
                 }else{
                     console.log(res);
                     alert("Thêm thất bại")
@@ -85,7 +86,6 @@ const SignUp = (props) => {
 
                         </View>
                         
-
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
                         <Text style={style.press}>Đăng kí</Text>
