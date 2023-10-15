@@ -36,7 +36,7 @@ const Profile = (props) => {
 
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
-                        <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
+                        <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={{uri:userInfo.avatar}} />
                         <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfo.name}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfo.email}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfo.phone}</Text>
