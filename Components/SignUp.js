@@ -7,38 +7,35 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const SignUp = (props) => {
     const { navigation } = props;
-    const [name, setname] = useState('');
-    const [email, setemail] = useState('');
-    const [phone, setphone] = useState('');
-    const [pass, setpass] = useState('');
-    const [avatar, setavatar] = useState('');
-    const [andress, setandress] = useState('');
+    const [name, setname] = useState("");
+    const [email, setemail] = useState("");
+    const [phone, setphone] = useState("");
+    const [pass, setpass] = useState("");
+    const [avatar, setavatar] = useState("");
+    const [andress, setandress] = useState("");
+
 
     const addUser = () => {
         let user = { name: name, phone: phone, email: email, pass: pass, avatar: avatar, andress: andress };
-        let url_ = 'http://192.168.0.104:3000/addUser';
-        fetch(url_, {
+        let url = 'http://192.168.88.103:3000/addUser';
+
+        console.log(user);
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(
-                user
-            ),
-        })
-            .then((res) => {
-                if (res.status === 201) {
-                    console.log(res);
-                    alert('User added successfully');
-                } else {
-                    console.error('Error adding user');
-                }
-            })
-            .catch((ex) => {
-                console.log(ex);
-            })
-            ;
+            body: JSON.stringify(user)
+        }).catch((ex) => {
+            console.log(ex);
+        }).then(res => {
+            if (res.status == 200) {
+                alert("Đăng kí thành công")
+                props.navigation.navigate('Login');
+            }
+        });
     }
 
 
@@ -85,7 +82,7 @@ const SignUp = (props) => {
                             <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-                       
+
                     </View>
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
                         <Text style={style.press}>Đăng kí</Text>
