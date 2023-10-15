@@ -10,21 +10,18 @@ const Profile = (props) => {
     const editProfile = () => {
         navigation.navigate("EditProfile")
     }
-    const [userInfo, setuserInfo] = useState({});
+
+    const [userInfor, setUserInfor] = useState({});
 
     const getLoginInfor = async () => {
-
-        const value = await AsyncStorage.getItem('loginInfo');
-
-        setuserInfo(JSON.parse(value))
+        const user = await AsyncStorage.getItem('loginInfo');
+        setUserInfor(JSON.parse(user))
 
     }
 
 
     React.useEffect(() => {
         getLoginInfor();
-        console.log(userInfo.name);
-
     }, [])
 
 
@@ -36,10 +33,17 @@ const Profile = (props) => {
 
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
+
                         <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={{uri:userInfo.avatar}} />
                         <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfo.name}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfo.email}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfo.phone}</Text>
+
+                        <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
+                        <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
+                        <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text>
+
                     </View>
 
                     <ScrollView style={{ marginTop: 120 }}>

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.1.117';
+    const ip = '192.168.88.103';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
@@ -16,6 +16,7 @@ const ComfirmData = (props) => {
     const [phone, setPhone] = useState();
     const [image, setImage] = useState();
     const [userInfo, setuserInfo] = useState({});
+    const [idSalon, setIdSalon] = useState();
 
     const getData = async () => {
 
@@ -25,21 +26,21 @@ const ComfirmData = (props) => {
         const m_phone = await AsyncStorage.getItem('phone');
         const m_day = await AsyncStorage.getItem('day');
         const m_hour = await AsyncStorage.getItem('hour');
-
+        const m_idSalon = await AsyncStorage.getItem('idSalon');
         const value = await AsyncStorage.getItem('loginInfo');
 
         setuserInfo(JSON.parse(value))
-
         setHour(m_hour);
         setday(m_day);
         setaddress(m_address);
         setImage(m_image);
         setPhone(m_phone);
         setName(m_name);
+        setIdSalon(m_idSalon);
+
     }
 
     const addBill = () => {
-        console.log(userInfo._id);
 
         let obj = {
             nameSalon: name,
@@ -54,7 +55,17 @@ const ComfirmData = (props) => {
             idUser: userInfo._id
         }
 
+        let obj2 = {
+            idSalon: idSalon,
+            hour: hour,
+            day: day,
+            idServices: props.route.params.idService,
+            idUser: userInfo._id
+        }
+
         let url = 'http://' + ip + ':3000/addBill';
+        let url2 = 'http://' + ip + ':3000/addBillDetail';
+
 
         fetch(url, {
             method: 'POST',
@@ -65,74 +76,95 @@ const ComfirmData = (props) => {
             body: JSON.stringify(obj)
         }).catch((ex) => {
             console.log(ex);
-        })
-        .then((res) => {
-            if (res.status == 200) {
-                console.log(res);
 
-                alert("Thêm thành công")
-            }else{
-
-                console.log(res);
-                alert("Thêm thất bại")
-            }
         })
+            .then((res) => {
+                if (res.status == 200) {
+                    console.log(res);
+
+                    alert("Thêm thành công")
+                } else {
+
+                }})
+            .then(res => {
+                if (res.status == 200) {
+
+                    fetch(url2, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(obj2)
+                    }).catch((ex) => {
+                        console.log(ex);
+                    }).then(res => {
+                        if (res.status == 200) {
+                            alert("Đặt lịch thành công")
+                            props.navigation.navigate('Home');
+                        }
+                    });
+
+                }
+            });
+        console.log(res);
+        alert("Thêm thất bại")
     }
+}
+    
 
 
-    React.useEffect(() => {
-        getData();
-        console.log(userInfo._id);
+React.useEffect(() => {
+    getData();
+}, [])
 
-    }, [])
+return (
+    <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
 
-    return (
-        <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
+        <Text style={styles.name} >{name}</Text>
 
-            <Text style={styles.name} >{name}</Text>
+        <Text style={styles.address}>{address}</Text>
 
-            <Text style={styles.address}>{address}</Text>
+        <View style={styles.con}>
 
-            <View style={styles.con}>
-
-                <View style={styles.time}>
-                    <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
-                </View>
-
-                <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>
-
-                <ScrollView>
-                    <View style={{ flexDirection: 'row', marginTop: 5, padding: 10, }}>
-                        <View style={{ flex: 2 }}>
-                            <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
-                        </View>
-
-                        <View style={{ borderWidth: 1, }}></View>
-
-                        <View style={{ flex: 5 }}>
-                            <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.content}</Text>
-                        </View>
-                    </View>
-                </ScrollView>
-
-                <View style={{ borderWidth: 0.5 }}></View>
-
-                <View style={{ padding: 12, flexDirection: 'row' }} >
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
-                </View>
-
+            <View style={styles.time}>
+                <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
             </View>
 
-            <TouchableOpacity onPress={addBill} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
-                <Text style={{ color: 'white', fontSize: 20, marginTop: 5 }}>Xác nhận</Text>
-            </TouchableOpacity>
+            <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>
 
+            <ScrollView>
+                <View style={{ flexDirection: 'row', marginTop: 5, padding: 10, }}>
+                    <View style={{ flex: 2 }}>
+                        <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
+                    </View>
 
+                    <View style={{ borderWidth: 1, }}></View>
+
+                    <View style={{ flex: 5 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.content}</Text>
+                    </View>
+                </View>
+            </ScrollView>
+
+            <View style={{ borderWidth: 0.5 }}></View>
+
+            <View style={{ padding: 12, flexDirection: 'row' }} >
+                <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
+                <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
+            </View>
 
         </View>
-    )
-}
+
+        <TouchableOpacity onPress={addBill} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
+            <Text style={{ color: 'white', fontSize: 20, marginTop: 5 }}>Xác nhận</Text>
+        </TouchableOpacity>
+
+
+
+    </View>
+)
+
 
 export default ComfirmData;
 

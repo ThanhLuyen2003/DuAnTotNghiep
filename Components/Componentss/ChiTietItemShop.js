@@ -47,7 +47,7 @@ const ChiTietItemShop = ({ route }) => {
 
   const getList = async () => {
 
-    let apiComment = 'http://192.168.1.117:3000/apiComment/comment';
+    let apiComment = 'http://192.168.88.103:3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
@@ -104,7 +104,11 @@ const ChiTietItemShop = ({ route }) => {
     return (
       <View >
         <View style={{ flexDirection: "row", alignItems: "stretch", borderBottomWidth: 1, padding: 6, borderColor: "#CCCCCC" }}>
+
           <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: userInfo.avatar }} />
+
+          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
+
           <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
 
         </View>

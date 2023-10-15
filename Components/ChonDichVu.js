@@ -11,7 +11,7 @@ const ChonDichVu = (props) => {
 
     const getList = async () => {
 
-        let apiService = 'http://192.168.1.117:3000/service/service';
+        let apiService = 'http://192.168.88.103:3000/service/service';
 
         try {
             const response = await fetch(apiService);
@@ -73,13 +73,14 @@ const ChonDichVu = (props) => {
 
     onShowSelectedItem = () => {
         const listSelected = dsdv.filter(item => item.selected == true);
-
         let content = '';
         let price = '';
+        let idService = [];
 
         listSelected.forEach((item, index) => {
             content = content + (index + 1) + ". " + item.name + " ( " + item.price + " đ )" + " \n";
             price = Number(price) + Number(item.price);
+            idService.push(item._id);
         })
 
         if (content.length == 0) {
@@ -87,7 +88,7 @@ const ChonDichVu = (props) => {
             return;
         }
 
-        props.navigation.navigate('ComfirmData', { content, price });
+        props.navigation.navigate('ComfirmData', { content, price, idService });
     }
 
 
