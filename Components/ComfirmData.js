@@ -66,12 +66,17 @@ const ComfirmData = (props) => {
         }).catch((ex) => {
             console.log(ex);
         })
+        .then((res) => {
+            if (res.status == 200) {
+                console.log(res);
 
-        alert("Đặt lịch thành công");
-       
-        props.navigation.navigate('Home');
+                alert("Thêm thành công")
+            }else{
 
-
+                console.log(res);
+                alert("Thêm thất bại")
+            }
+        })
     }
 
 
