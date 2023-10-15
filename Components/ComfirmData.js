@@ -76,23 +76,29 @@ const ComfirmData = (props) => {
             body: JSON.stringify(obj)
         }).catch((ex) => {
             console.log(ex);
-        })
-
-        fetch(url2, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(obj2)
-        }).catch((ex) => {
-            console.log(ex);
         }).then(res => {
             if (res.status == 200) {
-                alert("Đặt lịch thành công")
-                props.navigation.navigate('Home');
+
+                fetch(url2, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(obj2)
+                }).catch((ex) => {
+                    console.log(ex);
+                }).then(res => {
+                    if (res.status == 200) {
+                        alert("Đặt lịch thành công")
+                        props.navigation.navigate('Home');
+                    }
+                });
+
             }
         });
+
+
 
 
     }
