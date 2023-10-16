@@ -78,14 +78,6 @@ const ComfirmData = (props) => {
             console.log(ex);
 
         })
-            .then((res) => {
-                if (res.status == 200) {
-                    console.log(res);
-
-                    alert("Thêm thành công")
-                } else {
-
-                }})
             .then(res => {
                 if (res.status == 200) {
 
@@ -111,7 +103,7 @@ const ComfirmData = (props) => {
         alert("Thêm thất bại")
     }
 }
-    
+
 
 
 React.useEffect(() => {
