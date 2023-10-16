@@ -102,60 +102,62 @@ const ComfirmData = (props) => {
         console.log(res);
         alert("Thêm thất bại")
     }
+
+
+    React.useEffect(() => {
+        getData();
+    }, [])
+
+    return (
+        <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
+
+            <Text style={styles.name} >{name}</Text>
+
+            <Text style={styles.address}>{address}</Text>
+
+            <View style={styles.con}>
+
+                <View style={styles.time}>
+                    <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
+                </View>
+
+                <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>
+
+                <ScrollView>
+                    <View style={{ flexDirection: 'row', marginTop: 5, padding: 10, }}>
+                        <View style={{ flex: 2 }}>
+                            <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
+                        </View>
+
+                        <View style={{ borderWidth: 1, }}></View>
+
+                        <View style={{ flex: 5 }}>
+                            <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.content}</Text>
+                        </View>
+                    </View>
+                </ScrollView>
+
+                <View style={{ borderWidth: 0.5 }}></View>
+
+                <View style={{ padding: 12, flexDirection: 'row' }} >
+                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
+                </View>
+
+            </View>
+
+            <TouchableOpacity onPress={addBill} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
+                <Text style={{ color: 'white', fontSize: 20, marginTop: 5 }}>Xác nhận</Text>
+            </TouchableOpacity>
+
+
+
+        </View>
+    )
 }
 
 
 
-React.useEffect(() => {
-    getData();
-}, [])
-
-return (
-    <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
-
-        <Text style={styles.name} >{name}</Text>
-
-        <Text style={styles.address}>{address}</Text>
-
-        <View style={styles.con}>
-
-            <View style={styles.time}>
-                <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
-            </View>
-
-            <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>
-
-            <ScrollView>
-                <View style={{ flexDirection: 'row', marginTop: 5, padding: 10, }}>
-                    <View style={{ flex: 2 }}>
-                        <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
-                    </View>
-
-                    <View style={{ borderWidth: 1, }}></View>
-
-                    <View style={{ flex: 5 }}>
-                        <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.content}</Text>
-                    </View>
-                </View>
-            </ScrollView>
-
-            <View style={{ borderWidth: 0.5 }}></View>
-
-            <View style={{ padding: 12, flexDirection: 'row' }} >
-                <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
-                <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
-            </View>
-
-        </View>
-
-        <TouchableOpacity onPress={addBill} style={{ marginTop: '3%', backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center', }}  >
-            <Text style={{ color: 'white', fontSize: 20, marginTop: 5 }}>Xác nhận</Text>
-        </TouchableOpacity>
-
-
-
-    </View>
-)
 
 
 export default ComfirmData;
