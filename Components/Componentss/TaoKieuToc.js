@@ -33,6 +33,7 @@ const TaoKieuToc = (props) => {
 
     getList();
 
+
   }, []);
 
   const numColumns = 2; //
@@ -42,7 +43,7 @@ const TaoKieuToc = (props) => {
     return (
       <SafeAreaView style={{ height: "89%" }}>
         <View >
-          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type }) }}>
+          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type, id: item._id }) }}>
             <View style={styles.gridItem}>
               <Image style={{ width: 180, height: 180, alignSelf: "center" }} source={{ uri: item.avatar }} />
               <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
