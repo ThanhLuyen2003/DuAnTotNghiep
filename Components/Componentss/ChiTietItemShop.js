@@ -8,8 +8,9 @@ import Ingredient from './Ingredient';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const topTap = createMaterialTopTabNavigator();
-const ChiTietItemShop = ({ route }) => {
-  const ip = '192.168.1.117';
+
+const ChiTietItemShop = ({ route, navigation }) => {
+  const ip = '192.168.88.103';
 
   // console.log(route);
   let describe = route.params.describe;
@@ -19,14 +20,15 @@ const ChiTietItemShop = ({ route }) => {
   const [isLoading, setisLoading] = useState(true);
 
   const [moDalComment, setmoDalComment] = useState(false);
+  const [modalCart, setModalCart] = useState(false);
+  const [modalOrder, setModalOrder] = useState(false);
 
 
   const [userInfo, setuserInfo] = useState({})
   const [Comment, setComment] = useState("")
-  const [TimeComment, setTimeComment] = useState("")
+  const [TimeComment, setTimeComment] = useState("");
 
-
-
+  const [soLuong, setsoLuong] = useState(1);
 
   const getLoginInfor = async () => {
 
@@ -35,14 +37,6 @@ const ChiTietItemShop = ({ route }) => {
     setuserInfo(JSON.parse(value))
 
   }
-
-
-  React.useEffect(() => {
-    getLoginInfor();
-    console.log(userInfo.name);
-
-  }, [])
-
 
 
   const getList = async () => {
@@ -61,11 +55,6 @@ const ChiTietItemShop = ({ route }) => {
     }
   }
 
-  React.useEffect(() => {
-
-    getList();
-
-  }, []);
 
   const addComment = () => {
     console.log(userInfo._id);
@@ -89,11 +78,11 @@ const ChiTietItemShop = ({ route }) => {
     })
       .then((res) => {
         if (res.status == 200) {
-          
+
           alert("Thêm thành công")
           getList();
         } else {
-          
+
           alert("Thêm thất bại")
         }
       })
@@ -114,15 +103,59 @@ const ChiTietItemShop = ({ route }) => {
         </View>
 
         {/* <View style={{ flexDirection: "column" }}>
-          <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
+                  <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
 
-        </View> */}
+                </View> */}
       </View>
 
     );
 
   }
 
+
+  const addCart = () => {
+
+
+    let obj2 = { namePro: route.params.name, pricePro: route.params.price, quantity: soLuong, imagePro: route.params.avatar, idUser: userInfo._id, idPro: route.params.id }
+
+    let url2 = 'http://192.168.88.103:3000/addCart';
+
+    fetch(url2, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj2)
+    }).catch((ex) => {
+      console.log(ex);
+    }).then(res => {
+      if (res.status == 200) {
+        alert("Đã thêm vào giỏ hàng")
+        navigation.navigate('TabGroupProduct');
+      }
+    });
+  }
+
+  React.useEffect(() => {
+    getLoginInfor();
+
+    getList();
+
+  }, []);
+
+  const minus = () => {
+
+    if (soLuong == 1) {
+      return;
+    }
+    setsoLuong(soLuong - 1);
+
+  }
+
+  const plus = () => {
+    setsoLuong(soLuong + 1);
+  }
 
 
   return (
@@ -240,7 +273,7 @@ const ChiTietItemShop = ({ route }) => {
               <Text style={{ fontSize: 15, right: 5 }}>
                 Bình luận
               </Text>
-              <TextInput onChangeText={(txt)=>{setComment(txt)}} style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
+              <TextInput onChangeText={(txt) => { setComment(txt) }} style={{ width: 280, height: 45, borderRadius: 10, borderWidth: 2, borderColor: "#CCCCCC", padding: 5, margin: 5 }} />
 
               <Icons name='send' size={25} onPress={addComment} />
             </View>
@@ -254,7 +287,7 @@ const ChiTietItemShop = ({ route }) => {
 
             }
 
-
+            {/* modal comment */}
             <View >
               <Modal
                 animationType='slide'
@@ -288,21 +321,128 @@ const ChiTietItemShop = ({ route }) => {
 
 
         </View>
+
+
+
       </ScrollView>
+
       <View style={{ flexDirection: "row" }}>
-        <View style={{ backgroundColor: "white", width: "50%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+
+        {/* modal giỏ hàng */}
+        <Modal
+          visible={modalCart}
+          transparent={true}
+          animationType='slide'
+
+        >
+          <View style={styles.modelCart}>
+
+            <TouchableOpacity style={{ alignSelf: 'flex-end', margin: 10 }} onPress={() => { setModalCart(false) }}>
+              <Icon name='arrow-left' size={20} />
+            </TouchableOpacity>
+
+            <View style={{ flexDirection: 'row' }}>
+              <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
+
+              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{route.params.price} Đ</Text>
+
+            </View>
+
+            <View style={{ flexDirection: 'row', }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft: 20, marginTop: 20, width: '65%' }}>Số lượng</Text>
+
+              <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>
+
+                <TouchableOpacity onPress={minus}>
+                  <Icon style={{ marginLeft: 7 }} name='minus' size={20} />
+                </TouchableOpacity>
+
+                <View style={{ borderColor: 'black', height: '100%', width: 30, borderRightWidth: 1, borderLeftWidth: 1, alignItems: 'center', marginLeft: 5, marginRight: 8, borderRadius: 3 }}>
+                  <Text style={{ marginTop: 3, marginLeft: 2 }}>{soLuong} </Text>
+                </View>
+
+                <TouchableOpacity onPress={plus}>
+                  <Icon name='plus' size={20} />
+                </TouchableOpacity>
+
+              </View>
+            </View>
+
+            <TouchableOpacity onPress={addCart} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", marginTop: 30, }}>
+
+              <Icons name='cart-plus' size={20} style={{ right: 5 }} />
+              <Text style={{ fontWeight: "bold" }}>ThÊM GIỎ HÀNG</Text>
+
+            </TouchableOpacity>
+
+          </View>
+        </Modal>
+
+
+        {/* 
+//modal đơn hàng */}
+        <Modal
+          visible={modalOrder}
+          transparent={true}
+          animationType='slide'
+
+        >
+          <View style={styles.modelCart}>
+
+            <TouchableOpacity style={{ alignSelf: 'flex-end', margin: 10 }} onPress={() => { setModalOrder(false) }}>
+              <Icon name='arrow-left' size={20} />
+            </TouchableOpacity>
+
+            <View style={{ flexDirection: 'row' }}>
+              <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
+
+              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{route.params.price} Đ</Text>
+
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft: 20, marginTop: 20, width: '65%' }}>Số lượng</Text>
+
+              <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>
+
+                <TouchableOpacity onPress={minus}>
+                  <Icon style={{ marginLeft: 7 }} name='minus' size={20} />
+                </TouchableOpacity>
+
+                <View style={{ borderColor: 'black', height: '100%', width: 30, borderRightWidth: 1, borderLeftWidth: 1, alignItems: 'center', marginLeft: 5, marginRight: 8, borderRadius: 3 }}>
+                  <Text style={{ marginTop: 3, marginLeft: 2 }}>{soLuong} </Text>
+                </View>
+
+                <TouchableOpacity onPress={plus}>
+                  <Icon name='plus' size={20} />
+                </TouchableOpacity>
+
+              </View>
+            </View>
+
+            <TouchableOpacity onPress={() => { }} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", marginTop: 30 }}>
+
+              <Text style={{ fontWeight: "bold" }}>MUA NGAY</Text>
+
+            </TouchableOpacity>
+
+          </View>
+        </Modal>
+
+
+        <TouchableOpacity onPress={() => { setModalCart(true) }} style={{ backgroundColor: "white", width: "50%", height: 60, justifyContent: "center", alignItems: "center", }}>
 
           <Icons name='cart-plus' size={20} style={{ right: 5 }} />
-          <Pressable onPress={() => { alert("gio hang") }}><Text style={{ fontWeight: "bold" }}>ThÊM GIỎ HÀNG</Text></Pressable>
+          <Text style={{ fontWeight: "bold" }}>ThÊM GIỎ HÀNG</Text>
 
-        </View>
+        </TouchableOpacity>
 
 
-        <View style={{ backgroundColor: "#CD853F", width: "50%", height: 60, justifyContent: "center", alignItems: "center" }}>
+        <TouchableOpacity onPress={() => { setModalOrder(true) }} style={{ backgroundColor: "#CD853F", width: "50%", height: 60, justifyContent: "center", alignItems: "center" }}>
 
-          <Pressable onPress={() => { alert("mua ngay") }}><Text style={{ fontWeight: "bold" }}>MUA NGAY</Text></Pressable>
+          <Text style={{ fontWeight: "bold" }}>MUA NGAY</Text>
           <Text style={{ top: 5 }}>Không ưng đổi ngay</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
     </View>
@@ -334,7 +474,15 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     marginTop: "auto",
-    height: "100%",
     flex: 0.7
   },
+  modelCart: {
+    backgroundColor: 'white',
+    height: '100%',
+    flex: 0.42,
+    marginTop: "auto",
+
+
+
+  }
 })
