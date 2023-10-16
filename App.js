@@ -23,6 +23,7 @@ import ChonDichVu from './Components/ChonDichVu';
 import ComfirmData from './Components/ComfirmData';
 import LienHe from './Components/LienHe';
 import ChiTietItemShop from './Components/Componentss/ChiTietItemShop';
+import Cart from './Components/Componentss/Cart';
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ export default function App() {
 
     <NavigationContainer >
       <Stack.Navigator initialRouteName='ManChao' >
+
         <Stack.Screen name='ManChao' component={ManChao} options={{ headerShown: false }} />
 
         <Stack.Screen name='GioiThieu' component={GioiThieu} options={{ headerShown: false }} />
@@ -56,6 +58,9 @@ export default function App() {
         <Stack.Screen name="ComfirmData" component={ComfirmData} options={{ title: "Xác nhận thông tin" }} />
 
         <Stack.Screen name="ChiTietItemShop" component={ChiTietItemShop} options={{ headerShown: false }} />
+
+        <Stack.Screen name="Cart" component={Cart} options={{ title: "Giỏ hàng" }} />
+
 
 
       </Stack.Navigator>
