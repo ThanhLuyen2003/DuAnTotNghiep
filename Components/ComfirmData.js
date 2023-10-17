@@ -103,8 +103,13 @@ const ComfirmData = (props) => {
 
 
     React.useEffect(() => {
-        getData();
-    }, [])
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            // cập nhật giao diện ở đây
+            getData();
+        });
+
+        return unsubscribe;
+    }, [props.navigation]);
 
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
