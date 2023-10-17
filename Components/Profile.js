@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = (props) => {
 
-    const { navigation } = props;
     const editProfile = () => {
         navigation.navigate("EditProfile")
     }
@@ -14,15 +13,35 @@ const Profile = (props) => {
     const [userInfor, setUserInfor] = useState({});
 
     const getLoginInfor = async () => {
+
         const user = await AsyncStorage.getItem('loginInfo');
         setUserInfor(JSON.parse(user))
 
     }
 
 
+
+
+
+    const logout = async () => {
+
+        //console.log(userInfor);
+
+        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
+
+        props.navigation.navigate('Login')
+
+    }
     React.useEffect(() => {
-        getLoginInfor();
-    }, [])
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            // cập nhật giao diện ở đây
+            getLoginInfor();
+
+
+        });
+
+        return unsubscribe;
+    }, [props.navigation]);
 
 
     return (
@@ -41,7 +60,7 @@ const Profile = (props) => {
 
                     </View>
 
-                    <ScrollView style={{ marginTop: 120 }}>
+                    <ScrollView style={{ marginTop: 120, marginBottom: 60 }}>
                         <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
                             <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Tài khoản</Text>
                         </View>
@@ -88,7 +107,7 @@ const Profile = (props) => {
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='logout' size={25} color={'#CD853F'} />
 
-                            <Text style={{ marginLeft: 10, width: 200 }}>Đăng xuất</Text>
+                            <Text style={{ marginLeft: 10, width: 200 }} onPress={logout} >Đăng xuất</Text>
                             {/* <Button title='click' onPress={showToat}/> */}
                             {/* <Toast/> */}
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
