@@ -99,8 +99,6 @@ const ComfirmData = (props) => {
 
                 }
             });
-        console.log(res);
-        alert("Thêm thất bại")
     }
 
 
