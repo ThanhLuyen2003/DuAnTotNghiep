@@ -10,8 +10,6 @@ const Login = (props) => {
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
 
-
-
     const checkLogin = () => {
 
         if (phone.length == 0) {
@@ -44,9 +42,8 @@ const Login = (props) => {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
 
-                    console.log(JSON.stringify(objU));
                     // chuyển màn hình
-                    props.navigation.navigate('HomeTab');
+                    props.navigation.navigate('Home');
                 } catch (e) {
                     // saving error
                     console.log(e);
@@ -57,6 +54,8 @@ const Login = (props) => {
 
 
     }
+
+
 
     const SignUp = () => {
         props.navigation.navigate('SignUp');
