@@ -15,47 +15,22 @@ const SignUp = (props) => {
     const [andress, setandress] = useState("");
 
 
-    
-        
-       
-    
+
+
+
+
 
 
 
     const addUser = () => {
-        let user = { name: name, phone: phone, email: email, pass: pass, avatar: avatar, andress: andress };
-        let url = 'http://192.168.88.103:3000/addUser';
 
-        console.log(user);
 
-        fetch(url, {
 
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
 
-            body: JSON.stringify(objSP)
-        })
-            .catch((ex) => {
-                console.log(ex);
-            })
-            .then((res) => {
-                if (res.status === 200) {
-                    console.log(res);
-                    alert("Thêm thành công")
 
-                }else{
-                    console.log(res);
-                    alert("Thêm thất bại")
-                }
-            })
+    }
 
-            body: JSON.stringify(user)
-        }
 
-    
 
 
 
@@ -102,7 +77,7 @@ const SignUp = (props) => {
 
                         </View>
 
-                        
+
 
 
 
