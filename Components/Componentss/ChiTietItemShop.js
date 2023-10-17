@@ -121,6 +121,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
     let url2 = 'http://192.168.88.103:3000/addCart';
 
+
     fetch(url2, {
       method: 'POST',
       headers: {
@@ -421,7 +422,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={() => { }} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", marginTop: 30 }}>
+            <TouchableOpacity onPress={() => { }} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", position: 'absolute', bottom: 0 }}>
 
               <Text style={{ fontWeight: "bold" }}>MUA NGAY</Text>
 
