@@ -24,11 +24,12 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const [modalOrder, setModalOrder] = useState(false);
 
 
-  const [userInfo, setuserInfo] = useState({})
   const [Comment, setComment] = useState("")
   const [TimeComment, setTimeComment] = useState("");
 
   const [soLuong, setsoLuong] = useState(1);
+
+  const [userInfo, setuserInfo] = useState({})
 
   const getLoginInfor = async () => {
 
@@ -368,7 +369,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={addCart} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", marginTop: 30, }}>
+            <TouchableOpacity onPress={addCart} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", position: 'absolute', bottom: 0 }}>
 
               <Icons name='cart-plus' size={20} style={{ right: 5 }} />
               <Text style={{ fontWeight: "bold" }}>ThÊM GIỎ HÀNG</Text>
