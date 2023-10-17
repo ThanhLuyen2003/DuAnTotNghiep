@@ -26,8 +26,16 @@ const TabGroupProduct = (props) => {
   }
 
   React.useEffect(() => {
-    getLoginInfor();
-  }, [])
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // cập nhật giao diện ở đây
+      getLoginInfor();
+
+
+    });
+
+    return unsubscribe;
+  }, [props.navigation]);
+
 
   return (
     <SafeAreaView style={{ flex: 1, width: "100%" }}>
