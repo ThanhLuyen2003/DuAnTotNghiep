@@ -9,36 +9,36 @@ const ManChao = (props) => {
 
     const [userInfor, setUserInfor] = useState({});
 
-    const getLoginInfor = async () => {
+    // const getLoginInfor = async () => {
 
-        const user = await AsyncStorage.getItem('loginInfo');
-        setUserInfor(JSON.parse(user))
+    //     const user = await AsyncStorage.getItem('loginInfo');
+    //     setUserInfor(JSON.parse(user))
 
-    }
+    // }
 
-    React.useEffect(() => {
-        const unsubscribe = props.navigation.addListener('focus', () => {
-            // cập nhật giao diện ở đây
-            getLoginInfor();
+    // React.useEffect(() => {
+    //     const unsubscribe = props.navigation.addListener('focus', () => {
+    //         // cập nhật giao diện ở đây
+    //         getLoginInfor();
 
 
-        });
+    //     });
 
-        return unsubscribe;
-    }, [props.navigation]);
+    //     return unsubscribe;
+    // }, [props.navigation]);
 
 
     setTimeout(() => {
 
         //     if (userInfor.name == "") {
-        //         props.navigation.navigate('GioiThieu')
+        props.navigation.navigate('GioiThieu')
 
         //     } else {
 
 
         //     }
 
-        props.navigation.navigate('HomeTab')
+        //props.navigation.navigate('HomeTab')
 
 
 
