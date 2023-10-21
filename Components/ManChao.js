@@ -30,15 +30,15 @@ const ManChao = (props) => {
 
     setTimeout(() => {
 
-        if (userInfor.name == "") {
-            props.navigation.navigate('GioiThieu')
+        //     if (userInfor.name == "") {
+        //         props.navigation.navigate('GioiThieu')
 
-        } else {
-            props.navigation.navigate('HomeTab')
-
-        }
+        //     } else {
 
 
+        //     }
+
+        props.navigation.navigate('HomeTab')
 
 
 
