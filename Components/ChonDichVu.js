@@ -2,10 +2,6 @@ import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity,
 import React from 'react'
 import { useState } from "react";
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 
 const ChonDichVu = (props) => {
