@@ -162,7 +162,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   return (
 
-    <View>
+    <SafeAreaView>
       <ScrollView style={{ height: "90%" }} nestedScrollEnabled={true}>
 
 
@@ -447,7 +447,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
