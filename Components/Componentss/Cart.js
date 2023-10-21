@@ -4,7 +4,6 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import CheckBox from "@react-native-community/checkbox";
 
 const Cart = (props) => {
 
