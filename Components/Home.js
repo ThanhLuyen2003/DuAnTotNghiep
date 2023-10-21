@@ -23,7 +23,7 @@ const Home = (props) => {
                 {/* <Text>{'\n'}Muốn đẹp trai đến ngay Poly Barber</Text> */}
             </View>
 
-
+{/* alo */}
             <ScrollView >
 
                 <View style={styles.verticalLayout}>
