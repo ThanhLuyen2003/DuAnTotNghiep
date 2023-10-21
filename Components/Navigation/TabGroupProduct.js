@@ -47,35 +47,7 @@ const TabGroupProduct = (props) => {
 
           <TouchableOpacity style={{ position: "absolute", left: 375, zIndex: 1, top: 7, }} onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }}>
 
-<<<<<<< Updated upstream
             <Icons name="cart" size={25} color="#363636" />
-=======
-    </View>
-    
-    <topTap.Navigator
-      screenOptions={{
-        tabBarAndroidRipple: { borderless: false },
-        tabBarStyle: {
-          borderWidth: 1,
-          borderColor: "white",
-        },
-        tabBarLabelStyle: {
-          textTransform: "capitalize",
-          fontWeight: "bold"
-        },
-        tabBarIndicatorStyle: {
-          backgroundColor: "#CD853F",
-          height: 5,
-          borderRadius: 5,
-          width: "16%",
-          marginLeft: 5
-        },
-        tabBarScrollEnabled:true,
-        
-        
-      }}>
-      <topTap.Screen name="TaoKieuToc"  component={TaoKieuToc} options={{
->>>>>>> Stashed changes
 
           </TouchableOpacity>
         </View>
@@ -132,6 +104,7 @@ const TabGroupProduct = (props) => {
 
       </topTap.Navigator>
     </SafeAreaView>
+
   )
 }
 
