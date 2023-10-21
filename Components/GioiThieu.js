@@ -3,6 +3,8 @@ import React from 'react'
 import Onboarding from 'react-native-onboarding-swiper';
 
 
+
+
 const GioiThieu = (props) => {
     const { navigation } = props;
     const DoneAndSkip = () => {
