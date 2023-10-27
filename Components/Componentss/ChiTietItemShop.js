@@ -17,7 +17,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
   let describe = route.params.describe;
   let ingredient = route.params.ingredient;
 
-  const [dsComment, setdsComment] = useState([])
+  const [dsComment, setdsComment] = useState({})
   const [isLoading, setisLoading] = useState(true);
 
   const [moDalComment, setmoDalComment] = useState(false);
@@ -141,6 +141,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
   }
 
   React.useEffect(() => {
+
     getLoginInfor();
 
     getList();
@@ -153,6 +154,8 @@ const ChiTietItemShop = ({ route, navigation }) => {
       return;
     }
     setsoLuong(soLuong - 1);
+
+    console.log(userInfo.name);
 
   }
 
