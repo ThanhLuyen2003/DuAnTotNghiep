@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ActivityIndicator, FlatList, TouchableOpacity, Button } from "react-native";
+import { View, Image, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ActivityIndicator, FlatList, TouchableOpacity, Button, Alert } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -77,6 +77,49 @@ const Cart = (props) => {
     const renderItem = ({ item, index }) => {
 
 
+        const deleteCart = () => {
+
+
+            const url = 'http://' + ip + ':3000/delCart/' + item._id;
+
+            Alert.alert("Delete!!!", "Bạn có muộn xóa?", [
+                {
+                    text: 'Yes',
+                    onPress: () => {
+
+
+                        fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                            .then((res) => {
+                                if (res.status == 200) {
+                                    alert("Đã xóa");
+                                    getList();
+                                }
+                            })
+                            .catch((ex) => {
+                                console.log(ex);
+                            });
+
+                        getList();
+
+                    }
+                },
+                {
+                    text: 'No',
+                    style: "cancel"
+                }
+            ], {
+                cancelable: true,
+            }
+            )
+        }
+
+
         const minus = () => {
 
             if (item.quantity == 1) {
@@ -126,6 +169,9 @@ const Cart = (props) => {
             setdata(newData);
         }
 
+
+
+
         return (
             <View
                 style={{ width: '100%', margin: 5, padding: 5, backgroundColor: 'white' }}
@@ -169,7 +215,7 @@ const Cart = (props) => {
 
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={deleteCart}>
 
                     <Icon style={{ position: 'absolute', right: 20, bottom: 10 }} size={30} name="delete" />
 
