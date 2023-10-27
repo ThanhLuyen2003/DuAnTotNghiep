@@ -10,7 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
-  const ip = '192.168.88.103';
+
+  const ip = "192.168.88.104";
 
   // console.log(route);
   let describe = route.params.describe;
@@ -42,7 +43,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   const getList = async () => {
 
-    let apiComment = 'http://192.168.88.103:3000/apiComment/comment';
+    let apiComment = 'http://' + ip + ':3000/apiComment/comment';
 
     try {
       const response = await fetch(apiComment);
@@ -119,7 +120,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
     let obj2 = { namePro: route.params.name, pricePro: route.params.price, quantity: soLuong, imagePro: route.params.avatar, idUser: userInfo._id, idPro: route.params.id }
 
-    let url2 = 'http://192.168.88.103:3000/addCart';
+    let url2 = 'http://' + ip + ':3000/addCart';
 
 
     fetch(url2, {

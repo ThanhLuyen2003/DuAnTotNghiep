@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.88.103';
+    const ip = '192.168.88.104';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();

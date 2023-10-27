@@ -10,10 +10,13 @@ const Cart = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [data, setdata] = useState([]);
 
+    const ip = "192.168.88.104";
+
+
     const getList = async () => {
 
 
-        let api = 'http://192.168.88.103:3000/getCart/' + props.route.params.id;
+        let api = 'http://' + ip + ':3000/getCart/' + props.route.params.id;
 
         try {
             const response = await fetch(api);

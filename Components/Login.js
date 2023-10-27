@@ -7,6 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Login = (props) => {
 
+    const ip = "192.168.88.104";
+
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
 
@@ -22,7 +24,7 @@ const Login = (props) => {
 
         }
 
-        let url = 'http://192.168.88.103:3000/login/' + phone;
+        let url = 'http://' + ip + ':3000/login/' + phone;
 
         fetch(url)
             .then((res) => { return res.json(); })

@@ -11,11 +11,14 @@ const TaoKieuToc = (props) => {
   const [isLoading, setisLoading] = useState(true);
 
 
+  const ip = "192.168.88.104";
+
 
 
   const getList = async () => {
 
-    let apiSalon = 'http://192.168.88.103:3000/apiProduct/productsalon';
+
+    let apiSalon = 'http://' + ip + ':3000/apiProduct/productsalon';
 
     try {
       const response = await fetch(apiSalon);

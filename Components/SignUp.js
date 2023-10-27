@@ -18,10 +18,6 @@ const SignUp = (props) => {
 
 
 
-
-
-
-
     const addUser = () => {
 
 

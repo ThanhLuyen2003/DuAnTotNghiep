@@ -9,9 +9,11 @@ const ChonDichVu = (props) => {
     const [dsdv, setDsdv] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
+    const ip = "192.168.88.104";
+
     const getList = async () => {
 
-        let apiService = 'http://192.168.88.103:3000/service/service';
+        let apiService = 'http://' + ip + ':3000/service/service';
 
         try {
             const response = await fetch(apiService);
