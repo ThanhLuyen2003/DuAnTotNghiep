@@ -86,6 +86,9 @@ const Cart = (props) => {
 
         console.log(products);
 
+        props.navigation.navigate('Order', { price, products });
+
+
 
     }
 

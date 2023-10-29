@@ -32,6 +32,8 @@ const Profile = (props) => {
         props.navigation.navigate('Login')
 
     }
+
+
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây

@@ -3,12 +3,12 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
-import TaoKieuToc from '../Componentss/TaoKieuToc';
-import ChamSocDa from '../Componentss/ChamSocDa';
-import ChamSocCoThe from './../Componentss/ChamSocCoThe';
-import ComboSalon from '../Componentss/ComboSalon';
-import NuocHoa from './../Componentss/NuocHoa';
-import KemDanhRang from './../Componentss/KemDanhRang';
+import TaoKieuToc from '../ComponentsShop/TaoKieuToc';
+import ChamSocDa from '../ComponentsShop/ChamSocDa';
+import ChamSocCoThe from '../ComponentsShop/ChamSocCoThe';
+import ComboSalon from '../ComponentsShop/ComboSalon';
+import NuocHoa from '../ComponentsShop/NuocHoa';
+import KemDanhRang from '../ComponentsShop/KemDanhRang';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

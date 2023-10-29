@@ -10,7 +10,6 @@ import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Home from './Components/Home';
 
-import MuaSam from './Components/MuaSam';
 import DatLich from './Components/DatLich';
 
 import Profile from './Components/Profile';
@@ -22,8 +21,9 @@ import TabGroupProduct from './Components/Navigation/TabGroupProduct';
 import ChonDichVu from './Components/ChonDichVu';
 import ComfirmData from './Components/ComfirmData';
 import LienHe from './Components/LienHe';
-import ChiTietItemShop from './Components/Componentss/ChiTietItemShop';
-import Cart from './Components/Componentss/Cart';
+import ChiTietItemShop from './Components/ComponentsShop/ChiTietItemShop';
+import Cart from './Components/ComponentsShop/Cart';
+import Order from './Components/ComponentsShop/Order';
 
 
 const Stack = createNativeStackNavigator();
@@ -60,6 +60,9 @@ export default function App() {
         <Stack.Screen name="ChiTietItemShop" component={ChiTietItemShop} options={{ headerShown: false }} />
 
         <Stack.Screen name="Cart" component={Cart} options={{ title: "Giỏ hàng" }} />
+
+        <Stack.Screen name="Order" component={Order} options={{ title: "Đặt hàng" }} />
+
 
 
 
