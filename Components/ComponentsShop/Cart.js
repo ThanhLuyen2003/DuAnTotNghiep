@@ -33,8 +33,6 @@ const Cart = (props) => {
 
 
 
-
-
     const [tamTinh, setTamTinh] = useState(0);
 
     selectedItemm = (item, index) => {
@@ -73,6 +71,24 @@ const Cart = (props) => {
 
         setTamTinh(price)
     }
+
+    const Order = () => {
+
+        const listSelected = data.filter(item => item.selected == true);
+
+        let price = '0';
+        let products = [];
+
+        listSelected.forEach((item, index) => {
+            price = Number(price) + (Number(item.pricePro) * Number(item.quantity));
+            products.push({ name: item.namePro, price: item.pricePro, quantity: item.quantity, image: item.imagePro, idPro: item.idPro });
+        })
+
+        console.log(products);
+
+
+    }
+
 
     const renderItem = ({ item, index }) => {
 
@@ -138,8 +154,6 @@ const Cart = (props) => {
                 return {
                     ...e,
                 }
-
-
 
             })
 
@@ -236,13 +250,16 @@ const Cart = (props) => {
 
 
 
+
     return (
         <View style={{ height: '100%' }}>
             <View style={{ height: '90%' }}>
                 {
-                    (data.length == 0)
-                        ? (<Text style={{ marginTop: 300, alignSelf: 'center' }}>Giỏ hàng rỗng</Text>)
-                        : <FlatList data={data} renderItem={renderItem} />
+                    (isLoading)
+                        ? (<ActivityIndicator style={{ marginTop: 300 }} />)
+                        : ((data.length == 0)
+                            ? (<Text style={{ marginTop: 300, alignSelf: 'center' }}>Giỏ hàng rỗng</Text>)
+                            : <FlatList data={data} renderItem={renderItem} />)
 
                 }
             </View>
@@ -257,7 +274,7 @@ const Cart = (props) => {
 
                 <Text style={{ flex: 4, fontSize: 15 }}>Tạm tính: {tamTinh} đ</Text>
 
-                <TouchableOpacity style={{ height: '100%', width: "auto", backgroundColor: '#CD853F', flex: 2 }}>
+                <TouchableOpacity onPress={Order} style={{ height: '100%', width: "auto", backgroundColor: '#CD853F', flex: 2 }}>
                     <Text style={{ alignSelf: 'center', marginTop: 20 }}>Đặt hàng</Text>
                 </TouchableOpacity>
 
