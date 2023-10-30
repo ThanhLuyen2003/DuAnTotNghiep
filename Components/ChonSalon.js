@@ -9,7 +9,7 @@ const ChonSalon = (props) => {
     const [dssl, setDssl] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.104";
+    const ip = "192.168.88.101";
 
 
     const getList = async () => {
