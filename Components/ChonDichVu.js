@@ -9,7 +9,7 @@ const ChonDichVu = (props) => {
     const [dsdv, setDsdv] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.104";
+    const ip = "192.168.88.101";
 
     const getList = async () => {
 
@@ -106,7 +106,14 @@ const ChonDichVu = (props) => {
             {
                 (isLoading)
                     ? (<ActivityIndicator style={{ marginTop: '50%', marginBottom: '200%' }} />)
-                    : (<FlatList style={{ height: '90%' }} data={dsdv} renderItem={renderItem} numColumns={2} />)
+                    : (<FlatList
+                        style={{ height: '90%' }}
+                        data={dsdv}
+                        renderItem={renderItem}
+                        numColumns={2}
+
+
+                    />)
 
             }
 
