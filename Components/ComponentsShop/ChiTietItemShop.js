@@ -135,10 +135,27 @@ const ChiTietItemShop = ({ route, navigation }) => {
     }).then(res => {
       if (res.status == 200) {
         alert("Đã thêm vào giỏ hàng")
+        setModalCart(false);
         navigation.navigate('TabGroupProduct');
       }
     });
   }
+
+
+  const Order = () => {
+    let products = [];
+    let price = route.params.price;
+
+    products.push({ name: route.params.name, price: route.params.price, quantity: soLuong, image: route.params.avatar, idPro: route.params.id });
+
+    setModalOrder(false)
+
+    navigation.navigate('Order', { price, products });
+
+    console.log(price);
+
+  }
+
 
   React.useEffect(() => {
 
@@ -155,7 +172,6 @@ const ChiTietItemShop = ({ route, navigation }) => {
     }
     setsoLuong(soLuong - 1);
 
-    console.log(userInfo.name);
 
   }
 
@@ -426,7 +442,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={() => { }} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", position: 'absolute', bottom: 0 }}>
+            <TouchableOpacity onPress={Order} style={{ backgroundColor: "#CD853F", width: "100%", height: 60, justifyContent: "center", alignItems: "center", flexDirection: "row", position: 'absolute', bottom: 0 }}>
 
               <Text style={{ fontWeight: "bold" }}>MUA NGAY</Text>
 
