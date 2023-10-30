@@ -109,7 +109,7 @@ const DatLich = (props) => {
             <View style={{ padding: 15, backgroundColor: 'white', height: '96%' }}>
                 <View >
                     <Calendar
-                        enableSwipeMonths
+
                         theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
                         style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
                         onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day), setchonGio("") }}
