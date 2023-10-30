@@ -10,7 +10,7 @@ const Cart = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [data, setdata] = useState([]);
 
-    const ip = "192.168.88.104";
+    const ip = "192.168.88.101";
 
 
     const getList = async () => {
@@ -84,7 +84,10 @@ const Cart = (props) => {
             products.push({ name: item.namePro, price: item.pricePro, quantity: item.quantity, image: item.imagePro, idPro: item.idPro });
         })
 
-        console.log(products);
+        if (price == 0) {
+            alert('Vui lòng chọn sản phẩm')
+            return
+        }
 
         props.navigation.navigate('Order', { price, products });
 
