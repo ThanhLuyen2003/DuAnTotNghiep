@@ -11,7 +11,7 @@ const TaoKieuToc = (props) => {
   const [isLoading, setisLoading] = useState(true);
 
 
-  const ip = "192.168.88.104";
+  const ip = "192.168.88.101";
 
 
 
