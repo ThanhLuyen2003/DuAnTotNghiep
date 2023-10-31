@@ -1,20 +1,43 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView, Image } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { useState } from 'react'
 import DatePicker from '@react-native-community/datetimepicker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 const EditProfile = () => {
-
+    const ip = "192.168.1.117";
     const [open, setOpen] = useState(false); // xổ list xuống hay không
     const [value, setValue] = useState(null); // giá trị người dùng chọn
     const [items, setItems] = useState([     // mảng các phần tử
         { label: 'Nam', value: 1 },
         { label: 'Nữ', value: 2 }
     ]);
+
     const [dateBirth, setdateBirth] = useState("");
     const [date, setdate] = useState(new Date());
     const [showPicker, setshowPicker] = useState(false)
+
+    const [userInfo, setuserInfo] = useState({
+        phone: '',
+        email: '',
+        avatar: '',
+        address: ''
+    })
+    const [userId, setUserId] = useState(''); // State to hold the user ID
+    const [name, setName] = useState(''); // State to hold the name
+    const [phone, setPhone] = useState(''); // State to hold the phone
+    const [email, setEmail] = useState(''); // State to hold the email
+    const [avatar, setavatar] = useState("")
+    const [address, setaddress] = useState("")
+
+
+    const [img_source, setimg_source] = useState(null)
+    const [img_base64, setiimg_base64] = useState(null)
+
+
     const toggleDatePicker = () => {
         setshowPicker(!showPicker);
     }
@@ -30,68 +53,135 @@ const EditProfile = () => {
             toggleDatePicker();
         }
     }
+
+    const getLoginInfor = async () => {
+
+        const value = await AsyncStorage.getItem('loginInfo');
+        const userData = JSON.parse(value);
+        setuserInfo(userData)
+        setName(userData.name)
+        setPhone(userData.phone)
+        setEmail(userData.email)
+        setavatar(userData.avatar)
+        setaddress(userData.address)
+    }
+
+    React.useEffect(() => {
+
+        getLoginInfor();
+
+    }, []);
+
+    const pickImage = async () => {
+
+        // Đọc ảnh từ thư viện thì không cần khai báo quyền
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3], // khung view cắt ảnh 
+            quality: 1,
+        });
+
+
+        console.log(result);
+
+
+        if (!result.canceled) {
+            if (result.assets.length > 0 && result.assets[0].uri) {
+                setimg_source(result.assets[0].uri);
+                let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
+                let file_ext = _uri.substring(_uri.lastIndexOf('.') + 1); // lấy đuôi file
+                FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' })
+                    .then((res) => {
+                        // phải nối chuỗi với tiền tố data image
+                        setiimg_base64("data:image/" + file_ext + ";base64," + res);
+
+                        console.log(img_base64);
+                        // upload ảnh lên api thì dùng PUT có thể viết ở đây
+                    });
+            }
+
+            // chuyển ảnh thành base64 để upload lên json   
+             
+        }
+    }
+    const editUser = () => {
+        const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
+        const addressRegex = /^[0-9A-Za-z\s,-]+$/;
+        if (!nameRegex.test(name)) {
+            alert("Tên không hợp lệ. Vui lòng kiểm tra lại!");
+            return;
+        }
+        if (!addressRegex.test(address)) {
+            alert("Sai định dạng địa chỉ");
+            return;
+        }
+
+        let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
+        let obj = { name: name, phone: phone, email: email, avatar: img_base64, address: address }
+        fetch(url_api, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj),
+        })
+            .
+
+            then((res) => {
+                if (res.status === 200)
+                    alert("Sửa thành công");
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+
+
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ margin: 20 }}>
                 <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity onPress={() => { }}>
+                    <TouchableOpacity onPress={pickImage}>
                         <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
-                            <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={require('../Images/anime.jpg')}>
+                            {/* {img_source && <Image source={{ uri: img_source }} style={{ width: 200, height: 200 }} />} */}
+                            {/* {img_base64 && <Image source={{ uri: img_base64 }} style={{ width: 200, height: 200 }} />} */}
+
+                            {/* <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
+                            <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{uri:userInfo.avatar}}>
                                 <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                     <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                 </View>
                             </ImageBackground>
+                        </View> */}
+                            <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
+                                {img_base64 ? (
+                                    <Image source={{ uri: img_base64 }} style={{ width: 125, height: 125, borderRadius: 100 }} />
+                                ) : (
+                                    <Text>No Image</Text>
+                                )}
+                            </View>
                         </View>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.inputContainer}>
+                    <TextInput style={styles.input} value={name} onChangeText={(txt) => { setName(txt) }} />
 
-                <View style={{ flexDirection: 'column', padding: 5, bottom: 50, marginTop: 50 }}>
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>Họ tên</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Icons name="account" size={35} style={{ position: "absolute", left: 10 }} />
-                        <TextInput placeholder="Nhập tên" style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-                    </View>
-                </View>
-                <View style={{ flexDirection: 'column', padding: 5, bottom: 50 }}>
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>Ngày sinh</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Icons name="calendar-blank" size={35} style={{ position: "absolute", left: 10 }} />
-                        {
-                            showPicker && (
-                                <DatePicker
-                                    mode='date'
-                                    display="spinner"
-                                    value={date}
-                                    onChange={onChange}
-                                />
-                            )
-                        }
+                    <TextInput style={styles.input} value={phone} editable={false} onChangeText={(txt) => { setPhone(txt) }} />
 
-                        <Pressable onPress={toggleDatePicker}>
-                            <TextInput placeholder="12/12/2003" placeholderTextColor="black" onChangeText={setdateBirth} value={dateBirth} editable={false} style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-                        </Pressable>
+                    <TextInput style={styles.input} value={email} editable={false} onChangeText={(txt) => { setEmail(txt) }} />
 
+                    {/* <TextInput style={styles.input} value={avatar} onChangeText={(txt) => { setavatar(txt) }} /> */}
 
-                    </View>
+                    <TextInput style={styles.input} value={address} onChangeText={(txt) => { setaddress(txt) }} />
                 </View>
-                <View style={{ flexDirection: 'column', padding: 5, bottom: 50 }}>
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>Số điện thoại</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Icons name="phone" size={35} style={{ position: "absolute", left: 10 }} />
-                        <TextInput placeholder="Nhập số điện thoại" style={{ width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
-                    </View>
-                </View>
-                <View >
-                    <Text style={{ fontSize: 15, fontWeight: "bold", bottom: 50 }}>Giới tính</Text>
-                    <DropDownPicker style={styles.containerDropDown}
-                        open={open}
-                        value={value}
-                        items={items}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems} />
-                </View>
-                <Pressable style={{ justifyContent: "center", bottom: 10 }}>
+
+                <Pressable style={{ justifyContent: "center", bottom: 10 }} onPress={editUser}>
                     <Text style={styles.press}>Cập nhật</Text>
                 </Pressable>
             </View>
@@ -120,5 +210,19 @@ const styles = StyleSheet.create({
         textAlign: "center",
         shadowColor: "#000",
         elevation: 5
-    }
+    },
+    inputContainer: {
+        marginVertical: 10,
+        justifyContent: 'center',
+    },
+    input: {
+        height: 40,
+        marginVertical: 10,
+        borderWidth: 1,
+        borderColor: '#aaa',
+
+
+        borderRadius: 5,
+        padding: 10,
+    },
 })

@@ -46,6 +46,8 @@ const Profile = (props) => {
     }, [props.navigation]);
 
 
+    const isAvatarValid = userInfor.avatar && typeof userInfor.avatar === 'string' && userInfor.avatar.trim() !== '';
+
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
@@ -55,7 +57,9 @@ const Profile = (props) => {
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
 
-                        <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={{ uri: userInfor.avatar }} />
+                        {isAvatarValid ? (
+                            <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={{ uri: userInfor.avatar }} />
+                        ) : null}
                         <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text>

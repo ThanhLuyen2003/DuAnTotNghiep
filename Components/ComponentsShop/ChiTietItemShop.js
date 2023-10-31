@@ -26,9 +26,9 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const [modalOrder, setModalOrder] = useState(false);
 
 
-  const [Comment, setComment] = useState("")
-  const [avatarUser, setavatarUser] = useState("")
-  const [nameUser, setnameUser] = useState("")
+  const [Comment, setComment] = useState("");
+  const [avatarUser, setavatarUser] = useState("");
+  const [nameUser, setnameUser] = useState("");
   const [TimeComment, setTimeComment] = useState("");
 
   const [soLuong, setsoLuong] = useState(1);
