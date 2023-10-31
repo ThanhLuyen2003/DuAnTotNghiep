@@ -92,8 +92,9 @@ const ChiTietItemShop = ({ route, navigation }) => {
           setComment("")
         } else {
 
-          alert("Thêm thất bại")
-          console.log();
+          alert("Vui lòng cập nhật đầy đủ thông tin")
+          return res;
+          
         }
       })
   }
