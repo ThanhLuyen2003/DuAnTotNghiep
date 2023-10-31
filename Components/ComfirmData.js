@@ -78,7 +78,7 @@ const ComfirmData = (props) => {
             console.log(ex);
 
         })
-            .then(res => {
+        .then(res => {
                 if (res.status == 200) {
 
                     fetch(url2, {
