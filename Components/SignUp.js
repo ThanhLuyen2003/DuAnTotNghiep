@@ -16,6 +16,28 @@ const SignUp = (props) => {
     const [avatar, setAvatar] = useState("");
     const [address, setAddress] = useState("");
 
+
+
+
+    // Hàm kiểm tra định dạng số điện thoại
+    const isValidPhoneNumber = (phoneNumber) => {
+        const phoneRegex = /^[0-9]{10,11}$/; // Định dạng: 10 hoặc 11 chữ số
+
+        return phoneRegex.test(phoneNumber);
+    };
+    // Hàm kiểm tra định dạng email
+    const isValidEmail = (email) => {
+        const emailRegex = /\S+@\S+\.\S+/;
+
+        return emailRegex.test(email);
+    };
+
+    //kiểm tra kí tự 
+    const isValidName = (name) => {
+        const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
+
+        return nameRegex.test(name);
+    };
     const addSignUp = () => {
         if (!name || !email || !phone || !pass || !rePass) {
             alert("Vui lòng điền đầy đủ thông tin.");
@@ -27,8 +49,25 @@ const SignUp = (props) => {
             return;
         }
 
-        if (phone.length < 10) {
-            alert("Yêu cầu nhập đúng định dạng số điện thoại >10 <11 ")
+        if (!isValidPhoneNumber(phone)) {
+            alert('Số điện thoại không hợp lệ. Vui lòng kiểm tra lại!');
+            return;
+        }
+        if (!isValidEmail(email)) {
+            alert('Email không hợp lệ. Vui lòng kiểm tra lại!');
+            return;
+        }
+        if (pass.length && rePass.length < 8) {
+            alert("Mật khẩu trên 8 kí tự!")
+            return;
+        }
+        if (!isValidName(name)) {
+            alert('Tên không hợp lệ. Vui lòng kiểm tra lại!');
+            return;
+        }
+
+        if (name.length < 11) {
+            alert("Tên phải nhiều hơn 10 ký tự!");
             return;
         }
         let obj = {
@@ -52,12 +91,16 @@ const SignUp = (props) => {
             },
             body: JSON.stringify(obj)
         })
-            .
-
-
-            then(response => {
+            .then(response => {
                 if (response.status === 200) {
                     alert("Thêm thành công");
+                    setName('');
+                    setEmail('');
+                    setPhone('');
+                    setPass('');
+                    setrePass('');
+                    navigation.navigate("Login")
+                   
                 } else if (response.status === 400) {
                     alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
                 }
@@ -111,7 +154,7 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setPass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput keyboardType='numeric' maxLength={8} onChangeText={(txt) => { setPass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
                     </View>
@@ -121,7 +164,7 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setrePass(txt) }} placeholder="Nhập lại mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput keyboardType='numeric' maxLength={8} onChangeText={(txt) => { setrePass(txt) }} placeholder="Nhập lại mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
                     </View>
