@@ -6,7 +6,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
-    const ip = "192.168.0.101";
+    const ip = "192.168.1.117";
     const { navigation } = props;
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -79,7 +79,7 @@ const SignUp = (props) => {
             address: address
         };
 
-        const url = "http://192.168.0.101:3000/addUser";
+        const url = "http://"+ ip+":3000/addUser";
 
         fetch(url, {
             method: 'POST',
