@@ -10,8 +10,9 @@ const TaoKieuToc = (props) => {
   const [dsProduct, setdsProduct] = useState([])
   const [isLoading, setisLoading] = useState(true);
 
+  
 
-  const ip = "192.168.88.101";
+  const ip = "192.168.0.101";
 
 
 
