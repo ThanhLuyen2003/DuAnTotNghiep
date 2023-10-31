@@ -51,7 +51,7 @@ const Home = (props) => {
                                 imageStyle={{ borderRadius: 25 }} >
                                 <Image source={require('../Images/imgHome/banggia.png')} style={styles.icon} />
                             </View>
-                            <Text style={styles.itemText}>Bảng giá</Text>
+                            <Text style={styles.itemText}>Đơn hàng</Text>
                         </View>
 
                         <View style={styles.item}>

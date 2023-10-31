@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Profile = (props) => {
 
     const editProfile = () => {
-        navigation.navigate("EditProfile")
+        props.navigation.navigate("EditProfile")
     }
 
     const [userInfor, setUserInfor] = useState({});

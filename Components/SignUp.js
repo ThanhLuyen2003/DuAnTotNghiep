@@ -6,7 +6,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
-    const ip = "192.168.0.101";
+    const ip = "192.168.88.101";
     const { navigation } = props;
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -33,11 +33,7 @@ const SignUp = (props) => {
     };
 
     //kiểm tra kí tự 
-    const isValidName = (name) => {
-        const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
 
-        return nameRegex.test(name);
-    };
     const addSignUp = () => {
         if (!name || !email || !phone || !pass || !rePass) {
             alert("Vui lòng điền đầy đủ thông tin.");
@@ -61,10 +57,7 @@ const SignUp = (props) => {
             alert("Mật khẩu trên 8 kí tự!")
             return;
         }
-        if (!isValidName(name)) {
-            alert('Tên không hợp lệ. Vui lòng kiểm tra lại!');
-            return;
-        }
+
 
         if (name.length < 11) {
             alert("Tên phải nhiều hơn 10 ký tự!");
@@ -79,7 +72,7 @@ const SignUp = (props) => {
             address: address
         };
 
-        const url = "http://192.168.0.101:3000/addUser";
+        const url = "http://" + ip + ":3000/addUser";
 
         fetch(url, {
             method: 'POST',
@@ -100,7 +93,7 @@ const SignUp = (props) => {
                     setPass('');
                     setrePass('');
                     navigation.navigate("Login")
-                   
+
                 } else if (response.status === 400) {
                     alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
                 }

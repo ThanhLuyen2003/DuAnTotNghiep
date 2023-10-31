@@ -11,7 +11,7 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.0.101";
+  const ip = "192.168.88.101";
 
   // console.log(route);
   let describe = route.params.describe;
@@ -53,7 +53,6 @@ const ChiTietItemShop = ({ route, navigation }) => {
     try {
       const response = await fetch(apiComment);
       const json = await response.json();
-      console.log( json); // Log the comments to verify the structure
       setdsComment(json);
     } catch (err) {
       console.error("Error fetching comments:", err); // Log the error for troubleshooting
@@ -68,8 +67,8 @@ const ChiTietItemShop = ({ route, navigation }) => {
       Comment: Comment,
       idUser: userInfo._id,
       idbv: idbv,
-      avatarUser:userInfo.avatar,
-      nameUser:userInfo.name
+      avatarUser: userInfo.avatar,
+      nameUser: userInfo.name
 
     }
     const url = `http://${ip}:3000/apiComment/addComment/${userInfo._id}/${idbv}`;
@@ -94,7 +93,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
           alert("Vui lòng cập nhật đầy đủ thông tin")
           return res;
-          
+
         }
       })
   }
@@ -105,13 +104,13 @@ const ChiTietItemShop = ({ route, navigation }) => {
     return (
       <View >
         <View style={{ flexDirection: "row", alignItems: "stretch", borderBottomWidth: 1, padding: 6, borderColor: "#CCCCCC" }}>
-          
+
           <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: item.avatarUser }} />
-          <View style={{flexDirection:"column"}}>
-           <Text style={{fontSize:15,fontWeight:"bold" ,marginLeft:5}}>{item.nameUser}</Text>
-          <Text style={{ fontSize: 15, marginLeft: 15 }}>{item.Comment}</Text>      
+          <View style={{ flexDirection: "column" }}>
+            <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 5 }}>{item.nameUser}</Text>
+            <Text style={{ fontSize: 15, marginLeft: 15 }}>{item.Comment}</Text>
           </View>
-          
+
         </View>
       </View>
 
@@ -149,7 +148,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   const Order = () => {
     let products = [];
-    let price = route.params.price;
+    let price = route.params.price * soLuong;
 
     products.push({ name: route.params.name, price: route.params.price, quantity: soLuong, image: route.params.avatar, idPro: route.params.id });
 
@@ -310,7 +309,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
             {
               (isLoading)
                 ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment}/>
+                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment} />
 
             }
 

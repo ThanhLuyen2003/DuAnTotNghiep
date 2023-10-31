@@ -108,7 +108,7 @@ const Order = (props) => {
                         </View>
 
                         <View>
-                            <Text style={{ padding: 5 }}>{price}đ </Text>
+                            <Text style={{ padding: 5 }}>{Number(price)}đ </Text>
                             <Text style={{ padding: 5 }}>35000đ </Text>
                             <Text style={{ padding: 5 }}>-0đ </Text>
 
@@ -128,7 +128,7 @@ const Order = (props) => {
                     <Text style={{ marginTop: 20 }}>Đặt hàng</Text>
                 </TouchableOpacity>
 
-                <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{price + 35000}đ</Text>
+                <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{Number(price) + 35000}đ</Text>
 
                 <Text style={{ marginBottom: 20, marginRight: 10 }} >Tổng thanh toán: </Text>
 
