@@ -6,29 +6,71 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
+    const ip = "192.168.0.101";
     const { navigation } = props;
-    const [name, setname] = useState("");
-    const [email, setemail] = useState("");
-    const [phone, setphone] = useState("");
-    const [pass, setpass] = useState("");
-    const [avatar, setavatar] = useState("");
-    const [andress, setandress] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [pass, setPass] = useState("");
+    const [rePass, setrePass] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [address, setAddress] = useState("");
+
+    const addSignUp = () => {
+        if (!name || !email || !phone || !pass || !rePass) {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return;
+        }
+
+        if (pass != rePass) {
+            alert("Mật khẩu không khớp. Vui lòng kiểm tra lại.");
+            return;
+        }
+
+        if (phone.length < 10) {
+            alert("Yêu cầu nhập đúng định dạng số điện thoại >10 <11 ")
+            return;
+        }
+        let obj = {
+            name: name,
+            email: email,
+            phone: phone,
+            pass: pass,
+            avatar: avatar,
+            address: address
+        };
+
+        const url = "http://192.168.0.101:3000/addUser";
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
 
 
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj)
+        })
+            .
 
 
-
-    const addUser = () => {
-
-
-
-
-
-    }
-
-
-
-
+            then(response => {
+                if (response.status === 200) {
+                    alert("Thêm thành công");
+                } else if (response.status === 400) {
+                    alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
+                }
+                else {
+                    alert("Thêm thất bại ");
+                    return response.json();
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi thêm:', error);
+                alert('Có lỗi xảy ra trong quá trình thêm: ' + error.massge);
+            });
+    };
 
 
     return (
@@ -46,21 +88,21 @@ const SignUp = (props) => {
                         <Text style={{ color: "white" }}>Họ và tên</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="account" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setname(txt) }} placeholder="Nhập họ và tên" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setName(txt) }} placeholder="Nhập họ và tên" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 25 }}>
                         <Text style={{ color: "white" }}>Email</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="email" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setemail(txt) }} placeholder="Nhập email" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setEmail(txt) }} placeholder="Nhập email" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 50 }}>
                         <Text style={{ color: "white" }}>Số điện thoại</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Icons name="phone" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setphone(txt) }} placeholder="Nhập số điện thoại" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput keyboardType='numeric' maxLength={11} onChangeText={(txt) => { setPhone(txt) }} placeholder="Nhập số điện thoại" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 75 }}>
@@ -69,16 +111,21 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput onChangeText={(txt) => { setpass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput onChangeText={(txt) => { setPass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
-
-
-
-
-
                     </View>
-                    <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addUser}>
+                    <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 95 }}>
+                        <Text style={{ color: "white" }}>Nhập lại mật khẩu</Text>
+                        <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
+
+                            <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
+                            <TextInput onChangeText={(txt) => { setrePass(txt) }} placeholder="Nhập lại mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+
+                        </View>
+                    </View>
+                    <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addSignUp}>
                         <Text style={style.press}>Đăng kí</Text>
                     </Pressable>
                 </View>
