@@ -11,13 +11,14 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.88.101";
+  const ip = "192.168.0.101";
 
   // console.log(route);
   let describe = route.params.describe;
   let ingredient = route.params.ingredient;
+  let idbv = route.params.id;
 
-  const [dsComment, setdsComment] = useState({})
+  const [dsComment, setdsComment] = useState([])
   const [isLoading, setisLoading] = useState(true);
 
   const [moDalComment, setmoDalComment] = useState(false);
@@ -26,11 +27,15 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const [Comment, setComment] = useState("")
+  const [avatarUser, setavatarUser] = useState("")
+  const [nameUser, setnameUser] = useState("")
   const [TimeComment, setTimeComment] = useState("");
 
   const [soLuong, setsoLuong] = useState(1);
 
   const [userInfo, setuserInfo] = useState({})
+
+  const [userAvatar, setUserAvatar] = useState(null);
 
   const getLoginInfor = async () => {
 
@@ -43,30 +48,31 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   const getList = async () => {
 
-    let apiComment = 'http://' + ip + ':3000/apiComment/comment';
+    let apiComment = 'http://' + ip + ':3000/apiComment/getComment/' + idbv;
 
     try {
       const response = await fetch(apiComment);
-      const json = await response.json(); //chuyen du lieu thanh json
-
-      setdsComment(json);// do du lieu vao state
+      const json = await response.json();
+      console.log( json); // Log the comments to verify the structure
+      setdsComment(json);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching comments:", err); // Log the error for troubleshooting
     } finally {
-      setisLoading(false); // khong con load nua
+      setisLoading(false);
     }
   }
 
 
   const addComment = () => {
-    console.log(userInfo._id);
-
     let obj = {
       Comment: Comment,
-      idUser: userInfo._id
-    }
+      idUser: userInfo._id,
+      idbv: idbv,
+      avatarUser:userInfo.avatar,
+      nameUser:userInfo.name
 
-    let url = 'http://' + ip + ':3000/addComment';
+    }
+    const url = `http://${ip}:3000/apiComment/addComment/${userInfo._id}/${idbv}`;
 
     fetch(url, {
       method: 'POST',
@@ -83,31 +89,29 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
           alert("Thêm thành công")
           getList();
+          setComment("")
         } else {
 
           alert("Thêm thất bại")
+          console.log();
         }
       })
   }
+
 
   const renderComment = ({ item }) => {
 
     return (
       <View >
         <View style={{ flexDirection: "row", alignItems: "stretch", borderBottomWidth: 1, padding: 6, borderColor: "#CCCCCC" }}>
-
-          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: userInfo.avatar }} />
-
-          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: "https://i.pinimg.com/236x/95/0f/f6/950ff67d464c00318f5eea61f2cd0cb2.jpg" }} />
-
-          <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10 }}>{item.Comment}</Text>
-
+          
+          <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: item.avatarUser }} />
+          <View style={{flexDirection:"column"}}>
+           <Text style={{fontSize:15,fontWeight:"bold" ,marginLeft:5}}>{item.nameUser}</Text>
+          <Text style={{ fontSize: 15, marginLeft: 15 }}>{item.Comment}</Text>      
+          </View>
+          
         </View>
-
-        {/* <View style={{ flexDirection: "column" }}>
-                  <Text style={{ position: "relative", left: 70, bottom: 25, opacity: 0.3 }}>{item.TimeComment}</Text>
-
-                </View> */}
       </View>
 
     );
@@ -305,7 +309,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
             {
               (isLoading)
                 ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment} />
+                : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment}/>
 
             }
 
