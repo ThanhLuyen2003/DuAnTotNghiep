@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Login = (props) => {
 
-    const ip = "192.168.88.101";
+    const ip = "192.168.0.101";
 
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
