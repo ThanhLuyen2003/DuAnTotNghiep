@@ -11,7 +11,7 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.0.101";
+  const ip = "192.168.1.117";
 
   // console.log(route);
   let describe = route.params.describe;
@@ -26,9 +26,9 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const [modalOrder, setModalOrder] = useState(false);
 
 
-  const [Comment, setComment] = useState("")
-  const [avatarUser, setavatarUser] = useState("")
-  const [nameUser, setnameUser] = useState("")
+  const [Comment, setComment] = useState("");
+  const [avatarUser, setavatarUser] = useState("");
+  const [nameUser, setnameUser] = useState("");
   const [TimeComment, setTimeComment] = useState("");
 
   const [soLuong, setsoLuong] = useState(1);
