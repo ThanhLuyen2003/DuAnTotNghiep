@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 const EditProfile = () => {
-    const ip = "192.168.1.117";
+    const ip = "192.168.0.102";
     const [open, setOpen] = useState(false); // xổ list xuống hay không
     const [value, setValue] = useState(null); // giá trị người dùng chọn
     const [items, setItems] = useState([     // mảng các phần tử
@@ -36,6 +36,7 @@ const EditProfile = () => {
 
     const [img_source, setimg_source] = useState(null)
     const [img_base64, setiimg_base64] = useState(null)
+    const [saveImage, setsaveImage] = useState({});
 
 
     const toggleDatePicker = () => {
@@ -57,6 +58,7 @@ const EditProfile = () => {
     const getLoginInfor = async () => {
 
         const value = await AsyncStorage.getItem('loginInfo');
+        const m_saveImage = await AsyncStorage.getItem('savedImage')
         const userData = JSON.parse(value);
         setuserInfo(userData)
         setName(userData.name)
@@ -64,6 +66,7 @@ const EditProfile = () => {
         setEmail(userData.email)
         setavatar(userData.avatar)
         setaddress(userData.address)
+        setsaveImage(m_saveImage);
     }
 
     React.useEffect(() => {
@@ -71,6 +74,19 @@ const EditProfile = () => {
         getLoginInfor();
 
     }, []);
+
+    const saveImageToStorage = async (imageBase64) => {
+        try {
+            if (imageBase64) {
+                await AsyncStorage.setItem('savedImage', imageBase64);
+                console.log('Đã lưu ảnh vào Storage.');
+            } else {
+                console.log('Dữ liệu ảnh không tồn tại.');
+            }
+        } catch (error) {
+            console.log('Lỗi khi lưu ảnh vào Storage:', error);
+        }
+    };
 
     const pickImage = async () => {
 
@@ -86,7 +102,7 @@ const EditProfile = () => {
         console.log(result);
 
 
-        if (!result.canceled) {
+        if (!result.cancelled) {
             if (result.assets.length > 0 && result.assets[0].uri) {
                 setimg_source(result.assets[0].uri);
                 let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
@@ -97,12 +113,13 @@ const EditProfile = () => {
                         setiimg_base64("data:image/" + file_ext + ";base64," + res);
 
                         console.log(img_base64);
+
                         // upload ảnh lên api thì dùng PUT có thể viết ở đây
                     });
             }
 
             // chuyển ảnh thành base64 để upload lên json   
-             
+
         }
     }
     const editUser = () => {
@@ -130,9 +147,15 @@ const EditProfile = () => {
             .
 
             then((res) => {
-                if (res.status === 200)
+                if (res.status === 200) {
                     alert("Sửa thành công");
-                console.log(res);
+                    saveImageToStorage(img_base64);
+                    console.log(res);
+                } else {
+                    alert("Có lỗi xảy ra!")
+                    return res;
+                }
+
             })
             .catch((err) => {
                 console.log(err);
@@ -152,18 +175,14 @@ const EditProfile = () => {
                             {/* {img_source && <Image source={{ uri: img_source }} style={{ width: 200, height: 200 }} />} */}
                             {/* {img_base64 && <Image source={{ uri: img_base64 }} style={{ width: 200, height: 200 }} />} */}
 
-                            {/* <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
-                            <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{uri:userInfo.avatar}}>
-                                <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                    <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                                </View>
-                            </ImageBackground>
-                        </View> */}
                             <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
-                                {img_base64 ? (
-                                    <Image source={{ uri: img_base64 }} style={{ width: 125, height: 125, borderRadius: 100 }} />
-                                ) : (
-                                    <Text>No Image</Text>
+
+                                {(!img_base64 && typeof saveImage==='string') && (
+                                    <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
+                                    <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                                        <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                    </View>
+                                </ImageBackground>
                                 )}
                             </View>
                         </View>
