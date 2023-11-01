@@ -13,7 +13,7 @@ const Profile = (props) => {
     }
 
     const [userInfor, setUserInfor] = useState({});
-    const [saveImage, setsaveImage] = useState({});
+    const [saveImage, setsaveImage] = useState('');
     const [isLoading, setisLoading] = useState(false);
 
 
@@ -140,7 +140,7 @@ const Profile = (props) => {
                             ) : (
                                 <Text style={{ marginLeft: 10, width: 200 }} onPress={logout}>Đăng xuất</Text>
                             )}
-                            
+
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                     </ScrollView>

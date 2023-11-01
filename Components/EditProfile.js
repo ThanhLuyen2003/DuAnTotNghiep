@@ -177,12 +177,12 @@ const EditProfile = () => {
 
                             <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
 
-                                {(!img_base64 && typeof saveImage==='string') && (
+                                {(!img_base64 && typeof saveImage === 'string') && (
                                     <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
-                                    <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                        <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                                    </View>
-                                </ImageBackground>
+                                        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                                            <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                        </View>
+                                    </ImageBackground>
                                 )}
                             </View>
                         </View>
