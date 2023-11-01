@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -32,22 +32,29 @@ const TabGroupProduct = (props) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, width: "100%" }}>
-      <View style={{ backgroundColor: 'rgba(251, 154, 69, 0.8)', width: "100%", height: 60, flexDirection: "row", alignItems: "center" }}>
+    <View style={{ height: '90%' }}>
+      <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
 
-        <View >
-          <Icons style={{ position: "absolute", left: 25, zIndex: 1, top: 7 }} name="magnify" size={25} color="#363636" />
-          <TextInput placeholder="Tìm kiếm sản phẩm" style={{ width: 250, height: 40, backgroundColor: "#F8F8FF", left: 20, borderRadius: 10, paddingLeft: 28 }} />
+        <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-          <TouchableOpacity style={{ position: "absolute", left: 375, zIndex: 1, top: 7, }} onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }}>
-
-            <Icons name="cart" size={25} color="#363636" />
-
-          </TouchableOpacity>
+        <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
+          <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
+          <Text style={{ color: 'white' }} >Muốn ất ơ đến Fpoly Barber</Text>
         </View>
 
+        <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20 }} >
+          <Icons name="cart" size={25} color="white" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={{ position: 'absolute', right: 60 }}>
+          <Icons name="account" size={25} color="white" />
+        </TouchableOpacity>
+
+
       </View>
+
       <topTap.Navigator
+        style={styles.con2}
         screenOptions={{
           tabBarAndroidRipple: { borderless: false },
           tabBarStyle: {
@@ -97,11 +104,23 @@ const TabGroupProduct = (props) => {
 
 
       </topTap.Navigator>
-    </SafeAreaView>
+
+    </View>
 
   )
 }
 
 export default TabGroupProduct
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+  con2: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    position: 'absolute',
+    top: "17%"
+  }
+})
