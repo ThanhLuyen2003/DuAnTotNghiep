@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const Profile = (props) => {
 
@@ -11,11 +13,17 @@ const Profile = (props) => {
     }
 
     const [userInfor, setUserInfor] = useState({});
+    const [saveImage, setsaveImage] = useState({});
+    const [isLoading, setisLoading] = useState(false);
+
 
     const getLoginInfor = async () => {
 
         const user = await AsyncStorage.getItem('loginInfo');
+        const m_saveImage = await AsyncStorage.getItem('savedImage')
+
         setUserInfor(JSON.parse(user))
+        setsaveImage(m_saveImage);
 
     }
 
@@ -24,11 +32,15 @@ const Profile = (props) => {
 
 
     const logout = async () => {
-
+        setisLoading(true)
         //console.log(userInfor);
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
-
+        await AsyncStorage.removeItem("savedImage")
+        setUserInfor({}); // Reset user information state
+        setsaveImage({}); // Reset image state
+        setisLoading(false)
         props.navigation.navigate('Login')
 
     }
@@ -46,7 +58,7 @@ const Profile = (props) => {
     }, [props.navigation]);
 
 
-    const isAvatarValid = userInfor.avatar && typeof userInfor.avatar === 'string' && userInfor.avatar.trim() !== '';
+    const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
@@ -55,11 +67,18 @@ const Profile = (props) => {
                 </View>
 
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
-                    <View style={{ position: "absolute", top: -50, justifyContent: 'center', width: "100%", alignItems: "center" }}>
+                    <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
 
                         {isAvatarValid ? (
-                            <Image style={{ width: 96, height: 96, borderRadius: 50 }} source={{ uri: userInfor.avatar }} />
-                        ) : null}
+                            <Image style={{ width: 120, height: 120, borderRadius: 100 }} source={{ uri: saveImage }} />
+                        ) :
+                            (
+                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src='https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg'>
+                                    <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                                        <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                    </View>
+                                </ImageBackground>
+                            )}
                         <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text>
@@ -110,12 +129,18 @@ const Profile = (props) => {
                             <Text style={{ marginLeft: 10, width: 200 }}>Điều khoản và dịch vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', position: 'relative' }}>
                             <Icons name='logout' size={25} color={'#CD853F'} />
 
-                            <Text style={{ marginLeft: 10, width: 200 }} onPress={logout} >Đăng xuất</Text>
-                            {/* <Button title='click' onPress={showToat}/> */}
-                            {/* <Toast/> */}
+
+                            {isLoading ? (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: [{ translateX: -15 }, { translateY: -120 }] }}>
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                </View>
+                            ) : (
+                                <Text style={{ marginLeft: 10, width: 200 }} onPress={logout}>Đăng xuất</Text>
+                            )}
+                            
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                     </ScrollView>
