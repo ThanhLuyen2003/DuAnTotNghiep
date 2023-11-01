@@ -44,6 +44,22 @@ const TaoKieuToc = (props) => {
 
   const renderProductSalon = ({ item }) => {
 
+    let price = '';
+
+    if (item.price.length == 5) {
+      price = (item.price.substring(0, 2) + '.' + item.price.substring(2, 5));
+    } else
+      if (item.price.length == 6) {
+        price = (item.price.substring(0, 3) + '.' + item.price.substring(3, 6));
+
+      } else
+        if (item.price.length == 7) {
+          price = (item.price.substring(0, 1) + '.' + item.price.slice(1, 4) + '.' + item.price.slice(4, 7));
+        } else
+          if (item.price.length == 8) {
+            price = (item.price.substring(0, 2) + '.' + item.price.slice(2, 5) + '.' + item.price.slice(5, 8));
+          }
+
     return (
       <SafeAreaView style={{ height: "89%" }}>
         <View >
@@ -51,7 +67,7 @@ const TaoKieuToc = (props) => {
             <View style={styles.gridItem}>
               <Image style={{ width: 180, height: 180, alignSelf: "center" }} source={{ uri: item.avatar }} />
               <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
-              <Text style={{ fontSize: 15, color: "red" }} >{item.price} Đ</Text>
+              <Text style={{ fontSize: 15, color: "red" }} >{price} Đ</Text>
               {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
 
             </View>
