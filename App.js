@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     padding: 0,
     height: 66,
-
     marginTop: 60,
     backgroundColor: "white",
     borderTopColor: "transparent",
