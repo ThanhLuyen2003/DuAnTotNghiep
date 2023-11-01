@@ -134,8 +134,8 @@ const Profile = (props) => {
 
 
                             {isLoading ? (
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: [{ translateX: -15 }, { translateY: -120 }] }}>
-                                    <ActivityIndicator size="large" color="#0000ff" />
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '50%', left: '40%', transform: [{ translateX: -15 }, { translateY: -250 }] }}>
+                                    <ActivityIndicator size="large" color="#CD853F" style={{backgroundColor:"#C0C0C0",width:125,height:125,borderRadius:10,opacity:0.5}}/>
                                 </View>
                             ) : (
                                 <Text style={{ marginLeft: 10, width: 200 }} onPress={logout}>Đăng xuất</Text>
