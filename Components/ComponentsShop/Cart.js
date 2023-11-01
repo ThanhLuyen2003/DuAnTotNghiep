@@ -197,43 +197,43 @@ const Cart = (props) => {
                 style={{ width: '100%', margin: 5, padding: 5, backgroundColor: 'white' }}
             >
 
-                <TouchableOpacity
-                    onPress={() => selectedItemm(item, index)}
-                >
-                    <View style={{ flexDirection: 'row' }}  >
 
-                        <View style={{ marginRight: 5, alignSelf: 'center', height: 20, width: 20, borderWidth: 1 }}>
-                            <Icon style={{ alignSelf: 'center' }} name={(item.selected) ? 'check' : ''} size={20} />
+                <View style={{ flexDirection: 'row', }}  >
+                    <TouchableOpacity style={{ alignSelf: 'center' }}
+                        onPress={() => selectedItemm(item, index)}
+                    >
+                        <View style={{ marginRight: 5, height: 20, width: 20, borderWidth: 1 }}>
+                            <Icon style={{}} name={(item.selected) ? 'check' : ''} size={20} />
 
                         </View>
+                    </TouchableOpacity>
 
-                        <Image source={{ uri: item.imagePro }} style={{ height: 100, width: 100, marginRight: 10 }} />
+                    <Image source={{ uri: item.imagePro }} style={{ height: 100, width: 100, marginRight: 10 }} />
 
-                        <View>
-                            <Text style={{ width: '60%' }}>{item.namePro}</Text>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.pricePro} đ</Text>
+                    <View>
+                        <Text style={{ width: '60%' }}>{item.namePro}</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.pricePro} đ</Text>
 
-                            <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>
+                        <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>
 
-                                <TouchableOpacity onPress={minus}>
-                                    <Icon style={{ marginLeft: 7 }} name='minus' size={20} />
-                                </TouchableOpacity>
+                            <TouchableOpacity onPress={minus}>
+                                <Icon style={{ marginLeft: 7 }} name='minus' size={20} />
+                            </TouchableOpacity>
 
-                                <View style={{ borderColor: 'black', height: '100%', width: 30, borderRightWidth: 1, borderLeftWidth: 1, alignItems: 'center', marginLeft: 5, marginRight: 8, borderRadius: 3 }}>
-                                    <Text style={{ marginTop: 3, marginLeft: 2 }}>{item.quantity} </Text>
-                                </View>
-
-                                <TouchableOpacity onPress={plus}>
-                                    <Icon name='plus' size={20} />
-                                </TouchableOpacity>
-
+                            <View style={{ borderColor: 'black', height: '100%', width: 30, borderRightWidth: 1, borderLeftWidth: 1, alignItems: 'center', marginLeft: 5, marginRight: 8, borderRadius: 3 }}>
+                                <Text style={{ marginTop: 3, marginLeft: 2 }}>{item.quantity} </Text>
                             </View>
+
+                            <TouchableOpacity onPress={plus}>
+                                <Icon name='plus' size={20} />
+                            </TouchableOpacity>
 
                         </View>
 
                     </View>
 
-                </TouchableOpacity>
+                </View>
+
 
                 <TouchableOpacity onPress={deleteCart}>
 
