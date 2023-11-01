@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Login = (props) => {
 
-    const ip = "192.168.1.117";
+    const ip = "192.168.0.102";
 
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
@@ -43,7 +43,9 @@ const Login = (props) => {
                 try {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
-
+                    if (objU.avatar) {
+                        await AsyncStorage.setItem('savedImage', objU.avatar); // lưu ảnh khi có người dùng mới
+                    }
                     // chuyển màn hình
                     props.navigation.navigate('HomeTab');
                 } catch (e) {
