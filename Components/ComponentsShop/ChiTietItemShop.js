@@ -192,6 +192,21 @@ const ChiTietItemShop = ({ route, navigation }) => {
     setsoLuong(soLuong + 1);
   }
 
+  let price = '';
+
+  if (route.params.price.length == 5) {
+    price = (route.params.price.substring(0, 2) + '.' + route.params.price.substring(2, 5));
+  } else
+    if (route.params.price.length == 6) {
+      price = (route.params.price.substring(0, 3) + '.' + route.params.price.substring(3, 6));
+
+    } else
+      if (route.params.price.length == 7) {
+        price = (route.params.price.substring(0, 1) + '.' + route.params.price.slice(1, 4) + '.' + route.params.price.slice(4, 7));
+      } else
+        if (route.params.price.length == 8) {
+          price = (route.params.price.substring(0, 2) + '.' + route.params.price.slice(2, 5) + '.' + route.params.price.slice(5, 8));
+        }
 
   return (
 
@@ -207,7 +222,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
           </View>
 
           <View>
-            <Text style={{ fontSize: 20, color: "red", fontWeight: "400" }}>{route.params.price} Đ</Text>
+            <Text style={{ fontSize: 20, color: "red", fontWeight: "400" }}>{price} Đ</Text>
             <Text style={{ fontSize: 20, fontWeight: "400" }}>{route.params.name}</Text>
             <Text style={{ fontSize: 20, fontWeight: "400" }}>{route.params.trademark}</Text>
           </View>
@@ -379,7 +394,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row' }}>
               <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
 
-              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{route.params.price} Đ</Text>
+              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
 
             </View>
 
@@ -431,7 +446,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row' }}>
               <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
 
-              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{route.params.price} Đ</Text>
+              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
 
             </View>
 
