@@ -11,7 +11,7 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.88.101";
+  const ip = "192.168.0.102";
 
   // console.log(route);
   let describe = route.params.describe;
@@ -37,14 +37,16 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   const [userAvatar, setUserAvatar] = useState(null);
 
+  const [saveImage, setsaveImage] = useState({});
   const getLoginInfor = async () => {
 
     const value = await AsyncStorage.getItem('loginInfo');
-
+    const m_saveImage = await AsyncStorage.getItem('savedImage')
     setuserInfo(JSON.parse(value))
-
+    setsaveImage(m_saveImage);
   }
 
+  
 
   const getList = async () => {
 
@@ -63,11 +65,12 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const addComment = () => {
+    
     let obj = {
       Comment: Comment,
       idUser: userInfo._id,
       idbv: idbv,
-      avatarUser: userInfo.avatar,
+      avatarUser: saveImage,
       nameUser: userInfo.name
 
     }
@@ -83,14 +86,20 @@ const ChiTietItemShop = ({ route, navigation }) => {
     }).catch((ex) => {
       console.log(ex);
     })
-      .then((res) => {
+      .then( async(res) => {
         if (res.status == 200) {
+          
+          if (obj.avatarUser) {
+            // Remove the old image from storage
+            await AsyncStorage.removeItem("savedImage");
 
-          alert("Thêm thành công")
+            // Save the new image to storage
+            await AsyncStorage.setItem('savedImage', obj.avatarUser);
+            setsaveImage(obj.avatarUser);
+        }
           getList();
-          setComment("")
+          setComment('');
         } else {
-
           alert("Vui lòng cập nhật đầy đủ thông tin")
           return res;
 
@@ -308,7 +317,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
             {
               (isLoading)
-                ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+                ? (<ActivityIndicator style={{ marginTop: 200, }} />)
                 : <FlatList style={{ width: "100%" }} scrollEnabled={false} data={dsComment} renderItem={renderComment} />
 
             }
