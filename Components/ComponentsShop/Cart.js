@@ -33,7 +33,7 @@ const Cart = (props) => {
 
 
 
-    const [tamTinh, setTamTinh] = useState(0);
+    const [tamTinh, setTamTinh] = useState('');
 
     selectedItemm = (item, index) => {
 
@@ -62,12 +62,29 @@ const Cart = (props) => {
     const tinhTien = () => {
         const listSelected = data.filter(item => item.selected == true);
 
-        let price = '0';
+        let pri = '0';
 
 
         listSelected.forEach((item, index) => {
-            price = Number(price) + (Number(item.pricePro) * Number(item.quantity));
+            pri = Number(pri) + (Number(item.pricePro) * Number(item.quantity));
         })
+
+        let price = String(pri);
+
+        if (price.length == 5) {
+            price = (price.substring(0, 2) + '.' + price.substring(2, 5));
+        } else
+            if (price.length == 6) {
+                price = (price.substring(0, 3) + '.' + price.substring(3, 6));
+
+            } else
+                if (price.length == 7) {
+                    price = (price.substring(0, 1) + '.' + price.slice(1, 4) + '.' + price.slice(4, 7));
+                } else
+                    if (price.length == 8) {
+                        price = (price.substring(0, 2) + '.' + price.slice(2, 5) + '.' + price.slice(5, 8));
+                    }
+
 
         setTamTinh(price)
     }
@@ -190,7 +207,21 @@ const Cart = (props) => {
         }
 
 
+        let price = '';
 
+        if (item.pricePro.length == 5) {
+            price = (item.pricePro.substring(0, 2) + '.' + item.pricePro.substring(2, 5));
+        } else
+            if (item.pricePro.length == 6) {
+                price = (item.pricePro.substring(0, 3) + '.' + item.pricePro.substring(3, 6));
+
+            } else
+                if (item.pricePro.length == 7) {
+                    price = (item.pricePro.substring(0, 1) + '.' + item.pricePro.slice(1, 4) + '.' + item.pricePro.slice(4, 7));
+                } else
+                    if (item.pricePro.length == 8) {
+                        price = (item.pricePro.substring(0, 2) + '.' + item.pricePro.slice(2, 5) + '.' + item.pricePro.slice(5, 8));
+                    }
 
         return (
             <View
@@ -212,7 +243,7 @@ const Cart = (props) => {
 
                     <View>
                         <Text style={{ width: '60%' }}>{item.namePro}</Text>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.pricePro} đ</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{price} đ</Text>
 
                         <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>
 
