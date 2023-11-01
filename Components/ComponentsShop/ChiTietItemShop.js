@@ -11,7 +11,7 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.0.102";
+  const ip = "192.168.88.101";
 
   // console.log(route);
   let describe = route.params.describe;
@@ -46,7 +46,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
     setsaveImage(m_saveImage);
   }
 
-  
+
 
   const getList = async () => {
 
@@ -65,7 +65,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const addComment = () => {
-    
+
     let obj = {
       Comment: Comment,
       idUser: userInfo._id,
@@ -86,9 +86,9 @@ const ChiTietItemShop = ({ route, navigation }) => {
     }).catch((ex) => {
       console.log(ex);
     })
-      .then( async(res) => {
+      .then(async (res) => {
         if (res.status == 200) {
-          
+
           if (obj.avatarUser) {
             // Remove the old image from storage
             await AsyncStorage.removeItem("savedImage");
@@ -96,7 +96,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
             // Save the new image to storage
             await AsyncStorage.setItem('savedImage', obj.avatarUser);
             setsaveImage(obj.avatarUser);
-        }
+          }
           getList();
           setComment('');
         } else {
@@ -196,7 +196,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
   return (
 
     <SafeAreaView>
-      <ScrollView style={{ height: "90%" }} nestedScrollEnabled={true}>
+      <ScrollView style={{ height: "92%" }} nestedScrollEnabled={true}>
 
 
         <View style={styles.container}>
@@ -478,6 +478,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
           <Text style={{ fontWeight: "bold" }}>MUA NGAY</Text>
           <Text style={{ top: 5 }}>Không ưng đổi ngay</Text>
         </TouchableOpacity>
+
       </View>
 
     </SafeAreaView>
