@@ -7,14 +7,9 @@ import DatePicker from '@react-native-community/datetimepicker'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
-const EditProfile = () => {
+const EditProfile = (props) => {
     const ip = "192.168.0.102";
-    const [open, setOpen] = useState(false); // xổ list xuống hay không
-    const [value, setValue] = useState(null); // giá trị người dùng chọn
-    const [items, setItems] = useState([     // mảng các phần tử
-        { label: 'Nam', value: 1 },
-        { label: 'Nữ', value: 2 }
-    ]);
+
 
     const [dateBirth, setdateBirth] = useState("");
     const [date, setdate] = useState(new Date());
@@ -150,6 +145,14 @@ const EditProfile = () => {
                 if (res.status === 200) {
                     alert("Sửa thành công");
                     saveImageToStorage(img_base64);
+
+                    setName("")
+                    setEmail("")
+                    setPhone("")
+                    setaddress("")
+                    props.navigation.navigate("Profile");
+                    getLoginInfor();
+
                     console.log(res);
                 } else {
                     alert("Có lỗi xảy ra!")
@@ -173,17 +176,19 @@ const EditProfile = () => {
                     <TouchableOpacity onPress={pickImage}>
                         <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
                             {/* {img_source && <Image source={{ uri: img_source }} style={{ width: 200, height: 200 }} />} */}
-                            {/* {img_base64 && <Image source={{ uri: img_base64 }} style={{ width: 200, height: 200 }} />} */}
+
 
                             <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
 
+                                {img_base64 && <Image source={{ uri: img_base64 }} style={{ width: 125, height: 125, borderRadius: 100, }} />}
                                 {(!img_base64 && typeof saveImage === 'string') && (
                                     <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
                                         <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                             <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                         </View>
                                     </ImageBackground>
-                                )}
+                                )
+                                }
                             </View>
                         </View>
                     </TouchableOpacity>
