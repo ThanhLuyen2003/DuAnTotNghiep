@@ -125,7 +125,7 @@ const Order = (props) => {
 
 
                 <TouchableOpacity style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
-                    <Text style={{ marginTop: 20 }}>Đặt hàng</Text>
+                    <Text style={{ marginTop: '32%' }}>Đặt hàng</Text>
                 </TouchableOpacity>
 
                 <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{Number(price) + 35000}đ</Text>
