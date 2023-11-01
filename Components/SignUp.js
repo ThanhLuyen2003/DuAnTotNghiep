@@ -6,7 +6,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
-    const ip = "192.168.88.101";
+    const ip = "192.168.0.102";
 
 
     const { navigation } = props;
@@ -15,7 +15,7 @@ const SignUp = (props) => {
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
     const [rePass, setrePass] = useState("");
-    const [avatar, setAvatar] = useState("");
+    const [avatar, setAvatar] = useState("https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg");
     const [address, setAddress] = useState("");
 
 

@@ -43,7 +43,9 @@ const Login = (props) => {
                 try {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
-
+                    if (objU.avatar) {
+                        await AsyncStorage.setItem('savedImage', objU.avatar); // lưu ảnh khi có người dùng mới
+                    }
                     // chuyển màn hình
                     props.navigation.navigate('HomeTab');
                 } catch (e) {
