@@ -115,7 +115,7 @@ export default TabGroupProduct
 const styles = StyleSheet.create({
 
   con2: {
-    height: '100%',
+    height: '94%',
     width: '100%',
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
