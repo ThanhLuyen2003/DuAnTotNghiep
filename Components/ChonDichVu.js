@@ -52,6 +52,22 @@ const ChonDichVu = (props) => {
 
     const renderItem = ({ item, index }) => {
 
+        let pay = item.price;
+
+        if (pay.length == 5) {
+            pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+        } else
+            if (pay.length == 6) {
+                pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+
+            } else
+                if (pay.length == 7) {
+                    pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                } else
+                    if (pay.length == 8) {
+                        pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                    }
+
         return (
             <View style={[styles.container, {
                 backgroundColor: (item.selected) ? '#CD853F' : 'white', borderColor: (item.selected) ? 'white' : 'gray',
@@ -64,7 +80,7 @@ const ChonDichVu = (props) => {
                     <Image source={{ uri: item.image }} style={{ height: 120, width: 185, borderRadius: 10 }} />
                     <Text style={{ fontSize: 18, fontWeight: '500', margin: 5 }} >{item.name}</Text>
                     <Text style={{ fontSize: 12, color: 'gray', margin: 5 }} >{item.describe} </Text>
-                    <Text style={{ color: 'red', fontSize: 15, marginLeft: 5 }} >{item.price} Đ </Text>
+                    <Text style={{ color: 'red', fontSize: 15, marginLeft: 5 }} >{pay} Đ </Text>
                 </TouchableOpacity>
 
 
@@ -79,8 +95,27 @@ const ChonDichVu = (props) => {
         let price = '';
         let idService = [];
 
+
+
         listSelected.forEach((item, index) => {
-            content = content + (index + 1) + ". " + item.name + " ( " + item.price + " đ )" + " \n";
+
+            let pay = item.price;
+
+            if (pay.length == 5) {
+                pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+            } else
+                if (pay.length == 6) {
+                    pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+
+                } else
+                    if (pay.length == 7) {
+                        pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                    } else
+                        if (pay.length == 8) {
+                            pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                        }
+
+            content = content + (index + 1) + ". " + item.name + " ( " + pay + " đ )" + " \n";
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -90,7 +125,23 @@ const ChonDichVu = (props) => {
             return;
         }
 
-        props.navigation.navigate('ComfirmData', { content, price, idService });
+        let pay = String(price);
+
+        if (pay.length == 5) {
+            pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+        } else
+            if (pay.length == 6) {
+                pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+
+            } else
+                if (pay.length == 7) {
+                    pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                } else
+                    if (pay.length == 8) {
+                        pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                    }
+
+        props.navigation.navigate('ComfirmData', { content, pay, idService });
     }
 
 
