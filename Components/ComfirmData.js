@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.88.104';
+    const ip = '192.168.88.101';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
@@ -50,10 +50,11 @@ const ComfirmData = (props) => {
             phone: phone,
             imageSalon: image,
             services: props.route.params.content,
-            price: props.route.params.price,
+            price: props.route.params.pay,
             status: "Đang chờ",
             idUser: userInfo._id
         }
+
 
         let obj2 = {
             idSalon: idSalon,
@@ -97,6 +98,10 @@ const ComfirmData = (props) => {
                         }
                     });
 
+                }
+                else {
+
+                    alert("Xay ra loi!")
                 }
             });
     }

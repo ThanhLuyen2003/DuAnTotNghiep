@@ -33,7 +33,7 @@ const Cart = (props) => {
 
 
 
-    const [tamTinh, setTamTinh] = useState('');
+    const [tamTinh, setTamTinh] = useState('0');
 
     selectedItemm = (item, index) => {
 
@@ -98,7 +98,7 @@ const Cart = (props) => {
 
         listSelected.forEach((item, index) => {
             price = Number(price) + (Number(item.pricePro) * Number(item.quantity));
-            products.push({ name: item.namePro, price: item.pricePro, quantity: item.quantity, image: item.imagePro, idPro: item.idPro });
+            products.push({ name: item.namePro, price: item.pricePro, quantity: item.quantity, image: item.imagePro, idPro: item.idPro, idCart: item._id });
         })
 
         if (price == 0) {

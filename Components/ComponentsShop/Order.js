@@ -4,9 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Order = (props) => {
 
+    const ip = "192.168.88.101";
+
     const [userInfor, setUserInfor] = useState({});
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState();
+    const [message, setMessage] = useState("");
     let giaoHang = '35000';
 
     const getLoginInfor = async () => {
@@ -96,6 +99,62 @@ const Order = (props) => {
                 }
 
 
+
+    const datHang = () => {
+
+        if (userInfor.address == "") {
+            alert("Cần cập nhật địa chỉ!");
+            return;
+        }
+
+        let url = 'http://' + ip + ':3000/addOrder';
+
+        let obj = {
+            idUser: userInfor._id,
+            nameU: userInfor.name,
+            phoneU: userInfor.phone,
+            addressU: userInfor.address,
+            message: message,
+            price: pay,
+            products: products,
+            status: "Chờ lấy hàng"
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj)
+        }).catch((ex) => {
+            console.log(ex);
+        }).then(res => {
+            if (res.status == 200) {
+
+                products.forEach((item) => {
+
+                    const url = 'http://' + ip + ':3000/delCart/' + item.idCart;
+
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        }
+                    })
+                })
+
+                alert('Đặt hàng thành công')
+                props.navigation.navigate('Home');
+
+            } else {
+                alert("cut")
+            }
+        });
+
+    }
+
     return (
         <View>
             <ScrollView style={{ height: "89%" }}>
@@ -133,7 +192,7 @@ const Order = (props) => {
 
                 <View style={styles.note}>
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Ghi chú đơn hàng</Text>
-                    <TextInput style={styles.input} placeholder='...' placeholderTextColor='black' />
+                    <TextInput onChangeText={(txt) => { setMessage(txt) }} style={styles.input} placeholder='...' placeholderTextColor='black' />
                 </View>
 
 
@@ -177,7 +236,7 @@ const Order = (props) => {
             <View style={{ marginTop: '2%', height: '10%', backgroundColor: 'white', alignItems: 'flex-end', flexDirection: 'row-reverse', }}>
 
 
-                <TouchableOpacity style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
+                <TouchableOpacity onPress={datHang} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
                     <Text style={{ marginTop: '32%' }}>Đặt hàng</Text>
                 </TouchableOpacity>
 

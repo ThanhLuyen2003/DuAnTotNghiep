@@ -152,6 +152,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
         navigation.navigate('TabGroupProduct');
       }
     });
+
   }
 
 
