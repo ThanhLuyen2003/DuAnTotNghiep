@@ -7,6 +7,7 @@ const Order = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState();
+    let giaoHang = '35000';
 
     const getLoginInfor = async () => {
 
@@ -27,6 +28,72 @@ const Order = (props) => {
         return unsubscribe;
     }, [props.navigation]);
 
+    let price2 = String(price);
+    if (price2.length == 5) {
+        price2 = (item.price.substring(0, 2) + '.' + price2.substring(2, 5));
+    } else
+        if (price2.length == 6) {
+            price2 = (price2.substring(0, 3) + '.' + price2.substring(3, 6));
+
+        } else
+            if (price2.length == 7) {
+                price2 = (price2.substring(0, 1) + '.' + price2.slice(1, 4) + '.' + price2.slice(4, 7));
+            } else
+                if (price2.length == 8) {
+                    price2 = (price2.substring(0, 2) + '.' + price2.slice(2, 5) + '.' + price2.slice(5, 8));
+                }
+
+
+
+
+    const renderItem = (item) => {
+
+        let price2 = ''
+        if (item.price.length == 5) {
+            price2 = (item.price.substring(0, 2) + '.' + item.price.substring(2, 5));
+        } else
+            if (item.price.length == 6) {
+                price2 = (item.price.substring(0, 3) + '.' + item.price.substring(3, 6));
+
+            } else
+                if (item.price.length == 7) {
+                    price2 = (item.price.substring(0, 1) + '.' + item.price.slice(1, 4) + '.' + item.price.slice(4, 7));
+                } else
+                    if (item.price.length == 8) {
+                        price2 = (item.price.substring(0, 2) + '.' + item.price.slice(2, 5) + '.' + item.price.slice(5, 8));
+                    }
+
+
+        return (
+            <View style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
+                <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
+
+                <View style={{ alignSelf: 'center', width: "100%" }}>
+                    <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{price2} đ</Text>
+                    <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>
+
+                </View>
+
+            </View>
+        )
+    }
+
+    let pay = String(price + Number(giaoHang));
+
+    if (pay.length == 5) {
+        pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+    } else
+        if (pay.length == 6) {
+            pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+
+        } else
+            if (pay.length == 7) {
+                pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+            } else
+                if (pay.length == 8) {
+                    pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                }
 
 
     return (
@@ -74,21 +141,7 @@ const Order = (props) => {
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Sản phẩm </Text>
 
                     <View key={products.map((item) => item.idPro)}>
-                        {products.map((item) => {
-                            return (
-                                <View style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
-                                    <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
-
-                                    <View style={{ alignSelf: 'center', width: "100%" }}>
-                                        <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
-                                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.price} đ</Text>
-                                        <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>
-
-                                    </View>
-
-                                </View>
-                            )
-                        })}
+                        {products.map((item) => renderItem(item))}
                     </View>
                 </View>
 
@@ -108,8 +161,8 @@ const Order = (props) => {
                         </View>
 
                         <View>
-                            <Text style={{ padding: 5 }}>{Number(price)}đ </Text>
-                            <Text style={{ padding: 5 }}>35000đ </Text>
+                            <Text style={{ padding: 5 }}>{price2}đ </Text>
+                            <Text style={{ padding: 5 }}>35.000đ </Text>
                             <Text style={{ padding: 5 }}>-0đ </Text>
 
                         </View>
@@ -128,7 +181,7 @@ const Order = (props) => {
                     <Text style={{ marginTop: '32%' }}>Đặt hàng</Text>
                 </TouchableOpacity>
 
-                <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{Number(price) + 35000}đ</Text>
+                <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{pay}đ</Text>
 
                 <Text style={{ marginBottom: 20, marginRight: 10 }} >Tổng thanh toán: </Text>
 
