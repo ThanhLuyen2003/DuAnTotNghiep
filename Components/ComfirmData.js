@@ -78,7 +78,7 @@ const ComfirmData = (props) => {
             console.log(ex);
 
         })
-        .then(res => {
+            .then(res => {
                 if (res.status == 200) {
 
                     fetch(url2, {
@@ -144,7 +144,7 @@ const ComfirmData = (props) => {
 
                 <View style={{ padding: 12, flexDirection: 'row' }} >
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.pay} VNĐ</Text>
                 </View>
 
             </View>
