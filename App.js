@@ -24,6 +24,7 @@ import LienHe from './Components/LienHe';
 import ChiTietItemShop from './Components/ComponentsShop/ChiTietItemShop';
 import Cart from './Components/ComponentsShop/Cart';
 import Order from './Components/ComponentsShop/Order';
+import TabDonHang from './Components/Navigation/TabDonHang';
 
 
 const Stack = createNativeStackNavigator();
@@ -62,6 +63,9 @@ export default function App() {
         <Stack.Screen name="Cart" component={Cart} options={{ title: "Giỏ hàng" }} />
 
         <Stack.Screen name="Order" component={Order} options={{ title: "Đặt hàng" }} />
+
+        <Stack.Screen name="TabDonHang" component={TabDonHang} options={{ title: "Đơn hàng" }} />
+
 
 
 
