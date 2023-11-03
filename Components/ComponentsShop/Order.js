@@ -4,13 +4,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Order = (props) => {
 
-    const ip = "192.168.88.101";
+    const ip = "192.168.0.103";
 
     const [userInfor, setUserInfor] = useState({});
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState();
     const [message, setMessage] = useState("");
     let giaoHang = '35000';
+
+
+
+    const today = new Date();
+
+    const ngayMua = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+    const gioMua = today.getHours() + ":" + today.getMinutes();
+
+    const time = gioMua + " - " + ngayMua;
 
     const getLoginInfor = async () => {
 
@@ -117,7 +126,8 @@ const Order = (props) => {
             message: message,
             price: pay,
             products: products,
-            status: "Chờ lấy hàng"
+            status: "Chờ lấy hàng",
+            time: time
         }
 
         fetch(url, {
