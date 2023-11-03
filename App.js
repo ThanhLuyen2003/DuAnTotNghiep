@@ -25,6 +25,7 @@ import ChiTietItemShop from './Components/ComponentsShop/ChiTietItemShop';
 import Cart from './Components/ComponentsShop/Cart';
 import Order from './Components/ComponentsShop/Order';
 import TabDonHang from './Components/Navigation/TabDonHang';
+import KhamPha from './Components/KhamPha';
 
 
 const Stack = createNativeStackNavigator();
@@ -117,12 +118,12 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='LienHe' component={LienHe}
+      <Tabb.Screen name='KhamPha' component={KhamPha}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
               <Image source={require('./Images/phone.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Liên hệ</Text>
+              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Khám phá</Text>
             </View>
           ),
         }}

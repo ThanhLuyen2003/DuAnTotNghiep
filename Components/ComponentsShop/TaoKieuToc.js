@@ -1,7 +1,7 @@
 import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, TouchableHighlight, } from "react-native";
 import { useState } from "react";
 import React from 'react'
-import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
+
 
 import { FontVariant } from "react-native";
 
@@ -19,7 +19,7 @@ const TaoKieuToc = (props) => {
   const getList = async () => {
 
 
-    let apiSalon = 'http://' + ip + ':3000/apiProduct/productsalon';
+    let apiSalon = 'http://' + ip + ':3000/apiProduct/productsalon/Sap';
 
     try {
       const response = await fetch(apiSalon);
