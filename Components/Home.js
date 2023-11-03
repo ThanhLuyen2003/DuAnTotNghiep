@@ -76,7 +76,7 @@ const Home = (props) => {
                         <Text>Lịch sử{"\n"}   cắt</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{ alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('TabDonHang', { id: userInfor._id })} style={{ alignItems: 'center' }}>
                         <View style={styles.but}>
                             <Image source={require('../Images/imgHome/donhang.png')} style={{ width: 30, height: 30 }} />
                         </View>
