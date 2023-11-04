@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, TouchableHighlight, FlatList } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Onboarding from 'react-native-onboarding-swiper';
-import LinearGradient from "react-native-linear-gradient";
+import { FlatGrid } from 'react-native-super-grid';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -60,6 +59,13 @@ const KhamPha = (props) => {
             likeCount: 0, // Added likeCount for each item
             isLiked: false, // Added isLiked state for each item
 
+        },
+        {
+            id: '7',
+            image: 'https://classic.vn/wp-content/uploads/2022/09/classicvn-kieu-toc-side-part-vuot-ru-dep-d.png',
+            description: 'Phá cách với kiểu tóc...',
+            likeCount: 0, // Added likeCount for each item
+            isLiked: false, // Added isLiked state for each item
         },
 
 
@@ -155,10 +161,10 @@ const KhamPha = (props) => {
 
 
             </View>
-            <View style={{  alignItems: "center",paddingLeft:5,paddingRight:5,paddingTop:5 }}>
+            <View style={{ alignItems: "center", paddingLeft: 5, paddingRight: 5, paddingTop: 5 }}>
                 <Text>CÙNG 30SHINE KHÁM PHÁ</Text>
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>XU HƯỚNG TÓC HOT NHẤT</Text>
-                <View style={{  alignItems: "center", padding: 10 }}>
+                <View style={{ alignItems: "center", padding: 10 }}>
                 </View>
                 <TouchableOpacity onPress={() => setShowLikedItems(!showLikedItems)}>
                     <View style={{ width: "100%", height: 45, backgroundColor: "#C0C0C0", padding: 10, borderRadius: 10, flexDirection: "row", alignItems: "center" }}>
@@ -171,20 +177,21 @@ const KhamPha = (props) => {
 
             </View>
             {showLikedItems ? (
-                <FlatList
-                    numColumns={2}
+                <FlatGrid
+                    itemDimension={150}
                     data={getLikedItems()}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
-                    contentContainerStyle={styles.flatListContainer}
+                    style={styles.gridView}
                 />
             ) : (
-                <FlatList
-                    numColumns={2}
+                <FlatGrid
+                spacing={5}
+                    itemDimension={150}
                     data={data}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
-                    contentContainerStyle={styles.flatListContainer}
+                    style={styles.gridView}
                 />
             )}
         </View>
@@ -233,4 +240,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         opacity: 0.8,
     },
+    gridView: {
+        marginTop: 20,
+        flex: 1,
+      },
 })
