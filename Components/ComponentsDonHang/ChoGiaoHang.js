@@ -1,6 +1,5 @@
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ChoGiaoHang = (props) => {
 
@@ -41,6 +40,9 @@ const ChoGiaoHang = (props) => {
 
     console.log(donhang);
 
+    const renderItem = ({ item }) => {
+
+    }
 
     return (
         <View>
@@ -48,7 +50,7 @@ const ChoGiaoHang = (props) => {
                 ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
                 : donhang.length == 0
                     ? <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('./document_icon.png')} />
-                    : <FlatList />
+                    : <FlatList data={donhang} />
             }
         </View>
     )
