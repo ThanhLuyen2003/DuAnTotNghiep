@@ -10,7 +10,7 @@ const Cart = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [data, setdata] = useState([]);
 
-    const ip = "192.168.88.101";
+    const ip = "192.168.0.103";
 
 
     const getList = async () => {
