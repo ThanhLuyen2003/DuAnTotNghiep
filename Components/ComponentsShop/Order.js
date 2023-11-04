@@ -111,10 +111,7 @@ const Order = (props) => {
 
     const datHang = () => {
 
-        if (userInfor.address == "") {
-            alert("Cần cập nhật địa chỉ!");
-            return;
-        }
+
 
         let url = 'http://' + ip + ':3000/addOrder';
 
@@ -128,6 +125,13 @@ const Order = (props) => {
             products: products,
             status: "Chờ lấy hàng",
             time: time
+        }
+
+        console.log(obj);
+
+        if (userInfor.address == "") {
+            alert("Cần cập nhật địa chỉ!");
+            return;
         }
 
         fetch(url, {
