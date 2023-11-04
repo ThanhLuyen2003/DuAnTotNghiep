@@ -69,15 +69,15 @@ const NuocHoa = (props) => {
   }
   return (
     <SafeAreaView style={{ height: "88%" }}>
-    <View >
-      {
-        (isLoading)
-          ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-          : <FlatList numColumns={numColumns} data={dsProductNuocHoa} renderItem={renderProductSalon} />
+      <View >
+        {
+          (isLoading)
+            ? (<ActivityIndicator style={{ marginTop: 300, }} />)
+            : <FlatList numColumns={numColumns} data={dsProductNuocHoa} renderItem={renderProductSalon} />
 
-      }
-    </View>
-  </SafeAreaView>
+        }
+      </View>
+    </SafeAreaView>
   )
 }
 
