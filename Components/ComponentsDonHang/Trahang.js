@@ -1,23 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TraHang = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
-
-
 
     const ip = "192.168.0.103";
 
     const id = props.route.params.id;
 
 
-
     const getList = async () => {
 
 
-        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Chờ lấy hàng';
+        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Trả hàng';
 
 
         try {
@@ -33,15 +29,24 @@ const TraHang = (props) => {
     }
 
     React.useEffect(() => {
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            // cập nhật giao diện ở đây
+            getList();
+        });
 
-        getList();
-
-    }, []);
+        return unsubscribe;
+    }, [props.navigation]);
 
     console.log(donhang);
+
     return (
         <View>
-            <Text>ChamSocDa</Text>
+            {isLoading
+                ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
+                : donhang.length == 0
+                    ? <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('./document_icon.png')} />
+                    : <FlatList />
+            }
         </View>
     )
 }
