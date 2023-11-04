@@ -122,7 +122,7 @@ const HomeTab = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/phone.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
+              <Image source={require('./Images/icons8-eventidea-50.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
               <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Khám phá</Text>
             </View>
           ),
