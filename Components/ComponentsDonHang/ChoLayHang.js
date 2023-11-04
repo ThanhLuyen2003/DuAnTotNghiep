@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -39,12 +39,36 @@ const ChoLayHang = (props) => {
         return unsubscribe;
     }, [props.navigation]);
 
-    console.log(donhang);
+    const renderItem = ({ item }) => {
+
+        const product = item.products;
+
+        console.log(product[0].name);
+
+        return (
+            <View>
+
+                <Text>{item.nameU}</Text>
+
+
+
+            </View>
+        )
+
+    }
+
 
     return (
         <View>
 
+            {isLoading
+                ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
+                : donhang.length == 0
+                    ? <Image style={{ width: 100, height: 100, alignSelf: "center" }} source={require('./document_icon.png')} />
+                    : <FlatList data={donhang} renderItem={renderItem} />
 
+
+            }
 
         </View>
     )
