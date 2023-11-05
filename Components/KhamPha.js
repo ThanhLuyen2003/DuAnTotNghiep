@@ -186,7 +186,7 @@ const KhamPha = (props) => {
                 />
             ) : (
                 <FlatGrid
-                spacing={5}
+                    spacing={5}
                     itemDimension={150}
                     data={data}
                     renderItem={renderItem}
@@ -243,5 +243,5 @@ const styles = StyleSheet.create({
     gridView: {
         marginTop: 20,
         flex: 1,
-      },
+    },
 })
