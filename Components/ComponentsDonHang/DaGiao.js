@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 const DaGiao = (props) => {
@@ -37,15 +37,54 @@ const DaGiao = (props) => {
         return unsubscribe;
     }, [props.navigation]);
 
-    console.log(donhang);
 
+    const renderItem = ({ item }) => {
+
+        const product = item.products;
+
+        return (
+            <TouchableOpacity
+                style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
+                onPress={() => props.navigation.navigate('ChiTietDonHang',
+                    { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
+            >
+
+                <Text style={styles.status}>{item.status}</Text>
+
+                <View style={{ flexDirection: 'row' }}>
+                    <Image source={{ uri: product[0].image }} style={{ height: 100, width: 100 }} />
+
+                    <View style={{ alignSelf: 'center', width: "100%", marginLeft: 15 }}>
+
+                        <Text style={{ fontSize: 15, width: "75%", }}>{product[0].name}</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{product[0].price} đ</Text>
+                        <Text style={{ fontSize: 15, }}> x{product[0].quantity}</Text>
+
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ width: '50%' }}>
+                        <Text>Cùng {product.length - 1} sản phẩm khác nữa </Text>
+
+                    </View>
+                    <View style={{ flexDirection: 'row', }}>
+                        <Text>Thành tiền:</Text>
+                        <Text style={{ color: 'red' }}> {item.price} đ</Text>
+                    </View>
+                </View>
+
+            </TouchableOpacity>
+        )
+
+    }
     return (
         <View>
             {isLoading
                 ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
                 : donhang.length == 0
                     ? <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('./document_icon.png')} />
-                    : <FlatList />
+                    : <FlatList data={donhang} renderItem={renderItem} />
             }
         </View>
     )
