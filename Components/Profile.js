@@ -11,6 +11,9 @@ const Profile = (props) => {
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
     }
+    const tttk=()=>{
+        props.navigation.navigate("ThongTinTaiKhoan")
+    }
 
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
@@ -79,20 +82,20 @@ const Profile = (props) => {
                                     </View>
                                 </ImageBackground>
                             )}
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
+                        {/* <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
                         <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
-                        <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text>
+                        <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text> */}
 
                     </View>
 
-                    <ScrollView style={{ marginTop: 120, marginBottom: 60 }}>
+                    <ScrollView style={{ marginTop: 60, marginBottom: 60 }}>
                         <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
                             <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Tài khoản</Text>
                         </View>
-                        <Pressable onPress={editProfile}>
+                        <Pressable onPress={tttk}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='border-color' size={25} color={'#CD853F'} />
-                                <Text style={{ marginLeft: 10, width: 200 }}>Chỉnh sửa tài khoản</Text>
+                                <Text style={{ marginLeft: 10, width: 200 }}>Thông tin tài khoản</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
