@@ -28,8 +28,6 @@ import TabDonHang from './Components/Navigation/TabDonHang';
 import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
-import TabHistory from './Components/Navigation/TabHistory';
-import SapToi from './Components/ComponentsLich/SapToi';
 
 
 
@@ -85,7 +83,9 @@ export default function App() {
 
 
 
+        <Stack.Screen name="OTPgiaoDich" component={OTPgiaoDich} options={{ title: "Xác nhận OTP" }} />
 
+        <Stack.Screen name="PhoneXacNhan" component={PhoneXacNhan} options={{ title: "Xác nhận số điện thoại" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
