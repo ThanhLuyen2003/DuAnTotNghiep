@@ -189,7 +189,7 @@ const EditProfile = (props) => {
         <View style={{backgroundColor:'white',width:"100%",height:250,marginTop:60,padding:10}}>
             <View style={{flexDirection:"column",width:"auto",height:60,borderBottomColor:"gray",borderBottomWidth:1}}>
                 <Text>Họ tên*</Text>
-                <TextInput/>
+                <TextInput />
             </View>
         </View>
 
