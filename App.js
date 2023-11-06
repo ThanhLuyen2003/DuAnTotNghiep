@@ -27,6 +27,8 @@ import Order from './Components/ComponentsShop/Order';
 import TabDonHang from './Components/Navigation/TabDonHang';
 import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
+import ChiTietKhamPha from './Components/ChiTietKhamPha';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -70,7 +72,9 @@ export default function App() {
 
         <Stack.Screen name="ChiTietDonHang" component={ChiTietDonHang} options={{ title: "Đơn hàng" }} />
 
+        <Stack.Screen name="ChiTietKhamPha" component={ChiTietKhamPha} options={{ title: "Khám phá" }} />
 
+        
 
 
       </Stack.Navigator>
