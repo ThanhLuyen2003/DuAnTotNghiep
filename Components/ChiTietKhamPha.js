@@ -11,7 +11,7 @@ const ChiTietKhamPha = ({route}) => {
       <View style={{padding:10}}>
         <Text style={{fontWeight:"bold"}}>{route.params.Detail1}</Text>
         <Text >{route.params.Detail2}</Text>
-        <Image style={{width:"100%",height:400}} source={{uri:route.params.image1}}/>
+        <Image style={{width:"100%",height:400,borderRadius:20}} source={{uri:route.params.image1}}/>
       </View>
       
 
