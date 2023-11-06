@@ -29,6 +29,9 @@ import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
 import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
+import TabDonHangProfile from './Components/Navigation/TabDonHangProfile';
+import OTPgiaoDich from './Components/OTPgiaoDich';
+import PhoneXacNhan from './Components/PhoneXacNhan';
 
 
 
@@ -75,9 +78,13 @@ export default function App() {
 
         <Stack.Screen name="ChiTietKhamPha" component={ChiTietKhamPha} options={{ title: "Khám phá" }} />
 
-        <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{  title: "Thông tin tài khoản" }} />
+        <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{ title: "Thông tin tài khoản" }} />
 
+        <Stack.Screen name="TabDonHangProfile" component={TabDonHangProfile} options={{ title: "Đơn hàng" }} />
 
+        <Stack.Screen name="OTPgiaoDich" component={OTPgiaoDich} options={{ title: "Xác nhận OTP" }} />
+
+        <Stack.Screen name="PhoneXacNhan" component={PhoneXacNhan} options={{ title: "Xác nhận số điện thoại" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
