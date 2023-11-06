@@ -60,17 +60,17 @@ const ThongTinTaiKhoan = (props) => {
 
            
             <View style={{backgroundColor:"white",width:"100%",height:170,padding:10}}>
-                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:1}}>
+                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:0.5}}>
                         <Text style={{width:"60%",color:"gray"}}>Họ và tên</Text>
                         <Text style={{width:"40%",textAlign:"right"}}>{userInfor.name}</Text>
                 </View>
 
-                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:1}}>
+                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:0.5}}>
                         <Text style={{width:"60%",color:"gray"}}>Số điện thoại</Text>
                         <Text style={{width:"40%" ,textAlign:"right"}}>{userInfor.phone}</Text>
                 </View>
 
-                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:1}}>
+                <View style={{flexDirection:"row",width:"auto",height:40,alignItems:"center",borderBottomColor:"gray",borderBottomWidth:0.5}}>
                         <Text style={{width:"60%",color:"gray"}}> Email</Text>
                         <Text style={{width:"40%",textAlign:"right"}}>{userInfor.email}</Text>
                 </View>
