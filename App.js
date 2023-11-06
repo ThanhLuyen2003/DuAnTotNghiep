@@ -28,6 +28,11 @@ import TabDonHang from './Components/Navigation/TabDonHang';
 import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
+import SapToi from './Components/ComponentsLich/SapToi';
+import OTPgiaoDich from './Components/OTPgiaoDich';
+import PhoneXacNhan from './Components/PhoneXacNhan';
+import TabHistory from './Components/Navigation/TabHistory';
+import TabDonHangProfile from './Components/Navigation/TabDonHangProfile';
 
 
 
@@ -78,10 +83,7 @@ export default function App() {
 
         <Stack.Screen name="LichDaDat" component={SapToi} options={{ title: "Lịch đã đặt" }} />
 
-
-
-
-
+        <Stack.Screen name="TabDonHangProfile" component={TabDonHangProfile} options={{ title: "Đơn hàng" }} />
 
         <Stack.Screen name="OTPgiaoDich" component={OTPgiaoDich} options={{ title: "Xác nhận OTP" }} />
 
