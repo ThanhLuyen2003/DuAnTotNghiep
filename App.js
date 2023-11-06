@@ -28,6 +28,7 @@ import TabDonHang from './Components/Navigation/TabDonHang';
 import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
+import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 
 
 
@@ -74,7 +75,7 @@ export default function App() {
 
         <Stack.Screen name="ChiTietKhamPha" component={ChiTietKhamPha} options={{ title: "Khám phá" }} />
 
-        
+        <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{  title: "Thông tin tài khoản" }} />
 
 
       </Stack.Navigator>
