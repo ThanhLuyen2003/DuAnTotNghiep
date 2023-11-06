@@ -93,9 +93,6 @@ const ChiTietDonHang = (props) => {
             </View>
 
 
-            <TouchableOpacity style={{ marginTop: 10, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
-                <Text style={{ color: 'white', fontSize: 20, marginTop: 8, }}>Hủy đơn</Text>
-            </TouchableOpacity>
 
             <View style={{ height: 100 }}></View>
 

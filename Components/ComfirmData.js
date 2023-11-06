@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.88.101';
+    const ip = '192.168.0.102';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
@@ -51,7 +51,7 @@ const ComfirmData = (props) => {
             imageSalon: image,
             services: props.route.params.content,
             price: props.route.params.pay,
-            status: "Đang chờ",
+            status: "Sắp tới",
             idUser: userInfo._id
         }
 
