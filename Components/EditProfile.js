@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView, Image } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -170,46 +170,31 @@ const EditProfile = (props) => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={{ margin: 20 }}>
-                <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity onPress={pickImage}>
-                        <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
+       <SafeAreaView >
+            <View style={{ backgroundColor: "#666b7b", width: "auto", height: 100, marginTop: 10,alignItems:"center" }}>
+            <TouchableOpacity onPress={pickImage}>
+                       
                             {/* {img_source && <Image source={{ uri: img_source }} style={{ width: 200, height: 200 }} />} */}
-
-
-                            <View style={{ height: 125, width: 125, borderRadius: 100, justifyContent: "center", alignItems: "center", borderWidth: 0.5, borderColor: "#CD853F" }}>
-
-                                {img_base64 && <Image source={{ uri: img_base64 }} style={{ width: 125, height: 125, borderRadius: 100, }} />}
+                                {img_base64 && <Image source={{ uri: img_base64 }}  style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }}/>}
                                 {(!img_base64 && typeof saveImage === 'string') && (
-                                    <ImageBackground style={{ width: 120, height: 120 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
+                                    <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }} imageStyle={{ borderRadius: 100 }} source={{uri:saveImage}}>
                                         <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                            <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                        <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                         </View>
                                     </ImageBackground>
                                 )
                                 }
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput style={styles.input} value={name} onChangeText={(txt) => { setName(txt) }} />
-
-                    <TextInput style={styles.input} value={phone} editable={false} onChangeText={(txt) => { setPhone(txt) }} />
-
-                    <TextInput style={styles.input} value={email} editable={false} onChangeText={(txt) => { setEmail(txt) }} />
-
-                    {/* <TextInput style={styles.input} value={avatar} onChangeText={(txt) => { setavatar(txt) }} /> */}
-
-                    <TextInput style={styles.input} value={address} onChangeText={(txt) => { setaddress(txt) }} />
-                </View>
-
-                <Pressable style={{ justifyContent: "center", bottom: 10 }} onPress={editUser}>
-                    <Text style={styles.press}>Cập nhật</Text>
-                </Pressable>
+                    </TouchableOpacity> 
             </View>
-        </SafeAreaView>
+        <View style={{backgroundColor:'white',width:"100%",height:250,marginTop:60,padding:10}}>
+            <View style={{flexDirection:"column",width:"auto",height:60,borderBottomColor:"gray",borderBottomWidth:1}}>
+                <Text>Họ tên*</Text>
+                <TextInput/>
+            </View>
+        </View>
+
+
+       </SafeAreaView>
     )
 }
 
