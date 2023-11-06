@@ -62,14 +62,18 @@ const Home = (props) => {
             <ScrollView style={styles.con2}>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
-                    <TouchableOpacity style={{ alignItems: 'center' }}>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('LichDaDat', { id: userInfor._id })}
+                        style={{ alignItems: 'center' }}>
                         <View style={styles.but}>
                             <Image source={require('../Images/imgHome/datlich.png')} style={{ width: 30, height: 30 }} />
                         </View>
-                        <Text>Đặt lịch</Text>
+                        <Text>Lịch đã đặt</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{ alignItems: 'center' }}>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('TabHistory', { id: userInfor._id })}
+                        style={{ alignItems: 'center' }}>
                         <View style={styles.but}>
                             <Image source={require('../Images/imgHome/lichsucat.png')} style={{ width: 30, height: 30 }} />
                         </View>
