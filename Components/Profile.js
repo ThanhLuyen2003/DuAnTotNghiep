@@ -8,13 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = (props) => {
 
-    const editProfile = () => {
-        props.navigation.navigate("EditProfile")
-    }
+    
     const tttk=()=>{
         props.navigation.navigate("ThongTinTaiKhoan")
     }
-
+   
+    
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
     const [isLoading, setisLoading] = useState(false);
@@ -82,16 +81,12 @@ const Profile = (props) => {
                                     </View>
                                 </ImageBackground>
                             )}
-                        {/* <Text style={{ fontWeight: "bold", fontSize: 20 }}>{userInfor.name}</Text>
-                        <Text style={{ fontSize: 15 }}>{userInfor.email}</Text>
-                        <Text style={{ fontSize: 15 }}>{userInfor.phone}</Text> */}
+                        
 
                     </View>
 
                     <ScrollView style={{ marginTop: 60, marginBottom: 60 }}>
-                        <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
-                            <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Tài khoản</Text>
-                        </View>
+                        
                         <Pressable onPress={tttk}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='border-color' size={25} color={'#CD853F'} />
@@ -99,40 +94,43 @@ const Profile = (props) => {
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                        <Pressable onPress={()=>{props.navigation.navigate("TabDonHangProfile",{id:userInfor._id})}}>
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }} >
                             <Icons name='shopping' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Đơn hàng</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                            <Icons name='sale' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Ưu đãi</Text>
-                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
+                        </Pressable>
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='face-agent' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Trợ giúp, hỗ trợ yêu cầu</Text>
+                            <Text style={{ marginLeft: 10, width: 200 }}>Sở thích phục vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                            <Icons name='map-marker-check' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Địa điểm salon</Text>
+                            <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
+                            <Text style={{ marginLeft: 10, width: 200 }}>Hiểu để phục vụ anh tốt hơn</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                            <Icons name='bell-badge' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Thông báo</Text>
+                            <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />
+                            <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử cắt</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ margin: 5, marginLeft: 10, backgroundColor: '#CD853F', borderRadius: 5 }}>
-                            <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Cài đặt</Text>
-                        </View>
+                        
                         <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='information' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Điều khoản và dịch vụ</Text>
+                            <Text style={{ marginLeft: 10, width: 200 }}>Thông tin hỗ trợ khách hàng</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', position: 'relative' }}>
+                        <Pressable onPress={()=>{props.navigation.navigate("PhoneXacNhan")}}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <Icons name='code-brackets' size={25} color={'#CD853F'} />
+                            <Text style={{ marginLeft: 10, width: 200 }}>Lấy OTP xác thực giao dịch</Text>
+                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                        </View>
+                        </Pressable>
+                        
+                        {/* <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', position: 'relative' }}>
                             <Icons name='logout' size={25} color={'#CD853F'} />
 
 
@@ -145,7 +143,7 @@ const Profile = (props) => {
                             )}
 
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
+                        </View> */}
                     </ScrollView>
                 </View>
             </View>
