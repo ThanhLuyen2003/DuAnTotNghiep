@@ -186,14 +186,28 @@ const EditProfile = (props) => {
                                 }
                     </TouchableOpacity> 
             </View>
-        <View style={{backgroundColor:'white',width:"100%",height:250,marginTop:60,padding:10}}>
-            <View style={{flexDirection:"column",width:"auto",height:60,borderBottomColor:"gray",borderBottomWidth:1}}>
-                <Text>Họ tên*</Text>
-                <TextInput />
+        <View style={{backgroundColor:'white',width:"100%",height:300,marginTop:60,padding:10}}>
+            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5}}>
+                <Text>Họ tên {<Text style={{color:"red"}}>*</Text>}</Text>
+
+                <TextInput placeholder='Nhập họ tên'/>
+            </View>
+            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
+                <Text>Số điện thoại {<Text style={{color:"red"}}>*</Text>}</Text>
+                <TextInput placeholder='Nhập họ tên'/>
+            </View>
+            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
+                <Text>Email</Text>
+                <TextInput placeholder='Nhập họ tên'/>
+            </View>
+            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
+                <Text>Address</Text>
+                <TextInput placeholder='Nhập họ tên'/>
             </View>
         </View>
-
-
+            <TouchableHighlight style={{backgroundColor:"#CD853F",width:"90%",height:50,margin:20,justifyContent:"center",alignItems:"center",borderRadius:10,marginTop:50}}>
+                <Text style={{fontWeight:"bold"}}>CẬP NHẬT</Text>
+            </TouchableHighlight>
        </SafeAreaView>
     )
 }
