@@ -28,6 +28,8 @@ import TabDonHang from './Components/Navigation/TabDonHang';
 import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
+import TabHistory from './Components/Navigation/TabHistory';
+import SapToi from './Components/ComponentsLich/SapToi';
 
 
 
@@ -70,11 +72,18 @@ export default function App() {
 
         <Stack.Screen name="TabDonHang" component={TabDonHang} options={{ title: "Đơn hàng" }} />
 
+        <Stack.Screen name="TabHistory" component={TabHistory} options={{ title: "Lịch sử cắt" }} />
+
         <Stack.Screen name="ChiTietDonHang" component={ChiTietDonHang} options={{ title: "Đơn hàng" }} />
 
         <Stack.Screen name="ChiTietKhamPha" component={ChiTietKhamPha} options={{ title: "Khám phá" }} />
 
-        
+        <Stack.Screen name="LichDaDat" component={SapToi} options={{ title: "Lịch đã đặt" }} />
+
+
+
+
+
 
 
       </Stack.Navigator>
