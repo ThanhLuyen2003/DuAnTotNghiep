@@ -91,4 +91,9 @@ const TraHang = (props) => {
 
 export default TraHang
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

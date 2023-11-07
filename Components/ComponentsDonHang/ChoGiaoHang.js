@@ -93,4 +93,9 @@ const ChoGiaoHang = (props) => {
 
 export default ChoGiaoHang
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

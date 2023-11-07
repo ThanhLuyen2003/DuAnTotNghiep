@@ -8,13 +8,13 @@ const ChiTietDonHang = (props) => {
     const [product, setProduct] = useState([]);
 
     const renderItem = (item) => {
-
+        0
         return (
 
             <View style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
                 <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
 
-                <View style={{ alignSelf: 'center', width: "100%" }}>
+                <View style={{ alignSelf: 'center', width: "100%", marginLeft: 10 }}>
                     <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.price} đ</Text>
                     <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>

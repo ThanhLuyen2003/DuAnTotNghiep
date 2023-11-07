@@ -200,7 +200,7 @@ const KhamPha = (props) => {
 
 
             </View>
-            <View style={{ alignItems: "center", paddingLeft: 5, paddingRight: 5, paddingTop: 5 }}>
+            <View style={styles.con2}>
                 <Text>CÙNG Fpoly Barber KHÁM PHÁ</Text>
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>XU HƯỚNG TÓC HOT NHẤT</Text>
                 <View style={{ alignItems: "center", padding: 10 }}>
@@ -213,26 +213,27 @@ const KhamPha = (props) => {
                     </View>
                 </TouchableOpacity>
 
+                {showLikedItems ? (
+                    <FlatGrid
+                        itemDimension={150}
+                        data={getLikedItems()}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        style={styles.gridView}
+                    />
+                ) : (
+                    <FlatGrid
+                        spacing={5}
+                        itemDimension={150}
+                        data={data}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        style={styles.gridView}
+                    />
+                )}
 
             </View>
-            {showLikedItems ? (
-                <FlatGrid
-                    itemDimension={150}
-                    data={getLikedItems()}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    style={styles.gridView}
-                />
-            ) : (
-                <FlatGrid
-                    spacing={5}
-                    itemDimension={150}
-                    data={data}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    style={styles.gridView}
-                />
-            )}
+
         </View>
     )
 }
@@ -248,7 +249,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         position: 'absolute',
         top: "17%",
-        padding: 10
+        padding: 10,
+        alignItems: 'center'
     },
     but: {
         backgroundColor: '#778899',
