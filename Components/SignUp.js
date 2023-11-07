@@ -6,7 +6,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const SignUp = (props) => {
-    const ip = "192.168.1.117";
+    const ip = "192.168.0.105";
 
 
     const { navigation } = props;
