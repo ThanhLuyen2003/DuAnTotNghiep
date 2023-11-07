@@ -36,7 +36,6 @@ const ChoGiaoHang = (props) => {
 
     }, []);
 
-    console.log(donhang);
 
     const renderItem = ({ item }) => {
 
