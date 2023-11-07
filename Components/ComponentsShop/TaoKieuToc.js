@@ -12,7 +12,7 @@ const TaoKieuToc = (props) => {
 
 
 
-  const ip = "192.168.1.117";
+  const ip = "192.168.88.101";
 
 
 

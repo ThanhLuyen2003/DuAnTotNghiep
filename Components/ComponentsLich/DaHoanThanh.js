@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 const DaHoanThanh = (props) => {
 
-    const ip = "192.168.0.102";
+    const ip = "192.168.88.101";
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,21 @@ const DaHoanThanh = (props) => {
     }, []);
 
     const renderItem = ({ item }) => {
+
+        const chiTiet = () => {
+
+            props.navigation.navigate('ChiTietLich', {
+                name: item.nameSalon,
+                address: item.addressSalon,
+                day: item.day,
+                hour: item.hour,
+                price: item.price,
+                service: item.services,
+                phone: item.phone
+            })
+
+        }
+
         return (
             <View style={{ borderWidth: 1, marginBottom: 10, borderRadius: 20 }}>
                 <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}>
@@ -66,7 +81,7 @@ const DaHoanThanh = (props) => {
 
                 <View style={styles.con2}>
 
-                    <TouchableOpacity style={styles.but1}>
+                    <TouchableOpacity style={styles.but1} onPress={chiTiet}>
                         <Text style={{ marginTop: 8, color: 'white' }}>Xem hóa đơn</Text>
                     </TouchableOpacity>
 

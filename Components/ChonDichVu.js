@@ -9,7 +9,7 @@ const ChonDichVu = (props) => {
     const [dsdv, setDsdv] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.0.102";
+    const ip = "192.168.88.101";
 
     const getList = async () => {
 
@@ -115,7 +115,7 @@ const ChonDichVu = (props) => {
                             pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
                         }
 
-            content = content + (index + 1) + ". " + item.name + " ( " + pay + " đ )" + " \n";
+            content = content + (index + 1) + ". " + item.name + " \n" + " ( " + pay + " đ )" + " \n";
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })

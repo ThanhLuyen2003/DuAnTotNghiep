@@ -9,6 +9,7 @@ const ChoGiaoHang = (props) => {
 
     const id = props.route.params.id;
 
+    const ip = '192.168.88.101'
 
     const getList = async () => {
 
@@ -35,7 +36,6 @@ const ChoGiaoHang = (props) => {
 
     }, []);
 
-    console.log(donhang);
 
     const renderItem = ({ item }) => {
 
@@ -92,4 +92,9 @@ const ChoGiaoHang = (props) => {
 
 export default ChoGiaoHang
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.0.102';
+    const ip = '192.168.88.101';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();
@@ -126,7 +126,7 @@ const ComfirmData = (props) => {
             <View style={styles.con}>
 
                 <View style={styles.time}>
-                    <Text style={{ fontWeight: 'bold' }}>Thời gian:  {hour}  /  {day} |   SĐT: {phone}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>Thời gian: {hour}  /  {day} |  SĐT: {phone}</Text>
                 </View>
 
                 <View style={{ borderWidth: 0.5, marginTop: 10 }}></View>

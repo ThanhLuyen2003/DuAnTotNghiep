@@ -5,7 +5,7 @@ const TraHang = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.0.103";
+    const ip = "192.168.88.101";
 
     const id = props.route.params.id;
 
@@ -91,4 +91,9 @@ const TraHang = (props) => {
 
 export default TraHang
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

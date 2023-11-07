@@ -5,7 +5,7 @@ const DaHuy = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.0.102";
+    const ip = "192.168.88.101";
 
     const id = props.route.params.id;
 
@@ -91,4 +91,9 @@ const DaHuy = (props) => {
 
 export default DaHuy
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

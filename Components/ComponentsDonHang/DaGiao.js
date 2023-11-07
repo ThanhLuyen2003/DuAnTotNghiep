@@ -5,7 +5,7 @@ const DaGiao = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.0.102";
+    const ip = "192.168.88.101";
 
     const id = props.route.params.id;
 
@@ -51,7 +51,7 @@ const DaGiao = (props) => {
 
                 <Text style={styles.status}>{item.status}</Text>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', margin: 5 }}>
                     <Image source={{ uri: product[0].image }} style={{ height: 100, width: 100 }} />
 
                     <View style={{ alignSelf: 'center', width: "100%", marginLeft: 15 }}>
@@ -92,4 +92,9 @@ const DaGiao = (props) => {
 
 export default DaGiao
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    status: {
+        alignSelf: 'flex-end', marginRight: 30,
+        color: 'red',
+    }
+})

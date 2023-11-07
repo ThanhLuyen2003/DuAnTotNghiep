@@ -33,7 +33,11 @@ import OTPgiaoDich from './Components/OTPgiaoDich';
 import PhoneXacNhan from './Components/PhoneXacNhan';
 import TabHistory from './Components/Navigation/TabHistory';
 import TabDonHangProfile from './Components/Navigation/TabDonHangProfile';
+
 import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
+
+import ChiTietLich from './Components/ComponentsLich/ChiTietLich';
+
 
 
 
@@ -90,7 +94,12 @@ export default function App() {
 
         <Stack.Screen name="PhoneXacNhan" component={PhoneXacNhan} options={{ title: "Xác nhận số điện thoại" }} />
 
+
         <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{ title: "Xác nhận số điện thoại" }} />
+
+        <Stack.Screen name="ChiTietLich" component={ChiTietLich} options={{ title: "Chi tiết lịch" }} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
 

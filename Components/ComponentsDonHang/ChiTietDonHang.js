@@ -11,10 +11,10 @@ const ChiTietDonHang = (props) => {
 
         return (
 
-            <View style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
+            <View key={item._id} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
                 <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
 
-                <View style={{ alignSelf: 'center', width: "100%" }}>
+                <View style={{ alignSelf: 'center', width: "100%", marginLeft: 10 }}>
                     <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.price} đ</Text>
                     <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>
@@ -66,7 +66,7 @@ const ChiTietDonHang = (props) => {
             <View style={styles.product}>
                 <Text style={{ fontSize: 20, fontWeight: '500' }}>Sản phẩm </Text>
 
-                <View key={product.map((item) => item.name)}>
+                <View >
                     {product.map((item) => renderItem(item))}
                 </View>
 
