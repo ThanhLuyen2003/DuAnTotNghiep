@@ -33,19 +33,7 @@ const Profile = (props) => {
 
 
 
-    const logout = async () => {
-        setisLoading(true)
-        //console.log(userInfor);
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
-        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
-        await AsyncStorage.removeItem("savedImage")
-        setUserInfor({}); // Reset user information state
-        setsaveImage({}); // Reset image state
-        setisLoading(false)
-        props.navigation.navigate('Login')
-
-    }
+   
 
 
     React.useEffect(() => {
@@ -75,7 +63,7 @@ const Profile = (props) => {
                             <Image style={{ width: 120, height: 120, borderRadius: 100 }} source={{ uri: saveImage }} />
                         ) :
                             (
-                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src='https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg'>
+                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }}  src={userInfor.avatar}>
                                     <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                         <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                     </View>
