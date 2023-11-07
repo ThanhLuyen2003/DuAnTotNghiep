@@ -36,7 +36,23 @@ const SapToi = (props) => {
 
     }, []);
 
+
+
     const renderItem = ({ item }) => {
+
+        const chiTiet = () => {
+
+            props.navigation.navigate('ChiTietLich', {
+                name: item.nameSalon,
+                address: item.addressSalon,
+                day: item.day,
+                hour: item.hour,
+                price: item.price,
+                service: item.services,
+                phone: item.phone
+            })
+
+        }
         return (
             <View style={{ borderWidth: 1, marginBottom: 10, borderRadius: 20 }}>
                 <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}>
@@ -72,7 +88,7 @@ const SapToi = (props) => {
 
                     <View style={{ flex: 0.1 }}></View>
 
-                    <TouchableOpacity style={styles.but2}>
+                    <TouchableOpacity onPress={chiTiet} style={styles.but2}>
                         <Text style={{ marginTop: 8, color: 'orange' }}>Xem chi tiết</Text>
                     </TouchableOpacity>
 
