@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native'
+import { Image, StyleSheet, Text, View, ImageBackground, ScrollView,ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,7 +6,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
-
+    const [isLoading, setisLoading] = useState(false);
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
     }
@@ -31,6 +31,19 @@ const ThongTinTaiKhoan = (props) => {
     }, [props.navigation]);
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
+    const logout = async () => {
+        setisLoading(true)
+        //console.log(userInfor);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
+        await AsyncStorage.removeItem("savedImage")
+        setUserInfor({}); // Reset user information state
+        setsaveImage({}); // Reset image state
+        setisLoading(false)
+        props.navigation.navigate('Login')
+
+    }
     return (
         <ScrollView>
 
@@ -44,7 +57,7 @@ const ThongTinTaiKhoan = (props) => {
                     
                 ) :
                     (
-                        <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }} imageStyle={{ borderRadius: 100 }} src='https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg'>
+                        <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }} imageStyle={{ borderRadius: 100 }} src={userInfor.avatar}>
                             <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                 <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                             </View>
@@ -80,9 +93,16 @@ const ThongTinTaiKhoan = (props) => {
                         <Text style={{width:"40%",textAlign:"right"}}>{userInfor.address}</Text>
                 </View>
             </View>
-
+                    
                 <View style={{width:"100%",height:100,justifyContent:'center',alignItems:"center"}}>
-                    <Text style={{borderBottomWidth:1,fontWeight:"500"}}>ĐĂNG XUẤT</Text>
+                    
+                    {isLoading ? (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <ActivityIndicator size="large" color="#CD853F" style={{ backgroundColor: "#C0C0C0", width: 125, height: 125, borderRadius: 10, opacity: 0.5 }} />
+                                </View>
+                            ) : (
+                                <Text style={{borderBottomWidth:1,fontWeight:"500"}} onPress={logout}>ĐĂNG XUẤT</Text>
+                            )}
                 </View>
                 <View style={{width:"100%",height:30,justifyContent:'center',alignItems:"center"}}>
                     <Text style={{borderBottomWidth:1,color:"red",fontWeight:"500",borderBottomColor:"red"}}>Xóa tài khoản</Text>
