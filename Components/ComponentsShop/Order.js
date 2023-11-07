@@ -77,10 +77,10 @@ const Order = (props) => {
 
 
         return (
-            <View style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
+            <View key={item.idPro} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
                 <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
 
-                <View style={{ alignSelf: 'center', width: "100%" }}>
+                <View style={{ alignSelf: 'center', width: "100%", marginLeft: 5 }}>
                     <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{price2} đ</Text>
                     <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>
@@ -213,7 +213,7 @@ const Order = (props) => {
                 <View style={styles.product}>
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Sản phẩm </Text>
 
-                    <View key={products.map((item) => item.idPro)}>
+                    <View >
                         {products.map((item) => renderItem(item))}
                     </View>
                 </View>
