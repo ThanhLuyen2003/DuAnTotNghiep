@@ -8,23 +8,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 const EditProfile = (props) => {
-    const ip = "192.168.0.102";
-
-
-    const [dateBirth, setdateBirth] = useState("");
-    const [date, setdate] = useState(new Date());
-    const [showPicker, setshowPicker] = useState(false)
-
+    const ip = "192.168.0.105";
     const [userInfo, setuserInfo] = useState({
-        phone: '',
-        email: '',
-        avatar: '',
-        address: ''
     })
-    const [userId, setUserId] = useState(''); // State to hold the user ID
-    const [name, setName] = useState(''); // State to hold the name
-    const [phone, setPhone] = useState(''); // State to hold the phone
-    const [email, setEmail] = useState(''); // State to hold the email
+    const [userId, setUserId] = useState(''); 
+    const [name, setName] = useState(''); 
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
     const [avatar, setavatar] = useState("")
     const [address, setaddress] = useState("")
 
@@ -34,21 +24,7 @@ const EditProfile = (props) => {
     const [saveImage, setsaveImage] = useState({});
 
 
-    const toggleDatePicker = () => {
-        setshowPicker(!showPicker);
-    }
-    const onChange = ({ type }, selectedDate) => {
-        if (type == "set") {
-            const currentDate = selectedDate;
-            setdate(currentDate);
-            if (Platform.OS === "android") {
-                toggleDatePicker();
-                setdateBirth(currentDate.toDateString());
-            }
-        } else {
-            toggleDatePicker();
-        }
-    }
+
 
     const getLoginInfor = async () => {
 
@@ -114,10 +90,10 @@ const EditProfile = (props) => {
             }
 
             // chuyển ảnh thành base64 để upload lên json   
-
         }
+
     }
-    const editUser = () => {
+    const editUser = async () => {
         const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
         const addressRegex = /^[0-9A-Za-z\s,-]+$/;
         if (!nameRegex.test(name)) {
@@ -128,7 +104,10 @@ const EditProfile = (props) => {
             alert("Sai định dạng địa chỉ");
             return;
         }
-
+        if (img_base64 == null) {
+            alert("Vui lòng chọn ảnh")
+            return;
+        }
         let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
         let obj = { name: name, phone: phone, email: email, avatar: img_base64, address: address }
         fetch(url_api, {
@@ -141,21 +120,33 @@ const EditProfile = (props) => {
         })
             .
 
-            then((res) => {
+            then(async (res) => {
                 if (res.status === 200) {
                     alert("Sửa thành công");
-                    saveImageToStorage(img_base64);
+                    const updatedUserInfo = {
+                        ...userInfo, name, phone, email, address,
+                    }
+
+                    await AsyncStorage.setItem('loginInfo', JSON.stringify(updatedUserInfo));
 
                     setName("")
                     setEmail("")
                     setPhone("")
                     setaddress("")
                     props.navigation.navigate("Profile");
-                    getLoginInfor();
-
                     console.log(res);
+                    let updatedImage = img_base64 || saveImage; // Sử dụng ảnh hiện tại hoặc ảnh đã lưu
+                    setiimg_base64(updatedImage);
+                    
+                    if (img_base64 !== saveImage) {
+                        // Chỉ khi có thay đổi ảnh mới, hãy lưu vào Storage
+                        saveImageToStorage(updatedImage);
+                    }
+
+                    console.log(img_base64);
                 } else {
                     alert("Có lỗi xảy ra!")
+                    console.log(res);
                     return res;
                 }
 
@@ -170,45 +161,50 @@ const EditProfile = (props) => {
 
 
     return (
-       <SafeAreaView >
-            <View style={{ backgroundColor: "#666b7b", width: "auto", height: 100, marginTop: 10,alignItems:"center" }}>
-            <TouchableOpacity onPress={pickImage}>
-                       
-                            {/* {img_source && <Image source={{ uri: img_source }} style={{ width: 200, height: 200 }} />} */}
-                                {img_base64 && <Image source={{ uri: img_base64 }}  style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }}/>}
-                                {(!img_base64 && typeof saveImage === 'string') && (
-                                    <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100,marginTop:20 }} imageStyle={{ borderRadius: 100 }} source={{uri:saveImage}}>
-                                        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                        <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                                        </View>
-                                    </ImageBackground>
-                                )
-                                }
-                    </TouchableOpacity> 
+        <SafeAreaView >
+            <View style={{ backgroundColor: "#666b7b", width: "auto", height: 100, marginTop: 10, alignItems: "center" }}>
+                <TouchableOpacity onPress={pickImage}>
+                    {img_base64 ? (
+                        <Image source={{ uri: img_base64 }} style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, marginTop: 20 }} />
+                    ) : (
+                        (saveImage && typeof saveImage === 'string') ? (
+                            <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, marginTop: 20 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
+                                <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                                    <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                </View>
+                            </ImageBackground>
+                        ) : null
+                    )}
+                </TouchableOpacity>
             </View>
-        <View style={{backgroundColor:'white',width:"100%",height:300,marginTop:60,padding:10}}>
-            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5}}>
-                <Text>Họ tên {<Text style={{color:"red"}}>*</Text>}</Text>
 
-                <TextInput placeholder='Nhập họ tên'/>
+            <View style={{ backgroundColor: 'white', width: "100%", height: 300, marginTop: 60, padding: 10 }}>
+                <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
+                    <Text>Họ tên {<Text style={{ color: "red" }}>*</Text>}</Text>
+
+                    <TextInput placeholder='Nhập họ tên' value={name}
+                        onChangeText={(text) => setName(text)} />
+                </View>
+                <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
+                    <Text>Số điện thoại {<Text style={{ color: "red" }}>*</Text>}</Text>
+                    <TextInput placeholder='Số điện thoại' value={phone}
+                        onChangeText={(text) => setPhone(text)} />
+                </View>
+                <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
+                    <Text>Email</Text>
+                    <TextInput placeholder='Email' value={email}
+                        onChangeText={(text) => setEmail(text)} />
+                </View>
+                <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
+                    <Text>Address</Text>
+                    <TextInput placeholder='Nhập Address' value={address}
+                        onChangeText={(text) => setaddress(text)} />
+                </View>
             </View>
-            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
-                <Text>Số điện thoại {<Text style={{color:"red"}}>*</Text>}</Text>
-                <TextInput placeholder='Nhập họ tên'/>
-            </View>
-            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
-                <Text>Email</Text>
-                <TextInput placeholder='Nhập họ tên'/>
-            </View>
-            <View style={{flexDirection:"column",width:"auto",height:50,borderBottomColor:"gray",borderBottomWidth:0.5,marginTop:20}}>
-                <Text>Address</Text>
-                <TextInput placeholder='Nhập họ tên'/>
-            </View>
-        </View>
-            <TouchableHighlight style={{backgroundColor:"#CD853F",width:"90%",height:50,margin:20,justifyContent:"center",alignItems:"center",borderRadius:10,marginTop:50}}>
-                <Text style={{fontWeight:"bold"}}>CẬP NHẬT</Text>
+            <TouchableHighlight onPress={editUser} style={{ backgroundColor: "#CD853F", width: "90%", height: 50, margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 50 }}>
+                <Text style={{ fontWeight: "bold" }}>CẬP NHẬT</Text>
             </TouchableHighlight>
-       </SafeAreaView>
+        </SafeAreaView>
     )
 }
 
