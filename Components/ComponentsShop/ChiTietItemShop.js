@@ -11,7 +11,7 @@ const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.1.117";
+  const ip = "192.168.88.101";
 
   // console.log(route);
   let describe = route.params.describe;

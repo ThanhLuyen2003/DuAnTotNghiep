@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Order = (props) => {
 
-    const ip = "192.168.0.103";
+    const ip = "192.168.88.101";
 
     const [userInfor, setUserInfor] = useState({});
     const [products, setProducts] = useState([]);
