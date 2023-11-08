@@ -4,6 +4,7 @@ import React from 'react'
 
 
 import { FontVariant } from "react-native";
+import ip from "../../IP";
 
 const TaoKieuToc = (props) => {
   const { navigation } = props;
@@ -12,7 +13,6 @@ const TaoKieuToc = (props) => {
 
 
 
-  const ip = "192.168.0.105";
 
 
 

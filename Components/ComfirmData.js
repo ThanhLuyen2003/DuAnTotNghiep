@@ -2,12 +2,12 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
+import ip from '../IP';
 
 
 
 const ComfirmData = (props) => {
 
-    const ip = '192.168.88.101';
 
     const [address, setaddress] = useState();
     const [day, setday] = useState();

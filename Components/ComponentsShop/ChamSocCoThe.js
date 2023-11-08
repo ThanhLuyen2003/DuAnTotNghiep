@@ -1,12 +1,12 @@
 import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, TouchableHighlight, } from 'react-native'
 import React from 'react';
 import { useState } from "react";
+import ip from '../../IP';
 
 const ChamSocCoThe = (props) => {
   const { navigation } = props;
   const [dsProductChamSocCoThe, setdsProductChamSocCoThe] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const ip = "192.168.0.103";
 
   const getList = async () => {
 

@@ -1,9 +1,9 @@
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
+import ip from '../../IP';
 
 const DaHuyLich = (props) => {
 
-    const ip = "192.168.88.101";
 
 
     const [isLoading, setIsLoading] = useState(false);

@@ -7,12 +7,12 @@ import DatePicker from '@react-native-community/datetimepicker'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+import ip from '../IP'
 const EditProfile = (props) => {
-    const ip = "192.168.0.105";
     const [userInfo, setuserInfo] = useState({
     })
-    const [userId, setUserId] = useState(''); 
-    const [name, setName] = useState(''); 
+    const [userId, setUserId] = useState('');
+    const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [avatar, setavatar] = useState("")
@@ -137,7 +137,7 @@ const EditProfile = (props) => {
                     console.log(res);
                     let updatedImage = img_base64 || saveImage; // Sử dụng ảnh hiện tại hoặc ảnh đã lưu
                     setiimg_base64(updatedImage);
-                    
+
                     if (img_base64 !== saveImage) {
                         // Chỉ khi có thay đổi ảnh mới, hãy lưu vào Storage
                         saveImageToStorage(updatedImage);

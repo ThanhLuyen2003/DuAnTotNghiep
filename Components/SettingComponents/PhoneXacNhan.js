@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ip from '../../IP';
 
 const PhoneXacNhan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [phone, setPhone] = useState("");
 
-    const ip = "192.168.1.117";
 
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');

@@ -7,11 +7,11 @@ import Describe from './Describe';
 import Ingredient from './Ingredient';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ip from '../../IP';
 const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
 
-  const ip = "192.168.88.101";
 
   // console.log(route);
   let describe = route.params.describe;

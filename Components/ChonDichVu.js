@@ -2,6 +2,7 @@ import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity,
 import React from 'react'
 import { useState } from "react";
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import ip from '../IP';
 
 
 const ChonDichVu = (props) => {
@@ -9,7 +10,6 @@ const ChonDichVu = (props) => {
     const [dsdv, setDsdv] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.101";
 
     const getList = async () => {
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import ip from '../../IP';
 
 
 const OTPgiaoDich = ({ route }) => {
@@ -61,7 +62,7 @@ const OTPgiaoDich = ({ route }) => {
     }
 
     // Ví dụ với fetch API
-    fetch('http://192.168.1.117:3000/apiuser/updateOTP/' + route.params.id, {
+    fetch('http://' + ip + ':3000/apiuser/updateOTP/' + route.params.id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

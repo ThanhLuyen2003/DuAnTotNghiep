@@ -3,13 +3,13 @@ import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicato
 import { useState } from "react";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../IP";
 
 const ChonSalon = (props) => {
 
     const [dssl, setDssl] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.101";
 
 
     const getList = async () => {

@@ -2,11 +2,11 @@ import React from "react";
 import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } from "react-native";
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import ip from "../IP";
 
 
 
 const SignUp = (props) => {
-    const ip = "192.168.0.105";
 
 
     const { navigation } = props;
@@ -18,7 +18,7 @@ const SignUp = (props) => {
     const [avatar, setAvatar] = useState("https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg");
     const [address, setAddress] = useState("");
     const [otp, setOtp] = useState("");
-    
+
 
 
 
@@ -73,7 +73,7 @@ const SignUp = (props) => {
             pass: pass,
             avatar: avatar,
             address: address,
-            otp:otp,
+            otp: otp,
         };
 
         const url = "http://" + ip + ":3000/addUser";

@@ -1,10 +1,10 @@
 import { FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ip from '../../IP';
 
 const Order = (props) => {
 
-    const ip = "192.168.88.101";
 
     const [userInfor, setUserInfor] = useState({});
     const [products, setProducts] = useState([]);

@@ -7,13 +7,6 @@ import { useState } from "react";
 
 const ChiTietLich = (props) => {
 
-    const ip = '192.168.88.101';
-
-    const [address, setaddress] = useState();
-    const [day, setday] = useState();
-    const [hour, setHour] = useState();
-    const [name, setName] = useState();
-    const [phone, setPhone] = useState();
 
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>

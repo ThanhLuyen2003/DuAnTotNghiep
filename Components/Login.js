@@ -3,12 +3,12 @@ import { View, Image, StyleSheet, Text, ImageBackground, Button, TextInput, Touc
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import ip from "../IP";
 
 
 const Login = (props) => {
 
 
-    const ip = "192.168.0.105";
 
 
 

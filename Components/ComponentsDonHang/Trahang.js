@@ -1,11 +1,11 @@
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
+import ip from '../../IP';
 
 const TraHang = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.101";
 
     const id = props.route.params.id;
 

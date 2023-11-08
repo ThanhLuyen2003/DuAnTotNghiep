@@ -4,13 +4,13 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ip from "../../IP";
 
 const Cart = (props) => {
 
     const [isLoading, setisLoading] = useState(true);
     const [data, setdata] = useState([]);
 
-    const ip = "192.168.88.101";
 
 
     const getList = async () => {

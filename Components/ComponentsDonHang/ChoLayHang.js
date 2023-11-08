@@ -1,13 +1,13 @@
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ip from '../../IP';
 
 const ChoLayHang = (props) => {
 
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.0.105";
 
     const id = props.route.params.id;
 
