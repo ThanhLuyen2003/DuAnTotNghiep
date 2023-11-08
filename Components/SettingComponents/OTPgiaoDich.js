@@ -15,14 +15,14 @@ const OTPgiaoDich = ({ route }) => {
     const newInputs = [...otp];
     newInputs[index] = text;
     setOTP(newInputs);
-  
+
     // Di chuyển đến ô nhập tiếp theo nếu có kí tự được nhập, theo thứ tự từ trái sang phải và từ trên xuống dưới
     const nextIndex = index + 1;
     if (text.length === 1 && index < numberOfInputs - 1) {
       const nextRow = nextIndex < numberOfInputs ? 0 : 1;
       const nextInputIndex = (nextIndex % numberOfInputs) + nextRow * numberOfInputs;
       inputs[nextInputIndex].current?.focus();
-    }else if (text.length === 0 && index > 0) {//check xóa từ trái sang phải
+    } else if (text.length === 0 && index > 0) {//check xóa từ trái sang phải
       const prevRow = index < numberOfInputs ? 0 : 1;
       const prevInputIndex = ((index - 1) % numberOfInputs) + prevRow * numberOfInputs;
       inputs[prevInputIndex].current?.focus();
@@ -33,7 +33,7 @@ const OTPgiaoDich = ({ route }) => {
     newInputs[index] = text;
     setConfirmOTP(newInputs);
 
-   
+
     if (text.length === 1 && index < numberOfInputs - 1) {
       const nextRow = index < numberOfInputs ? 1 : 0;
       const nextInputIndex = ((index + 1) % numberOfInputs) + nextRow * numberOfInputs;
@@ -82,7 +82,7 @@ const OTPgiaoDich = ({ route }) => {
   };
   return (
     <View style={styles.container}>
-       <View style={styles.inputContainer}>
+      <View style={styles.inputContainer}>
         {inputs.slice(0, numberOfInputs).map((input, index) => (
           <TextInput
             key={index}

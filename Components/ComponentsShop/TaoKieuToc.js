@@ -12,7 +12,7 @@ const TaoKieuToc = (props) => {
 
 
 
-  const ip = "192.168.88.101";
+  const ip = "192.168.0.105";
 
 
 
@@ -51,7 +51,6 @@ const TaoKieuToc = (props) => {
     } else
       if (item.price.length == 6) {
         price = (item.price.substring(0, 3) + '.' + item.price.substring(3, 6));
-
       } else
         if (item.price.length == 7) {
           price = (item.price.substring(0, 1) + '.' + item.price.slice(1, 4) + '.' + item.price.slice(4, 7));

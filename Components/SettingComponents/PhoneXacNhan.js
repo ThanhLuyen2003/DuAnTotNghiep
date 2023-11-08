@@ -35,11 +35,11 @@ const PhoneXacNhan = (props) => {
             .then((res_json) => {
                 if (res_json.length !== 1) {
                     alert("Số điện thoại không khớp với tài khoản vui lòng nhập lại!");
-                    
+
                     return;
                 } else {
 
-                    props.navigation.navigate('OTPgiaoDich',{id:userInfor._id});
+                    props.navigation.navigate('OTPgiaoDich', { id: userInfor._id });
                     setPhone("");
                 }
 

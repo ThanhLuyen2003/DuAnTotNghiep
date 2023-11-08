@@ -7,7 +7,7 @@ const ChoLayHang = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-    const ip = "192.168.88.101";
+    const ip = "192.168.0.105";
 
     const id = props.route.params.id;
 
@@ -41,6 +41,7 @@ const ChoLayHang = (props) => {
 
         return (
             <TouchableOpacity
+                key={item._id}
                 style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
                 onPress={() => props.navigation.navigate('ChiTietDonHang',
                     { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}

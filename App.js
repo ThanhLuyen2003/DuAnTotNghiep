@@ -29,19 +29,19 @@ import KhamPha from './Components/KhamPha';
 import ChiTietDonHang from './Components/ComponentsDonHang/ChiTietDonHang';
 import ChiTietKhamPha from './Components/ChiTietKhamPha';
 import SapToi from './Components/ComponentsLich/SapToi';
-import OTPgiaoDich from './Components/OTPgiaoDich';
-import PhoneXacNhan from './Components/PhoneXacNhan';
 import TabHistory from './Components/Navigation/TabHistory';
 import TabDonHangProfile from './Components/Navigation/TabDonHangProfile';
 
-import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 
 import ChiTietLich from './Components/ComponentsLich/ChiTietLich';
-import ThongTinHoTroKhachHang from './Components/ThongTinHoTroKhachHang';
 import BaoMatThongTin from './Components/ThongTinKhachHang/BaoMatThongTin';
 import CamKetFpoly from './Components/ThongTinKhachHang/CamKetFpoly';
 import DieuKienGiaoDich from './Components/ThongTinKhachHang/DieuKienGiaoDich';
 import VeChungToi from './Components/ThongTinKhachHang/VeChungToi';
+import ThongTinTaiKhoan from './Components/SettingComponents/ThongTinTaiKhoan';
+import PhoneXacNhan from './Components/SettingComponents/PhoneXacNhan';
+import OTPgiaoDich from './Components/SettingComponents/OTPgiaoDich';
+import ThongTinHoTroKhachHang from './Components/SettingComponents/ThongTinHoTroKhachHang';
 
 
 
@@ -104,15 +104,15 @@ export default function App() {
 
         <Stack.Screen name="ChiTietLich" component={ChiTietLich} options={{ title: "Chi tiết lịch" }} />
 
-        <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown:false }} />
+        <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown: false }} />
 
-        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ headerShown:false }} />
+        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ headerShown: false }} />
 
-        <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown:false }} />
+        <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown: false }} />
 
-        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown:false }} />
+        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown: false }} />
 
-        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ headerShown:false }} />
+        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
