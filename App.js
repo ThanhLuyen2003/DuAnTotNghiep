@@ -38,6 +38,10 @@ import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 
 import ChiTietLich from './Components/ComponentsLich/ChiTietLich';
 import ThongTinHoTroKhachHang from './Components/ThongTinHoTroKhachHang';
+import BaoMatThongTin from './Components/ThongTinKhachHang/BaoMatThongTin';
+import CamKetFpoly from './Components/ThongTinKhachHang/CamKetFpoly';
+import DieuKienGiaoDich from './Components/ThongTinKhachHang/DieuKienGiaoDich';
+import VeChungToi from './Components/ThongTinKhachHang/VeChungToi';
 
 
 
@@ -101,6 +105,14 @@ export default function App() {
         <Stack.Screen name="ChiTietLich" component={ChiTietLich} options={{ title: "Chi tiết lịch" }} />
 
         <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown:false }} />
+
+        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ header:false }} />
+
+        <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ header:false }} />
+
+        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ header:false }} />
+
+        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ header:false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
