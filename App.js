@@ -106,13 +106,13 @@ export default function App() {
 
         <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown:false }} />
 
-        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ header:false }} />
+        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ headerShown:false }} />
 
-        <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ header:false }} />
+        <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown:false }} />
 
-        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ header:false }} />
+        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown:false }} />
 
-        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ header:false }} />
+        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ headerShown:false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
