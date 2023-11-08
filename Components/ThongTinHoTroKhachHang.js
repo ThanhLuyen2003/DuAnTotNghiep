@@ -23,26 +23,35 @@ const ThongTinHoTroKhachHang = (props) => {
       <View style={{ backgroundColor: "#CCCCCC", height: 50, justifyContent: "center", alignItems: "center" }}>
         <Text style={{ fontWeight: "bold", fontSize: 18 }}>Thông tin hỗ trợ khách hàng</Text>
       </View>
-      <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', height: 40, justifyContent: "center", alignItems: "center" }} >
+      <Pressable onPress={()=>{props.navigation.navigate("CamKetFpoly")}}>
+        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', height: 40, justifyContent: "center", alignItems: "center" }} >
         <Icons name='shield-sun' size={25} color={'#CD853F'} />
         <Text style={{ marginLeft: 10, width: 200 }}>Cam kết về Fpoly Barber Care</Text>
         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
       </View>
+      </Pressable>
+      
+      <Pressable onPress={()=>{props.navigation.navigate("VeChungToi")}}>
       <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', height: 40, justifyContent: "center", alignItems: "center" }} >
         <Icons name='family-tree' size={25} color={'#CD853F'} />
         <Text style={{ marginLeft: 10, width: 200 }}>Về chúng tôi</Text>
         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
       </View>
+      </Pressable>
+      <Pressable onPress={()=>{props.navigation.navigate("DieuKienGiaoDich")}}>
       <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', height: 40, justifyContent: "center", alignItems: "center" }} >
         <Icons name='account-arrow-right' size={25} color={'#CD853F'} />
         <Text style={{ marginLeft: 10, width: 200 }}>Điều kiện giao dịch chung</Text>
         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
       </View>
+      </Pressable>
+      <Pressable onPress={()=>{props.navigation.navigate("BaoMatThongTin")}}>
       <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', height: 40, justifyContent: "center", alignItems: "center" }} >
         <Icons name='security' size={25} color={'#CD853F'} />
         <Text style={{ marginLeft: 10, width: 200 }}>Chính sách bảo mật thông tin</Text>
         <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
       </View>
+      </Pressable>
     </View>
   )
 }
