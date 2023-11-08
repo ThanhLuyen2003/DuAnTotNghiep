@@ -99,17 +99,22 @@ const Profile = (props) => {
                             <Text style={{ marginLeft: 10, width: 200 }}>Hiểu để phục vụ anh tốt hơn</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                        <Pressable onPress={()=>{props.navigation.navigate("TabHistory",{id:userInfor._id})}}>
+                          <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử cắt</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
+                        </View>  
+                        </Pressable>
                         
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                        <Pressable onPress={()=>{props.navigation.navigate("ThongTinHoTroKhachHang",{avatar:saveImage,name:userInfor.name})}}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='information' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Thông tin hỗ trợ khách hàng</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
+                        </Pressable>
+                        
                         <Pressable onPress={()=>{props.navigation.navigate("PhoneXacNhan")}}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='code-brackets' size={25} color={'#CD853F'} />
