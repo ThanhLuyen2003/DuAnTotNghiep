@@ -37,6 +37,7 @@ import TabDonHangProfile from './Components/Navigation/TabDonHangProfile';
 import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 
 import ChiTietLich from './Components/ComponentsLich/ChiTietLich';
+import ThongTinHoTroKhachHang from './Components/ThongTinHoTroKhachHang';
 
 
 
@@ -99,7 +100,7 @@ export default function App() {
 
         <Stack.Screen name="ChiTietLich" component={ChiTietLich} options={{ title: "Chi tiết lịch" }} />
 
-
+        <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown:false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
