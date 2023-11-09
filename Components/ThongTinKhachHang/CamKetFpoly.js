@@ -37,7 +37,7 @@ const CamKetFpoly = (props) => {
         <Text style={{ fontSize: 25, fontWeight: "bold" }}>CAM KẾT FPOLY CARE</Text>
       </View>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Image width={"100%"} height={400} source={{ uri: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/1/15/871184/Cat-Toc-2.jpeg" }} />
+        <Image style={{width:"100%"}} height={400} source={{ uri: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/1/15/871184/Cat-Toc-2.jpeg" }} />
         <Text style={{ position: "absolute", bottom: 50, color: "white", fontWeight: "bold" }}>VÌ FPOLY TIN CHẤT LƯỢNG PHỤC VỤ LÀ HÀNG ĐẦU</Text>
         <Text style={{ position: "absolute", bottom: 30, color: "white" }}>Áp dụng tại salon bất kỳ toàn hệ thống Fpoly Barber</Text>
       </View>
