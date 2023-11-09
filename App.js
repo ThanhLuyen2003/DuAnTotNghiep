@@ -112,7 +112,7 @@ export default function App() {
 
         <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown: false }} />
 
-        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ headerShown: false }} />
+        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ title:"Giới thiệu" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
