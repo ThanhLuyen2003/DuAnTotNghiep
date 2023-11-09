@@ -83,7 +83,7 @@ const Profile = (props) => {
                             </View>
                         </Pressable>
                         <Pressable onPress={()=>{props.navigation.navigate("TabDonHangProfile",{id:userInfor._id})}}>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }} >
+                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', }} >
                             <Icons name='shopping' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Đơn hàng</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
