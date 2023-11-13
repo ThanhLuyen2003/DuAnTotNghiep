@@ -11,11 +11,13 @@ import NuocHoa from '../ComponentsShop/NuocHoa';
 import KemDanhRang from '../ComponentsShop/KemDanhRang';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ip from '../../IP';
 
 const topTap = createMaterialTopTabNavigator();
 const TabGroupProduct = (props) => {
 
   const [userInfo, setUserInfo] = useState({});
+  const [data, setdata] = useState([]);
 
   const getLoginInfor = async () => {
 
@@ -25,11 +27,34 @@ const TabGroupProduct = (props) => {
 
   }
 
+  const getList = async () => {
+
+
+    let api = 'http://' + ip + ':3000/getCart/' + props.route.params.id;
+
+    try {
+      const response = await fetch(api);
+      const json = await response.json(); //chuyen du lieu thanh json
+
+      setdata(json);// do du lieu vao state
+    } catch (err) {
+      console.error(err);
+    }
+
+  }
+
+
   React.useEffect(() => {
-    getLoginInfor();
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // cập nhật giao diện ở đây
+      getLoginInfor();
+      getList();
 
-  }, []);
 
+    });
+
+    return unsubscribe;
+  }, [props.navigation]);
 
   return (
     <View style={{ height: '90%' }}>
@@ -44,9 +69,12 @@ const TabGroupProduct = (props) => {
 
         <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20 }} >
           <Icons name="cart" size={25} color="white" />
+          <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+            <Text style={{ color: 'white', fontSize: 10, }} > {data.length} </Text>
+          </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ position: 'absolute', right: 60 }}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
           <Icons name="account" size={25} color="white" />
         </TouchableOpacity>
 
