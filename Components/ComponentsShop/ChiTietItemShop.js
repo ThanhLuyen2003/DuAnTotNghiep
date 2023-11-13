@@ -131,9 +131,17 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const addCart = () => {
 
 
-    let obj2 = { namePro: route.params.name, pricePro: route.params.price, quantity: soLuong, imagePro: route.params.avatar, idUser: userInfo._id, idPro: route.params.id }
+    let obj2 = {
+      namePro: route.params.name,
+      pricePro: route.params.price,
+      quantity: soLuong,
+      imagePro: route.params.avatar,
+      idUser: userInfo._id,
+      idPro: route.params.id
+    }
 
-    let url2 = 'http://' + ip + ':3000/addCart';
+    const idPro = route.params.id
+    let url2 = 'http://' + ip + ':3000/addCart/' + idPro;
 
 
     fetch(url2, {
