@@ -7,14 +7,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ManChao = (props) => {
 
-    const [userInfor, setUserInfor] = useState({});
+    // const [userInfor, setUserInfor] = useState({});
 
     // const getLoginInfor = async () => {
 
-    //     const user = await AsyncStorage.getItem('loginInfo');
     //     setUserInfor(JSON.parse(user))
 
     // }
+
 
     // React.useEffect(() => {
     //     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -28,19 +28,17 @@ const ManChao = (props) => {
     // }, [props.navigation]);
 
 
-    setTimeout(() => {
+    setTimeout(async () => {
+        // const user = await AsyncStorage.getItem('loginInfo');
 
-        //     if (userInfor.name == "") {
+        // if (user == "") {
         props.navigation.navigate('GioiThieu')
 
-        //     } else {
+        // } else {
 
+        //     props.navigation.navigate('HomeTab')
 
-        //     }
-
-        //props.navigation.navigate('HomeTab')
-
-
+        // }
 
     }, 1000);
 
