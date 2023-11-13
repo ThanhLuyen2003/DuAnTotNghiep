@@ -51,7 +51,7 @@ const Login = (props) => {
                         await AsyncStorage.setItem('savedImage', objU.avatar); // lưu ảnh khi có người dùng mới
                     }
                     // chuyển màn hình
-                    props.navigation.navigate('HomeTab');
+                    props.navigation.navigate('HomeTab', { id: objU._id });
                 } catch (e) {
                     // saving error
                     console.log(e);
