@@ -42,6 +42,7 @@ import ThongTinTaiKhoan from './Components/SettingComponents/ThongTinTaiKhoan';
 import PhoneXacNhan from './Components/SettingComponents/PhoneXacNhan';
 import OTPgiaoDich from './Components/SettingComponents/OTPgiaoDich';
 import ThongTinHoTroKhachHang from './Components/SettingComponents/ThongTinHoTroKhachHang';
+import HeThongSalon from './Components/HeThongSalon';
 
 
 
@@ -99,8 +100,7 @@ export default function App() {
 
         <Stack.Screen name="PhoneXacNhan" component={PhoneXacNhan} options={{ title: "Xác nhận số điện thoại" }} />
 
-
-        <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{ title: "Xác nhận số điện thoại" }} />
+        <Stack.Screen name="ThongTinTaiKhoan" component={ThongTinTaiKhoan} options={{ title: "Thông tin tài khoản" }} />
 
         <Stack.Screen name="ChiTietLich" component={ChiTietLich} options={{ title: "Chi tiết lịch" }} />
 
@@ -112,7 +112,11 @@ export default function App() {
 
         <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown: false }} />
 
-        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ title:"Giới thiệu" }} />
+        <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ title: "Giới thiệu" }} />
+
+        <Stack.Screen name="HeThongSalon" component={HeThongSalon} options={{ title: "Hệ thống salon" }} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -123,10 +127,10 @@ export default function App() {
 
 
 // screenOptions={{headerShown:false,tabBarStyle:styles.tabBar}}
-const HomeTab = () => {
+const HomeTab = (props) => {
   return (
     <Tabb.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar, tabBarShowLabel: false }}>
-      <Tabb.Screen name='Home' component={Home}
+      <Tabb.Screen name='Home' component={Home} initialParams={{ id: props.route.params.id }}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
@@ -138,7 +142,7 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='TabGroupProduct' component={TabGroupProduct}
+      <Tabb.Screen name='TabGroupProduct' component={TabGroupProduct} initialParams={{ id: props.route.params.id }}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
@@ -160,7 +164,7 @@ const HomeTab = () => {
         }}
       />
 
-      <Tabb.Screen name='KhamPha' component={KhamPha}
+      <Tabb.Screen name='KhamPha' component={KhamPha} initialParams={{ id: props.route.params.id }}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
