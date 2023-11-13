@@ -5,11 +5,13 @@ import Onboarding from 'react-native-onboarding-swiper';
 import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 import LinearGradient from "react-native-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../IP";
 
 const Home = (props) => {
 
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState({});
+    const [data, setdata] = useState([]);
 
 
     const getLoginInfor = async () => {
@@ -22,11 +24,27 @@ const Home = (props) => {
 
     }
 
+
+    const getList = async () => {
+
+
+        let api = 'http://' + ip + ':3000/getCart/' + props.route.params.id;
+
+        try {
+            const response = await fetch(api);
+            const json = await response.json(); //chuyen du lieu thanh json
+
+            setdata(json);// do du lieu vao state
+        } catch (err) {
+            console.error(err);
+        }
+
+    }
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
             getLoginInfor();
-
+            getList();
 
         });
 
@@ -48,18 +66,22 @@ const Home = (props) => {
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20 }} >
+                <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20, flexDirection: 'row' }} >
                     <Icons name="cart" size={25} color="white" />
+
+                    <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+                        <Text style={{ color: 'white', fontSize: 10, }} > {data.length} </Text>
+                    </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ position: 'absolute', right: 60 }}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
                     <Icons name="account" size={25} color="white" />
                 </TouchableOpacity>
 
 
             </View>
 
-            <ScrollView style={styles.con2}>
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.con2} >
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
                     <TouchableOpacity
@@ -89,14 +111,13 @@ const Home = (props) => {
                         <Text>Đơn hàng</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{ alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('HeThongSalon')} style={{ alignItems: 'center' }}>
                         <View style={styles.but}>
                             <Image source={require('../Images/imgHome/hethong.png')} style={{ width: 30, height: 30 }} />
                         </View>
                         <Text>Hệ thống{"\n"}   salon</Text>
                     </TouchableOpacity>
                 </View>
-
 
 
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
@@ -166,7 +187,7 @@ const Home = (props) => {
                     CAM KẾT FPOLY BARBER
                 </Text>
 
-                <View style={styles.hot}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('CamKetFpoly')} style={styles.hot}>
                     <View style={{ flexDirection: 'row-reverse' }}>
 
                         <View style={{ flexDirection: 'row', padding: 10, flex: 1 }}>
@@ -221,7 +242,7 @@ const Home = (props) => {
 
 
 
-                </View>
+                </TouchableOpacity>
 
                 <View style={{ height: 100 }}></View>
 
