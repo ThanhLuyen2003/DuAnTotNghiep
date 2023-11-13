@@ -4,6 +4,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatGrid } from 'react-native-super-grid';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ip from "../IP";
 
 
 const KhamPha = (props) => {
@@ -108,7 +109,23 @@ const KhamPha = (props) => {
 
 
     ]);
+    const [data2, setdata2] = useState([]);
 
+    const getList = async () => {
+
+
+        let api = 'http://' + ip + ':3000/getCart/' + props.route.params.id;
+
+        try {
+            const response = await fetch(api);
+            const json = await response.json(); //chuyen du lieu thanh json
+
+            setdata2(json);// do du lieu vao state
+        } catch (err) {
+            console.error(err);
+        }
+
+    }
     const getLoginInfor = async () => {
 
         const user = await AsyncStorage.getItem('loginInfo');
@@ -124,6 +141,7 @@ const KhamPha = (props) => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
             getLoginInfor();
+            getList();
 
 
         });
@@ -192,9 +210,12 @@ const KhamPha = (props) => {
 
                 <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20 }} >
                     <Icons name="cart" size={25} color="white" />
+                    <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+                        <Text style={{ color: 'white', fontSize: 10, }} > {data2.length} </Text>
+                    </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ position: 'absolute', right: 60 }}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
                     <Icons name="account" size={25} color="white" />
                 </TouchableOpacity>
 
