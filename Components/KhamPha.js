@@ -215,9 +215,14 @@ const KhamPha = (props) => {
 
                 <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20 }} >
                     <Icons name="cart" size={25} color="white" />
-                    <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
-                        <Text style={{ color: 'white', fontSize: 10, }} > {data2.length} </Text>
-                    </View>
+
+                    {data2.length != 0
+                        ? <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+                            <Text style={{ color: 'white', fontSize: 10, }} > {data2.length} </Text>
+                        </View>
+                        : <View></View>
+                    }
+
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
