@@ -18,13 +18,13 @@ const TabGroupProduct = (props) => {
 
   const [userInfo, setUserInfo] = useState({});
   const [data, setdata] = useState([]);
-
+  const [saveImage, setsaveImage] = useState({});
   const getLoginInfor = async () => {
 
     const value = await AsyncStorage.getItem('loginInfo');
-
+    const m_saveImage = await AsyncStorage.getItem('savedImage')
     setUserInfo(JSON.parse(value))
-
+    setsaveImage(m_saveImage);
   }
 
   const getList = async () => {
@@ -56,11 +56,18 @@ const TabGroupProduct = (props) => {
     return unsubscribe;
   }, [props.navigation]);
 
+  const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
   return (
     <View style={{ height: '90%' }}>
       <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
 
-        <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+      {isAvatarValid ? (
+                    <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+
+                ) :
+                    (
+                        <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+                    )}
 
         <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
           <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
