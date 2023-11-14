@@ -106,7 +106,7 @@ export default function App() {
 
         <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown: false }} />
 
-        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ headerShown: false }} />
+        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ title:"Chính sách bảo mật" }} />
 
         <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown: false }} />
 
