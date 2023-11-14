@@ -50,8 +50,6 @@ const ThongTinTaiKhoan = (props) => {
     const deleteUser = async () => {
         try {
             const userId = userInfor._id; 
-
-           
             const response = await fetch(  'http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
                 method: 'DELETE',
                 headers: {
