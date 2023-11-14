@@ -70,7 +70,7 @@ const ChonDichVu = (props) => {
 
         return (
             <View style={[styles.container, {
-                backgroundColor: (item.selected) ? '#CD853F' : 'white', borderColor: (item.selected) ? 'white' : 'gray',
+                backgroundColor: (item.selected) ? '#778899' : 'white', borderColor: (item.selected) ? 'white' : 'gray',
             }]}
             >
 
@@ -79,7 +79,7 @@ const ChonDichVu = (props) => {
                 >
                     <Image source={{ uri: item.image }} style={{ height: 120, width: 185, borderRadius: 10 }} />
                     <Text style={{ fontSize: 18, fontWeight: '500', margin: 5 }} >{item.name}</Text>
-                    <Text style={{ fontSize: 12, color: 'gray', margin: 5 }} >{item.describe} </Text>
+                    <Text style={{ fontSize: 12, color: (item.selected) ? 'white' : '#778899', margin: 5 }} >{item.describe} </Text>
                     <Text style={{ color: 'red', fontSize: 15, marginLeft: 5 }} >{pay} Đ </Text>
                 </TouchableOpacity>
 
