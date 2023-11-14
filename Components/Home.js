@@ -59,13 +59,16 @@ const Home = (props) => {
         <View style={{ height: '90%' }}>
 
             <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
-                {isAvatarValid ? (
+                <TouchableOpacity onPress={()=>{props.navigation.navigate("ThongTinTaiKhoan")}}>
+                     {isAvatarValid ? (
                     <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
                 ) :
                     (
                         <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
                     )}
+                </TouchableOpacity>
+               
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
