@@ -70,7 +70,7 @@ export default function App() {
 
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
 
-        <Stack.Screen name="EditProfile" component={EditProfile} options={{ title:"Chỉnh sửa tài khoản" }} />
+        <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: "Chỉnh sửa tài khoản" }} />
 
         <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
 
@@ -106,11 +106,11 @@ export default function App() {
 
         <Stack.Screen name="ThongTinHoTroKhachHang" component={ThongTinHoTroKhachHang} options={{ headerShown: false }} />
 
-        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ title:"Chính sách bảo mật" }} />
+        <Stack.Screen name="BaoMatThongTin" component={BaoMatThongTin} options={{ title: "Chính sách bảo mật" }} />
 
         <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown: false }} />
 
-        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ title:"Điều kiện giao dịch chung" }} />
+        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ title: "Điều kiện giao dịch chung" }} />
 
         <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ title: "Giới thiệu" }} />
 
@@ -134,8 +134,8 @@ const HomeTab = (props) => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/homee.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Home</Text>
+              <Image source={require('./Images/homee.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : '#778899' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : '#778899', fontSize: 12 }}>Home</Text>
             </View>
           ),
 
@@ -146,8 +146,8 @@ const HomeTab = (props) => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Mua sắm</Text>
+              <Image source={require('./Images/shopping.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : '#778899' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : '#778899', fontSize: 12 }}>Mua sắm</Text>
             </View>
           ),
         }}
@@ -156,9 +156,9 @@ const HomeTab = (props) => {
       <Tabb.Screen name='DatLich' component={DatLich}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center", bottom: 3, tintColor: focused ? 'black' : 'white', backgroundColor: '#CD853F', borderRadius: 100, height: 60, width: 60 }}>
-              <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25, tintColor: focused ? 'black' : 'white' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? 'black' : 'white', fontSize: 12 }}>Đặt lịch</Text>
+            <View style={{ alignItems: "center", justifyContent: "center", bottom: 3, tintColor: focused ? 'black' : 'white', backgroundColor: focused ? '#CD853F' : '#778899', borderRadius: 100, height: 60, width: 60 }}>
+              <Image source={require('./Images/timetable.png')} style={{ width: 25, height: 25, tintColor: 'white' }} resizeMode="stretch" />
+              <Text style={{ color: 'white', fontSize: 12 }}>Đặt lịch</Text>
             </View>
           ),
         }}
@@ -168,8 +168,8 @@ const HomeTab = (props) => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 3 }}>
-              <Image source={require('./Images/icons8-eventidea-50.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : 'gray' }} resizeMode="stretch" />
-              <Text style={{ color: focused ? '#CD853F' : 'gray', fontSize: 12 }}>Khám phá</Text>
+              <Image source={require('./Images/icons8-eventidea-50.png')} style={{ width: 25, height: 25, tintColor: focused ? '#CD853F' : '#778899' }} resizeMode="stretch" />
+              <Text style={{ color: focused ? '#CD853F' : '#778899', fontSize: 12 }}>Khám phá</Text>
             </View>
           ),
         }}
