@@ -69,7 +69,7 @@ const EditProfile = (props) => {
             quality: 1,
         });
         console.log(result);
-        if (!result.cancelled) {
+        if (!result.canceled) {
             if (result.assets.length > 0 && result.assets[0].uri) {
                 setimg_source(result.assets[0].uri);
                 let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
@@ -93,7 +93,7 @@ const EditProfile = (props) => {
                             body: JSON.stringify(obj1),
                         }).then(async (res) => {
                             if (res.status === 200) {
-                                         saveImageToStorage(img_base64);
+                                saveImageToStorage(img_base64);
                             } else {
                                 alert("Có lỗi xảy ra!")
                                 console.log(res);
@@ -115,10 +115,8 @@ const EditProfile = (props) => {
             alert("Sai định dạng địa chỉ");
             return;
         }
-        // if (img_base64 == null) {
-        //     alert("Vui lòng chọn ảnh")
-        //     return;
-        // }
+
+
         let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
         let obj = { name: name, phone: phone, email: email, address: address }
         fetch(url_api, {
