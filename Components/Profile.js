@@ -89,7 +89,7 @@ const Profile = (props) => {
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                         </Pressable>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                        {/* <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='face-agent' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Sở thích phục vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -98,7 +98,7 @@ const Profile = (props) => {
                             <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Hiểu để phục vụ anh tốt hơn</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
+                        </View> */}
                         <Pressable onPress={()=>{props.navigation.navigate("TabHistory",{id:userInfor._id})}}>
                           <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                             <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />
@@ -122,21 +122,6 @@ const Profile = (props) => {
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View>
                         </Pressable>
-                        
-                        {/* <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', position: 'relative' }}>
-                            <Icons name='logout' size={25} color={'#CD853F'} />
-
-
-                            {isLoading ? (
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '50%', left: '40%', transform: [{ translateX: -15 }, { translateY: -250 }] }}>
-                                    <ActivityIndicator size="large" color="#CD853F" style={{ backgroundColor: "#C0C0C0", width: 125, height: 125, borderRadius: 10, opacity: 0.5 }} />
-                                </View>
-                            ) : (
-                                <Text style={{ marginLeft: 10, width: 200 }} onPress={logout}>Đăng xuất</Text>
-                            )}
-
-                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View> */}
                     </ScrollView>
                 </View>
             </View>
