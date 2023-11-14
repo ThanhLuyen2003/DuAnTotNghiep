@@ -110,7 +110,7 @@ export default function App() {
 
         <Stack.Screen name="CamKetFpoly" component={CamKetFpoly} options={{ headerShown: false }} />
 
-        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ headerShown: false }} />
+        <Stack.Screen name="DieuKienGiaoDich" component={DieuKienGiaoDich} options={{ title:"Điều kiện giao dịch chung" }} />
 
         <Stack.Screen name="VeChungToi" component={VeChungToi} options={{ title: "Giới thiệu" }} />
 
