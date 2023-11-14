@@ -28,7 +28,7 @@ const CamKetFpoly = (props) => {
   }, [props.navigation]);
   return (
     <ScrollView style={{ width: "100%", height: "100%" }}>
-      <View style={{ width: "100%", height: 100, backgroundColor: "white", justifyContent: "center", borderBottomWidth: 0.5, borderBottomColor: "#CCCCCC" }}>
+      <View style={{ width: "100%", height: 50, backgroundColor: "white", justifyContent: "center", borderBottomWidth: 0.5, borderBottomColor: "#CCCCCC" }}>
         <Pressable onPress={() => { props.navigation.navigate("ThongTinHoTroKhachHang",{avatar:saveImage,name:userInfor.name}) }}>
           <Icons name='arrow-left' size={30} />
         </Pressable>
