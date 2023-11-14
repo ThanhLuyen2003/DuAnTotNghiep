@@ -7,9 +7,6 @@ const ThongTinHoTroKhachHang = (props) => {
   return (
     <View style={{ height: '90%' }}>
       <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
-        <Pressable onPress={() => { props.navigation.navigate("Profile") }}>
-          <Icons name='arrow-left' size={30} color={"black"} />
-        </Pressable>
 
         <TouchableOpacity onPress={() => { alert("hi") }}>
           <Image source={{ uri: props.route.params.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%', marginLeft: 10 }} />
