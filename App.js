@@ -70,7 +70,7 @@ export default function App() {
 
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
 
-        <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: true }} />
+        <Stack.Screen name="EditProfile" component={EditProfile} options={{ title:"Chỉnh sửa tài khoản" }} />
 
         <Stack.Screen name="ChonSalon" component={ChonSalon} options={{ title: "Chọn địa điểm" }} />
 
