@@ -3,7 +3,7 @@ import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 const VeChungToi = (props) => {
   return (
-    <ScrollView style={{ width: "100%", height: "100%" }}>
+    <ScrollView style={{ width: "100%" }}>
       <View style={{ width: "100%", padding: 20 }}>
         <Image source={{ uri: "https://i.pinimg.com/564x/0b/b7/af/0bb7afd6a2596aadc215cd7ce77e6000.jpg" }} height={150} style={{ opacity: 0.5, borderRadius: 20 }} />
       </View>
