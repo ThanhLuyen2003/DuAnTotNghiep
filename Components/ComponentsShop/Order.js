@@ -230,13 +230,11 @@ const Order = (props) => {
                         <View style={{ width: '75%' }}>
                             <Text style={{ padding: 5 }}>Tổng tiền hàng</Text>
                             <Text style={{ padding: 5 }}>Phí giao hàng</Text>
-                            <Text style={{ padding: 5 }}>Khuyến mãi</Text>
                         </View>
 
                         <View>
                             <Text style={{ padding: 5 }}>{price2}đ </Text>
                             <Text style={{ padding: 5 }}>35.000đ </Text>
-                            <Text style={{ padding: 5 }}>-0đ </Text>
 
                         </View>
 
