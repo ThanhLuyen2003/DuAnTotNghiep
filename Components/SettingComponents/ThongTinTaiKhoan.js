@@ -1,8 +1,10 @@
-import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator } from 'react-native'
+import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity,Alert } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import ip from '../../IP';
+
 const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
@@ -44,6 +46,30 @@ const ThongTinTaiKhoan = (props) => {
         props.navigation.navigate('Login')
 
     }
+
+    const deleteUser = async () => {
+        try {
+            const userId = userInfor._id; 
+
+           
+            const response = await fetch(  'http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',           
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {               
+                Alert.alert('Thành công', 'Xóa người dùng thành công');
+                props.navigation.navigate('Login');
+            } else {
+                Alert.alert('Lỗi', data.message || 'Lỗi xóa người dùng');
+            }
+        } catch (error) {
+            console.error('Error :', error);
+            Alert.alert('Error', 'An unexpected error occurred.');
+        }
+    };
     return (
         <ScrollView>
 
@@ -105,7 +131,10 @@ const ThongTinTaiKhoan = (props) => {
                 )}
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
-                <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text>
+                <TouchableOpacity onPress={deleteUser}>
+                   <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text> 
+                </TouchableOpacity>
+                
             </View>
 
         </ScrollView>
