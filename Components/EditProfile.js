@@ -22,7 +22,7 @@ const EditProfile = (props) => {
     const [img_source, setimg_source] = useState(null)
     const [img_base64, setiimg_base64] = useState(null)
     const [saveImage, setsaveImage] = useState({});
-
+    const [isDirty, setIsDirty] = useState(false);
 
 
 
@@ -68,11 +68,7 @@ const EditProfile = (props) => {
             aspect: [4, 3], // khung view cắt ảnh 
             quality: 1,
         });
-
-
         console.log(result);
-
-
         if (!result.cancelled) {
             if (result.assets.length > 0 && result.assets[0].uri) {
                 setimg_source(result.assets[0].uri);
@@ -94,12 +90,7 @@ const EditProfile = (props) => {
 
     }
     const editUser = async () => {
-        const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
         const addressRegex = /^[0-9A-Za-z\s,-]+$/;
-        if (!nameRegex.test(name)) {
-            alert("Tên không hợp lệ. Vui lòng kiểm tra lại!");
-            return;
-        }
         if (!addressRegex.test(address)) {
             alert("Sai định dạng địa chỉ");
             return;
@@ -119,7 +110,6 @@ const EditProfile = (props) => {
             body: JSON.stringify(obj),
         })
             .
-
             then(async (res) => {
                 if (res.status === 200) {
                     alert("Sửa thành công");
@@ -154,8 +144,33 @@ const EditProfile = (props) => {
             .catch((err) => {
                 console.log(err);
             });
-    }
 
+    }
+    const handleInputChange = (text, field) => {
+        // Update the corresponding state and set isDirty to true
+
+
+        switch (field) {
+            case 'name':
+                setName(text);
+                break;
+            case 'phone':
+                setPhone(text);
+                break;
+            case 'email':
+                setEmail(text);
+                break;
+            case 'address':
+
+
+                setaddress(text);
+                break;
+            // Add more cases if you have additional input fields
+            default:
+                break;
+        }
+        setIsDirty(true);
+    }
 
 
 
@@ -183,25 +198,25 @@ const EditProfile = (props) => {
                     <Text>Họ tên {<Text style={{ color: "red" }}>*</Text>}</Text>
 
                     <TextInput placeholder='Nhập họ tên' value={name}
-                        onChangeText={(text) => setName(text)} />
+                        onChangeText={(text) => handleInputChange(text, 'name')} />
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Số điện thoại {<Text style={{ color: "red" }}>*</Text>}</Text>
                     <TextInput placeholder='Số điện thoại' value={phone}
-                        onChangeText={(text) => setPhone(text)} />
+                        onChangeText={(text) => handleInputChange(text, 'phone')} />
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Email</Text>
                     <TextInput placeholder='Email' value={email}
-                        onChangeText={(text) => setEmail(text)} />
+                        onChangeText={(text) => handleInputChange(text, 'email')} />
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Address</Text>
                     <TextInput placeholder='Nhập Address' value={address}
-                        onChangeText={(text) => setaddress(text)} />
+                        onChangeText={(text) => handleInputChange(text, 'address')} />
                 </View>
             </View>
-            <TouchableHighlight onPress={editUser} style={{ backgroundColor: "#CD853F", width: "90%", height: 50, margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 50 }}>
+            <TouchableHighlight onPress={editUser} disabled={!isDirty} style={{ backgroundColor: isDirty ? "#CD853F" : "#888", width: "90%", height: 50, margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 50 }}>
                 <Text style={{ fontWeight: "bold" }}>CẬP NHẬT</Text>
             </TouchableHighlight>
         </SafeAreaView>
