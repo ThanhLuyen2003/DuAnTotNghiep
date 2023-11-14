@@ -82,6 +82,26 @@ const EditProfile = (props) => {
                         console.log(img_base64);
 
                         // upload ảnh lên api thì dùng PUT có thể viết ở đây
+                        let url_api = "http://" + ip + ":3000/apiuser/updateAvatar/" + userInfo._id
+                        let obj1 = { avatar: img_base64 }
+                        fetch(url_api, {
+                            method: 'PUT',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(obj1),
+                        }).then(async (res) => {
+                            if (res.status === 200) {
+                                         saveImageToStorage(img_base64);
+                            } else {
+                                alert("Có lỗi xảy ra!")
+                                console.log(res);
+                                return res;
+                            }
+                        }).catch((err) => {
+                            console.log(err);
+                        });
                     });
             }
 
@@ -95,12 +115,12 @@ const EditProfile = (props) => {
             alert("Sai định dạng địa chỉ");
             return;
         }
-        if (img_base64 == null) {
-            alert("Vui lòng chọn ảnh")
-            return;
-        }
+        // if (img_base64 == null) {
+        //     alert("Vui lòng chọn ảnh")
+        //     return;
+        // }
         let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
-        let obj = { name: name, phone: phone, email: email, avatar: img_base64, address: address }
+        let obj = { name: name, phone: phone, email: email, address: address }
         fetch(url_api, {
             method: 'PUT',
             headers: {
@@ -124,16 +144,16 @@ const EditProfile = (props) => {
                     setPhone("")
                     setaddress("")
                     props.navigation.navigate("Profile");
-                    console.log(res);
-                    let updatedImage = img_base64 || saveImage; // Sử dụng ảnh hiện tại hoặc ảnh đã lưu
-                    setiimg_base64(updatedImage);
+                    // console.log(res);
+                    // let updatedImage = img_base64 || saveImage; // Sử dụng ảnh hiện tại hoặc ảnh đã lưu
+                    // setiimg_base64(updatedImage);
 
-                    if (img_base64 !== saveImage) {
-                        // Chỉ khi có thay đổi ảnh mới, hãy lưu vào Storage
-                        saveImageToStorage(updatedImage);
-                    }
+                    // if (img_base64 !== saveImage) {
+                    //     // Chỉ khi có thay đổi ảnh mới, hãy lưu vào Storage
+                    //     saveImageToStorage(updatedImage);
+                    // }
 
-                    console.log(img_base64);
+
                 } else {
                     alert("Có lỗi xảy ra!")
                     console.log(res);
@@ -147,9 +167,6 @@ const EditProfile = (props) => {
 
     }
     const handleInputChange = (text, field) => {
-        // Update the corresponding state and set isDirty to true
-
-
         switch (field) {
             case 'name':
                 setName(text);
@@ -161,18 +178,13 @@ const EditProfile = (props) => {
                 setEmail(text);
                 break;
             case 'address':
-
-
                 setaddress(text);
                 break;
-            // Add more cases if you have additional input fields
             default:
                 break;
         }
         setIsDirty(true);
     }
-
-
 
 
     return (
