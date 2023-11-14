@@ -141,7 +141,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
     }
 
     const idPro = route.params.id
-    let url2 = 'http://' + ip + ':3000/addCart/' + idPro;
+    let url2 = 'http://' + ip + ':3000/addCart';
 
 
     fetch(url2, {

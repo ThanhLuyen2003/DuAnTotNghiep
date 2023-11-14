@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import ip from '../IP'
-import ImageResizer from 'react-native-image-resizer';
 const EditProfile = (props) => {
     const [userInfo, setuserInfo] = useState({
     })
@@ -61,31 +60,22 @@ const EditProfile = (props) => {
     };
 
     const pickImage = async () => {
+
+        // Đọc ảnh từ thư viện thì không cần khai báo quyền
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 3], // khung view cắt ảnh 
             quality: 1,
         });
-
+        console.log(result);
         if (!result.cancelled) {
             if (result.assets.length > 0 && result.assets[0].uri) {
-                // Resize the image
-                const resizedImage = await ImageResizer.createResizedImage(
-                    result.assets[0].uri,
-                    300,
-                    300,
-                    'JPEG',
-                    100
-                );
-
-                setimg_source(resizedImage.uri);
-
-                // Convert to base64
-                FileSystem.readAsStringAsync(resizedImage.uri, { encoding: 'base64' })
+                setimg_source(result.assets[0].uri);
+                let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
+                let file_ext = _uri.substring(_uri.lastIndexOf('.') + 1); // lấy đuôi file
+                FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' })
                     .then((res) => {
-                        setiimg_base64("data:image/jpeg;base64," + res);
-                        saveImageToStorage("data:image/jpeg;base64," + res);
                         // phải nối chuỗi với tiền tố data image
                         setiimg_base64("data:image/" + file_ext + ";base64," + res);
 
@@ -103,7 +93,7 @@ const EditProfile = (props) => {
                             body: JSON.stringify(obj1),
                         }).then(async (res) => {
                             if (res.status === 200) {
-                                saveImageToStorage(img_base64);
+                                         saveImageToStorage(img_base64);
                             } else {
                                 alert("Có lỗi xảy ra!")
                                 console.log(res);
@@ -113,14 +103,12 @@ const EditProfile = (props) => {
                             console.log(err);
                         });
                     });
-
-
-
             }
+
+            // chuyển ảnh thành base64 để upload lên json   
         }
-    };
 
-
+    }
     const editUser = async () => {
         const addressRegex = /^[0-9A-Za-z\s,-]+$/;
         if (!addressRegex.test(address)) {

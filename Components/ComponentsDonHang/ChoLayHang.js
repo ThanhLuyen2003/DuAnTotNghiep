@@ -84,7 +84,10 @@ const ChoLayHang = (props) => {
             {isLoading
                 ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
                 : donhang.length == 0
-                    ? <Image style={{ width: 100, height: 100, alignSelf: "center" }} source={require('./document_icon.png')} />
+                    ? <View >
+                        <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('./document_icon.png')} />
+                        <Text style={{ textAlign: 'center', marginTop: 10 }}>Chưa có đơn hàng nào</Text>
+                    </View>
                     : <FlatList data={donhang} renderItem={renderItem} />
 
 

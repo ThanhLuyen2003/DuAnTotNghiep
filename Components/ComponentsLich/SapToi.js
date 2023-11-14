@@ -107,7 +107,10 @@ const SapToi = (props) => {
             {isLoading
                 ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
                 : dataLich.length == 0
-                    ? <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('../ComponentsDonHang/document_icon.png')} />
+                    ? <View >
+                        <Image style={{ width: 100, height: 100, alignSelf: "center", marginTop: 200 }} source={require('../ComponentsDonHang/document_icon.png')} />
+                        <Text style={{ textAlign: 'center', marginTop: 10 }}>Chưa có lịch</Text>
+                    </View>
                     : <FlatList data={dataLich} renderItem={renderItem} />
             }
 

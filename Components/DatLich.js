@@ -73,11 +73,11 @@ const DatLich = (props) => {
 
         return (
             <View
-                style={[stylee.itemm, { backgroundColor: (item.selected) ? 'aqua' : 'white', }]}
+                style={[stylee.itemm, { backgroundColor: (item.selected) ? '#778899' : 'white', borderColor: (item.selected) ? '#778899' : 'gray', }]}
             >
                 <Button
                     disabled={ngayChon == ngayHnay ? ((timetoday > timeItem) ? true : false) : false}
-                    color={(item.selected || isDisable == true) ? 'red' : '#CD853F'}
+                    color={(item.selected || isDisable == true) ? 'black' : '#CD853F'}
                     title={item.time}
                     onPress={() => selectedItemm(item, index)}
                 />
@@ -152,7 +152,6 @@ const DatLich = (props) => {
 
 const stylee = StyleSheet.create({
     itemm: {
-        borderColor: '#CD853F',
         borderWidth: 1,
         margin: 5,
         flex: 1,
