@@ -27,17 +27,13 @@ const CamKetFpoly = (props) => {
     return unsubscribe;
   }, [props.navigation]);
   return (
-    <ScrollView style={{ width: "100%", height: "100%" }}>
-      <View style={{ width: "100%", height: 50, backgroundColor: "white", justifyContent: "center", borderBottomWidth: 0.5, borderBottomColor: "#CCCCCC" }}>
-        <Pressable onPress={() => { props.navigation.navigate("ThongTinHoTroKhachHang",{avatar:saveImage,name:userInfor.name}) }}>
-          <Icons name='arrow-left' size={30} />
-        </Pressable>
-      </View>
-      <View style={{ width: "100%", height: 50, justifyContent: "center", alignItems: "center" }}>
+    <ScrollView style={{ width: "100%", height: "100%", }}>
+
+      <View style={{ width: "100%", height: 50, justifyContent: "center", alignItems: "center", marginTop: 20 }}>
         <Text style={{ fontSize: 25, fontWeight: "bold" }}>CAM KẾT FPOLY CARE</Text>
       </View>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Image style={{width:"100%"}} height={400} source={{ uri: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/1/15/871184/Cat-Toc-2.jpeg" }} />
+        <Image style={{ width: "100%" }} height={400} source={{ uri: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/1/15/871184/Cat-Toc-2.jpeg" }} />
         <Text style={{ position: "absolute", bottom: 50, color: "white", fontWeight: "bold" }}>VÌ FPOLY TIN CHẤT LƯỢNG PHỤC VỤ LÀ HÀNG ĐẦU</Text>
         <Text style={{ position: "absolute", bottom: 30, color: "white" }}>Áp dụng tại salon bất kỳ toàn hệ thống Fpoly Barber</Text>
       </View>

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button, ActivityIndicator,TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -58,8 +58,8 @@ const Profile = (props) => {
 
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
-
-                        {isAvatarValid ? (
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate("ThongTinTaiKhoan")}}>
+                     {isAvatarValid ? (
                             <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={saveImage}>
                                 <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                     <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
@@ -74,6 +74,8 @@ const Profile = (props) => {
                                     </View>
                                 </ImageBackground>
                             )}
+                </TouchableOpacity>
+                        
 
 
                     </View>

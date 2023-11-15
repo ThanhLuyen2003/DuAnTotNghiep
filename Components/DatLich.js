@@ -67,7 +67,6 @@ const DatLich = (props) => {
 
     const renderItemm = ({ item, index }) => {
 
-
         const timeItem = item.time.slice(0, 2);
         const minItem = item.time.slice(3, 5);
 
@@ -134,6 +133,7 @@ const DatLich = (props) => {
                     data={khungGio}
                     renderItem={renderItemm}
                     numColumns={3}
+                    showsVerticalScrollIndicator={false}
                 />
 
 
