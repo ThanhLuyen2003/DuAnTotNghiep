@@ -259,12 +259,7 @@ const EditProfile = (props) => {
                         </View>
                     </ImageBackground>
 
-                        <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, marginTop: 20, borderWidth: 1 }} imageStyle={{ borderRadius: 100 }} source={{ uri: img_base64 }}>
-                            <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                            </View>
-                        </ImageBackground>
-
+                       
                     ) : (
                         (saveImage && typeof saveImage === 'string') ? (
                             <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, marginTop: 20 }} imageStyle={{ borderRadius: 100 }} source={{ uri: saveImage }}>
