@@ -177,7 +177,9 @@ const Order = (props) => {
 
                         <Text style={{ fontSize: 20, fontWeight: '500', width: '65%' }} >Thông tin nhận hàng</Text>
 
-                        <TouchableOpacity style={{ alignSelf: 'center', borderWidth: 1, padding: 3 }}>
+                        <TouchableOpacity
+                            onPress={() => { props.navigation.navigate('EditProfile') }}
+                            style={{ alignSelf: 'center', borderWidth: 1, padding: 3 }}>
                             <Text>Thay đổi địa chỉ</Text>
                         </TouchableOpacity>
 
@@ -195,7 +197,7 @@ const Order = (props) => {
                             <Text style={{ padding: 5 }}>{userInfor.name} </Text>
                             <Text style={{ padding: 5 }}>{userInfor.phone} </Text>
                             <Text style={{ padding: 5 }}>{userInfor.email} </Text>
-                            <Text style={{ padding: 5, width: '90%' }}>{userInfor.address} </Text>
+                            <Text style={{ padding: 5, width: '60%' }}>{userInfor.address} </Text>
 
                         </View>
 
