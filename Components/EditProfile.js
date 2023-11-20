@@ -9,6 +9,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import { useEffect } from 'react'
 import ip from '../IP'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Modal } from 'react-native'
 const EditProfile = (props) => {
     const [userInfo, setuserInfo] = useState({
     })
@@ -146,16 +148,7 @@ const EditProfile = (props) => {
                     setEmail("")
                     setPhone("")
                     setaddress("")
-                    props.navigation.navigate("Profile");
-                    // console.log(res);
-                    // let updatedImage = img_base64 || saveImage; // Sử dụng ảnh hiện tại hoặc ảnh đã lưu
-                    // setiimg_base64(updatedImage);
-
-                    // if (img_base64 !== saveImage) {
-                    //     // Chỉ khi có thay đổi ảnh mới, hãy lưu vào Storage
-                    //     saveImageToStorage(updatedImage);
-                    // }
-
+                    props.navigation.navigate("HomeTab");
 
                 } else {
                     alert("Có lỗi xảy ra!")
@@ -180,15 +173,116 @@ const EditProfile = (props) => {
             case 'email':
                 setEmail(text);
                 break;
-            case 'address':
-                setaddress(text);
-                break;
             default:
                 break;
         }
         setIsDirty(true);
     }
 
+    const [onShow, setOnShow] = useState(false);//show modal
+
+    const [open1, setOpen1] = useState(false);//show dropdown
+    const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
+
+    const [value, setValue] = useState(null); // giá trị ng dùng chọn
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+
+    const [provinces, setprovinces] = useState([]);
+    const [districts, setDistricts] = useState([]);
+    const [wards, setWards] = useState([]);
+
+    const getProvinces = () => {
+
+        let url = 'https://provinces.open-api.vn/api/?depth=1';
+
+        fetch(url)
+            .then((res) => { return res.json(); })
+            .then((res_json) => {
+                let arr_droplist = res_json.map((item, index, src_arr) => {
+                    return { label: item.name, value: item.code }
+                });
+
+                setprovinces(arr_droplist);
+
+            })
+    }
+
+    const getDistricts = (code) => {
+
+        let url = 'https://provinces.open-api.vn/api/p/' + code + '?depth=2';
+
+        if (!code) {
+            return
+        } else {
+
+            fetch(url)
+                .then((res) => { return res.json(); })
+                .then((res_json) => {
+                    let arr_droplist = res_json.districts;
+
+                    let districts = arr_droplist.map((item, index, src_arr) => {
+
+                        return { label: item.name, value: item.code }
+                    });
+
+                    setDistricts(districts);
+                    setValue3("")
+
+                })
+        }
+
+    }
+
+    const getward = (code) => {
+        let url = 'https://provinces.open-api.vn/api/d/' + code + '?depth=2';
+
+        if (!code) {
+            return
+        } else {
+            fetch(url)
+                .then((res) => { return res.json(); })
+                .then((res_json) => {
+                    let arr_droplist = res_json.wards;
+
+                    let wards = arr_droplist.map((item, index, src_arr) => {
+
+                        return { label: item.name, value: item.name }
+                    });
+
+                    setWards(wards);
+                })
+
+        }
+
+    }
+
+    React.useEffect(() => {
+        getProvinces();
+    }, [])
+
+
+    const [province, setProvince] = useState("");
+
+    const onSelectItem = (item) => {
+
+        setProvince(item.label);
+
+    }
+
+
+    const [district, setDistrict] = useState("");
+
+    const onSelectItem2 = (item) => {
+
+        setDistrict(item.label);
+
+    }
+
+    const confirmAddress = (text) => {
+        setaddress(text + "/" + value3 + "/" + district + "/" + province);
+    }
 
     return (
         <SafeAreaView >
@@ -215,7 +309,7 @@ const EditProfile = (props) => {
                 </TouchableOpacity>
             </View>
 
-            <View style={{ backgroundColor: 'white', width: "100%", height: 300, marginTop: 60, padding: 10 }}>
+            <View style={{ width: "100%", height: 300, marginTop: 60, padding: 10 }}>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
                     <Text>Họ tên {<Text style={{ color: "red" }}>*</Text>}</Text>
 
@@ -232,16 +326,82 @@ const EditProfile = (props) => {
                     <TextInput style={styles.textInput} placeholder='Email' value={email}
                         onChangeText={(text) => handleInputChange(text, 'email')} />
                 </View>
-                <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
+
+                <Modal
+                    visible={onShow}
+                    transparent={true}
+                    animationType='slide'
+                >
+                    <View style={styles.modal}>
+
+                        <Text onPress={() => { setOnShow(false) }} style={{ marginBottom: 10 }}>Đóng</Text>
+                        <View style={styles.dropdown}>
+
+                            <DropDownPicker
+                                open={open1}
+                                value={value}
+                                items={provinces}
+                                setOpen={setOpen1}
+                                setValue={setValue}
+                                setItems={setprovinces}
+                                onChangeValue={(code) => getDistricts(code)}
+                                onSelectItem={(item) => onSelectItem(item)}
+                                placeholder='Chọn thành phố'
+                            />
+
+
+                        </View>
+
+                        <View style={styles.dropdown2}>
+                            <DropDownPicker
+                                open={open2}
+                                value={value2}
+                                items={districts}
+                                setOpen={setOpen2}
+                                setValue={setValue2}
+                                setItems={setDistricts}
+                                onChangeValue={(code) => getward(code)}
+                                onSelectItem={(item) => onSelectItem2(item)}
+                                placeholder='Chọn quận/huyện'
+
+                            />
+                        </View>
+
+                        <View style={styles.dropdown3}>
+                            <DropDownPicker
+                                open={open3}
+                                value={value3}
+                                items={wards}
+                                setOpen={setOpen3}
+                                setValue={setValue3}
+                                setItems={setWards}
+                                placeholder='Chọn phường/xã'
+                            />
+                        </View>
+
+
+                        <View style={{ width: 300, height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
+                            <Text>Địa chỉ</Text>
+                            <TextInput style={styles.textInput} placeholder='Số nhà/tên đường'
+                                onChangeText={(text) => confirmAddress(text)} />
+                        </View>
+
+                    </View>
+                </Modal>
+
+                <View style={{ flexDirection: "column", width: "auto", height: 'auto', borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Địa chỉ</Text>
-                    <TextInput style={styles.textInput} placeholder='Nhập địa chỉ' value={address}
-                        onChangeText={(text) => handleInputChange(text, 'address')} />
+                    <TouchableOpacity onPress={() => { setOnShow(true) }}>
+                        <Text style={{ marginTop: 10 }}>{!address ? <Text style={{ color: 'gray' }} >Nhập địa chỉ</Text> : <Text>{address}</Text>} </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-            <TouchableHighlight onPress={editUser} disabled={!isDirty} style={{ backgroundColor: isDirty ? "#CD853F" : "#888", width: "90%", height: 50, margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 50 }}>
+            <TouchableHighlight onPress={editUser} style={{ backgroundColor: isDirty ? "#CD853F" : "#888", width: "90%", height: 50, margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 50 }}>
                 <Text style={{ fontWeight: "bold" }}>CẬP NHẬT</Text>
             </TouchableHighlight>
         </SafeAreaView>
+
+
     )
 }
 
@@ -283,5 +443,32 @@ const styles = StyleSheet.create({
     },
     textInput: {
         marginTop: 8
+    },
+    modal: {
+        backgroundColor: 'white',
+        height: '100%',
+        flex: 0.7,
+        margin: 30,
+        marginTop: '45%',
+        borderRadius: 30,
+        alignItems: 'center',
+        padding: 20,
+        shadowRadius: 1,
+        shadowColor: 'gray',
+        shadowOpacity: 0.5,
+        shadowOffset: { height: -5, width: -5 },
+    },
+    dropdown: {
+        zIndex: 300,
+        width: 300
+    },
+    dropdown2: {
+        zIndex: 200,
+        width: 300,
+        margin: 20
+    },
+    dropdown3: {
+        zIndex: 100,
+        width: 300
     }
 })
