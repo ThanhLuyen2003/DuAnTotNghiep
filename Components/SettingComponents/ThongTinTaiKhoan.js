@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity,Alert } from 'react-native'
+import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -49,15 +49,15 @@ const ThongTinTaiKhoan = (props) => {
 
     const deleteUser = async () => {
         try {
-            const userId = userInfor._id; 
-            const response = await fetch(  'http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
+            const userId = userInfor._id;
+            const response = await fetch('http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',           
+                    'Content-Type': 'application/json',
                 },
             });
             const data = await response.json();
-            if (response.ok) {               
+            if (response.ok) {
                 Alert.alert('Thành công', 'Xóa người dùng thành công');
                 props.navigation.navigate('Login');
             } else {
@@ -113,8 +113,8 @@ const ThongTinTaiKhoan = (props) => {
                 </View>
 
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center" }}>
-                    <Text style={{ width: "60%", color: "gray" }}>Địa chỉ</Text>
-                    <Text style={{ width: "40%", textAlign: "right" }}>{userInfor.address}</Text>
+                    <Text style={{ width: "40%", color: "gray" }}>Địa chỉ</Text>
+                    <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.address}</Text>
                 </View>
             </View>
 
@@ -130,9 +130,9 @@ const ThongTinTaiKhoan = (props) => {
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
                 <TouchableOpacity onPress={deleteUser}>
-                   <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text> 
+                    <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text>
                 </TouchableOpacity>
-                
+
             </View>
 
         </ScrollView>
