@@ -18,7 +18,7 @@ const SignUp = (props) => {
     const [avatar, setAvatar] = useState("https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg");
     const [address, setAddress] = useState("");
     const [otp, setOtp] = useState("");
-
+    const [balance, setbalance] = useState(0);
 
 
 
@@ -74,6 +74,7 @@ const SignUp = (props) => {
             avatar: avatar,
             address: address,
             otp: otp,
+            balance,
         };
 
         const url = "http://" + ip + ":3000/addUser";
