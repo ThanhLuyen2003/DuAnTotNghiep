@@ -43,6 +43,8 @@ import PhoneXacNhan from './Components/SettingComponents/PhoneXacNhan';
 import OTPgiaoDich from './Components/SettingComponents/OTPgiaoDich';
 import ThongTinHoTroKhachHang from './Components/SettingComponents/ThongTinHoTroKhachHang';
 import HeThongSalon from './Components/HeThongSalon';
+import Balance from './Components/Balance';
+import ChiTietHoaDonNap from './Components/ChiTietHoaDonNap';
 
 
 
@@ -116,7 +118,9 @@ export default function App() {
 
         <Stack.Screen name="HeThongSalon" component={HeThongSalon} options={{ title: "Hệ thống salon" }} />
 
+        <Stack.Screen name="Balance" component={Balance} options={{ title: "Balance" }} />
 
+        <Stack.Screen name="ChiTietHoaDonNap" component={ChiTietHoaDonNap} options={{ title: "Chi TIết hóa đơn nạp" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
