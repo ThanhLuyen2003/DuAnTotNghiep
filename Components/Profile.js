@@ -98,12 +98,15 @@ const Profile = (props) => {
                             <Icons name='face-agent' size={25} color={'#CD853F'} />
                             <Text style={{ marginLeft: 10, width: 200 }}>Sở thích phục vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
-                        <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                            <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Hiểu để phục vụ anh tốt hơn</Text>
-                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View> */}
+                        <Pressable onPress={()=>{props.navigation.navigate("Balance",{id:userInfor._id})}}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
+                            <Text style={{ marginLeft: 10, width: 200 }}>Nạp tiền</Text>
+                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                        </View>
+                        </Pressable>
+                        
                         <Pressable onPress={() => { props.navigation.navigate("TabHistory", { id: userInfor._id }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />
