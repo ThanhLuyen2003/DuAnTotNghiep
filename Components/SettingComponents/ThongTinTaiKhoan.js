@@ -9,6 +9,7 @@ const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
     const [isLoading, setisLoading] = useState(false);
+    const [totalBalance, settotalBalance] = useState(0)
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
     }
@@ -16,10 +17,10 @@ const ThongTinTaiKhoan = (props) => {
 
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
-
+        const m_totalBalance = await AsyncStorage.getItem('totalBalance')
         setUserInfor(JSON.parse(user))
         setsaveImage(m_saveImage);
-
+        settotalBalance(parseFloat(m_totalBalance));
     }
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
@@ -38,10 +39,12 @@ const ThongTinTaiKhoan = (props) => {
         //console.log(userInfor);
         await new Promise(resolve => setTimeout(resolve, 3000));
 
-        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
+        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "",totalBalance:"" }));
         await AsyncStorage.removeItem("savedImage")
+        
         setUserInfor({}); // Reset user information state
         setsaveImage({}); // Reset image state
+      
         setisLoading(false)
         props.navigation.navigate('Login')
 
