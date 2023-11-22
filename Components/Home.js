@@ -12,16 +12,15 @@ const Home = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState({});
     const [data, setdata] = useState([]);
-
+    const [totalBalance, settotalBalance] = useState(0)
 
     const getLoginInfor = async () => {
-
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
+        const m_totalBalance = await AsyncStorage.getItem('totalBalance')
 
         setUserInfor(JSON.parse(user))
-        setsaveImage(m_saveImage);
-
+        settotalBalance(parseFloat(m_totalBalance));
     }
 
 
@@ -53,25 +52,57 @@ const Home = (props) => {
 
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
+    const formatNumberAsCurrency = (number) => {
+        if (isNaN(number) || number === null) {//kiểm tra nếu null hoặc NaN thì trả về 0, 
+            return '0 ₫';
+        }
+
+        const numString = number.toString();//chuyển kiểu số thành chuỗi
+        const length = numString.length;
+
+        if (length <= 2) {
+            return numString + ' ₫';
+        }
+
+        let result = '';
+        let separatorCount = 0;
+
+        for (let i = length - 1; i >= 0; i--) {
+            result = numString[i] + result;
+            separatorCount++;//để theo dõi số chữ số được xử lý.
+
+            if (separatorCount === 3 && i !== 0) {
+                result = ',' + result;
+                separatorCount = 0;
+            }
+        }
+
+        return result + ' ₫';//Nối đ vào cuối được định dạng trả về
+    };
 
 
     return (
         <View style={{ height: '90%' }}>
 
             <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
-                <TouchableOpacity onPress={()=>{props.navigation.navigate("ThongTinTaiKhoan")}}>
-                     {isAvatarValid ? (
-                    <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+                <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
+                    {isAvatarValid ? (
+                        <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-                ) :
-                    (
-                        <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
-                    )}
+                    ) :
+                        (
+                            <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+                        )}
                 </TouchableOpacity>
-               
+
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
+                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20,padding:6 }}>
+                        <Text>Tài khoản: {formatNumberAsCurrency(totalBalance)}</Text>
+                    </View>
+
+
                 </View>
 
                 <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20, flexDirection: 'row' }} >
@@ -93,6 +124,9 @@ const Home = (props) => {
 
             </View>
 
+            <View >
+
+            </View>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.con2} >
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
