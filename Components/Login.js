@@ -93,16 +93,9 @@ const Login = (props) => {
                     <Text style={{ color: 'white', }}>Quên mật khẩu?</Text>
                 </TouchableOpacity>
 
-                <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image source={require('../Images/gg.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
-                        <Text style={{ color: 'white', margin: 20 }}>OR</Text>
-                        <Image source={require('../Images/fb.png')} style={{ borderRadius: 150, width: 50, height: 50 }} />
 
-                    </View>
-                </View>
 
-                <TouchableOpacity onPress={checkLogin} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 50, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={checkLogin} style={{ backgroundColor: '#CD853F', width: '80%', height: 50, marginTop: 90, borderRadius: 50, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Đăng nhập</Text>
                 </TouchableOpacity>
 
