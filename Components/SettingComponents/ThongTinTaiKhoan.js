@@ -39,12 +39,12 @@ const ThongTinTaiKhoan = (props) => {
         //console.log(userInfor);
         await new Promise(resolve => setTimeout(resolve, 3000));
 
-        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "",totalBalance:"" }));
+        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "", totalBalance: "" }));
         await AsyncStorage.removeItem("savedImage")
-        
+
         setUserInfor({}); // Reset user information state
         setsaveImage({}); // Reset image state
-      
+
         setisLoading(false)
         props.navigation.navigate('Login')
 
@@ -111,8 +111,8 @@ const ThongTinTaiKhoan = (props) => {
                 </View>
 
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center", borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
-                    <Text style={{ width: "60%", color: "gray" }}> Email</Text>
-                    <Text style={{ width: "40%", textAlign: "right" }}>{userInfor.email}</Text>
+                    <Text style={{ width: "40%", color: "gray" }}> Email</Text>
+                    <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.email}</Text>
                 </View>
 
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center" }}>

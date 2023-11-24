@@ -98,7 +98,7 @@ const EditProfile = (props) => {
                             body: JSON.stringify(obj1),
                         }).then(async (res) => {
                             if (res.status === 200) {
-                                         saveImageToStorage(img_base64);
+                                saveImageToStorage(img_base64);
                             } else {
                                 alert("Có lỗi xảy ra!")
                                 console.log(res);
@@ -110,7 +110,7 @@ const EditProfile = (props) => {
                     });
             }
 
-             
+
         }
 
     }
@@ -120,7 +120,7 @@ const EditProfile = (props) => {
             alert("Sai định dạng địa chỉ");
             return;
         }
-       
+
 
         let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
         let obj = { name: name, phone: phone, email: email, address: address }
@@ -296,13 +296,6 @@ const EditProfile = (props) => {
                                 <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                             </View>
                         </ImageBackground>
-
-
-
-                        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                            <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                        </View>
-                    </ImageBackground>
 
                     ) : (
                         (saveImage && typeof saveImage === 'string') ? (

@@ -24,7 +24,7 @@ const Balance = (props) => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
             getLoginInfor();
-            
+
 
         });
 
@@ -34,6 +34,7 @@ const Balance = (props) => {
     const formatCurrency = (value) => {
         return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
     const showConfirmationDialog = () => {
         Alert.alert('Xác nhận nạp tiền',
             `Bạn có chắc chắn muốn nạp ${formatCurrency(amountToDeposit)} VNĐ không?`,
@@ -67,13 +68,14 @@ const Balance = (props) => {
                 },
                 {
                     text: 'Xem chi tiết hóa đơn',
-                    onPress: () => { props.navigation.navigate("ChiTietHoaDonNap",{id:userInfor._id,name:userInfor.name,phone:userInfor.phone,email:userInfor.email,amountToDeposit:amountToDeposit}) },
+                    onPress: () => { props.navigation.navigate("ChiTietHoaDonNap", { id: userInfor._id, name: userInfor.name, phone: userInfor.phone, email: userInfor.email, amountToDeposit: amountToDeposit }) },
                 },
 
             ]
 
         )
     };
+
     const addMoney = async () => {
         try {
             const userId = props.route.params.id;
@@ -81,10 +83,12 @@ const Balance = (props) => {
             if (isNaN(depositAmount)) {
                 console.error('Số tiền gửi đi không hợp lệ');
                 return setAmountToDeposit("");
-            } else if (depositAmount < 100000) {
+            } else if (depositAmount > 100000) {
                 alert("Số tiền bạn nạp phải trên 100.000đ")
-            } else if (depositAmount > 50000000) {
+                return
+            } else if (depositAmount < 50000000) {
                 alert("Số tiền bạn nạp đã quá mức cho phép vui lòng thử lại!!!")
+                return
             }
             const url_api = `http://${ip}:3000/apiuser/depositMoney/${userId}`;
             const response = await fetch(url_api, {

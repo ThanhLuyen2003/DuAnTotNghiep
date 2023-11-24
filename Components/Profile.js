@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button, ActivityIndicator,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, ScrollView, TouchableHighlight, Pressable, Button, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -58,24 +58,24 @@ const Profile = (props) => {
 
                 <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
-                    <TouchableOpacity onPress={()=>{props.navigation.navigate("ThongTinTaiKhoan")}}>
-                     {isAvatarValid ? (
-                            <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={saveImage}>
-                                <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                                    <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
-                                </View>
-                            </ImageBackground>
-
-                        ) :
-                            (
-                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={userInfor.avatar}>
+                        <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
+                            {isAvatarValid ? (
+                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={saveImage}>
                                     <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                         <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                     </View>
                                 </ImageBackground>
-                            )}
-                </TouchableOpacity>
-                        
+
+                            ) :
+                                (
+                                    <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={userInfor.avatar}>
+                                        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                                            <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
+                                        </View>
+                                    </ImageBackground>
+                                )}
+                        </TouchableOpacity>
+
 
 
                     </View>
@@ -99,14 +99,14 @@ const Profile = (props) => {
                             <Text style={{ marginLeft: 10, width: 200 }}>Sở thích phục vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View> */}
-                        <Pressable onPress={()=>{props.navigation.navigate("Balance",{id:userInfor._id})}}>
+                        <Pressable onPress={() => { props.navigation.navigate("Balance", { id: userInfor._id }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                            <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
-                            <Text style={{ marginLeft: 10, width: 200 }}>Nạp tiền</Text>
-                            <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                        </View>
+                                <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Nạp tiền</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
                         </Pressable>
-                        
+
                         <Pressable onPress={() => { props.navigation.navigate("TabHistory", { id: userInfor._id }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />

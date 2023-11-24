@@ -3,35 +3,15 @@ import { View, Image, StyleSheet, ImageBackground, Text } from "react-native";
 import { useFonts } from 'expo-font';
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../IP";
 
 
 const ManChao = (props) => {
 
-    // const [userInfor, setUserInfor] = useState({});
-
-    // const getLoginInfor = async () => {
-
-    //     setUserInfor(JSON.parse(user))
-
-    // }
-
-
-    // React.useEffect(() => {
-    //     const unsubscribe = props.navigation.addListener('focus', () => {
-    //         // cập nhật giao diện ở đây
-    //         getLoginInfor();
-
-
-    //     });
-
-    //     return unsubscribe;
-    // }, [props.navigation]);
-
 
     setTimeout(async () => {
-        // const user = await AsyncStorage.getItem('loginInfo');
 
-        // if (user == "") {
+        // if (isLogin == false) {
         props.navigation.navigate('GioiThieu')
 
         // } else {

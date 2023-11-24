@@ -80,7 +80,6 @@ const Home = (props) => {
         return result + ' ₫';//Nối đ vào cuối được định dạng trả về
     };
 
-
     return (
         <View style={{ height: '90%' }}>
 
@@ -98,7 +97,7 @@ const Home = (props) => {
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
-                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20,padding:6 }}>
+                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6 }}>
                         <Text>Tài khoản: {formatNumberAsCurrency(totalBalance)}</Text>
                     </View>
 
