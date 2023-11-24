@@ -81,51 +81,34 @@ const SignUp = (props) => {
 
         await firebase.auth().createUserWithEmailAndPassword(email, pass)
             .then(() => {
-                firebase.auth().currentUser.sendEmailVerification({
-                    handleCodeInApp: true,
-                    url: 'https://duantotnghiep-87d19.firebaseapp.com',
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(obj)
                 })
-                    .then(() => {
-                        alert('Verification email sent');
-                    }).catch((e) => {
-                        alert(e);
+                    .then(response => {
+                        if (response.status === 200) {
+                            alert("Thêm thành công");
+
+                            navigation.navigate("Login")
+
+                        } else if (response.status === 400) {
+                            alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
+                        }
+                        else {
+                            alert("Thêm thất bại ");
+                            return response.json();
+                        }
                     })
-                    .then(() => {
-                        firebase.firestore().collection('users')
-                            .doc(firebase.auth().currentUser.uid)
-                            .set({ name: name, phone: phone, email: email })
+                    .catch(error => {
+                        console.error('Lỗi khi thêm:', error);
+                        alert('Có lỗi xảy ra trong quá trình thêm: ' + error.massge);
+                    });
 
-                        fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(obj)
-                        })
-                            .then(response => {
-                                if (response.status === 200) {
-                                    alert("Thêm thành công");
-
-                                    navigation.navigate("Login")
-
-                                } else if (response.status === 400) {
-                                    alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
-                                }
-                                else {
-                                    alert("Thêm thất bại ");
-                                    return response.json();
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Lỗi khi thêm:', error);
-                                alert('Có lỗi xảy ra trong quá trình thêm: ' + error.massge);
-                            });
-
-                    })
-                    .catch((e) => {
-                        alert(e);
-                    })
 
             })
             .catch((e) => {
