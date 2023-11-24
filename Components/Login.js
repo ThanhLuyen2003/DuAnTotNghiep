@@ -79,7 +79,7 @@ const Login = (props) => {
 
                 <View style={style.btn}>
                     <Image source={require('../Images/Vector.png')} style={{ width: 20, height: 20, marginTop: 10, marginLeft: 8 }} />
-                    <TextInput style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' onChangeText={txt => { setPhone(txt) }} />
+                    <TextInput keyboardType='numeric' style={style.textinput} placeholder="Số điện thoại" placeholderTextColor='white' onChangeText={txt => { setPhone(txt) }} />
                 </View>
 
                 <View style={{ height: 30 }}></View>

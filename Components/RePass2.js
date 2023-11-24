@@ -45,6 +45,10 @@ const RePass2 = (props) => {
                     alert("Sai mật khẩu");
                 }
             })
+            .catch((e) => {
+                alert("Sai mật khẩu " + e);
+
+            })
 
     }
 

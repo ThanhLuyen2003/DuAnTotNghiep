@@ -29,7 +29,7 @@ const RePass = (props) => {
             </Text>
 
             <View style={styles.email}>
-                <TextInput style={{ marginTop: 20, }} placeholder="Email" onChangeText={(txt) => { setEmail(txt) }} />
+                <TextInput style={{ marginTop: 20, }} keyboardType='email-address' placeholder="Email" onChangeText={(txt) => { setEmail(txt) }} />
             </View>
 
             <TouchableOpacity style={styles.hi} onPress={sendEmail}>
