@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } 
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ip from "../IP";
+import { firebase } from "../Firebase";
 
 
 
@@ -37,7 +38,7 @@ const SignUp = (props) => {
 
     //kiểm tra kí tự 
 
-    const addSignUp = () => {
+    const addSignUp = async () => {
         if (!name || !email || !phone || !pass || !rePass) {
             alert("Vui lòng điền đầy đủ thông tin.");
             return;
@@ -56,16 +57,14 @@ const SignUp = (props) => {
             alert('Email không hợp lệ. Vui lòng kiểm tra lại!');
             return;
         }
-        if (pass.length && rePass.length < 8) {
-            alert("Mật khẩu trên 8 kí tự!")
-            return;
-        }
+
 
 
         if (name.length < 11) {
             alert("Tên phải nhiều hơn 10 ký tự!");
             return;
         }
+
         let obj = {
             name: name,
             email: email,
@@ -79,38 +78,64 @@ const SignUp = (props) => {
 
         const url = "http://" + ip + ":3000/addUser";
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
 
+        await firebase.auth().createUserWithEmailAndPassword(email, pass)
+            .then(() => {
+                firebase.auth().currentUser.sendEmailVerification({
+                    handleCodeInApp: true,
+                    url: 'https://duantotnghiep-87d19.firebaseapp.com',
+                })
+                    .then(() => {
+                        alert('Verification email sent');
+                    }).catch((e) => {
+                        alert(e);
+                    })
+                    .then(() => {
+                        firebase.firestore().collection('users')
+                            .doc(firebase.auth().currentUser.uid)
+                            .set({ name: name, phone: phone, email: email })
 
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(obj)
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    alert("Thêm thành công");
-                    setName('');
-                    setEmail('');
-                    setPhone('');
-                    setPass('');
-                    setrePass('');
-                    navigation.navigate("Login")
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(obj)
+                        })
+                            .then(response => {
+                                if (response.status === 200) {
+                                    alert("Thêm thành công");
 
-                } else if (response.status === 400) {
-                    alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
-                }
-                else {
-                    alert("Thêm thất bại ");
-                    return response.json();
-                }
+                                    navigation.navigate("Login")
+
+                                } else if (response.status === 400) {
+                                    alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
+                                }
+                                else {
+                                    alert("Thêm thất bại ");
+                                    return response.json();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Lỗi khi thêm:', error);
+                                alert('Có lỗi xảy ra trong quá trình thêm: ' + error.massge);
+                            });
+
+                    })
+                    .catch((e) => {
+                        alert(e);
+                    })
+
             })
-            .catch(error => {
-                console.error('Lỗi khi thêm:', error);
-                alert('Có lỗi xảy ra trong quá trình thêm: ' + error.massge);
-            });
+            .catch((e) => {
+                alert("Email đã được đăng kí bởi tài khoản khác");
+                return
+            })
+
+
+
+
     };
 
 
@@ -152,7 +177,7 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput keyboardType='numeric' maxLength={8} onChangeText={(txt) => { setPass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput keyboardType='numeric' onChangeText={(txt) => { setPass(txt) }} placeholder="Nhập mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
                     </View>
@@ -162,7 +187,7 @@ const SignUp = (props) => {
                             <Image style={{ width: 35, height: 35, position: "absolute", left: 10 }} source={require('../Images/padlock.png')} />
 
                             <Icons name="lock" color="#FFF" size={35} style={{ position: "absolute", left: 10 }} />
-                            <TextInput keyboardType='numeric' maxLength={8} onChangeText={(txt) => { setrePass(txt) }} placeholder="Nhập lại mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
+                            <TextInput keyboardType='numeric' onChangeText={(txt) => { setrePass(txt) }} placeholder="Nhập lại mật khẩu" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
 
                         </View>
                     </View>
