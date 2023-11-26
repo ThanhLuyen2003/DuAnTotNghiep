@@ -5,7 +5,7 @@ const MuaSam = (props) => {
 
     return (
         <View>
-            
+            <Text>cccc</Text>
         </View>
     );
 }

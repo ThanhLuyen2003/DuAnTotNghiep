@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity,Alert } from 'react-native'
+import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,6 +9,7 @@ const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
     const [isLoading, setisLoading] = useState(false);
+    const [totalBalance, settotalBalance] = useState(0)
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
     }
@@ -16,10 +17,10 @@ const ThongTinTaiKhoan = (props) => {
 
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
-
+        const m_totalBalance = await AsyncStorage.getItem('totalBalance')
         setUserInfor(JSON.parse(user))
         setsaveImage(m_saveImage);
-
+        settotalBalance(parseFloat(m_totalBalance));
     }
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
@@ -38,10 +39,12 @@ const ThongTinTaiKhoan = (props) => {
         //console.log(userInfor);
         await new Promise(resolve => setTimeout(resolve, 3000));
 
-        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "" }));
+        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "", totalBalance: "" }));
         await AsyncStorage.removeItem("savedImage")
+
         setUserInfor({}); // Reset user information state
         setsaveImage({}); // Reset image state
+
         setisLoading(false)
         props.navigation.navigate('Login')
 
@@ -49,15 +52,15 @@ const ThongTinTaiKhoan = (props) => {
 
     const deleteUser = async () => {
         try {
-            const userId = userInfor._id; 
-            const response = await fetch(  'http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
+            const userId = userInfor._id;
+            const response = await fetch('http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',           
+                    'Content-Type': 'application/json',
                 },
             });
             const data = await response.json();
-            if (response.ok) {               
+            if (response.ok) {
                 Alert.alert('Thành công', 'Xóa người dùng thành công');
                 props.navigation.navigate('Login');
             } else {
@@ -108,13 +111,13 @@ const ThongTinTaiKhoan = (props) => {
                 </View>
 
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center", borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
-                    <Text style={{ width: "60%", color: "gray" }}> Email</Text>
-                    <Text style={{ width: "40%", textAlign: "right" }}>{userInfor.email}</Text>
+                    <Text style={{ width: "40%", color: "gray" }}> Email</Text>
+                    <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.email}</Text>
                 </View>
 
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center" }}>
-                    <Text style={{ width: "60%", color: "gray" }}>Địa chỉ</Text>
-                    <Text style={{ width: "40%", textAlign: "right" }}>{userInfor.address}</Text>
+                    <Text style={{ width: "40%", color: "gray" }}>Địa chỉ</Text>
+                    <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.address}</Text>
                 </View>
             </View>
 
@@ -130,9 +133,9 @@ const ThongTinTaiKhoan = (props) => {
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
                 <TouchableOpacity onPress={deleteUser}>
-                   <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text> 
+                    <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text>
                 </TouchableOpacity>
-                
+
             </View>
 
         </ScrollView>

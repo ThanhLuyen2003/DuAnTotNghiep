@@ -61,15 +61,15 @@ const TabGroupProduct = (props) => {
     <View style={{ height: '90%' }}>
       <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
 
-      <TouchableOpacity onPress={()=>{props.navigation.navigate("ThongTinTaiKhoan")}}>
-                     {isAvatarValid ? (
-                    <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+        <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
+          {isAvatarValid ? (
+            <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-                ) :
-                    (
-                        <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
-                    )}
-                </TouchableOpacity>
+          ) :
+            (
+              <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+            )}
+        </TouchableOpacity>
 
         <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
           <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
@@ -106,7 +106,7 @@ const TabGroupProduct = (props) => {
             fontWeight: "bold"
           },
           tabBarIndicatorStyle: {
-            backgroundColor: "#CD853F",
+            backgroundColor: "#778899",
             height: 5,
             borderRadius: 5,
             width: "16%",

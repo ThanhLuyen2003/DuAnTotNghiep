@@ -43,6 +43,11 @@ import PhoneXacNhan from './Components/SettingComponents/PhoneXacNhan';
 import OTPgiaoDich from './Components/SettingComponents/OTPgiaoDich';
 import ThongTinHoTroKhachHang from './Components/SettingComponents/ThongTinHoTroKhachHang';
 import HeThongSalon from './Components/HeThongSalon';
+import Balance from './Components/Balance';
+import ChiTietHoaDonNap from './Components/ChiTietHoaDonNap';
+import MuaSam from './Components/MuaSam';
+import RePass from './Components/RePass';
+import RePass2 from './Components/RePass2';
 
 
 
@@ -116,6 +121,13 @@ export default function App() {
 
         <Stack.Screen name="HeThongSalon" component={HeThongSalon} options={{ title: "Hệ thống salon" }} />
 
+        <Stack.Screen name="Balance" component={Balance} options={{ title: "Balance" }} />
+
+        <Stack.Screen name="ChiTietHoaDonNap" component={ChiTietHoaDonNap} options={{ title: "Chi Tiết hóa đơn nạp" }} />
+
+        <Stack.Screen name="ResetPass" component={RePass} options={{ title: "Nhập email xác thực" }} />
+
+        <Stack.Screen name="RePass2" component={RePass2} options={{ title: "Xác nhận mật khẩu" }} />
 
       </Stack.Navigator>
     </NavigationContainer>
