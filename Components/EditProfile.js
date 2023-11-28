@@ -115,9 +115,8 @@ const EditProfile = (props) => {
 
     }
     const editUser = async () => {
-        const addressRegex = /^[0-9A-Za-z\s,-]+$/;
-        if (!addressRegex.test(address)) {
-            alert("Sai định dạng địa chỉ");
+        if (address == "") {
+            alert("Cần nhập địa chỉ");
             return;
         }
 
@@ -142,14 +141,7 @@ const EditProfile = (props) => {
 
                     await AsyncStorage.setItem('loginInfo', JSON.stringify(updatedUserInfo));
 
-                    setName("")
-                    setEmail("")
-                    setPhone("")
-                    setaddress("")
-
-                    props.navigation.navigate("HomeTab");
-
-                    props.navigation.navigate("Profile");
+                    props.navigation.navigate("Home");
 
                 } else {
                     alert("Có lỗi xảy ra!")
