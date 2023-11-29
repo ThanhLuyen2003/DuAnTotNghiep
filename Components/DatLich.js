@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, Text, FlatList, TouchableHighlight, TouchableO
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../IP";
 const DatLich = (props) => {
 
 
@@ -25,14 +26,44 @@ const DatLich = (props) => {
 
     const [khungGio, setkhungGio] = useState([
 
-        { "id": "1", "time": "09:00" }, { "id": "2", "time": "09:30" }, { "id": "3", "time": "10:00" }, { "id": "4", "time": "10:30" },
-        { "id": "5", "time": "11:00" }, { "id": "6", "time": "11:30" }, { "id": "7", "time": "12:00" }, { "id": "8", "time": "12:30" },
-        { "id": "9", "time": "13:00" }, { "id": "10", "time": "13:30" }, { "id": "11", "time": "14:00" }, { "id": "12", "time": "14:30" },
-        { "id": "13", "time": "15:00" }, { "id": "14", "time": "15:30" }, { "id": "15", "time": "16:00" }, { "id": "16", "time": "16:30" },
-        { "id": "17", "time": "17:00" }, { "id": "18", "time": "17:30" }, { "id": "19", "time": "18:00" }, { "id": "20", "time": "18:30" },
-        { "id": "21", "time": "19:00" }, { "id": "22", "time": "19:30" }, { "id": "23", "time": "20:00" }, { "id": "24", "time": "20:30" },
+        // { "id": "1", "time": "09:00" }, { "id": "2", "time": "09:30" }, { "id": "3", "time": "10:00" }, { "id": "4", "time": "10:30" },
+        // { "id": "5", "time": "11:00" }, { "id": "6", "time": "11:30" }, { "id": "7", "time": "12:00" }, { "id": "8", "time": "12:30" },
+        // { "id": "9", "time": "13:00" }, { "id": "10", "time": "13:30" }, { "id": "11", "time": "14:00" }, { "id": "12", "time": "14:30" },
+        // { "id": "13", "time": "15:00" }, { "id": "14", "time": "15:30" }, { "id": "15", "time": "16:00" }, { "id": "16", "time": "16:30" },
+        // { "id": "17", "time": "17:00" }, { "id": "18", "time": "17:30" }, { "id": "19", "time": "18:00" }, { "id": "20", "time": "18:30" },
+        // { "id": "21", "time": "19:00" }, { "id": "22", "time": "19:30" }, { "id": "23", "time": "20:00" }, { "id": "24", "time": "20:30" },
     ])
+    const [dataLich, setDataLich] = useState([]);
 
+    const getListBill = async () => {
+
+
+        let api = 'http://' + ip + ':3000/getBill';
+
+
+        try {
+            const response = await fetch(api);
+            const json = await response.json(); //chuyen du lieu thanh json
+
+            setDataLich(json);// do du lieu vao state
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const getList = async () => {
+
+        let time = 'http://' + ip + ':3000/time';
+
+        try {
+            const response = await fetch(time);
+            const json = await response.json(); //chuyen du lieu thanh json
+
+            setkhungGio(json);// do du lieu vao state
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     selectedItemm = (item, index) => {
 
@@ -43,7 +74,7 @@ const DatLich = (props) => {
 
         const newData = khungGio.map((e, index) => {
 
-            if (item.id == e.id) {
+            if (item.time == e.time) {
                 return {
                     ...e,
                     selected: true
@@ -61,8 +92,23 @@ const DatLich = (props) => {
         setkhungGio(newData);
     }
 
-    const [isDisable, setisDisable] = useState(false);
+    const isDisable = () => {
 
+        console.log(chonNgay);
+
+        dataLich.forEach(element => {
+            (chonNgay == element.day) ? true : false
+        })
+
+        // (chonNgay == "2023-11-28")
+        //     ? console.log("true")
+        //     : console.log("false");
+
+        // ("17:30" == "17:00")
+        //     ? console.log("true")
+        //     : console.log("false");
+
+    }
     // ngayChon == ngayHnay ? (timetoday > timeItem && minToday > minItem ? setisDisable(true) : setisDisable(false)) : setisDisable(false)
 
     const renderItemm = ({ item, index }) => {
@@ -70,12 +116,15 @@ const DatLich = (props) => {
         const timeItem = item.time.slice(0, 2);
         const minItem = item.time.slice(3, 5);
 
+
         return (
             <View
                 style={[stylee.itemm, { backgroundColor: (item.selected) ? '#778899' : 'white', borderColor: (item.selected) ? '#778899' : 'gray', }]}
             >
                 <Button
-                    disabled={ngayChon == ngayHnay ? ((timetoday > timeItem) ? true : false) : false}
+                    disabled={
+                        (ngayChon == ngayHnay) ? ((timetoday > timeItem) ? true : false) : ((chonNgay == "2023-11-29") ? (item.time == "17:00") ? true : false : false)
+                    }
                     color={(item.selected || isDisable == true) ? 'black' : '#CD853F'}
                     title={item.time}
                     onPress={() => selectedItemm(item, index)}
@@ -103,6 +152,11 @@ const DatLich = (props) => {
 
     }
 
+    React.useEffect(() => {
+        getList();
+        getListBill();
+    }, [])
+
     return (
         <SafeAreaView>
             <View style={{ padding: 15, backgroundColor: 'white', height: '96%' }}>
@@ -111,7 +165,7 @@ const DatLich = (props) => {
 
                         theme={{ monthTextColor: "#CD853F", arrowColor: "#CD853F", textMonthFontSize: 30, textMonthFontWeight: "bold", dayTextColor: "#CD853F", textInactiveColor: "#CD853F", textSectionTitleColor: "#CD853F", textDayFontWeight: "bold", todayBackgroundColor: "#CD853F", selectedDayBackgroundColor: "#CD853F" }}
                         style={{ borderRadius: 10, borderColor: '#CD853F', borderWidth: 1, shadowOpacity: 0.2 }}
-                        onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day), setchonGio("") }}
+                        onDayPress={(date) => { setchonNgay(date.dateString), setngayChon(date.day), setchonGio(""), getList() }}
                         markedDates={{
                             [chonNgay]: { selected: true }
                         }}
@@ -137,7 +191,7 @@ const DatLich = (props) => {
                 />
 
 
-                <TouchableOpacity onPress={salon} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={isDisable} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
