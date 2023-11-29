@@ -123,6 +123,8 @@ const DatLich = (props) => {
             >
                 <Button
                     disabled={
+
+
                         (ngayChon == ngayHnay) ? ((timetoday > timeItem) ? true : false) : ((chonNgay == "2023-11-29") ? (item.time == "17:00") ? true : false : false)
                     }
                     color={(item.selected || isDisable == true) ? 'black' : '#CD853F'}
@@ -191,7 +193,7 @@ const DatLich = (props) => {
                 />
 
 
-                <TouchableOpacity onPress={isDisable} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
+                <TouchableOpacity onPress={salon} style={{ marginTop: 5, backgroundColor: '#CD853F', width: '90%', height: 40, borderRadius: 10, alignItems: 'center', alignSelf: 'center' }}  >
                     <Text style={{ color: 'white', fontSize: 20, marginTop: 10, }}>Tiếp tục</Text>
                 </TouchableOpacity>
 
