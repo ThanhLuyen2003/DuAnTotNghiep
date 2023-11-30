@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, Linking } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Onboarding from 'react-native-onboarding-swiper';
 import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
@@ -79,6 +79,11 @@ const Home = (props) => {
 
         return result + ' ₫';//Nối đ vào cuối được định dạng trả về
     };
+
+    const phone = () => {
+        let phoneNumber = '0963424881';
+        Linking.openURL(`tel:${phoneNumber}`)
+    }
 
     return (
         <View style={{ height: '90%' }}>
@@ -295,6 +300,16 @@ const Home = (props) => {
 
             </ScrollView>
 
+            <TouchableOpacity style={styles.hi} onPress={phone}>
+                <View style={styles.hi1}>
+                    <Text style={{ marginTop: 7, marginLeft: 15 }}>Hotline</Text>
+                </View>
+
+                <View style={styles.hi2}>
+                    <Icons name="phone" size={25} style={{ alignSelf: 'center', marginTop: 8 }} />
+                </View>
+            </TouchableOpacity>
+
         </View>
 
     );
@@ -331,6 +346,44 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
 
-    }
+    },
+    hi: {
+        flexDirection: 'row',
+        width: 120,
+        height: 30,
+        position: 'absolute',
+        right: 20,
+        bottom: 20
+    },
+    hi1: {
+        backgroundColor: 'orange',
+        width: '100%',
+        height: '100%',
+        borderRadius: 30,
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        shadowOffset: {
+            height: 5,
+            width: -5
+        },
 
+    },
+    hi2: {
+        width: 45,
+        height: 45,
+        position: 'absolute',
+        right: 0,
+        backgroundColor: 'orange',
+        alignSelf: 'center',
+        borderRadius: 30,
+        borderColor: 'yellow',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        shadowOffset: {
+            height: 3,
+            width: -3
+        },
+
+    }
 });
