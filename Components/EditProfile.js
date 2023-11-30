@@ -73,7 +73,7 @@ const EditProfile = (props) => {
         });
         console.log(result);
 
-        if (!result.cancelled) {
+        if (!result.canceled) {
             const selectedImages = result.assets;
             if (result.assets.length > 0 && result.assets[0].uri) {
                 setimg_source(result.assets[0].uri);
