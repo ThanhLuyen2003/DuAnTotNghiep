@@ -47,7 +47,7 @@ const ComfirmData = (props) => {
 
         await Notifications.scheduleNotificationAsync({
             content: {
-                title: "Đã đến giờ cắt tóc",
+                title: "Đã đến giờ làm đẹp",
                 body: 'Đừng quên lúc ' + hour + ' ngày ' + day + ' tại ' + name + ' bạn nhé!',
             },
             trigger: {
