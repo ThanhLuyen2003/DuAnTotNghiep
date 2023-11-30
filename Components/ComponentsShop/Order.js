@@ -109,6 +109,7 @@ const Order = (props) => {
 
 
 
+
     const datHang = () => {
 
 
@@ -123,7 +124,7 @@ const Order = (props) => {
             message: message,
             price: pay,
             products: products,
-            status: "Chờ lấy hàng",
+            status: "Có đơn",
             time: time
         }
 
