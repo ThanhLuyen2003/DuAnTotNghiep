@@ -3,6 +3,7 @@ import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
 import ip from '../IP';
+import * as Notifications from 'expo-notifications';
 
 
 
@@ -40,7 +41,23 @@ const ComfirmData = (props) => {
 
     }
 
-    const addBill = () => {
+    async function schedulePushNotification() {
+
+        const date = new Date(day + 'T' + hour + ':00'); // Thời gian cụ thể:
+
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: "Đã đến giờ cắt tóc",
+                body: 'Đừng quên lúc ' + hour + ' ngày ' + day + ' tại ' + name + ' bạn nhé!',
+            },
+            trigger: {
+                date: date
+            },
+        });
+    }
+
+
+    const addBill = async () => {
 
         let obj = {
             nameSalon: name,
@@ -67,6 +84,7 @@ const ComfirmData = (props) => {
         let url = 'http://' + ip + ':3000/addBill';
         let url2 = 'http://' + ip + ':3000/addBillDetail';
 
+        await schedulePushNotification();
 
         fetch(url, {
             method: 'POST',
@@ -93,6 +111,7 @@ const ComfirmData = (props) => {
                         console.log(ex);
                     }).then(res => {
                         if (res.status == 200) {
+
                             alert("Đặt lịch thành công")
                             props.navigation.navigate('Home');
                         }
