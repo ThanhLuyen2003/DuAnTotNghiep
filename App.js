@@ -49,7 +49,15 @@ import MuaSam from './Components/MuaSam';
 import RePass from './Components/RePass';
 import RePass2 from './Components/RePass2';
 
+import * as Notifications from 'expo-notifications';
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 
 const Stack = createNativeStackNavigator();
