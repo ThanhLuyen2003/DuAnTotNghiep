@@ -123,9 +123,7 @@ const DatLich = (props) => {
             >
                 <Button
                     disabled={
-
-
-                        (ngayChon == ngayHnay) ? ((timetoday > timeItem) ? true : false) : ((chonNgay == "2023-11-29") ? (item.time == "17:00") ? true : false : false)
+                        (ngayChon == ngayHnay) ? ((timetoday > timeItem || (timetoday == timeItem && minToday >= minItem)) ? true : false) : (false)
                     }
                     color={(item.selected || isDisable == true) ? 'black' : '#CD853F'}
                     title={item.time}
