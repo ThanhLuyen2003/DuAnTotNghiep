@@ -7,6 +7,7 @@ import DaGiao from '../ComponentsDonHang/DaGiao';
 import DaHuy from '../ComponentsDonHang/DaHuy';
 import TraHang from '../ComponentsDonHang/Trahang';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ChoXacNhan from '../ComponentsDonHang/ChoLayHang';
 
 const TabDonHang = (props) => {
 
@@ -41,8 +42,8 @@ const TabDonHang = (props) => {
 
 
                 }}>
-                <topTap.Screen name="ChoLayHang" component={ChoLayHang} initialParams={{ id }} options={{
-                    title: "Chờ lấy hàng",
+                <topTap.Screen name="ChoLayHang" component={ChoXacNhan} initialParams={{ id }} options={{
+                    title: "Chờ xác nhận",
                 }} />
 
                 <topTap.Screen name="ChoGiaoHang" component={ChoGiaoHang} initialParams={{ id }} options={{

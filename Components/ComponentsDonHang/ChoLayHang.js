@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ip from '../../IP';
 
-const ChoLayHang = (props) => {
+const ChoXacNhan = (props) => {
 
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
@@ -15,7 +15,7 @@ const ChoLayHang = (props) => {
     const getList = async () => {
 
 
-        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Chờ lấy hàng';
+        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Có đơn';
 
 
         try {
@@ -47,7 +47,7 @@ const ChoLayHang = (props) => {
                     { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
             >
 
-                <Text style={styles.status}>{item.status}</Text>
+                <Text style={styles.status}>Chờ xác nhận</Text>
 
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={{ uri: product[0].image }} style={{ height: 100, width: 100 }} />
@@ -97,7 +97,7 @@ const ChoLayHang = (props) => {
     )
 }
 
-export default ChoLayHang
+export default ChoXacNhan
 
 const styles = StyleSheet.create({
     status: {

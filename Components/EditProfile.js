@@ -274,6 +274,12 @@ const EditProfile = (props) => {
     }
 
     const confirmAddress = (text) => {
+
+        if (!value3 || !district || !province) {
+            alert("Vui lòng chọn địa chỉ!")
+            return;
+        }
+
         setaddress(text + "/" + value3 + "/" + district + "/" + province);
     }
 
@@ -289,10 +295,6 @@ const EditProfile = (props) => {
                                 <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                             </View>
                         </ImageBackground>
-
-
-
-
 
                     ) : (
                         (saveImage && typeof saveImage === 'string') ? (
