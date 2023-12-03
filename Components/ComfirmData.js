@@ -119,7 +119,6 @@ const ComfirmData = (props) => {
 
                 }
                 else {
-
                     alert("Xay ra loi!")
                 }
             });
