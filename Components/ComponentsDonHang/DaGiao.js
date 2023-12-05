@@ -13,7 +13,7 @@ const DaGiao = (props) => {
     const getList = async () => {
 
 
-        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Đã giao';
+        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Đã giao hàng';
 
 
         try {
@@ -70,7 +70,7 @@ const DaGiao = (props) => {
                     </View>
                     <View style={{ flexDirection: 'row', }}>
                         <Text>Thành tiền:</Text>
-                        <Text style={{ color: 'red' }}> {item.price} đ</Text>
+                        <Text > {item.price} đ</Text>
                     </View>
                 </View>
 
@@ -98,6 +98,6 @@ export default DaGiao
 const styles = StyleSheet.create({
     status: {
         alignSelf: 'flex-end', marginRight: 30,
-        color: 'red',
+        color: 'green',
     }
 })

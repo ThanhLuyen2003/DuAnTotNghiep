@@ -11,7 +11,7 @@ const ChiTietDonHang = (props) => {
 
         return (
 
-            <View key={item._id} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
+            <View key={item.id} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
                 <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
 
                 <View style={{ alignSelf: 'center', width: "100%", marginLeft: 10 }}>
@@ -53,7 +53,7 @@ const ChiTietDonHang = (props) => {
                     <View>
                         <Text style={{ padding: 5 }}>{props.route.params.name} </Text>
                         <Text style={{ padding: 5 }}>{props.route.params.phone} </Text>
-                        <Text style={{ padding: 5, width: '90%' }}>{props.route.params.address} </Text>
+                        <Text style={{ padding: 5, width: '60%' }}>{props.route.params.address} </Text>
 
                     </View>
 
