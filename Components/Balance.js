@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import ip from '../IP';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from 'react-native';
@@ -24,8 +24,6 @@ const Balance = (props) => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
             getLoginInfor();
-
-
         });
 
         return unsubscribe;
@@ -35,102 +33,40 @@ const Balance = (props) => {
         return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    const showConfirmationDialog = () => {
-        Alert.alert('Xác nhận nạp tiền',
-            `Bạn có chắc chắn muốn nạp ${formatCurrency(amountToDeposit)} VNĐ không?`,
-            [
-                {
-                    text: 'Cancle',
-                    style: 'cancel',
-
-                }, {
-                    text: 'Ok',
-                    onPress: () => addMoney(),
-
-
-                },
-                {
-                    cancelable: false
-                }
-            ]
-        )
-    };
 
     const showDepositConfirmation = () => {
-        Alert.alert(
-            'Nạp tiền thành công',
-            `Nạp tiền ${formatCurrency(amountToDeposit)} VNĐ thành công!`,
-            [
-                {
-                    text: 'Cancle',
-                    style: 'cancel',
-
-                },
-                {
-                    text: 'Xem chi tiết hóa đơn',
-                    onPress: () => { props.navigation.navigate("ChiTietHoaDonNap", { id: userInfor._id, name: userInfor.name, phone: userInfor.phone, email: userInfor.email, amountToDeposit: amountToDeposit }) },
-                },
-
-            ]
-
-        )
+        const depositAmount = parseFloat(amountToDeposit.replace(/,/g, ''));
+    if (isNaN(depositAmount)) {
+        console.error('Số tiền gửi đi không hợp lệ');
+        return setAmountToDeposit("");
+    } else if (depositAmount < 10000) {
+        alert("Số tiền bạn nạp phải trên 10.000đ")
+        return
+    } else if (depositAmount > 50000000) {
+        alert("Số tiền bạn nạp đã quá mức cho phép vui lòng thử lại!!!")
+        return
+    }
+        props.navigation.navigate("ThanhToanAnToan", {
+            userId: userInfor._id,
+            name: userInfor.name,
+            phone: userInfor.phone,
+            email: userInfor.email,
+            depositAmount: depositAmount,
+            pass:userInfor.pass
+        });
     };
-
-    const addMoney = async () => {
-        try {
-            const userId = props.route.params.id;
-            const depositAmount = parseFloat(amountToDeposit.replace(/,/g, ''));
-            if (isNaN(depositAmount)) {
-                console.error('Số tiền gửi đi không hợp lệ');
-                return setAmountToDeposit("");
-            } else if (depositAmount > 1) {
-                alert("Số tiền bạn nạp phải trên 100.000đ")
-                return
-            } else if (depositAmount < 50000000) {
-                alert("Số tiền bạn nạp đã quá mức cho phép vui lòng thử lại!!!")
-                return
-            }
-            const url_api = `http://${ip}:3000/apiuser/depositMoney/${userId}`;
-            const response = await fetch(url_api, {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ amount: depositAmount }),
-            });
-            if (response.ok) {
-                const result = await response.json();
-                const newBalance = result.user.balance;
-
-                //Lưu trữ trước khi xóa 
-                const storedDepositAmount = depositAmount;
-
-                //Cập nhật trạng thái và lưu tổng số dư vào bộ nhớ mới
-                setBalance(newBalance);
-                setAmountToDeposit('');
-                showDepositConfirmation();
-                //lấy tổng số dư từ bộ nhớ lưu trữ
-                const storedTotalBalance = await AsyncStorage.getItem('totalBalance');
-
-                // Tính tổng số dư mới để lưu
-                const newTotalBalance = storedTotalBalance
-                    ? parseFloat(storedTotalBalance) + storedDepositAmount
-                    : storedDepositAmount;
-                //Lưu tổng số dư mới vào bộ nhớ
-
-                await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
-
-
-            } else {
-                console.error('Nạp tiền không thành công', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('Error', error);
-        }
-    };
+    
+  
     return (
         <View style={styles.container}>
+            
+            
+            <ScrollView>
+              <View style={styles.contai}>
+                <Text style={{marginLeft:10,marginBottom:10}}>Nạp tiền vào</Text>
+                <Text style={{width: "90%",height: 50,borderColor: '#CD853F', borderWidth: 1,borderRadius: 8,paddingLeft: 10,marginLeft:"5%"}}>hi</Text>
+
+               <Text style={{marginLeft:25}}>Số tiền cần nạp</Text>
             <TextInput
                 style={styles.input}
                 placeholder='Số tiền nạp'
@@ -138,7 +74,13 @@ const Balance = (props) => {
                 onChangeText={(txt) => setAmountToDeposit(formatCurrency(txt))}
                 keyboardType='numeric'
             />
-            <Button title="Add Money" onPress={showConfirmationDialog} />
+            </View>  
+            </ScrollView>
+            
+            
+            <TouchableOpacity style={styles.opacitybtn} onPress={showDepositConfirmation}>
+                <Text>Nạp tiền</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -146,8 +88,6 @@ const Balance = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 16,
     },
     balanceText: {
@@ -156,14 +96,29 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     input: {
-        width: "50%",
-        height: 40,
-        borderColor: 'gray',
+        width: "90%",
+        height: 50,
+        borderColor: '#CD853F',
         borderWidth: 1,
         borderRadius: 8,
         paddingLeft: 10,
         marginBottom: 16,
+        marginLeft:"5%"
     },
+    contai:{
+        width:"100%",
+        backgroundColor:"white",
+        borderRadius:10
+    },
+    opacitybtn:{
+
+        width:"100%",
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"#CD853F",
+        borderRadius:10
+    }
 });
 
 export default Balance;
