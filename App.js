@@ -50,6 +50,7 @@ import RePass from './Components/RePass';
 import RePass2 from './Components/RePass2';
 
 import * as Notifications from 'expo-notifications';
+import ThanhToanAnToan from './Components/ThanhToanAnToan';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -129,13 +130,15 @@ export default function App() {
 
         <Stack.Screen name="HeThongSalon" component={HeThongSalon} options={{ title: "Hệ thống salon" }} />
 
-        <Stack.Screen name="Balance" component={Balance} options={{ title: "Balance" }} />
+        <Stack.Screen name="Balance" component={Balance} options={{ title: "Nạp tiền" }} />
 
-        <Stack.Screen name="ChiTietHoaDonNap" component={ChiTietHoaDonNap} options={{ title: "Chi Tiết hóa đơn nạp" }} />
+        <Stack.Screen name="ChiTietHoaDonNap" component={ChiTietHoaDonNap} options={{ headerShown:false }} />
 
         <Stack.Screen name="ResetPass" component={RePass} options={{ title: "Nhập email xác thực" }} />
 
         <Stack.Screen name="RePass2" component={RePass2} options={{ title: "Xác nhận mật khẩu" }} />
+
+        <Stack.Screen name="ThanhToanAnToan" component={ThanhToanAnToan} options={{ title: "Thanh toán an toàn" }} />
 
       </Stack.Navigator>
     </NavigationContainer>
