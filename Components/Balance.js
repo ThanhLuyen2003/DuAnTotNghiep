@@ -83,7 +83,7 @@ const Balance = (props) => {
             if (isNaN(depositAmount)) {
                 console.error('Số tiền gửi đi không hợp lệ');
                 return setAmountToDeposit("");
-            } else if (depositAmount > 100000) {
+            } else if (depositAmount > 1) {
                 alert("Số tiền bạn nạp phải trên 100.000đ")
                 return
             } else if (depositAmount < 50000000) {
