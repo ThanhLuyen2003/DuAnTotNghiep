@@ -55,9 +55,15 @@ const EditProfile = (props) => {
                 console.log('Đã lưu ảnh vào Storage.');
             } else {
                 console.log('Dữ liệu ảnh không tồn tại.');
+                return;
             }
         } catch (error) {
             console.log('Lỗi khi lưu ảnh vào Storage:', error);
+            return;
+        }
+        const result = saveImageToStorage(imageData);
+        if (result === false) {
+            console.log('Image data does not exist. Not saved.');
         }
     };
 
@@ -68,7 +74,7 @@ const EditProfile = (props) => {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3], // khung view cắt ảnh 
-            quality: 1,
+            quality: 0.11111111111111111111111,
             multiple: true, // Enable multiple image selection
         });
         console.log(result);
