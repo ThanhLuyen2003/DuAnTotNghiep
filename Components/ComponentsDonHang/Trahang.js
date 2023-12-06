@@ -44,8 +44,6 @@ const TraHang = (props) => {
         return (
             <TouchableOpacity
                 style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
-                onPress={() => props.navigation.navigate('ChiTietDonHang',
-                    { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
             >
 
                 <Text style={styles.status}>{item.status}</Text>
@@ -72,6 +70,8 @@ const TraHang = (props) => {
                         <Text style={{ color: 'red' }}> {item.price} đ</Text>
                     </View>
                 </View>
+                <Text></Text>
+                <Text style={{ color: "red" }}>Địa chỉ hoàn trả hàng: 134 Nguyên Xá phường Minh Khai quận Bắc Từ Liêm thành phố Hà Nội</Text>
 
             </TouchableOpacity>
         )
