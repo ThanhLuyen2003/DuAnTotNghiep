@@ -115,21 +115,52 @@ const Profile = (props) => {
                             </View>
                         </Pressable>
 
-                        <Pressable onPress={() => { props.navigation.navigate("ThongTinHoTroKhachHang", { avatar: saveImage, name: userInfor.name }) }}>
+                        {/* <Pressable onPress={() => { props.navigation.navigate("ThongTinHoTroKhachHang", { avatar: saveImage, name: userInfor.name }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='information' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Thông tin hỗ trợ khách hàng</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
+                        </Pressable> */}
+
+                        <Pressable onPress={() => { props.navigation.navigate("CamKetFpoly", { avatar: saveImage, name: userInfor.name }) }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                                <Icons name='shield-sun' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Cam kết về Fpoly Barber Care</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
                         </Pressable>
 
-                        <Pressable onPress={() => { props.navigation.navigate("PhoneXacNhan") }}>
+                        <Pressable onPress={() => { props.navigation.navigate("VeChungToi", { avatar: saveImage, name: userInfor.name }) }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                                <Icons name='family-tree' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Về chúng tôi</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
+                        </Pressable>
+
+                        <Pressable onPress={() => { props.navigation.navigate("DieuKienGiaoDich", { avatar: saveImage, name: userInfor.name }) }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                                <Icons name='account-arrow-right' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Điều kiện giao dịch chung</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
+                        </Pressable>
+
+                        <Pressable onPress={() => { props.navigation.navigate("BaoMatThongTin", { avatar: saveImage, name: userInfor.name }) }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                                <Icons name='security' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Chính sách bảo mật thông tin</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
+                        </Pressable>
+                        {/* <Pressable onPress={() => { props.navigation.navigate("PhoneXacNhan") }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='code-brackets' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Lấy OTP xác thực giao dịch</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
-                        </Pressable>
+                        </Pressable> */}
                     </ScrollView>
                 </View>
             </View>
