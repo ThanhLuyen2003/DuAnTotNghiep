@@ -7,7 +7,25 @@ import { useState } from "react";
 
 const ChiTietLich = (props) => {
 
+    const [content, setContent] = useState(props.route.params.service);
 
+    const renderItem = (item) => {
+        return (
+
+            <View key={item.name} style={{ flexDirection: 'row', margin: 5 }}>
+
+                <View style={{ flex: 4, textAlign: 'center' }}>
+                    <Text style={{ marginLeft: 10 }}>- {item.name}</Text>
+                </View>
+
+                <View style={{ flex: 2, }}>
+                    <Text style={{ textAlign: 'center' }} >{item.price}</Text>
+
+                </View>
+
+            </View>
+        )
+    }
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
 
@@ -25,16 +43,21 @@ const ChiTietLich = (props) => {
 
                 <ScrollView>
                     <View style={{ flexDirection: 'row', marginTop: 5, padding: 10, }}>
-                        <View style={{ flex: 2 }}>
-                            <Text style={{ fontSize: 18 }}>Dịch vụ đã chọn</Text>
+                        <View style={{ flex: 4 }}>
+                            <Text style={{ fontSize: 18, }}>Dịch vụ đã chọn</Text>
                         </View>
 
-                        <View style={{ borderWidth: 1, }}></View>
 
-                        <View style={{ flex: 5 }}>
-                            <Text style={{ fontSize: 18, marginLeft: 5 }}>{props.route.params.service}</Text>
+                        <View style={{ flex: 2 }}>
+                            <Text style={{ fontSize: 18, textAlign: 'center' }}>Giá</Text>
                         </View>
                     </View>
+
+                    <View>
+                        {content.map((item) => renderItem(item))}
+                    </View>
+
+
                 </ScrollView>
 
                 <View style={{ borderWidth: 0.5 }}></View>
