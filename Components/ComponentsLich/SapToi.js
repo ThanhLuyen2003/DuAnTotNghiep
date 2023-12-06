@@ -1,6 +1,7 @@
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import ip from '../../IP';
+import * as Notifications from 'expo-notifications';
 
 const SapToi = (props) => {
 
@@ -37,8 +38,53 @@ const SapToi = (props) => {
     }, []);
 
 
-
     const renderItem = ({ item }) => {
+
+        async function scheduleAndCancel() {
+
+            await Notifications.cancelAllScheduledNotificationsAsync();
+        }
+
+
+        const huyLich = async () => {
+
+            Alert.alert("Cảnh báo!!!", "Bạn chắc chắn muốn hủy lịch?", [
+                {
+                    text: 'Hủy lịch',
+                    onPress: async () => {
+
+                        await scheduleAndCancel();
+
+                        let api = 'http://' + ip + ':3000/huyBill/' + item._id;
+
+                        fetch(api, {
+                            method: 'PUT',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                        }).then((res) => {
+                            if (res.status == '200') {
+                                alert("Hủy lịch thành công");
+                                getList();
+
+                            } else {
+                                alert("Xảy ra lỗi!");
+                            }
+                        })
+
+                    }
+                },
+                {
+                    text: 'Không',
+                    style: "cancel"
+                }
+            ], {
+                cancelable: true,
+            }
+            )
+        }
+
 
         const chiTiet = () => {
 
@@ -82,7 +128,7 @@ const SapToi = (props) => {
 
                 <View style={styles.con2}>
 
-                    <TouchableOpacity style={styles.but1}>
+                    <TouchableOpacity onPress={huyLich} style={styles.but1}>
                         <Text style={{ marginTop: 8, color: 'white' }}>Hủy lịch</Text>
                     </TouchableOpacity>
 
