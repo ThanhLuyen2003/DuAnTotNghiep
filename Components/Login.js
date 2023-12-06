@@ -48,8 +48,15 @@ const Login = (props) => {
                     if (objU.avatar) {
                         await AsyncStorage.setItem('savedImage', objU.avatar); // lưu ảnh khi có người dùng mới
                     }
-                    // chuyển màn hình
-
+                    if (objU.balance) {
+                        await AsyncStorage.setItem('totalBalance', objU.balance.toString()); // lưu số tiền khi có người dùng với
+                    } else {
+                        // If balance doesn't exist in objU, you can set a default value or handle it as needed.
+                        const defaultBalance = 0; // Set your default balance here
+                        await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
+                    }
+                    
+                    
 
                     props.navigation.navigate('HomeTab', { id: objU._id });
                 } catch (e) {
