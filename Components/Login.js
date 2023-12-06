@@ -55,8 +55,8 @@ const Login = (props) => {
                         const defaultBalance = 0; // Set your default balance here
                         await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
                     }
-                    
-                    
+
+
 
                     props.navigation.navigate('HomeTab', { id: objU._id });
                 } catch (e) {

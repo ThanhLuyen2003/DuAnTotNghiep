@@ -21,7 +21,6 @@ const ComfirmData = (props) => {
 
     const [content, setContent] = useState(props.route.params.content)
 
-
     const getData = async () => {
 
         const m_address = await AsyncStorage.getItem('address');
