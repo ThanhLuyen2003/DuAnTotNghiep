@@ -253,6 +253,7 @@ const KhamPha = (props) => {
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         style={styles.gridView}
+                        spacing={5}
                     />
                 ) : (
                     <FlatGrid
