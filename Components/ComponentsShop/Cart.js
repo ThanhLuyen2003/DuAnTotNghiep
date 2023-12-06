@@ -242,7 +242,7 @@ const Cart = (props) => {
                     <Image source={{ uri: item.imagePro }} style={{ height: 100, width: 100, marginRight: 10 }} />
 
                     <View>
-                        <Text style={{ width: '60%' }}>{item.namePro}</Text>
+                        <Text style={{ width: '50%' }}>{item.namePro}</Text>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{price} đ</Text>
 
                         <View style={{ flexDirection: 'row', marginTop: 20, borderColor: 'black', borderWidth: 1, alignItems: 'center', alignSelf: 'stretch', width: 100, borderRadius: 5, }}>

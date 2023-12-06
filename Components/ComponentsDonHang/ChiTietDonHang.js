@@ -11,7 +11,7 @@ const ChiTietDonHang = (props) => {
 
         return (
 
-            <View key={item._id} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
+            <View key={item.id} style={{ flexDirection: 'row', padding: 10, borderBottomWidth: 1 }}>
                 <Image source={{ uri: item.image }} style={{ height: 100, width: 100 }} />
 
                 <View style={{ alignSelf: 'center', width: "100%", marginLeft: 10 }}>
