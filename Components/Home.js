@@ -181,7 +181,7 @@ const Home = (props) => {
                 </ScrollView>
 
                 <View style={{ position: 'relative', width: '100%', alignItems: 'center', bottom: 40, height: 30 }}>
-                    <Text style={{ fontSize: 30, color: 'white' }}>•••</Text>
+                    <Text style={{ fontSize: 30, color: 'white' }}>•••••</Text>
                 </View>
 
                 <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginBottom: 10 }}>

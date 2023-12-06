@@ -7,14 +7,12 @@ const ChoGiaoHang = (props) => {
     const [donhang, setDonhang] = useState([]);
     const [isLoading, setisLoading] = useState(true);
 
-
     const id = props.route.params.id;
 
 
     const getList = async () => {
 
-
-        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Chờ giao hàng';
+        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Đang giao hàng';
 
 
         try {

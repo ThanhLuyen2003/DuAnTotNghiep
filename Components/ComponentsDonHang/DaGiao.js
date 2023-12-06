@@ -45,7 +45,7 @@ const DaGiao = (props) => {
         return (
             <TouchableOpacity
                 style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
-                onPress={() => props.navigation.navigate('ChiTietDonHang',
+                onPress={() => props.navigation.navigate('DonHangHoanThanh',
                     { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
             >
 
@@ -79,6 +79,7 @@ const DaGiao = (props) => {
 
     }
     return (
+
         <View>
             {isLoading
                 ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 200 }} />
@@ -90,6 +91,7 @@ const DaGiao = (props) => {
                     : <FlatList data={donhang} renderItem={renderItem} />
             }
         </View>
+
     )
 }
 

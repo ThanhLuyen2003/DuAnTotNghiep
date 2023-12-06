@@ -121,9 +121,9 @@ const Cart = (props) => {
 
             const url = 'http://' + ip + ':3000/delCart/' + item._id;
 
-            Alert.alert("Delete!!!", "Bạn có muộn xóa?", [
+            Alert.alert("Cảnh báo!!!", "Bạn có muốn xóa?", [
                 {
-                    text: 'Yes',
+                    text: 'Xóa',
                     onPress: () => {
 
 
@@ -149,7 +149,7 @@ const Cart = (props) => {
                     }
                 },
                 {
-                    text: 'No',
+                    text: 'Hủy',
                     style: "cancel"
                 }
             ], {

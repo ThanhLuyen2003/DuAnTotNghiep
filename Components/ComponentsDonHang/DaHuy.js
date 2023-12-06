@@ -13,7 +13,7 @@ const DaHuy = (props) => {
     const getList = async () => {
 
 
-        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Đã hủy';
+        let api = 'http://' + ip + ':3000/getOrder/' + id + '/Hủy đơn';
 
 
         try {
@@ -44,11 +44,9 @@ const DaHuy = (props) => {
         return (
             <TouchableOpacity
                 style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
-                onPress={() => props.navigation.navigate('ChiTietDonHang',
-                    { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
             >
 
-                <Text style={styles.status}>{item.status}</Text>
+                <Text style={styles.status}>Đã hủy</Text>
 
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={{ uri: product[0].image }} style={{ height: 100, width: 100 }} />
