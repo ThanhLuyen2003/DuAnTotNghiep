@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 
 const ChiTietHoaDonNap = (props) => {
@@ -21,12 +22,24 @@ const ChiTietHoaDonNap = (props) => {
                 </View>
                 <View style={{ width: "100%", backgroundColor: "white", borderRadius: 10 }}>
                     <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                        <Text>Dịch vụ/ Cửa hàng</Text>
-                        <Text >Nạp tiền vào Ví </Text>
+                        <Text style={{ color: "gray" }}>Dịch vụ/ Cửa hàng</Text>
+                        <Text style={{ fontWeight: "bold" }}>Nạp tiền vào Ví </Text>
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                        <Text>Thời gian thanh toán</Text>
-                        <Text >{props.route.params.currentTime} - {props.route.params.currentDate}</Text>
+                        <Text style={{ color: "gray" }}>Thời gian thanh toán</Text>
+                        <Text style={{ fontWeight: "bold" }}>{props.route.params.currentTime} - {props.route.params.currentDate}</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 30, alignItems: "center" }}>
+                        <TouchableOpacity onPress={()=>{props.navigation.navigate("Balance")}} style={{ width: "50%", alignItems: "center", justifyContent: "center", height: 50, borderRadius: 10, borderColor: "gray", borderWidth: 1, marginRight: 5 }}>
+                            <View >
+                                <Text style={{ fontWeight: "bold" }}>Tạo giao dịch mới</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{props.navigation.navigate("Home")}} style={{ width: "50%", alignItems: "center", justifyContent: "center", height: 50, borderRadius: 10, borderColor: "gray", borderWidth: 1, marginRight: 5 }}>
+                        <View>
+                            <Text style={{ color: "#CD853F", fontWeight: "bold" }}>Màn hình chính</Text>
+                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
