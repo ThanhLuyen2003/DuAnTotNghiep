@@ -21,6 +21,7 @@ const Home = (props) => {
 
         setUserInfor(JSON.parse(user))
         settotalBalance(parseFloat(m_totalBalance));
+        setsaveImage(m_saveImage)
     }
 
 
@@ -69,10 +70,10 @@ const Home = (props) => {
                     {isAvatarValid ? (
                         <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-                    ) :
-                        (
+                        ) :
+                          (
                             <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
-                        )}
+                          )}
                 </TouchableOpacity>
 
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
