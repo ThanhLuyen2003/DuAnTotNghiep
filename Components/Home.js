@@ -13,7 +13,7 @@ const Home = (props) => {
     const [saveImage, setsaveImage] = useState({});
     const [data, setdata] = useState([]);
     const [totalBalance, settotalBalance] = useState(0)
-
+    const [showTongSoDu, setShowTongSoDu] = useState(false);
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
@@ -52,32 +52,8 @@ const Home = (props) => {
 
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
-    const formatNumberAsCurrency = (number) => {
-        if (isNaN(number) || number === null) {//kiểm tra nếu null hoặc NaN thì trả về 0, 
-            return '0 ₫';
-        }
-
-        const numString = number.toString();//chuyển kiểu số thành chuỗi
-        const length = numString.length;
-
-        if (length <= 2) {
-            return numString + ' ₫';
-        }
-
-        let result = '';
-        let separatorCount = 0;
-
-        for (let i = length - 1; i >= 0; i--) {
-            result = numString[i] + result;
-            separatorCount++;//để theo dõi số chữ số được xử lý.
-
-            if (separatorCount === 3 && i !== 0) {
-                result = ',' + result;
-                separatorCount = 0;
-            }
-        }
-
-        return result + ' ₫';//Nối đ vào cuối được định dạng trả về
+    const formatCurrency = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     const phone = () => {
@@ -102,10 +78,13 @@ const Home = (props) => {
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
-                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6 }}>
-                        <Text>Tài khoản: {formatNumberAsCurrency(totalBalance)}</Text>
+                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6,flexDirection:"row" }}>
+                    <Text style={{ color: "white" }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
+                        <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
+                    <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'}  style={{marginLeft:10}}/>
+                </TouchableOpacity>
                     </View>
-
+                    
 
                 </View>
 
