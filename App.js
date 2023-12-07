@@ -52,6 +52,7 @@ import RePass2 from './Components/RePass2';
 import * as Notifications from 'expo-notifications';
 import ThanhToanAnToan from './Components/ThanhToanAnToan';
 import DonHangHoanThanh from './Components/ComponentsDonHang/DonHangHoanThanh';
+import LichSuNapTien from './Components/LichSuNapTien';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -143,6 +144,7 @@ export default function App() {
 
         <Stack.Screen name="ThanhToanAnToan" component={ThanhToanAnToan} options={{ title: "Thanh toán an toàn" }} />
 
+        <Stack.Screen name="LichSuNapTien" component={LichSuNapTien} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
