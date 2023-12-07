@@ -72,6 +72,7 @@ const ComfirmData = (props) => {
             price: props.route.params.pay,
             status: "Sắp tới",
             idUser: userInfo._id
+            
         }
 
 
@@ -117,7 +118,6 @@ const ComfirmData = (props) => {
                             props.navigation.navigate('Home');
                         }
                     });
-
                 }
                 else {
                     alert("Xay ra loi!")
@@ -188,7 +188,10 @@ const ComfirmData = (props) => {
                 </ScrollView>
 
                 <View style={{ borderWidth: 0.5 }}></View>
-
+                <View style={{justifyContent:"center",padding:16}}>
+                    <Text>Phương thức thanh toán</Text>
+                </View>
+                <View style={{ borderWidth: 0.5 }}></View>
                 <View style={{ padding: 12, flexDirection: 'row' }} >
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
                     <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.pay} VNĐ</Text>
