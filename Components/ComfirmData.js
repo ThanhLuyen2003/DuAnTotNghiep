@@ -113,7 +113,6 @@ const ComfirmData = (props) => {
                         console.log(ex);
                     }).then(res => {
                         if (res.status == 200) {
-
                             alert("Đặt lịch thành công")
                             props.navigation.navigate('Home');
                         }
