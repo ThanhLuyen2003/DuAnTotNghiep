@@ -66,14 +66,37 @@ const ThanhToanAnToan = (props) => {
                 const currentDate = new Date();
                 const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
                 const formattedTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+                const billMoneyUrl = `http://${ip}:3000/addBillMoney/${props.route.params.userId}`;
                 const newTotalBalance = totalBalance + depositAmount;
-
-                await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
-
                 setTotalBalance(newTotalBalance);
-
+                const billMoneyResponse = await fetch(billMoneyUrl, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        
+                        soDu:depositAmount,
+                        date:formattedDate,
+                        time:formattedTime,
+                        tongSoDu:newTotalBalance
+                    }),
+                });
+                const billMoneyResult = await billMoneyResponse.json();
+                    const billMoneyId = billMoneyResult._id;
+                if (billMoneyResponse.ok) {
+                    console.log('BillMoney created:', billMoneyResult);
+                    // console.log(billMoneyId);
+                } else {
+                    console.error('Creating BillMoney failed:', billMoneyResponse.status, billMoneyResponse.statusText);
+                }
+                
+                await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
+              
+                
                 setModalVisible(false);
-                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount });
+                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount,billId:billMoneyId });
             } else {
                 console.error('Nạp tiền không thành công', response.status, response.statusText);
             }
@@ -93,27 +116,27 @@ const ThanhToanAnToan = (props) => {
                 <View style={{ flex: 1, padding: 16, }}>
                     <View style={{ width: "100%", backgroundColor: "white", borderRadius: 10, borderColor: "gray", borderWidth: 1 }}>
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{color:"gray"}}>Dịch vụ:</Text>
-                            <Text style={{fontWeight:"bold"}}>Nạp tiền vào Ví Barber</Text>
+                            <Text style={{ color: "gray" }}>Dịch vụ:</Text>
+                            <Text style={{ fontWeight: "bold" }}>Nạp tiền vào Ví Barber</Text>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{color:"gray"}}>Nguồn tiền:</Text>
-                            <Text style={{fontWeight:"bold"}}>MBBank</Text>
+                            <Text style={{ color: "gray" }}>Nguồn tiền:</Text>
+                            <Text style={{ fontWeight: "bold" }}>MBBank</Text>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{color:"gray"}}>Số tiền:</Text>
-                            <Text style={{fontWeight:"bold"}}>{formatCurrency(depositAmount)}đ</Text>
+                            <Text style={{ color: "gray" }}>Số tiền:</Text>
+                            <Text style={{ fontWeight: "bold" }}>{formatCurrency(depositAmount)}đ</Text>
                         </View>
-                        <View style={{ width: "95%", height: 1, borderWidth: 1, borderColor: "gray", marginLeft: 10,backgroundColor:"gray" }}></View>
+                        <View style={{ width: "95%", height: 1, borderWidth: 1, borderColor: "gray", marginLeft: 10, backgroundColor: "gray" }}></View>
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{color:"gray"}}>Phí giao dịch:</Text>
-                            <Text style={{fontWeight:"bold"}}>Miễn phí</Text>
+                            <Text style={{ color: "gray" }}>Phí giao dịch:</Text>
+                            <Text style={{ fontWeight: "bold" }}>Miễn phí</Text>
                         </View>
-                        
+
                     </View>
-                    <View style={{justifyContent:"center",alignItems:"center",flexDirection:"row"}}>
-                            <Icons name='security' size={50} color={'gray'} />
-                            <Text style={{color:"gray"}}>Bảo mật SSL/TLS, mọi thông tin{"\n"}giao dịch đều được mã hóa an toàn.</Text>
+                    <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+                        <Icons name='security' size={50} color={'gray'} />
+                        <Text style={{ color: "gray" }}>Bảo mật SSL/TLS, mọi thông tin{"\n"}giao dịch đều được mã hóa an toàn.</Text>
                     </View>
                 </View>
 
@@ -133,10 +156,10 @@ const ThanhToanAnToan = (props) => {
                 }}
             >
                 <View style={styles.modalView}>
-                        <TouchableOpacity onPress={toggleModal} style={{width:"30%",height:6,backgroundColor:"gray",borderRadius:10,justifyContent:"center",alignItems:"center"}}>
-                             
-                        </TouchableOpacity>
-                        
+                    <TouchableOpacity onPress={toggleModal} style={{ width: "30%", height: 6, backgroundColor: "gray", borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
+
+                    </TouchableOpacity>
+
                     <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 30 }}>Nhập mật khẩu</Text>
                     <TextInput
                         style={styles.input}
@@ -156,7 +179,7 @@ const ThanhToanAnToan = (props) => {
             </Modal>
 
             <TouchableOpacity style={styles.opacitybtn} onPress={toggleModal}>
-                <Text style={{color:"white",fontWeight:"bold",fontSize:18}}>Xác nhận</Text>
+                <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>Xác nhận</Text>
             </TouchableOpacity>
         </View>
     )
@@ -179,8 +202,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#CD853F",
         borderRadius: 10,
         marginLeft: 16, marginRight: 16,
-        
-        
+
+
     },
     centeredView: {
         flex: 1,
@@ -191,7 +214,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        
+
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -202,7 +225,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         marginTop: "auto",
         flex: 0.7,
-        alignItems:"center"
+        alignItems: "center"
     },
     input: {
         width: "90%",
