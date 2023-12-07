@@ -14,7 +14,7 @@ const LichSuNapTien = (props) => {
     const [billMoneyList, setBillMoneyList] = useState([]);
     const [isLoading, setisLoading] = useState(true);
     const [showTongSoDu, setShowTongSoDu] = useState(false);
-
+    const [searchDate, setSearchDate] = useState('');
     console.log(props.route.params);
 
     const getList = async () => {
@@ -47,6 +47,9 @@ const LichSuNapTien = (props) => {
     };
 
     const renderItem = ({ item }) => {
+        if (searchDate && !item.date.includes(searchDate)) {
+            return null;
+        }
         return (
             <View style={{ flex: 1, padding: 16 }}>
 
@@ -72,7 +75,7 @@ const LichSuNapTien = (props) => {
             <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10, height: 80, alignItems: "center", backgroundColor: "#CD853F", borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                 <View style={{ alignItems: "center", justifyContent: "center" }}>
                     <Icons name='magnify' size={25} style={{ position: "absolute", left: 15 }} />
-                    <TextInput style={{ width: 320, height: 40, borderWidth: 1, borderColor: "gray", borderRadius: 10, paddingLeft: 40 }} placeholder='tìm kiếm giao dịch' />
+                    <TextInput style={{ width: 320, height: 40, borderWidth: 1, borderColor: "gray", borderRadius: 10, paddingLeft: 40 }} placeholder='Tìm kiếm giao dịch theo ngày' onChangeText={(text) => setSearchDate(text)} />
                 </View>
                 <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
                     <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} />
