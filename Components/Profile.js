@@ -154,6 +154,13 @@ const Profile = (props) => {
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
+                        <Pressable onPress={() => { props.navigation.navigate("LichSuNapTien", { avatar: saveImage, name: userInfor.name,userId:userInfor._id }) }}>
+                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                                <Icons name='security' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử nạp tiền</Text>
+                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
+                            </View>
+                        </Pressable>
                         {/* <Pressable onPress={() => { props.navigation.navigate("PhoneXacNhan") }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='code-brackets' size={25} color={'#CD853F'} />
