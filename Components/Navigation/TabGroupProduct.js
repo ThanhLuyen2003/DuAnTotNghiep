@@ -15,16 +15,19 @@ import ip from '../../IP';
 
 const topTap = createMaterialTopTabNavigator();
 const TabGroupProduct = (props) => {
-
+  const [totalBalance, settotalBalance] = useState(0)
   const [userInfo, setUserInfo] = useState({});
   const [data, setdata] = useState([]);
   const [saveImage, setsaveImage] = useState({});
+  const [showTongSoDu, setShowTongSoDu] = useState(false);
   const getLoginInfor = async () => {
 
     const value = await AsyncStorage.getItem('loginInfo');
     const m_saveImage = await AsyncStorage.getItem('savedImage')
+    const m_totalBalance = await AsyncStorage.getItem('totalBalance')
     setUserInfo(JSON.parse(value))
     setsaveImage(m_saveImage);
+    settotalBalance(parseFloat(m_totalBalance));
   }
 
   const getList = async () => {
@@ -55,7 +58,9 @@ const TabGroupProduct = (props) => {
 
     return unsubscribe;
   }, [props.navigation]);
-
+  const formatCurrency = (value) => {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
   const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
   return (
     <View style={{ height: '90%' }}>
@@ -74,8 +79,14 @@ const TabGroupProduct = (props) => {
         <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
           <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
           <Text style={{ color: 'white' }} >Muốn ất ơ đến Fpoly Barber</Text>
+          <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6,flexDirection:"row" }}>
+                    <Text style={{ color: "white" }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
+                        <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
+                    <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'}  style={{marginLeft:10}}/>
+                </TouchableOpacity>
+          </View>
         </View>
-
+       
         <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20 }} >
           <Icons name="cart" size={25} color="white" />
           {data.length != 0
