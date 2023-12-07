@@ -72,7 +72,7 @@ const ComfirmData = (props) => {
             price: props.route.params.pay,
             status: "Sắp tới",
             idUser: userInfo._id
-            
+
         }
 
 
@@ -103,21 +103,9 @@ const ComfirmData = (props) => {
             .then(res => {
                 if (res.status == 200) {
 
-                    fetch(url2, {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(obj2)
-                    }).catch((ex) => {
-                        console.log(ex);
-                    }).then(res => {
-                        if (res.status == 200) {
-                            alert("Đặt lịch thành công")
-                            props.navigation.navigate('Home');
-                        }
-                    });
+                    alert("Đặt lịch thành công")
+                    props.navigation.navigate('Home');
+
                 }
                 else {
                     alert("Xay ra loi!")
@@ -188,7 +176,7 @@ const ComfirmData = (props) => {
                 </ScrollView>
 
                 <View style={{ borderWidth: 0.5 }}></View>
-                <View style={{justifyContent:"center",padding:16}}>
+                <View style={{ justifyContent: "center", padding: 16 }}>
                     <Text>Phương thức thanh toán</Text>
                 </View>
                 <View style={{ borderWidth: 0.5 }}></View>

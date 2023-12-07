@@ -67,7 +67,7 @@ const DatLich = (props) => {
 
     selectedItemm = (item, index) => {
 
-        if (chonNgay.length == 0) {
+        if (!chonNgay) {
             alert("Vui lòng chọn ngày")
             return;
         }
@@ -149,7 +149,9 @@ const DatLich = (props) => {
             console.log(e);
         }
 
-
+        getList();
+        setchonGio("");
+        setchonNgay("");
     }
 
     React.useEffect(() => {

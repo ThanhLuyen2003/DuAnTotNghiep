@@ -117,8 +117,8 @@ const SapToi = (props) => {
 
                     <View style={{ marginLeft: 10 }}>
 
-                        <Text style={{ marginTop: 10 }}>{item.nameSalon}</Text>
-                        <Text style={{ marginTop: 10, width: '75%' }}>{item.addressSalon}</Text>
+                        <Text style={{ marginTop: 10, fontWeight: '700' }}>{item.nameSalon}</Text>
+                        <Text style={{ marginTop: 10, width: '60%' }}>{item.addressSalon}</Text>
                         <Text style={{ marginTop: 10 }}>{item.phone}</Text>
 
                     </View>
