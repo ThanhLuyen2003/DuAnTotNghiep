@@ -55,16 +55,13 @@ const EditProfile = (props) => {
                 console.log('Đã lưu ảnh vào Storage.');
             } else {
                 console.log('Dữ liệu ảnh không tồn tại.');
-                return;
+                return AsyncStorage;
             }
         } catch (error) {
             console.log('Lỗi khi lưu ảnh vào Storage:', error);
             return;
         }
-        const result = saveImageToStorage(imageData);
-        if (result === false) {
-            console.log('Image data does not exist. Not saved.');
-        }
+        
     };
 
     const pickImage = async () => {
