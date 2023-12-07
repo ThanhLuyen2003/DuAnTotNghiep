@@ -32,7 +32,7 @@ const RePass2 = (props) => {
                                 alert("Đổi mật khẩu thành công");
                                 props.navigation.navigate("Login");
                             } else {
-                                alert("cut")
+                                alert("Đổi mật khẩu không thành công")
                             }
                         })
                         .catch((err) => {
