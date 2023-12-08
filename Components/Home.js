@@ -12,7 +12,9 @@ const Home = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState({});
     const [data, setdata] = useState([]);
-    const [totalBalance, settotalBalance] = useState(0)
+
+    const [totalBalance, settotalBalance] = useState(0);
+
     const [showTongSoDu, setShowTongSoDu] = useState(false);
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');
@@ -70,22 +72,22 @@ const Home = (props) => {
                     {isAvatarValid ? (
                         <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-                        ) :
-                          (
+                    ) :
+                        (
                             <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
-                          )}
+                        )}
                 </TouchableOpacity>
 
-                <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
+                <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%', marginTop: 10 }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
-                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6,flexDirection:"row" }}>
-                    <Text style={{ color: "white" }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
+                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6, flexDirection: "row", marginTop: 5 }}>
+                        <Text style={{ color: "white", }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
                         <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
-                    <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'}  style={{marginLeft:10}}/>
-                </TouchableOpacity>
+                            <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} style={{ marginLeft: 10 }} />
+                        </TouchableOpacity>
                     </View>
-                    
+
 
                 </View>
 
