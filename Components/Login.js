@@ -5,16 +5,19 @@ import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ip from "../IP";
 import { firebase } from "../Firebase";
+import { Modal } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 
 const Login = (props) => {
 
+    const [isDone, setIsDone] = useState(false);
 
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
 
     const checkLogin = () => {
-
+        setIsDone(true)
         if (phone.length == 0) {
             alert("Chưa nhập số điện thoại");
             return;
@@ -59,6 +62,7 @@ const Login = (props) => {
 
 
                     props.navigation.navigate('HomeTab', { id: objU._id });
+                    setIsDone(false);
                 } catch (e) {
                     // saving error
                     console.log(e);
@@ -74,12 +78,23 @@ const Login = (props) => {
     const SignUp = () => {
         props.navigation.navigate('SignUp');
     }
+
+
     return (
 
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <SafeAreaView>
 
+                <Modal
+                    animationType='fade'
+                    visible={isDone}
+                    transparent={true}
+                >
+                    <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
 
+                        <ActivityIndicator />
+                    </View>
+                </Modal>
                 <View style={{ justifyContent: 'center', width: "100%", alignItems: "center", marginTop: 50 }}>
                     <Image style={{ width: 200, height: 200, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
                 </View>
