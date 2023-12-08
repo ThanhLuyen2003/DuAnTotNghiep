@@ -60,7 +60,7 @@ const TabGroupProduct = (props) => {
   }, [props.navigation]);
   const formatCurrency = (value) => {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
+  };
   const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
   return (
     <View style={{ height: '90%' }}>
@@ -79,14 +79,9 @@ const TabGroupProduct = (props) => {
         <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
           <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
           <Text style={{ color: 'white' }} >Muốn ất ơ đến Fpoly Barber</Text>
-          <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6,flexDirection:"row" }}>
-                    <Text style={{ color: "white" }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
-                        <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
-                    <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'}  style={{marginLeft:10}}/>
-                </TouchableOpacity>
-          </View>
+
         </View>
-       
+
         <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20 }} >
           <Icons name="cart" size={25} color="white" />
           {data.length != 0

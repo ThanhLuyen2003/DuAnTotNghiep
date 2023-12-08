@@ -53,10 +53,10 @@ const Profile = (props) => {
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
-                <View style={{ flex: 0.5, alignItems: "center", justifyContent: "center" }}>
+                <View style={{ height: '15.5%', alignItems: "center", justifyContent: "center" }}>
                 </View>
 
-                <View style={{ flex: 2, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                <View style={{ height: '83.5%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
                             {isAvatarValid ? (
@@ -75,8 +75,6 @@ const Profile = (props) => {
                                     </ImageBackground>
                                 )}
                         </TouchableOpacity>
-
-
 
                     </View>
                     <ScrollView style={{ marginTop: 60, marginBottom: 60 }}>
@@ -115,13 +113,13 @@ const Profile = (props) => {
                             </View>
                         </Pressable>
 
-                        {/* <Pressable onPress={() => { props.navigation.navigate("ThongTinHoTroKhachHang", { avatar: saveImage, name: userInfor.name }) }}>
+                        <Pressable onPress={() => { props.navigation.navigate("LichSuNapTien", { avatar: saveImage, name: userInfor.name, userId: userInfor._id }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                                <Icons name='information' size={25} color={'#CD853F'} />
-                                <Text style={{ marginLeft: 10, width: 200 }}>Thông tin hỗ trợ khách hàng</Text>
+                                <Icons name='security' size={25} color={'#CD853F'} />
+                                <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử giao dịch</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
-                        </Pressable> */}
+                        </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("CamKetFpoly", { avatar: saveImage, name: userInfor.name }) }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
@@ -154,13 +152,7 @@ const Profile = (props) => {
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
-                        <Pressable onPress={() => { props.navigation.navigate("LichSuNapTien", { avatar: saveImage, name: userInfor.name,userId:userInfor._id }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                                <Icons name='security' size={25} color={'#CD853F'} />
-                                <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử nạp tiền</Text>
-                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                            </View>
-                        </Pressable>
+
                         {/* <Pressable onPress={() => { props.navigation.navigate("PhoneXacNhan") }}>
                             <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
                                 <Icons name='code-brackets' size={25} color={'#CD853F'} />
