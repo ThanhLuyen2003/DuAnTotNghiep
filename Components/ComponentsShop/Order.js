@@ -1,7 +1,11 @@
-import { FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useMemo, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ip from '../../IP';
+import { RadioGroup } from 'react-native-radio-buttons-group';
+import { Modal } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import { Button } from 'react-native';
 
 const Order = (props) => {
 
@@ -12,6 +16,7 @@ const Order = (props) => {
     const [message, setMessage] = useState("");
     let giaoHang = '35000';
 
+    const [isDone, setisDone] = useState(false)
 
 
     const today = new Date();
@@ -21,10 +26,16 @@ const Order = (props) => {
 
     const time = gioMua + " - " + ngayMua;
 
-    const getLoginInfor = async () => {
 
+    const [totalBalance, settotalBalance] = useState(0);
+
+
+    const getLoginInfor = async () => {
+        const m_totalBalance = await AsyncStorage.getItem('totalBalance')
         const user = await AsyncStorage.getItem('loginInfo');
+
         setUserInfor(JSON.parse(user))
+        settotalBalance(parseFloat(m_totalBalance));
 
     }
 
@@ -41,12 +52,12 @@ const Order = (props) => {
     }, [props.navigation]);
 
     let price2 = String(price);
+
     if (price2.length == 5) {
         price2 = (item.price.substring(0, 2) + '.' + price2.substring(2, 5));
     } else
         if (price2.length == 6) {
             price2 = (price2.substring(0, 3) + '.' + price2.substring(3, 6));
-
         } else
             if (price2.length == 7) {
                 price2 = (price2.substring(0, 1) + '.' + price2.slice(1, 4) + '.' + price2.slice(4, 7));
@@ -107,13 +118,8 @@ const Order = (props) => {
                     pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
                 }
 
-
-
-
     const datHang = () => {
-
-
-
+        setisDone(true)
         let url = 'http://' + ip + ':3000/addOrder';
 
         let obj = {
@@ -125,7 +131,8 @@ const Order = (props) => {
             price: pay,
             products: products,
             status: "Có đơn",
-            time: time
+            time: time,
+            note: "Thanh toán khi nhận hàng"
         }
 
         console.log(obj);
@@ -159,7 +166,7 @@ const Order = (props) => {
                         }
                     })
                 })
-
+                setisDone(false)
                 alert('Đặt hàng thành công')
                 props.navigation.navigate('Home');
 
@@ -170,8 +177,185 @@ const Order = (props) => {
 
     }
 
+    const radioButtons = useMemo(() => ([
+        {
+            id: '1',
+            label: 'Thanh toán khi nhận hàng',
+        },
+        {
+            id: '2',
+            label: 'Ví BarberPay',
+        }
+    ]), []);
+
+
+
+    const [selectedId, setSelectedId] = useState("");
+
+    const hi = () => {
+        alert("Chọn phương thức thanh toán");
+    }
+
+    const BarberPay = async () => {
+
+        if (userInfor.address == "") {
+            alert("Cần cập nhật địa chỉ!");
+            return;
+        }
+
+        let pay2 = String(price + Number(giaoHang));
+
+        if (Number(pay2) > totalBalance) {
+            Alert.alert("Không đủ tiền trong ví", "Bạn có muốn nạp thêm tiền?", [
+                {
+                    text: "Ok",
+                    onPress: () => {
+                        props.navigation.navigate('Balance')
+                    },
+                },
+                {
+                    text: "Hủy",
+                    style: "cancel"
+                }
+            ])
+
+        } else {
+            setisDone(true)
+            Alert.alert("", "Xác nhận thanh toán bằng ví BarberPay?", [
+                ,
+                {
+                    text: "Hủy",
+
+                },
+                {
+                    text: "Thanh toán",
+                    onPress: async () => {
+                        const tienConLai = totalBalance - Number(pay2);
+
+                        console.log(tienConLai);
+
+                        try {
+                            await AsyncStorage.setItem('totalBalance', tienConLai.toString());
+
+                        } catch (e) {
+                            console.log(e);
+                        }
+
+                        const url = 'http://' + ip + ':3000/changeBalance/' + userInfor._id + '/' + tienConLai;
+
+                        fetch(url, {
+                            method: 'PUT',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                        }).then((res) => {
+                            if (res.status == '200') {
+
+                                const url = 'http://' + ip + ':3000/addBillMoney/' + userInfor._id;
+
+                                const obj = {
+                                    idUser: userInfor._id,
+                                    soDu: "-" + Number(pay2),
+                                    date: ngayMua,
+                                    time: gioMua,
+                                    tongSoDu: tienConLai
+                                }
+
+                                fetch(url, {
+                                    method: 'POST',
+                                    headers: {
+                                        Accept: 'application/json',
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(obj)
+                                }).catch((ex) => {
+                                    console.log(ex);
+                                }).then(res => {
+                                    if (res.status == 200) {
+
+                                        let url = 'http://' + ip + ':3000/addOrder';
+
+                                        let obj = {
+                                            idUser: userInfor._id,
+                                            nameU: userInfor.name,
+                                            phoneU: userInfor.phone,
+                                            addressU: userInfor.address,
+                                            message: message,
+                                            price: pay,
+                                            products: products,
+                                            status: "Đang giao hàng",
+                                            time: time,
+                                            note: "Đã thanh toán"
+                                        }
+
+                                        fetch(url, {
+                                            method: 'POST',
+                                            headers: {
+                                                Accept: 'application/json',
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(obj)
+                                        }).catch((ex) => {
+                                            console.log(ex);
+                                        }).then(res => {
+                                            if (res.status == 200) {
+
+                                                products.forEach((item) => {
+
+                                                    const url = 'http://' + ip + ':3000/delCart/' + item.idCart;
+
+                                                    fetch(url, {
+                                                        method: 'DELETE',
+                                                        headers: {
+                                                            Accept: 'application/json',
+                                                            'Content-Type': 'application/json',
+                                                        }
+                                                    })
+                                                })
+                                                setisDone(false)
+                                                alert('Đặt hàng thành công')
+                                                props.navigation.navigate('Home');
+
+                                            } else {
+                                                alert("cut")
+                                            }
+                                        });
+
+                                    }
+                                })
+
+
+                            } else {
+                                alert("Xảy ra lỗi!");
+                            }
+                        })
+
+
+                    }
+                }
+            ])
+
+
+        }
+
+    }
+
+
     return (
         <View>
+
+            <Modal
+                animationType='fade'
+                visible={isDone}
+                transparent={true}
+            >
+                <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+
+                    <ActivityIndicator />
+                </View>
+            </Modal>
+
             <ScrollView style={{ height: "89%" }}>
                 <View style={styles.address}>
                     <View style={{ flexDirection: 'row' }}>
@@ -223,8 +407,15 @@ const Order = (props) => {
 
                 <View style={styles.note}>
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Phương thức thanh toán</Text>
-                    <Text>Thanh toán khi nhận hàng</Text>
+
+                    <RadioGroup
+                        radioButtons={radioButtons}
+                        onPress={setSelectedId}
+                        selectedId={selectedId}
+                        containerStyle={styles.radio}
+                    />
                 </View>
+
 
                 <View style={styles.note}>
                     <Text style={{ fontSize: 20, fontWeight: '500' }}>Thông tin đơn hàng</Text>
@@ -245,15 +436,27 @@ const Order = (props) => {
                 </View>
 
 
-
             </ScrollView>
-
             <View style={{ marginTop: '2%', height: '10%', backgroundColor: 'white', alignItems: 'flex-end', flexDirection: 'row-reverse', }}>
 
 
-                <TouchableOpacity onPress={datHang} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
-                    <Text style={{ marginTop: '32%' }}>Đặt hàng</Text>
-                </TouchableOpacity>
+                {selectedId == ""
+                    ?
+                    <TouchableOpacity onPress={hi} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
+                        <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
+                    </TouchableOpacity>
+
+                    :
+                    selectedId == "1"
+                        ?
+                        <TouchableOpacity onPress={datHang} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
+                            <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity onPress={BarberPay} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
+                            <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
+                        </TouchableOpacity>
+                }
 
                 <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{pay}đ</Text>
 
@@ -286,6 +489,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 5,
         padding: 10
+    },
+    radio: {
+        alignItems: 'flex-start',
+        marginTop: 5
     }
 
 })
