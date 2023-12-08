@@ -40,7 +40,6 @@ const ChiTietDonHang = (props) => {
 
                     <Text style={{ fontSize: 20, fontWeight: '500', width: '65%', marginLeft: 10 }} >Thông tin nhận hàng</Text>
 
-
                 </View>
 
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -71,11 +70,19 @@ const ChiTietDonHang = (props) => {
                 </View>
 
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 5 }}>
                     <Text style={{ width: '70%', fontSize: 18 }}>Thành tiền:</Text>
                     <Text style={{ color: 'red', fontSize: 18 }}> {props.route.params.price} đ</Text>
                 </View>
-                <Text>Vui lòng thanh toán {props.route.params.price}đ sau khi nhận hàng </Text>
+
+                {
+                    props.route.params.note == "Thanh toán khi nhận hàng"
+                        ? <Text>Vui lòng thanh toán {props.route.params.price}đ sau khi nhận hàng </Text>
+
+                        : <Text>Đơn hàng đã thanh toán</Text>
+                }
+
+
             </View>
 
             <View style={styles.cc}>
