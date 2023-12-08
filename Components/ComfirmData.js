@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
@@ -18,6 +18,7 @@ const ComfirmData = (props) => {
     const [image, setImage] = useState();
     const [userInfo, setuserInfo] = useState({});
     const [idSalon, setIdSalon] = useState();
+    const [isDone, setIsDone] = useState(false)
 
     const [content, setContent] = useState(props.route.params.content)
 
@@ -61,6 +62,7 @@ const ComfirmData = (props) => {
 
     const addBill = async () => {
 
+        setIsDone(true)
         let obj = {
             nameSalon: name,
             addressSalon: address,
@@ -105,7 +107,7 @@ const ComfirmData = (props) => {
 
                     alert("Đặt lịch thành công")
                     props.navigation.navigate('Home');
-
+                    setIsDone(false)
                 }
                 else {
                     alert("Xay ra loi!")
@@ -144,6 +146,16 @@ const ComfirmData = (props) => {
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
 
+            <Modal
+                animationType='fade'
+                visible={isDone}
+                transparent={true}
+            >
+                <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+
+                    <ActivityIndicator />
+                </View>
+            </Modal>
             <Text style={styles.name} >{name}</Text>
 
             <Text style={styles.address}>{address}</Text>
