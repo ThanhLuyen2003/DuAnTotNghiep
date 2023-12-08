@@ -44,7 +44,7 @@ const ChoXacNhan = (props) => {
                 key={item._id}
                 style={{ backgroundColor: 'white', marginBottom: 10, padding: 10 }}
                 onPress={() => props.navigation.navigate('ChiTietDonHang',
-                    { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id })}
+                    { name: item.nameU, address: item.addressU, phone: item.phoneU, message: item.message, price: item.price, time: item.time, product: product, id: item._id, note: item.note })}
             >
 
                 <Text style={styles.status}>Chờ xác nhận</Text>
