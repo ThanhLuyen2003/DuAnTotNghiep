@@ -19,6 +19,8 @@ const ThanhToanAnToan = (props) => {
         setPassword(text);
         setIsPasswordEntered(!!text.trim());
     };
+
+
     useEffect(() => {
         const fetchTotalBalance = async () => {
             try {
@@ -49,6 +51,7 @@ const ThanhToanAnToan = (props) => {
             Alert.alert('Lỗi', 'Mật khẩu không đúng');
         }
     };
+
     const addMoney = async () => {
         try {
             const url_api = `http://${ip}:3000/apiuser/depositMoney/${props.route.params.userId}`;
@@ -76,27 +79,27 @@ const ThanhToanAnToan = (props) => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        
-                        soDu:depositAmount,
-                        date:formattedDate,
-                        time:formattedTime,
-                        tongSoDu:newTotalBalance
+
+                        soDu: "+" + depositAmount,
+                        date: formattedDate,
+                        time: formattedTime,
+                        tongSoDu: newTotalBalance
                     }),
                 });
                 const billMoneyResult = await billMoneyResponse.json();
-                    const billMoneyId = billMoneyResult._id;
+                const billMoneyId = billMoneyResult._id;
                 if (billMoneyResponse.ok) {
                     console.log('BillMoney created:', billMoneyResult);
                     // console.log(billMoneyId);
                 } else {
                     console.error('Creating BillMoney failed:', billMoneyResponse.status, billMoneyResponse.statusText);
                 }
-                
+
                 await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
-              
-                
+
+
                 setModalVisible(false);
-                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount,billId:billMoneyId });
+                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount, billId: billMoneyId });
             } else {
                 console.error('Nạp tiền không thành công', response.status, response.statusText);
             }
