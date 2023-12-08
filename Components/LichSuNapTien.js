@@ -15,7 +15,6 @@ const LichSuNapTien = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [showTongSoDu, setShowTongSoDu] = useState(false);
     const [searchDate, setSearchDate] = useState('');
-    console.log(props.route.params);
 
     const getList = async () => {
         const getBillMoneyUrl = `http://${ip}:3000/getBillMoney/${props.route.params.userId}`;
@@ -60,7 +59,7 @@ const LichSuNapTien = (props) => {
                         <Text style={{ color: "gray" }}>{item.time} - {item.date}</Text>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={{ color: "gray" }}>Số dư ví: {showTongSoDu ? formatCurrency(item.tongSoDu) : '******'}đ</Text>
-                            <Text style={{ fontWeight: "bold" }}>+{formatCurrency(item.soDu)}đ</Text>
+                            <Text style={{ fontWeight: "bold" }}>{formatCurrency(item.soDu)}đ</Text>
                         </View>
 
                     </View>
@@ -72,10 +71,10 @@ const LichSuNapTien = (props) => {
 
     return (
         <View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10, height: 80, alignItems: "center", backgroundColor: "#CD853F", borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10, height: 80, alignItems: "center", backgroundColor: "#778899", borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                 <View style={{ alignItems: "center", justifyContent: "center" }}>
                     <Icons name='magnify' size={25} style={{ position: "absolute", left: 15 }} />
-                    <TextInput style={{ width: 320, height: 40, borderWidth: 1, borderColor: "gray", borderRadius: 10, paddingLeft: 40 }} placeholder='Tìm kiếm giao dịch theo ngày' onChangeText={(text) => setSearchDate(text)} />
+                    <TextInput style={{ width: 320, height: 40, borderWidth: 1, borderColor: "white", borderRadius: 10, paddingLeft: 40, }} placeholderTextColor='white' placeholder='Tìm kiếm giao dịch theo ngày' onChangeText={(text) => setSearchDate(text)} />
                 </View>
                 <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
                     <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} />
@@ -89,12 +88,12 @@ const LichSuNapTien = (props) => {
                     billMoneyList.length === 0 ? (
 
                         <View >
-                            <Icon name='calendar-text' size={100} style={{alignSelf:"center",marginTop:200}}/>
+                            <Icon name='calendar-text' size={100} style={{ alignSelf: "center", marginTop: 200 }} />
                             <Text style={{ textAlign: 'center', marginTop: 10 }}>Chưa có lịch sử nạp tiền nào</Text>
                         </View>
                     ) : (
 
-                        <FlatList data={billMoneyList} renderItem={renderItem} />
+                        <FlatList style={{ height: '90%' }} data={billMoneyList} renderItem={renderItem} />
                     )
                 )
             }
