@@ -17,7 +17,6 @@ const Login = (props) => {
     const [pass, setPass] = useState("");
 
     const checkLogin = () => {
-        setIsDone(true)
         if (phone.length == 0) {
             alert("Chưa nhập số điện thoại");
             return;
@@ -27,6 +26,7 @@ const Login = (props) => {
             return;
 
         }
+        setIsDone(true)
 
         let url = 'http://' + ip + ':3000/login/' + phone;
 
