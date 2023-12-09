@@ -26,7 +26,6 @@ const Login = (props) => {
             return;
 
         }
-        setIsDone(true)
 
         let url = 'http://' + ip + ':3000/login/' + phone;
 
@@ -43,6 +42,7 @@ const Login = (props) => {
                     alert("Sai password");
                     return;
                 }
+                setIsDone(true)
 
                 // đến đây là đúng thông tin, thì lưu vào storage và chuyển màn hình
                 try {
@@ -58,11 +58,17 @@ const Login = (props) => {
                         const defaultBalance = 0; // Set your default balance here
                         await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
                     }
+                    await firebase.auth().signInWithEmailAndPassword(objU.email, pass)
+                        .then((data) => {
+                            if (data) {
+                                setIsDone(false);
+                                props.navigation.navigate('HomeTab', { id: objU._id });
+                            }
+                            else {
+                                alert("Cut")
+                            }
+                        })
 
-
-
-                    props.navigation.navigate('HomeTab', { id: objU._id });
-                    setIsDone(false);
                 } catch (e) {
                     // saving error
                     console.log(e);
@@ -73,7 +79,7 @@ const Login = (props) => {
 
 
     }
-   
+
 
     const SignUp = () => {
         props.navigation.navigate('SignUp');

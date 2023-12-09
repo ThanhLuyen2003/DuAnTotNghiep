@@ -38,7 +38,6 @@ import BaoMatThongTin from './Components/ThongTinKhachHang/BaoMatThongTin';
 import CamKetFpoly from './Components/ThongTinKhachHang/CamKetFpoly';
 import DieuKienGiaoDich from './Components/ThongTinKhachHang/DieuKienGiaoDich';
 import VeChungToi from './Components/ThongTinKhachHang/VeChungToi';
-import ThongTinTaiKhoan from './Components/SettingComponents/ThongTinTaiKhoan';
 import PhoneXacNhan from './Components/SettingComponents/PhoneXacNhan';
 import OTPgiaoDich from './Components/SettingComponents/OTPgiaoDich';
 import ThongTinHoTroKhachHang from './Components/SettingComponents/ThongTinHoTroKhachHang';
@@ -53,6 +52,7 @@ import * as Notifications from 'expo-notifications';
 import ThanhToanAnToan from './Components/ThanhToanAnToan';
 import DonHangHoanThanh from './Components/ComponentsDonHang/DonHangHoanThanh';
 import LichSuNapTien from './Components/LichSuNapTien';
+import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

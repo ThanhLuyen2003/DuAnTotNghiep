@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ip from "../IP";
+import { firebase } from "../Firebase";
 
 
 const ManChao = (props) => {
@@ -11,14 +12,15 @@ const ManChao = (props) => {
 
     setTimeout(async () => {
 
-        // if (isLogin == false) {
-        props.navigation.navigate('GioiThieu')
+        console.log(firebase.auth().currentUser);
 
-        // } else {
+        if (firebase.auth().currentUser == null) {
+            props.navigation.navigate('GioiThieu')
 
-        //     props.navigation.navigate('HomeTab')
+        } else {
+            props.navigation.navigate('HomeTab')
 
-        // }
+        }
 
     }, 1000);
 
