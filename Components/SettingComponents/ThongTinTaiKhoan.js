@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
+import { Image, StyleSheet, Text, View, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity, Alert, Modal } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,7 +8,7 @@ import ip from '../../IP';
 const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState();
-    const [isLoading, setisLoading] = useState(false);
+    const [isDone, setIsDone] = useState(false);
     const [totalBalance, settotalBalance] = useState(0)
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
@@ -26,8 +26,6 @@ const ThongTinTaiKhoan = (props) => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
             getLoginInfor();
-
-
         });
 
         return unsubscribe;
@@ -35,7 +33,7 @@ const ThongTinTaiKhoan = (props) => {
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
     const logout = async () => {
-        setisLoading(true)
+        setIsDone(true)
         //console.log(userInfor);
         await new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -45,7 +43,7 @@ const ThongTinTaiKhoan = (props) => {
         setUserInfor({}); // Reset user information state
         setsaveImage({}); // Reset image state
 
-        setisLoading(false)
+        setIsDone(false);
         props.navigation.navigate('Login')
 
     }
@@ -61,7 +59,6 @@ const ThongTinTaiKhoan = (props) => {
             });
             const data = await response.json();
             if (response.ok) {
-                Alert.alert('Thành công', 'Xóa người dùng thành công');
                 props.navigation.navigate('Login');
             } else {
                 Alert.alert('Lỗi', data.message || 'Lỗi xóa người dùng');
@@ -114,30 +111,43 @@ const ThongTinTaiKhoan = (props) => {
                     <Text style={{ width: "40%", color: "gray" }}> Email</Text>
                     <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.email}</Text>
                 </View>
-
+                <Modal
+                    animationType='fade'
+                    visible={isDone}
+                    transparent={true}
+                >
+                    <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+                        <ActivityIndicator />
+                    </View>
+                </Modal>
                 <View style={{ flexDirection: "row", width: "auto", height: 40, alignItems: "center" }}>
                     <Text style={{ width: "40%", color: "gray" }}>Địa chỉ</Text>
                     <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.address}</Text>
                 </View>
             </View>
 
-            <View style={{ width: "100%", height: 100, justifyContent: 'center', alignItems: "center" }}>
-
-                {isLoading ? (
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <ActivityIndicator size="large" color="#CD853F" style={{ backgroundColor: "#C0C0C0", width: 125, height: 125, borderRadius: 10, opacity: 0.5 }} />
-                    </View>
-                ) : (
-                    <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={logout}>ĐĂNG XUẤT</Text>
-                )}
+            <View style={{ width: "100%", height: 50, justifyContent: 'center', alignItems: "center" }}>
+                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={logout}>ĐĂNG XUẤT</Text>
+            </View>
+            <View style={{ width: "100%", height: 50, justifyContent: 'center', alignItems: "center" }}>
+                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} >Quên mật khẩu?</Text>
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
-                <TouchableOpacity onPress={deleteUser}>
+                <TouchableOpacity onPress={()=>{
+                     Alert.alert('Cảnh báo!', 'Bạn có muốn xóa?', [
+                        {
+                          text: 'Cancel',
+                          onPress: () => console.log('Cancel Pressed'),
+                          style: 'cancel',
+                        },
+                        {text: 'OK', onPress: ()=>{deleteUser()}},
+                      ]);
+                }}>
                     <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text>
                 </TouchableOpacity>
 
             </View>
-
+            
         </ScrollView>
     )
 }

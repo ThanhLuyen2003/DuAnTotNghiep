@@ -7,11 +7,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ip from '../IP';
 import { useEffect } from 'react';
+import { ActivityIndicator } from "react-native";
 const ThanhToanAnToan = (props) => {
+    const [isDone, setIsDone] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
     const [password, setPassword] = useState('');
     const [totalBalance, setTotalBalance] = useState(0);
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
+    let dichVu = "Nạp tiền vào ví từ PolyBank";
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -53,6 +56,7 @@ const ThanhToanAnToan = (props) => {
     };
 
     const addMoney = async () => {
+        setIsDone(true)
         try {
             const url_api = `http://${ip}:3000/apiuser/depositMoney/${props.route.params.userId}`;
             const response = await fetch(url_api, {
@@ -65,7 +69,7 @@ const ThanhToanAnToan = (props) => {
             });
             if (response.ok) {
                 const result = await response.json();
-                Alert.alert('Thông báo', 'Nạp tiền thành công');
+               
                 const currentDate = new Date();
                 const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
                 const formattedTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
@@ -83,7 +87,8 @@ const ThanhToanAnToan = (props) => {
                         soDu: "+" + depositAmount,
                         date: formattedDate,
                         time: formattedTime,
-                        tongSoDu: newTotalBalance
+                        tongSoDu: newTotalBalance,
+                        dichVu:dichVu
                     }),
                 });
                 const billMoneyResult = await billMoneyResponse.json();
@@ -96,10 +101,10 @@ const ThanhToanAnToan = (props) => {
                 }
 
                 await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
-
-
+                Alert.alert('Thông báo', 'Nạp tiền thành công');
+                setIsDone(false)
                 setModalVisible(false);
-                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount, billId: billMoneyId });
+                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount, billId: billMoneyId,dichVu:dichVu });
             } else {
                 console.error('Nạp tiền không thành công', response.status, response.statusText);
             }
@@ -150,6 +155,15 @@ const ThanhToanAnToan = (props) => {
                 <Text>Tổng tiền:</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>{formatCurrency(depositAmount)}đ</Text>
             </View>
+            <Modal
+                        animationType='fade'
+                        visible={isDone}
+                        transparent={true}
+                    >
+                        <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+                            <ActivityIndicator />
+                        </View>
+                    </Modal>
             <Modal
                 animationType="slide"
                 transparent={true}

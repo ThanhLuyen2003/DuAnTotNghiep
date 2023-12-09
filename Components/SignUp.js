@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable } from "react-native";
+import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable,Modal } from "react-native";
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ip from "../IP";
 import { firebase } from "../Firebase";
-
+import { ActivityIndicator } from "react-native";
 
 
 const SignUp = (props) => {
@@ -20,7 +20,7 @@ const SignUp = (props) => {
     const [address, setAddress] = useState("");
     const [otp, setOtp] = useState("");
     const [balance, setbalance] = useState(0);
-
+    const [isDone, setIsDone] = useState(false);
 
 
     // Hàm kiểm tra định dạng số điện thoại
@@ -39,6 +39,7 @@ const SignUp = (props) => {
     //kiểm tra kí tự 
 
     const addSignUp = async () => {
+        setIsDone(true);
         if (!name || !email || !phone || !pass || !rePass) {
             alert("Vui lòng điền đầy đủ thông tin.");
             return;
@@ -93,9 +94,9 @@ const SignUp = (props) => {
                     .then(response => {
                         if (response.status === 200) {
                             alert("Thêm thành công");
-
+                            
                             navigation.navigate("Login")
-
+                            setIsDone(false);
                         } else if (response.status === 400) {
                             alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
                         }
@@ -154,6 +155,15 @@ const SignUp = (props) => {
                             <TextInput keyboardType='numeric' maxLength={11} onChangeText={(txt) => { setPhone(txt) }} placeholder="Nhập số điện thoại" placeholderTextColor='white' style={{ color: 'white', width: "100%", height: 50, paddingLeft: 50, borderWidth: 1, borderColor: "white", borderRadius: 10 }} />
                         </View>
                     </View>
+                    <Modal
+                        animationType='fade'
+                        visible={isDone}
+                        transparent={true}
+                    >
+                        <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+                            <ActivityIndicator />
+                        </View>
+                    </Modal>
                     <View style={{ flexDirection: 'column', margin: 10, padding: 5, bottom: 75 }}>
                         <Text style={{ color: "white" }}>Mật khẩu</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -174,6 +184,7 @@ const SignUp = (props) => {
 
                         </View>
                     </View>
+
                     <Pressable style={{ justifyContent: "center", bottom: 80 }} onPress={addSignUp}>
                         <Text style={style.press}>Đăng kí</Text>
                     </Pressable>

@@ -7,7 +7,7 @@ import ip from "../IP";
 import { firebase } from "../Firebase";
 import { Modal } from "react-native";
 import { ActivityIndicator } from "react-native";
-
+import { useEffect } from "react";
 
 const Login = (props) => {
 
@@ -73,7 +73,7 @@ const Login = (props) => {
 
 
     }
-
+   
 
     const SignUp = () => {
         props.navigation.navigate('SignUp');
@@ -90,7 +90,7 @@ const Login = (props) => {
                     visible={isDone}
                     transparent={true}
                 >
-                    <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
+                    <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.5 }}>
 
                         <ActivityIndicator />
                     </View>
