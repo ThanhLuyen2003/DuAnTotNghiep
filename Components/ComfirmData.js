@@ -187,10 +187,7 @@ const ComfirmData = (props) => {
 
                 </ScrollView>
 
-                <View style={{ borderWidth: 0.5 }}></View>
-                <View style={{ justifyContent: "center", padding: 16 }}>
-                    <Text>Phương thức thanh toán</Text>
-                </View>
+
                 <View style={{ borderWidth: 0.5 }}></View>
                 <View style={{ padding: 12, flexDirection: 'row' }} >
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>

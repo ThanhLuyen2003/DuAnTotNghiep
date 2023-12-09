@@ -70,7 +70,7 @@ const Balance = (props) => {
                     <TouchableOpacity>
                         <View style={{ width: "90%", height: 50, borderColor: '#CD853F', borderWidth: 2, borderRadius: 8, paddingLeft: 10, marginLeft: "5%", flexDirection: "row", alignItems: "center", backgroundColor: "#FFCC66" }}>
                             <Image style={{ width: 40, height: 40, borderRadius: 50 }} source={require('../Images/Barbershop.png')} />
-                            <Text>Ví Barber: </Text>
+                            <Text>Ví BarberPay: </Text>
                             <Text style={{ fontWeight: "bold" }}>{formatCurrency(totalBalance)}</Text>
                         </View>
                     </TouchableOpacity>
@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
     contai: {
         width: "100%",
         backgroundColor: "white",
-        borderRadius: 10
+        borderRadius: 10,
+        padding: 10
     },
     opacitybtn: {
 
