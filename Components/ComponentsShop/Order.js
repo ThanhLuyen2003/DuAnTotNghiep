@@ -15,7 +15,7 @@ const Order = (props) => {
     const [price, setPrice] = useState();
     const [message, setMessage] = useState("");
     let giaoHang = '35000';
-
+    let dichVu="Thanh toán ví BarberPay"
     const [isDone, setisDone] = useState(false)
 
 
@@ -259,7 +259,8 @@ const Order = (props) => {
                                     soDu: "-" + Number(pay2),
                                     date: ngayMua,
                                     time: gioMua,
-                                    tongSoDu: tienConLai
+                                    tongSoDu: tienConLai,
+                                    dichVu:dichVu
                                 }
 
                                 fetch(url, {

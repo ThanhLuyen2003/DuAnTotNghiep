@@ -15,7 +15,8 @@ const LichSuNapTien = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [showTongSoDu, setShowTongSoDu] = useState(false);
     const [searchDate, setSearchDate] = useState('');
-
+    const positiveImageSource = require('../Images/imgHome/naptien.jpg'); // Thay đổi đường dẫn tới ảnh dương
+    const negativeImageSource = require('../Images/imgHome/thanhtoan.jpg'); // Thay đổi đường dẫn tới ảnh âm
     const getList = async () => {
         const getBillMoneyUrl = `http://${ip}:3000/getBillMoney/${props.route.params.userId}`;
 
@@ -49,13 +50,15 @@ const LichSuNapTien = (props) => {
         if (searchDate && !item.date.includes(searchDate)) {
             return null;
         }
+        const amountStyle = item.soDu >= 0 ? styles.positiveAmount : styles.negativeAmount;
+        const imageSource = item.soDu >= 0 ? positiveImageSource : negativeImageSource;
         return (
-            <View style={{ flex: 1, padding: 16 }}>
+            <View>
 
-                <View style={{ flexDirection: "row", alignItems: "center", borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
-                    <Icons name='cash-fast' size={60} color={'#CD853F'} style={{ borderRadius: 20 }} />
+                <View style={[{ flexDirection: "row", alignItems: "center", padding: 16 }, amountStyle]}>
+                    <Image source={imageSource} style={{ width: 50, height: 50, borderRadius: 50,borderWidth:0.5 }} />
                     <View style={{ marginLeft: 20, width: "80%" }}>
-                        <Text style={{ fontWeight: "bold" }}>Nạp tiền vào ví từ BankPoly</Text>
+                        <Text style={{ fontWeight: "bold" }}>{item.dichVu}</Text>
                         <Text style={{ color: "gray" }}>{item.time} - {item.date}</Text>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={{ color: "gray" }}>Số dư ví: {showTongSoDu ? formatCurrency(item.tongSoDu) : '******'}đ</Text>
@@ -103,4 +106,13 @@ const LichSuNapTien = (props) => {
 
 export default LichSuNapTien
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    positiveAmount: {
+        backgroundColor: 'white',
+    },
+    negativeAmount: {
+        backgroundColor: '#CCFFFF',
+    },
+
+
+})

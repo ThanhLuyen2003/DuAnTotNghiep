@@ -53,6 +53,7 @@ import * as Notifications from 'expo-notifications';
 import ThanhToanAnToan from './Components/ThanhToanAnToan';
 import DonHangHoanThanh from './Components/ComponentsDonHang/DonHangHoanThanh';
 import LichSuNapTien from './Components/LichSuNapTien';
+import QuenMatKhau from './Components/QuenMatKhau';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -145,6 +146,8 @@ export default function App() {
         <Stack.Screen name="ThanhToanAnToan" component={ThanhToanAnToan} options={{ title: "Thanh toán an toàn" }} />
 
         <Stack.Screen name="LichSuNapTien" component={LichSuNapTien} options={{ headerShown: false }} />
+
+        <Stack.Screen name="QuenMatKhau" component={QuenMatKhau} options={{ title:"Quên mật khẩu" }} />
       </Stack.Navigator>
     </NavigationContainer>
 

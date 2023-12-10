@@ -41,7 +41,9 @@ const Login = (props) => {
                 let objU = res_json[0];
                 if (objU.pass != pass) {
                     alert("Sai password");
+                    setIsDone(false)
                     return;
+                  
                 }
 
                 // đến đây là đúng thông tin, thì lưu vào storage và chuyển màn hình
@@ -54,10 +56,14 @@ const Login = (props) => {
                     if (objU.balance) {
                         await AsyncStorage.setItem('totalBalance', objU.balance.toString()); // lưu số tiền khi có người dùng với
                     } else {
-                        // If balance doesn't exist in objU, you can set a default value or handle it as needed.
-                        const defaultBalance = 0; // Set your default balance here
+                        
+                        const defaultBalance = 0; 
                         await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
                     }
+                    if(objU.pass){
+                        await AsyncStorage.setItem('pass', objU.pass);
+                    }
+
 
 
 

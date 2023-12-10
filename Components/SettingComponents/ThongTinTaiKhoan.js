@@ -10,6 +10,7 @@ const ThongTinTaiKhoan = (props) => {
     const [saveImage, setsaveImage] = useState();
     const [isDone, setIsDone] = useState(false);
     const [totalBalance, settotalBalance] = useState(0)
+   const [oldPassword, setoldPassword] = useState("");
     const editProfile = () => {
         props.navigation.navigate("EditProfile")
     }
@@ -18,6 +19,8 @@ const ThongTinTaiKhoan = (props) => {
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
         const m_totalBalance = await AsyncStorage.getItem('totalBalance')
+        const m_oldPassword=await AsyncStorage.getItem("pass");
+        setoldPassword(m_oldPassword);
         setUserInfor(JSON.parse(user))
         setsaveImage(m_saveImage);
         settotalBalance(parseFloat(m_totalBalance));
@@ -34,9 +37,6 @@ const ThongTinTaiKhoan = (props) => {
 
     const logout = async () => {
         setIsDone(true)
-        //console.log(userInfor);
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
         await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "", totalBalance: "" }));
         await AsyncStorage.removeItem("savedImage")
 
@@ -130,7 +130,7 @@ const ThongTinTaiKhoan = (props) => {
                 <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={logout}>ĐĂNG XUẤT</Text>
             </View>
             <View style={{ width: "100%", height: 50, justifyContent: 'center', alignItems: "center" }}>
-                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} >Quên mật khẩu?</Text>
+                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={()=>{props.navigation.navigate("QuenMatKhau",{userId:userInfor._id,oldPassword:oldPassword})}}>Quên mật khẩu?</Text>
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
                 <TouchableOpacity onPress={()=>{
