@@ -119,7 +119,6 @@ const Order = (props) => {
                 }
 
     const datHang = () => {
-        setisDone(true)
         let url = 'http://' + ip + ':3000/addOrder';
 
         let obj = {
@@ -141,6 +140,7 @@ const Order = (props) => {
             alert("Cần cập nhật địa chỉ!");
             return;
         }
+        setisDone(true)
 
         fetch(url, {
             method: 'POST',

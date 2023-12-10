@@ -53,10 +53,10 @@ const Profile = (props) => {
     return (
         <ImageBackground blurRadius={2} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
             <View style={{ flex: 1 }}>
-                <View style={{ height: '15.5%', alignItems: "center", justifyContent: "center" }}>
+                <View style={{ height: '20.5%', alignItems: "center", justifyContent: "center" }}>
                 </View>
 
-                <View style={{ height: '83.5%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                <View style={{ height: '79.5%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
                             {isAvatarValid ? (

@@ -61,7 +61,7 @@ const EditProfile = (props) => {
             console.log('Lỗi khi lưu ảnh vào Storage:', error);
             return;
         }
-        
+
     };
 
     const pickImage = async () => {
@@ -71,47 +71,44 @@ const EditProfile = (props) => {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3], // khung view cắt ảnh 
-            quality: 0.11111111111111111111111,
+            quality: 1,
             multiple: true, // Enable multiple image selection
         });
-        console.log(result);
+        //console.log(result);
 
         if (!result.canceled) {
-            const selectedImages = result.assets;
-            if (result.assets.length > 0 && result.assets[0].uri) {
-                setimg_source(result.assets[0].uri);
-                let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
-                let file_ext = _uri.substring(_uri.lastIndexOf('.') + 1); // lấy đuôi file
-                FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' })
-                    .then((res) => {
-                        // phải nối chuỗi với tiền tố data image
-                        setiimg_base64("data:image/" + file_ext + ";base64," + res);
+            setiimg_base64(result.assets[0].uri);
+            //chuyển ảnh thành base64 để upload lên json
+            let _uri = result.assets[0].uri;  // địa chỉ file ảnh đã chọn
+            let file_ext = _uri.substring(_uri.lastIndexOf('.') + 1); // lấy đuôi file
 
-                        console.log(img_base64);
+            FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' })
+                .then((res) => {
+                    // phải nối chuỗi với tiền tố data image
+                    setiimg_base64(result.assets[0].uri);
 
-                        // upload ảnh lên api thì dùng PUT có thể viết ở đây
-                        let url_api = "http://" + ip + ":3000/apiuser/updateAvatar/" + userInfo._id
-                        let obj1 = { avatar: img_base64 }
-                        fetch(url_api, {
-                            method: 'PUT',
-                            headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(obj1),
-                        }).then(async (res) => {
-                            if (res.status === 200) {
-                                saveImageToStorage(img_base64);
-                            } else {
-                                alert("Có lỗi xảy ra!")
-                                console.log(res);
-                                return res;
-                            }
-                        }).catch((err) => {
-                            console.log(err);
-                        });
+                    // upload ảnh lên api thì dùng PUT có thể viết ở đây
+                    let url_api = "http://" + ip + ":3000/apiuser/updateAvatar/" + userInfo._id
+                    let obj1 = { avatar: result.assets[0].uri }
+
+                    fetch(url_api, {
+                        method: 'PUT',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(obj1),
+                    }).then(async (res) => {
+                        if (res.status === 200) {
+                            saveImageToStorage(result.assets[0].uri);
+                            alert("Đổi ảnh đại diện thành công")
+                        } else {
+                            alert("Đổi ảnh đại diện thất bại")
+                        }
+                    }).catch((err) => {
+                        console.log(err);
                     });
-            }
+                });
 
 
         }
@@ -325,8 +322,7 @@ const EditProfile = (props) => {
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Email</Text>
-                    <TextInput style={styles.textInput} placeholder='Email' value={email}
-                        onChangeText={(text) => handleInputChange(text, 'email')} />
+                    <Text style={{ marginTop: 8 }}>{email}</Text>
                 </View>
 
                 <Modal

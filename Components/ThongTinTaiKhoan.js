@@ -3,7 +3,9 @@ import React from 'react'
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
-import ip from '../../IP';
+import ip from '../IP';
+import { firebase } from "../Firebase";
+
 
 const ThongTinTaiKhoan = (props) => {
     const [userInfor, setUserInfor] = useState({});
@@ -40,34 +42,14 @@ const ThongTinTaiKhoan = (props) => {
         await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "", totalBalance: "" }));
         await AsyncStorage.removeItem("savedImage")
 
-        setUserInfor({}); // Reset user information state
-        setsaveImage({}); // Reset image state
+        await firebase.auth().signOut();
 
         setIsDone(false);
         props.navigation.navigate('Login')
 
     }
 
-    const deleteUser = async () => {
-        try {
-            const userId = userInfor._id;
-            const response = await fetch('http://' + ip + ':3000/apiuser/deleteUser/' + userId, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
-            if (response.ok) {
-                props.navigation.navigate('Login');
-            } else {
-                Alert.alert('Lỗi', data.message || 'Lỗi xóa người dùng');
-            }
-        } catch (error) {
-            console.error('Error :', error);
-            Alert.alert('Error', 'An unexpected error occurred.');
-        }
-    };
+
     return (
         <ScrollView>
 
@@ -133,21 +115,8 @@ const ThongTinTaiKhoan = (props) => {
                 <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={()=>{props.navigation.navigate("QuenMatKhau",{userId:userInfor._id,oldPassword:oldPassword})}}>Quên mật khẩu?</Text>
             </View>
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
-                <TouchableOpacity onPress={()=>{
-                     Alert.alert('Cảnh báo!', 'Bạn có muốn xóa?', [
-                        {
-                          text: 'Cancel',
-                          onPress: () => console.log('Cancel Pressed'),
-                          style: 'cancel',
-                        },
-                        {text: 'OK', onPress: ()=>{deleteUser()}},
-                      ]);
-                }}>
-                    <Text style={{ borderBottomWidth: 1, color: "red", fontWeight: "500", borderBottomColor: "red" }}>Xóa tài khoản</Text>
-                </TouchableOpacity>
-
             </View>
-            
+
         </ScrollView>
     )
 }
