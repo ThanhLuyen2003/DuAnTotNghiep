@@ -99,6 +99,7 @@ const SignUp = (props) => {
                             setIsDone(false);
                         } else if (response.status === 400) {
                             alert("Số điện thoại đăng kí trùng lặp hoặc email bị trùng ")
+                            setIsDone(false);
                         }
                         else {
                             alert("Thêm thất bại ");
@@ -114,7 +115,8 @@ const SignUp = (props) => {
             })
             .catch((e) => {
                 alert("Email đã được đăng kí bởi tài khoản khác");
-                return
+                setIsDone(false);
+                return;
             })
 
 

@@ -147,7 +147,7 @@ export default function App() {
 
         <Stack.Screen name="LichSuNapTien" component={LichSuNapTien} options={{ headerShown: false }} />
 
-        <Stack.Screen name="QuenMatKhau" component={QuenMatKhau} options={{ title:"Quên mật khẩu" }} />
+        <Stack.Screen name="QuenMatKhau" component={QuenMatKhau} options={{ headerShown:false }} />
       </Stack.Navigator>
     </NavigationContainer>
 

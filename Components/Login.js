@@ -15,7 +15,7 @@ const Login = (props) => {
 
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
-
+    
     const checkLogin = () => {
         if (phone.length == 0) {
             alert("Chưa nhập số điện thoại");
@@ -56,34 +56,21 @@ const Login = (props) => {
                     if (objU.balance) {
                         await AsyncStorage.setItem('totalBalance', objU.balance.toString()); // lưu số tiền khi có người dùng với
                     } else {
-                        
                         const defaultBalance = 0; 
                         await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
                     }
                     if(objU.pass){
                         await AsyncStorage.setItem('pass', objU.pass);
                     }
-
-                    await firebase.auth().signInWithEmailAndPassword(objU.email, pass)
-                        .then((data) => {
-                            if (data) {
-                                setIsDone(false);
-                                props.navigation.navigate('HomeTab', { id: objU._id });
-                            }
-                            else {
-                                alert("Cut")
-                            }
-                        })
+                    props.navigation.navigate('HomeTab', { id: objU._id });
+                    setIsDone(false)
 
                 } catch (e) {
                     // saving error
                     console.log(e);
+                    setIsDone(false);
                 }
-
-
             })
-
-
     }
 
 
