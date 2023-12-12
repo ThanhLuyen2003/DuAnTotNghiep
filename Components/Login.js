@@ -15,7 +15,7 @@ const Login = (props) => {
 
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
-    
+
     const checkLogin = () => {
         if (phone.length == 0) {
             alert("Chưa nhập số điện thoại");
@@ -26,6 +26,7 @@ const Login = (props) => {
             return;
 
         }
+        setIsDone(true)
 
         let url = 'http://' + ip + ':3000/login/' + phone;
 
@@ -34,6 +35,8 @@ const Login = (props) => {
             .then(async (res_json) => {
                 if (res_json.length != 1) {
                     alert("Không tồn tại username hoặc bị trùng lặp dữ liệu");
+                    setIsDone(false)
+
                     return;
                 }
                 // đến đây là tồn tại 1 bản ghi, kiểm tra password
@@ -42,9 +45,8 @@ const Login = (props) => {
                     alert("Sai password");
                     setIsDone(false)
                     return;
-                  
+
                 }
-                setIsDone(true)
 
                 // đến đây là đúng thông tin, thì lưu vào storage và chuyển màn hình
                 try {
@@ -56,10 +58,11 @@ const Login = (props) => {
                     if (objU.balance) {
                         await AsyncStorage.setItem('totalBalance', objU.balance.toString()); // lưu số tiền khi có người dùng với
                     } else {
-                        const defaultBalance = 0; 
+
+                        const defaultBalance = 0;
                         await AsyncStorage.setItem('totalBalance', defaultBalance.toString());
                     }
-                    if(objU.pass){
+                    if (objU.pass) {
                         await AsyncStorage.setItem('pass', objU.pass);
                     }
                     props.navigation.navigate('HomeTab', { id: objU._id });

@@ -12,13 +12,15 @@ const ManChao = (props) => {
 
     setTimeout(async () => {
 
-        console.log(firebase.auth().currentUser);
+        const value = await AsyncStorage.getItem('loginInfo');
+        const userData = JSON.parse(value);
 
-        if (firebase.auth().currentUser == null) {
+        if (value == null) {
             props.navigation.navigate('GioiThieu')
 
         } else {
-            props.navigation.navigate('HomeTab')
+            console.log(userData._id);
+            props.navigation.navigate('HomeTab', { id: userData._id })
 
         }
 

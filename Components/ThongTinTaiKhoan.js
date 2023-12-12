@@ -39,13 +39,12 @@ const ThongTinTaiKhoan = (props) => {
 
     const logout = async () => {
         setIsDone(true)
-        await AsyncStorage.setItem('loginInfo', JSON.stringify({ name: "", _id: "", email: "", phone: "", address: "", avatar: "", pass: "", totalBalance: "" }));
+        await AsyncStorage.removeItem('loginInfo');
         await AsyncStorage.removeItem("savedImage")
 
-        await firebase.auth().signOut();
 
         setIsDone(false);
-        props.navigation.navigate('Login')
+        props.navigation.navigate('GioiThieu')
 
     }
 
