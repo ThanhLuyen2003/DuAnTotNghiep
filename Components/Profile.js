@@ -58,9 +58,9 @@ const Profile = (props) => {
 
                 <View style={{ height: '79.5%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
+                        <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }} style={{ borderColor: "white", borderWidth: 3, borderRadius: 100 }}>
                             {isAvatarValid ? (
-                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={saveImage}>
+                                <ImageBackground style={{ width: 120, height: 120, borderWidth: 0, borderRadius: 100, }} imageStyle={{ borderRadius: 100 }} src={saveImage}>
                                     <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                         <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                     </View>
@@ -68,7 +68,7 @@ const Profile = (props) => {
 
                             ) :
                                 (
-                                    <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, borderColor: "#CD853F" }} imageStyle={{ borderRadius: 100 }} src={userInfor.avatar}>
+                                    <ImageBackground style={{ width: 120, height: 120, borderWidth: 0, borderRadius: 100, }} imageStyle={{ borderRadius: 100 }} src={userInfor.avatar}>
                                         <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
                                             <Icons name='camera' size={30} color={'black'} style={{ opacity: 0.7, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#fff", borderRadius: 10 }} />
                                         </View>

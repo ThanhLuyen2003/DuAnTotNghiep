@@ -85,11 +85,13 @@ const EditProfile = (props) => {
             FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' })
                 .then((res) => {
                     // phải nối chuỗi với tiền tố data image
-                    setiimg_base64(result.assets[0].uri);
+                    const img = "data:image/" + file_ext + ";base64," + res;
+
+                    setiimg_base64(img);
 
                     // upload ảnh lên api thì dùng PUT có thể viết ở đây
                     let url_api = "http://" + ip + ":3000/apiuser/updateAvatar/" + userInfo._id
-                    let obj1 = { avatar: result.assets[0].uri }
+                    let obj1 = { avatar: img }
 
                     fetch(url_api, {
                         method: 'PUT',
@@ -100,7 +102,7 @@ const EditProfile = (props) => {
                         body: JSON.stringify(obj1),
                     }).then(async (res) => {
                         if (res.status === 200) {
-                            saveImageToStorage(result.assets[0].uri);
+                            saveImageToStorage(img);
                             alert("Đổi ảnh đại diện thành công")
                         } else {
                             alert("Đổi ảnh đại diện thất bại")

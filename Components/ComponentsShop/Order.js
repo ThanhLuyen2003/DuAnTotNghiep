@@ -15,7 +15,7 @@ const Order = (props) => {
     const [price, setPrice] = useState();
     const [message, setMessage] = useState("");
     let giaoHang = '35000';
-    let dichVu="Thanh toán ví BarberPay"
+    let dichVu = "Thanh toán ví BarberPay"
     const [isDone, setisDone] = useState(false)
 
 
@@ -166,6 +166,7 @@ const Order = (props) => {
                         }
                     })
                 })
+
                 setisDone(false)
                 alert('Đặt hàng thành công')
                 props.navigation.navigate('Home');
@@ -220,7 +221,6 @@ const Order = (props) => {
             ])
 
         } else {
-            setisDone(true)
             Alert.alert("", "Xác nhận thanh toán bằng ví BarberPay?", [
                 ,
                 {
@@ -231,6 +231,7 @@ const Order = (props) => {
                     text: "Thanh toán",
                     onPress: async () => {
                         const tienConLai = totalBalance - Number(pay2);
+                        setisDone(true)
 
                         console.log(tienConLai);
 
@@ -260,7 +261,7 @@ const Order = (props) => {
                                     date: ngayMua,
                                     time: gioMua,
                                     tongSoDu: tienConLai,
-                                    dichVu:dichVu
+                                    dichVu: dichVu
                                 }
 
                                 fetch(url, {
