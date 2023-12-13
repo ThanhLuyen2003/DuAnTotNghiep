@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, TouchableHighlight, FlatList } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlatGrid } from 'react-native-super-grid';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ip from "../IP";
 
+
 const KhamPha = (props) => {
+    const { navigation } = props;
+    const [userInfor, setUserInfor] = useState({});
+    const [saveImage, setsaveImage] = useState({});
+    const [showLikedItems, setShowLikedItems] = useState(false);
+
     const [data, setData] = useState([
         {
             id: '1',
             image: 'https://classic.vn/wp-content/uploads/2022/09/classicvn-kieu-toc-side-part-vuot-ru-dep-d.png',
             description: 'Phá cách với kiểu tóc...',
+
             likeCount: 0,
             isLiked: false,
-            Detail: "Tóc xoăn nam luôn là kiểu tóc phong cách...",
-            Detail1: "Kiểu tóc xoăn nam ngắn kết hợp Fade",
+            Detail: "Tóc xoăn nam luôn là kiểu tóc phong cách. Mang đến cho nam giới ở các độ tuổi khác nhau vẻ ngoài trẻ trung nhưng vẫn cổ điển. Đương nhiên, mái tóc xoăn của nam giới có kết cấu đáng kể. Nhưng rõ ràng có một quan niệm sai lầm lớn rằng kiểu tóc xoăn khá khó duy trì hay bảo dưỡng. Thực tế, mọi kiểu tóc đều cần cắt tỉa và chăm chút như nhau. Do đó, đừng ngần ngại chọn cho mình 1 kiểu tóc xoăn ấn tượng để thay đổi bản thân!",
+            Detail1: " Kiểu tóc xoăn nam ngắn kết hợp Fade",
             image1: "https://classic.vn/wp-content/uploads/2022/12/pha-cach-voi-mau-toc-xoan-nam-ca-tinh-1.webp",
-            Detail2: "Trên mái tóc ngắn gợn sóng của nam giới...",
+            Detail2: "Trên mái tóc ngắn gợn sóng của nam giới, không có giới hạn nào mà bạn không thể tạo kiểu. Kết hợp fade và undercut sẽ cho ra kiểu dáng hay ho. Trên thực tế, kiểu tóc này sẽ mang lại cho bạn một vẻ ngoài táo bạo nhưng hào nhoáng. Nếu có một kiểu tóc bạn nên thử với quần short của mình, thì đó nên là kiểu tóc có phần dưới bạc màu.Để tận dụng tối đa kiểu tóc xoăn, hãy đảm bảo các lọn tóc được bồng bềnh.",
             Detail3: "Phá cách với kiểu toc nam Side Part vuốt rủ và học cách vuốt trong tích tắc"
+
+
+
         },
         {
             id: '2',
@@ -95,37 +105,41 @@ const KhamPha = (props) => {
             Detail3: "TOP những màu tóc nhuộm lý tưởng dành cho học sinh",
         },
 
-        // Add more data as needed
-    ]);
 
+
+
+    ]);
     const [data2, setdata2] = useState([]);
-    const { navigation } = props;
-    const [userInfor, setUserInfor] = useState({});
-    const [saveImage, setsaveImage] = useState({});
-    const [showLikedItems, setShowLikedItems] = useState(false);
 
     const getList = async () => {
+
+
         let api = 'http://' + ip + ':3000/getCart/' + props.route.params.id;
 
         try {
             const response = await fetch(api);
-            const json = await response.json();
-            setdata2(json);
+            const json = await response.json(); //chuyen du lieu thanh json
+
+            setdata2(json);// do du lieu vao state
         } catch (err) {
             console.error(err);
         }
-    }
 
+    }
     const getLoginInfor = async () => {
+
         const user = await AsyncStorage.getItem('loginInfo');
-        const m_saveImage = await AsyncStorage.getItem('savedImage');
+        const m_saveImage = await AsyncStorage.getItem('savedImage')
 
         setUserInfor(JSON.parse(user))
         setsaveImage(m_saveImage);
     }
 
-    useEffect(() => {
+
+
+    React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
+            // cập nhật giao diện ở đây
             getLoginInfor();
             getList();
         });
@@ -133,199 +147,173 @@ const KhamPha = (props) => {
         return unsubscribe;
     }, [props.navigation]);
 
+
     const yeuThich = (itemIndex) => {
         setData((prevData) => {
             const newData = [...prevData];
-            newData[itemIndex].isLiked = !newData[itemIndex].isLiked;
-            newData[itemIndex].likeCount = newData[itemIndex].isLiked
-                ? newData[itemIndex].likeCount + 1
-                : newData[itemIndex].likeCount - 1;
+            newData[itemIndex].
+
+                isLiked = !newData[itemIndex].isLiked;
+            newData[itemIndex].
+
+                likeCount = newData[itemIndex].isLiked
+                    ? newData[itemIndex].likeCount + 1
+                    : newData[itemIndex].likeCount - 1;
             return newData;
         });
     }
-
     const getTotalLikes = () => {
         return data.reduce((total, item) => total + item.likeCount, 0);
     }
-
     const getLikedItems = () => {
+        // Function to filter and get all liked items
         return data.filter((item) => item.isLiked);
     }
+
     const numColumns = showLikedItems ? 2 : 1;
     const key = showLikedItems ? 'liked' : 'not-liked';
     const renderItem = ({ item, index }) => {
         return (
-            <TouchableOpacity
-                style={styles.gridItem}
-                onPress={() => { navigation.navigate("ChiTietKhamPha", { id: item.id, description: item.description, image: item.image, Detail1: item.Detail1, Detail2: item.Detail2, Detail3: item.Detail3, image1: item.image1 }) }}
-            >
-                <Image style={styles.image} source={{ uri: item.image }} />
-                <Text style={styles.description}>{item.description}</Text>
+            <View style={{ flex: 1, left: 10, marginTop: 10 }} >
+                <TouchableOpacity onPress={() => { navigation.navigate("ChiTietKhamPha", { id: item.id, description: item.description, image: item.image, Detail1: item.Detail1, Detail2: item.Detail2, Detail3: item.Detail3, image1: item.image1 }) }}>
+                    <Image style={{ width: '90%', height: 200, borderRadius: 10, opacity: 0.8 }} source={{ uri: item.image }} />
+                </TouchableOpacity>
+
+
+                <Text style={{ position: 'absolute', top: 170, left: 20, color: "white", fontWeight: "bold" }}>{item.description}</Text>
                 <TouchableOpacity onPress={() => yeuThich(index)}>
                     <Icons
                         name="robot-love-outline"
                         size={25}
                         style={[
-                            styles.likeIcon,
+                            { position: 'absolute', bottom: 150, left: 130, width: 40, height: 40, paddingLeft: 7, paddingTop: 6, borderRadius: 50 },
                             { backgroundColor: item.isLiked ? 'yellow' : '#CCCCCC' },
                         ]}
                         color={'white'}
                     />
                 </TouchableOpacity>
-            </TouchableOpacity>
+
+            </View>
         )
     }
 
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
-
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => props.navigation.navigate("ThongTinTaiKhoan")}>
+        <View style={{ height: '90%' }}>
+
+            <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
+
+                <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
                     {isAvatarValid ? (
-                        <Image source={{ uri: saveImage }} style={styles.avatarImage} />
-                    ) : (
-                        <Image source={{ uri: userInfor.avatar }} style={styles.avatarImage} />
-                    )}
+                        <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+
+                    ) :
+                        (
+                            <Image source={{ uri: userInfor.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+                        )}
                 </TouchableOpacity>
-                <View style={styles.userInfo}>
-                    <Text style={styles.userName}>{userInfor.name}</Text>
-                    <Text style={styles.userStatus}>Muốn ất ơ đến Fpoly Barber</Text>
+                <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
+                    <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
+                    <Text style={{ color: 'white' }} >Muốn ất ơ đến Fpoly Barber</Text>
                 </View>
-                <TouchableOpacity onPress={() => props.navigation.navigate('Cart', { id: userInfor._id })} style={styles.cartIcon}>
+
+                <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20 }} >
                     <Icons name="cart" size={25} color="white" />
-                    {data2.length !== 0 && (
-                        <View style={styles.cartBadge}>
-                            <Text style={styles.cartBadgeText}>{data2.length}</Text>
+
+                    {data2.length != 0
+                        ? <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+                            <Text style={{ color: 'white', fontSize: 10, }} > {data2.length} </Text>
                         </View>
-                    )}
+                        : <View></View>
+                    }
+
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={styles.accountIcon}>
+
+                <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
                     <Icons name="account" size={25} color="white" />
                 </TouchableOpacity>
-            </View>
 
-            <View style={styles.mainContainer}>
+
+            </View>
+            <View style={styles.con2}>
                 <Text>CÙNG Fpoly Barber KHÁM PHÁ</Text>
-                <Text style={styles.trendingText}>XU HƯỚNG TÓC HOT NHẤT</Text>
+                <Text style={{ fontSize: 18, fontWeight: "bold" }}>XU HƯỚNG TÓC HOT NHẤT</Text>
+                <View style={{ alignItems: "center", padding: 10 }}>
+                </View>
                 <TouchableOpacity onPress={() => setShowLikedItems(!showLikedItems)}>
-                    <View style={styles.likeToggleContainer}>
+                    <View style={{ width: "100%", height: 45, backgroundColor: "#C0C0C0", padding: 10, borderRadius: 10, flexDirection: "row", alignItems: "center" }}>
                         <Icon name="robot-love" size={20} />
-                        <Text style={styles.likeToggleText}>Đã thích</Text>
-                        <Text style={styles.likeCountBadge}>{getTotalLikes()}</Text>
+                        <Text style={{ marginLeft: 10 }}>Đã thích</Text>
+                        <Text style={{ marginLeft: "auto", backgroundColor: "yellow", width: 20, height: 20, paddingLeft: 6, borderRadius: 50 }}>{getTotalLikes()}</Text>
                     </View>
                 </TouchableOpacity>
 
-                <FlatGrid
-                    key={key}
-                    numColumns={showLikedItems ? 2 : 1}
-                    itemDimension={150}
-                    data={showLikedItems ? getLikedItems() : data}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    style={styles.gridView}
-                    spacing={5}
-                />
+                {showLikedItems ? (
+                    <FlatGrid
+                        key={key}
+                        
+                        itemDimension={150}
+                        data={getLikedItems()}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        style={styles.gridView}
+                        spacing={5}
+                    />
+                ) : (
+                    <FlatGrid
+                        spacing={5}
+                        key={key}
+                        
+                        itemDimension={150}
+                        data={data}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        style={styles.gridView}
+                    />
+                )}
+
             </View>
+
         </View>
     )
 }
 
+export default KhamPha
+
 const styles = StyleSheet.create({
-    container: {
-        height: '100%',
-        backgroundColor: '#ffffff',
-    },
-    header: {
-        height: '20%',
+    con2: {
+        height: '83.5%',
         width: '100%',
-        backgroundColor: '#778899',
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 20,
-    },
-    avatarImage: {
-        height: 60,
-        width: 60,
-        borderRadius: 50,
-        marginBottom: '5%',
-    },
-    userInfo: {
-        alignItems: 'flex-start',
-        marginLeft: 10,
-        marginBottom: '5%',
-    },
-    userName: {
-        fontSize: 20,
-        color: 'white',
-    },
-    userStatus: {
-        color: 'white',
-    },
-    cartIcon: {
-        position: 'absolute',
-        right: 20,
-    },
-    cartBadge: {
-        position: 'absolute',
-        bottom: 15,
-        left: 12,
-        height: 18,
-        backgroundColor: 'red',
-        padding: 3,
-        borderRadius: 10,
-    },
-    cartBadgeText: {
-        color: 'white',
-        fontSize: 10,
-    },
-    accountIcon: {
-        position: 'absolute',
-        right: 60,
-    },
-    mainContainer: {
-        height: '80%',
-        width: '100%',
+        backgroundColor: 'white',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         position: 'absolute',
-        top: '20%',
+        top: "17%",
         padding: 10,
-        alignItems: 'center',
+        alignItems: 'center'
     },
-    trendingText: {
-        fontSize: 18,
-        fontWeight: "bold",
-    },
-    likeToggleContainer: {
-        width: '100%',
-        height: 45,
-        backgroundColor: "#C0C0C0",
+    but: {
+        backgroundColor: '#778899',
         padding: 10,
-        borderRadius: 10,
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    likeToggleText: {
-        marginLeft: 10,
-    },
-    likeCountBadge: {
-        marginLeft: "auto",
-        backgroundColor: "yellow",
-        width: 20,
-        height: 20,
-        paddingLeft: 6,
         borderRadius: 50,
+        width: 50,
+        height: 50
+
     },
-    gridView: {
-        marginTop: 20,
-        flex: 1,
+    img: {
+        width: 392, height: 140, margin: 10,
+        borderRadius: 10
     },
-    gridItem: {
-        flex: 1,
-        margin: 5,
-        borderRadius: 10,
-        overflow: 'hidden',
+    hot: {
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: '#EEEEEE',
+        borderRadius: 10
+
+    },
+    flatListContainer: {
+
+        width: "100%"
     },
     image: {
         width: '100%',
@@ -333,23 +321,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         opacity: 0.8,
     },
-    description: {
-        position: 'absolute',
-        top: 170,
-        left: 20,
-        color: "white",
-        fontWeight: "bold",
+    gridView: {
+        marginTop: 20,
+        flex: 1,
     },
-    likeIcon: {
-        position: 'absolute',
-        bottom: 150,
-        left: 130,
-        width: 40,
-        height: 40,
-        paddingLeft: 7,
-        paddingTop: 6,
-        borderRadius: 50,
-    },
-});
-
-export default KhamPha;
+})
