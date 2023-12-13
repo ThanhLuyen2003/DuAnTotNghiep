@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ip from '../IP';
 import { firebase } from "../Firebase";
+import { CommonActions } from '@react-navigation/native';
 
 
 const ThongTinTaiKhoan = (props) => {
@@ -44,16 +45,17 @@ const ThongTinTaiKhoan = (props) => {
             await AsyncStorage.removeItem('savedImage');
             await AsyncStorage.removeItem('totalBalance');
 
-            
-            props.navigation.reset({
-                index: 0,
-                routes: [{ name: 'GioiThieu' }], 
-            });
+            setIsDone(false);
+
+            props.navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'GioiThieu' }]
+                })
+            )
 
         } catch (error) {
             console.error('Error logging out:', error.message);
-        } finally {
-            setIsDone(false);
         }
     }
 
