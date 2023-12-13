@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, Linking,Modal } from "react-native";
+import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, Linking, Modal } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Onboarding from 'react-native-onboarding-swiper';
 import { useEffect } from "react";
@@ -76,7 +76,7 @@ const Home = (props) => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ height:"90%" }}>
             <Modal
                 transparent={true}
                 animationType="slide"
@@ -87,7 +87,7 @@ const Home = (props) => {
                     <View style={{ backgroundColor: '#778899', padding: 20, borderRadius: 10, width: '80%' }}>
                         <Text>Chào mừng {userInfor.name} đến với ứng dụng đặt lịch PolyBarber!</Text>
                         <TouchableOpacity onPress={closeModal} style={{ marginTop: 20 }}>
-                            <Text style={{ color: 'blue',height:20,width:50,borderWidth:0.5,borderRadius:10,textAlign:"center" }}>Đóng</Text>
+                            <Text style={{ color: 'blue', height: 20, width: 50, borderWidth: 0.5, borderRadius: 10, textAlign: "center" }}>Đóng</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -316,6 +316,7 @@ const Home = (props) => {
                     <Icons name="phone" size={25} style={{ alignSelf: 'center', marginTop: 8 }} />
                 </View>
             </TouchableOpacity>
+
 
         </View>
 
