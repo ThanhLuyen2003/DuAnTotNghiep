@@ -56,7 +56,7 @@ const Profile = (props) => {
                 <View style={{ height: '20.5%', alignItems: "center", justifyContent: "center" }}>
                 </View>
 
-                <View style={{ height: '79.5%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                <View style={{ height: '100%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }} style={{ borderColor: "white", borderWidth: 3, borderRadius: 100 }}>
                             {isAvatarValid ? (
@@ -79,14 +79,14 @@ const Profile = (props) => {
                     </View>
                     <ScrollView style={{ marginTop: 60, marginBottom: 60 }}>
                         <Pressable onPress={tttk}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='border-color' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Thông tin tài khoản</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
                         <Pressable onPress={() => { props.navigation.navigate("TabDonHangProfile", { id: userInfor._id }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F', }} >
+                            <View style={styles.accountInfoRow} >
                                 <Icons name='shopping' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Đơn hàng</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -98,7 +98,7 @@ const Profile = (props) => {
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View> */}
                         <Pressable onPress={() => { props.navigation.navigate("Balance", { id: userInfor._id }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Nạp tiền</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -106,7 +106,7 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("TabHistory", { id: userInfor._id }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='rotate-3d-variant' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử cắt</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -114,7 +114,7 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("LichSuNapTien", { avatar: saveImage, name: userInfor.name, userId: userInfor._id }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='security' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử giao dịch</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -122,7 +122,7 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("CamKetFpoly", { avatar: saveImage, name: userInfor.name }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='shield-sun' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Cam kết về Fpoly Barber Care</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -130,7 +130,7 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("VeChungToi", { avatar: saveImage, name: userInfor.name }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='family-tree' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Về chúng tôi</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -138,7 +138,7 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("DieuKienGiaoDich", { avatar: saveImage, name: userInfor.name }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='account-arrow-right' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Điều kiện giao dịch chung</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
@@ -146,20 +146,12 @@ const Profile = (props) => {
                         </Pressable>
 
                         <Pressable onPress={() => { props.navigation.navigate("BaoMatThongTin", { avatar: saveImage, name: userInfor.name }) }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
+                            <View style={styles.accountInfoRow}>
                                 <Icons name='security' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Chính sách bảo mật thông tin</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
-
-                        {/* <Pressable onPress={() => { props.navigation.navigate("PhoneXacNhan") }}>
-                            <View style={{ flexDirection: 'row', margin: 10, padding: 5, borderBottomWidth: 1, borderBottomColor: '#CD853F' }}>
-                                <Icons name='code-brackets' size={25} color={'#CD853F'} />
-                                <Text style={{ marginLeft: 10, width: 200 }}>Lấy OTP xác thực giao dịch</Text>
-                                <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
-                            </View>
-                        </Pressable> */}
                     </ScrollView>
                 </View>
             </View>
@@ -169,4 +161,20 @@ const Profile = (props) => {
 
 export default Profile
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    accountInfoRow: {
+        flexDirection: 'row',
+        margin: 5,
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#CD853F',
+        backgroundColor: '#FFF',
+        borderRadius: 10, 
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+
+})

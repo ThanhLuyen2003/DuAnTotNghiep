@@ -1,28 +1,22 @@
-import { StyleSheet, Text, View, Modal, TextInput, Alert } from 'react-native'
-import React from 'react'
-import { ScrollView } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { useState } from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Modal, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import ip from '../IP';
-import { useEffect } from 'react';
-import { ActivityIndicator } from "react-native";
+
 const ThanhToanAnToan = (props) => {
     const [isDone, setIsDone] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
     const [password, setPassword] = useState('');
-    const [totalBalance, setTotalBalance] = useState(0);
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
-    let dichVu = "Nạp tiền vào ví từ PolyBank";
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
+    const [totalBalance, setTotalBalance] = useState(0);
+
+    const toggleModal = () => setModalVisible(!isModalVisible);
+
     const handlePasswordChange = (text) => {
         setPassword(text);
         setIsPasswordEntered(!!text.trim());
     };
-
 
     useEffect(() => {
         const fetchTotalBalance = async () => {
@@ -39,24 +33,22 @@ const ThanhToanAnToan = (props) => {
         fetchTotalBalance();
     }, []);
 
-
     const depositAmount = parseFloat(props.route.params.depositAmount);
-    const checkpass = () => {
+
+    const checkPassword = () => {
         const enteredPassword = password;
         if (enteredPassword.length < 8) {
-            Alert.alert('Lỗi', 'Mật khẩu phải có ít nhất 8 ký tự');
-            return;
-        }
-        const correctPassword = props.route.params.pass;
-        if (enteredPassword === correctPassword) {
-            addMoney();
+            alert('Mật khẩu phải có ít nhất 8 ký tự');
+        } else if (enteredPassword !== props.route.params.pass) {
+            alert('Mật khẩu không đúng');
         } else {
-            Alert.alert('Lỗi', 'Mật khẩu không đúng');
+            handleDeposit();
         }
     };
 
-    const addMoney = async () => {
-        setIsDone(true)
+    const handleDeposit = async () => {
+        setIsDone(true);
+
         try {
             const url_api = `http://${ip}:3000/apiuser/depositMoney/${props.route.params.userId}`;
             const response = await fetch(url_api, {
@@ -67,15 +59,18 @@ const ThanhToanAnToan = (props) => {
                 },
                 body: JSON.stringify({ amount: depositAmount }),
             });
+
             if (response.ok) {
                 const result = await response.json();
-               
+
                 const currentDate = new Date();
                 const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
                 const formattedTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+
                 const billMoneyUrl = `http://${ip}:3000/addBillMoney/${props.route.params.userId}`;
                 const newTotalBalance = totalBalance + depositAmount;
                 setTotalBalance(newTotalBalance);
+
                 const billMoneyResponse = await fetch(billMoneyUrl, {
                     method: 'POST',
                     headers: {
@@ -83,101 +78,103 @@ const ThanhToanAnToan = (props) => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-
-                        soDu: "+" + depositAmount,
+                        soDu: `+${depositAmount}`,
                         date: formattedDate,
                         time: formattedTime,
                         tongSoDu: newTotalBalance,
-                        dichVu:dichVu
+                        dichVu: 'Nạp tiền vào ví từ PolyBank',
                     }),
                 });
-                const billMoneyResult = await billMoneyResponse.json();
-                const billMoneyId = billMoneyResult._id;
+
                 if (billMoneyResponse.ok) {
-                    console.log('BillMoney created:', billMoneyResult);
-                    // console.log(billMoneyId);
+                    const billMoneyResult = await billMoneyResponse.json();
+                    const billMoneyId = billMoneyResult._id;
+
+                    await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
+
+                    setIsDone(false);
+                    setModalVisible(false);
+
+                    props.navigation.navigate('ChiTietHoaDonNap', {
+                        currentDate: formattedDate,
+                        currentTime: formattedTime,
+                        depositedAmount: depositAmount,
+                        billId: billMoneyId,
+                        dichVu: 'Nạp tiền vào ví từ PolyBank',
+                    });
+                    
                 } else {
                     console.error('Creating BillMoney failed:', billMoneyResponse.status, billMoneyResponse.statusText);
                 }
-
-                await AsyncStorage.setItem('totalBalance', newTotalBalance.toString());
-                Alert.alert('Thông báo', 'Nạp tiền thành công');
-                setIsDone(false)
-                setModalVisible(false);
-                props.navigation.navigate('ChiTietHoaDonNap', { currentDate: formattedDate, currentTime: formattedTime, depositedAmount: depositAmount, billId: billMoneyId,dichVu:dichVu });
             } else {
                 console.error('Nạp tiền không thành công', response.status, response.statusText);
             }
         } catch (error) {
             console.error('Error', error.message);
-            Alert.alert('Lỗi', `Nạp tiền không thành công: ${error.message}`);
+            alert(`Nạp tiền không thành công: ${error.message}`);
         }
     };
-
 
     const formatCurrency = (value) => {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
-    return (
-        <View style={{ width: "100%", height: "98%" }}>
-            <ScrollView style={{ width: "100%", height: "90%", }}>
-                <View style={{ flex: 1, padding: 16, }}>
-                    <View style={{ width: "100%", backgroundColor: "white", borderRadius: 10, borderColor: "gray", borderWidth: 1 }}>
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{ color: "gray" }}>Dịch vụ:</Text>
-                            <Text style={{ fontWeight: "bold" }}>Nạp tiền vào Ví Barber</Text>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{ color: "gray" }}>Nguồn tiền:</Text>
-                            <Text style={{ fontWeight: "bold" }}>MBBank</Text>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{ color: "gray" }}>Số tiền:</Text>
-                            <Text style={{ fontWeight: "bold" }}>{formatCurrency(depositAmount)}đ</Text>
-                        </View>
-                        <View style={{ width: "95%", height: 1, borderWidth: 1, borderColor: "gray", marginLeft: 10, backgroundColor: "gray" }}></View>
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10, padding: 10 }}>
-                            <Text style={{ color: "gray" }}>Phí giao dịch:</Text>
-                            <Text style={{ fontWeight: "bold" }}>Miễn phí</Text>
-                        </View>
 
+    return (
+        <View style={styles.container}>
+            <ScrollView>
+                <View style={styles.paymentContainer}>
+                    <View style={styles.paymentRow}>
+                        <Text style={styles.grayText}>Dịch vụ:</Text>
+                        <Text style={styles.boldText}>Nạp tiền vào Ví Barber</Text>
                     </View>
-                    <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
-                        <Icons name='security' size={50} color={'gray'} />
-                        <Text style={{ color: "gray" }}>Bảo mật SSL/TLS, mọi thông tin{"\n"}giao dịch đều được mã hóa an toàn.</Text>
+                    <View style={styles.paymentRow}>
+                        <Text style={styles.grayText}>Nguồn tiền:</Text>
+                        <Text style={styles.boldText}>MBBank</Text>
+                    </View>
+                    <View style={styles.paymentRow}>
+                        <Text style={styles.grayText}>Số tiền:</Text>
+                        <Text style={styles.boldText}>{formatCurrency(depositAmount)}đ</Text>
+                    </View>
+                    <View style={styles.separator}></View>
+                    <View style={styles.paymentRow}>
+                        <Text style={styles.grayText}>Phí giao dịch:</Text>
+                        <Text style={styles.boldText}>Miễn phí</Text>
                     </View>
                 </View>
-
+                <View style={styles.securityContainer}>
+                    <Icons name='security' size={50} color={'gray'} />
+                    <Text style={styles.grayText}>Bảo mật SSL/TLS, mọi thông tin giao dịch đều được mã hóa an toàn.</Text>
+                </View>
             </ScrollView>
 
-            <View style={{ width: "100%", height: 1, borderWidth: 0.5, borderColor: "gray" }}></View>
-            <View style={{ flexDirection: "row", justifyContent: 'space-between', alignItems: "center", height: 50, marginLeft: 16, marginRight: 16 }}>
-                <Text>Tổng tiền:</Text>
-                <Text style={{ fontWeight: "bold", fontSize: 20 }}>{formatCurrency(depositAmount)}đ</Text>
+            <View style={styles.totalAmountContainer}>
+                <Text style={styles.totalAmountText}>Tổng tiền:</Text>
+                <Text style={styles.boldText}>{formatCurrency(depositAmount)}đ</Text>
             </View>
+
+            <TouchableOpacity style={styles.opacitybtn} onPress={toggleModal}>
+                <Text style={styles.btnText}>Xác nhận</Text>
+            </TouchableOpacity>
+
             <Modal
-                        animationType='fade'
-                        visible={isDone}
-                        transparent={true}
-                    >
-                        <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.7 }}>
-                            <ActivityIndicator />
-                        </View>
-                    </Modal>
+                animationType='fade'
+                visible={isDone}
+                transparent={true}
+            >
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator />
+                </View>
+            </Modal>
+
             <Modal
                 animationType="slide"
                 transparent={true}
                 visible={isModalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!isModalVisible);
-                }}
+                onRequestClose={toggleModal}
             >
                 <View style={styles.modalView}>
-                    <TouchableOpacity onPress={toggleModal} style={{ width: "30%", height: 6, backgroundColor: "gray", borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
-
-                    </TouchableOpacity>
-
-                    <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 30 }}>Nhập mật khẩu</Text>
+                    <TouchableOpacity onPress={toggleModal} style={styles.closeButton}></TouchableOpacity>
+                    <Text style={styles.modalHeaderText}>Nhập mật khẩu</Text>
                     <TextInput
                         style={styles.input}
                         secureTextEntry={true}
@@ -186,23 +183,16 @@ const ThanhToanAnToan = (props) => {
                     />
                     <TouchableOpacity
                         style={[styles.opacitybtn, { opacity: isPasswordEntered ? 1 : 0.5 }]}
-                        onPress={checkpass}
+                        onPress={checkPassword}
                         disabled={!isPasswordEntered}
                     >
-                        <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>Xác nhận</Text>
+                        <Text style={styles.btnText}>Xác nhận</Text>
                     </TouchableOpacity>
                 </View>
-
             </Modal>
-
-            <TouchableOpacity style={styles.opacitybtn} onPress={toggleModal}>
-                <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>Xác nhận</Text>
-            </TouchableOpacity>
         </View>
-    )
-}
-
-export default ThanhToanAnToan
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -210,28 +200,35 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     opacitybtn: {
-
-
         width: "90%",
         height: 50,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#CD853F",
         borderRadius: 10,
-        marginLeft: 16, marginRight: 16,
-
-
+        marginLeft: 16,
+        marginRight: 16,
+        marginBottom: 16,
     },
-    centeredView: {
-        flex: 1,
+    closeButton: {
+        width: "30%",
+        height: 6,
+        backgroundColor: "gray",
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalHeaderText: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30,
+        marginBottom: 20,
     },
     modalView: {
-
-        padding: 10,
+        padding: 20,
         backgroundColor: 'white',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -242,7 +239,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         marginTop: "auto",
         flex: 0.7,
-        alignItems: "center"
+        alignItems: "center",
     },
     input: {
         width: "90%",
@@ -252,6 +249,69 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingLeft: 10,
         marginBottom: 16,
-        marginLeft: "5%"
+        marginLeft: "5%",
     },
-})
+    loadingContainer: {
+        padding: 40,
+        backgroundColor: 'black',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        borderRadius: 20,
+        opacity: 0.7,
+    },
+    paymentContainer: {
+        width: "100%",
+        backgroundColor: "white",
+        borderRadius: 10,
+        borderColor: "gray",
+        borderWidth: 1,
+        marginTop: 10,
+    },
+    paymentRow: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        marginTop: 10,
+        padding: 10,
+    },
+    separator: {
+        width: "95%",
+        height: 1,
+        borderWidth: 1,
+        borderColor: "gray",
+        marginLeft: 10,
+        backgroundColor: "gray",
+    },
+    grayText: {
+        color: "gray",
+    },
+    boldText: {
+        fontWeight: "bold",
+    },
+    securityContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        marginTop: 20,
+    },
+    totalAmountContainer: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: "center",
+        height: 50,
+        marginLeft: 16,
+        marginRight: 16,
+    },
+    totalAmountText: {
+        fontWeight: "bold",
+        fontSize: 18,
+    },
+    btnText: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 18,
+    },
+});
+
+export default ThanhToanAnToan;

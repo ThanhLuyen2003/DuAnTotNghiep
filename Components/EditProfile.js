@@ -287,7 +287,7 @@ const EditProfile = (props) => {
 
     return (
         <SafeAreaView >
-            <View style={{ backgroundColor: "#666b7b", width: "auto", height: 100, marginTop: 10, alignItems: "center" }}>
+            <View style={{ alignItems: 'center', backgroundColor: '#666b7b', width: 'auto', height: 100, marginTop: 10 }}>
                 <TouchableOpacity onPress={pickImage}>
                     {img_base64 ? (
                         <ImageBackground style={{ width: 120, height: 120, borderWidth: 0.5, borderRadius: 100, marginTop: 20 }} imageStyle={{ borderRadius: 100 }} source={{ uri: img_base64 }}>
@@ -436,8 +436,6 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderWidth: 1,
         borderColor: '#aaa',
-
-
         borderRadius: 5,
         padding: 10,
     },
@@ -470,5 +468,6 @@ const styles = StyleSheet.create({
     dropdown3: {
         zIndex: 100,
         width: 300
-    }
+    },
+    
 })

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, Linking } from "react-native";
+import { View, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, ImageBackground, Image, TouchableOpacity, Linking,Modal } from "react-native";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Onboarding from 'react-native-onboarding-swiper';
-import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
+import { useEffect } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ip from "../IP";
@@ -16,6 +16,17 @@ const Home = (props) => {
     const [totalBalance, settotalBalance] = useState(0);
 
     const [showTongSoDu, setShowTongSoDu] = useState(false);
+    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+
+    useEffect(() => {
+
+        setShowWelcomeModal(true);
+    }, []);
+
+    const closeModal = () => {
+
+        setShowWelcomeModal(false);
+    };
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
@@ -65,8 +76,22 @@ const Home = (props) => {
     }
 
     return (
-        <View style={{ height: '90%' }}>
-
+        <View style={{ flex: 1 }}>
+            <Modal
+                transparent={true}
+                animationType="slide"
+                visible={showWelcomeModal}
+                onRequestClose={closeModal}
+            >
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ backgroundColor: '#778899', padding: 20, borderRadius: 10, width: '80%' }}>
+                        <Text>Chào mừng {userInfor.name} đến với ứng dụng đặt lịch PolyBarber!</Text>
+                        <TouchableOpacity onPress={closeModal} style={{ marginTop: 20 }}>
+                            <Text style={{ color: 'blue',height:20,width:50,borderWidth:0.5,borderRadius:10,textAlign:"center" }}>Đóng</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
             <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
                 <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
                     {isAvatarValid ? (

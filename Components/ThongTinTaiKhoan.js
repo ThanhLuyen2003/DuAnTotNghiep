@@ -38,14 +38,23 @@ const ThongTinTaiKhoan = (props) => {
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
     const logout = async () => {
-        setIsDone(true)
-        await AsyncStorage.removeItem('loginInfo');
-        await AsyncStorage.removeItem("savedImage")
+        try {
+            setIsDone(true);
+            await AsyncStorage.removeItem('loginInfo');
+            await AsyncStorage.removeItem('savedImage');
+            await AsyncStorage.removeItem('totalBalance');
 
+            
+            props.navigation.reset({
+                index: 0,
+                routes: [{ name: 'GioiThieu' }], 
+            });
 
-        setIsDone(false);
-        props.navigation.navigate('GioiThieu')
-
+        } catch (error) {
+            console.error('Error logging out:', error.message);
+        } finally {
+            setIsDone(false);
+        }
     }
 
 
@@ -106,13 +115,19 @@ const ThongTinTaiKhoan = (props) => {
                     <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.address}</Text>
                 </View>
             </View>
+            <TouchableOpacity onPress={logout} style={styles.logoutButton}>
+                <Text>ĐĂNG XUẤT</Text>
+            </TouchableOpacity>
 
-            <View style={{ width: "100%", height: 50, justifyContent: 'center', alignItems: "center" }}>
-                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={logout}>ĐĂNG XUẤT</Text>
-            </View>
-            <View style={{ width: "100%", height: 50, justifyContent: 'center', alignItems: "center" }}>
-                <Text style={{ borderBottomWidth: 1, fontWeight: "500" }} onPress={() => { props.navigation.navigate("QuenMatKhau", { userId: userInfor._id, oldPassword: oldPassword }) }}>Đổi mật khẩu?</Text>
-            </View>
+            <TouchableOpacity
+                onPress={() => {
+                    props.navigation.navigate('QuenMatKhau', { userId: userInfor._id, oldPassword: oldPassword });
+                }}
+                style={styles.changePasswordLink}
+            >
+                <Text>Đổi mật khẩu?</Text>
+            </TouchableOpacity>
+
             <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
             </View>
 
@@ -122,4 +137,21 @@ const ThongTinTaiKhoan = (props) => {
 
 export default ThongTinTaiKhoan
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    logoutButton: {
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        fontWeight: '500',
+    },
+    changePasswordLink: {
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        fontWeight: '500',
+    },
+})
