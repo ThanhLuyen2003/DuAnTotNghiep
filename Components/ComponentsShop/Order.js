@@ -129,7 +129,7 @@ const Order = (props) => {
             message: message,
             price: pay,
             products: products,
-            status: "Có đơn",
+            status: "Đang giao hàng",
             time: time,
             note: "Thanh toán khi nhận hàng"
         }
