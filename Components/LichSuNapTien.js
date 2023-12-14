@@ -53,10 +53,10 @@ const LichSuNapTien = (props) => {
         const amountStyle = item.soDu >= 0 ? styles.positiveAmount : styles.negativeAmount;
         const imageSource = item.soDu >= 0 ? positiveImageSource : negativeImageSource;
         return (
-            <View>
+            <View style={{ margin: 5 }}>
 
                 <View style={[{ flexDirection: "row", alignItems: "center", padding: 16 }, amountStyle]}>
-                    <Image source={imageSource} style={{ width: 50, height: 50, borderRadius: 50,borderWidth:0.5 }} />
+                    <Image source={imageSource} style={{ width: 50, height: 50, borderRadius: 50, borderWidth: 0.5 }} />
                     <View style={{ marginLeft: 20, width: "80%" }}>
                         <Text style={{ fontWeight: "bold" }}>{item.dichVu}</Text>
                         <Text style={{ color: "gray" }}>{item.time} - {item.date}</Text>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     negativeAmount: {
-        backgroundColor: '#CCFFFF',
+        backgroundColor: 'white',
     },
 
 

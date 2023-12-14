@@ -145,6 +145,10 @@ const ChonDichVu = (props) => {
         return pay;
     }
 
+    const formatCurrency = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
+
     const renderItem = (item, index) => {
 
         let pay = item.price;
@@ -163,7 +167,7 @@ const ChonDichVu = (props) => {
                     <Image source={{ uri: item.image }} style={{ height: 120, width: 185, borderRadius: 10 }} />
                     <Text style={{ fontSize: 18, fontWeight: '500', margin: 5 }} >{item.name}</Text>
                     <Text style={{ fontSize: 12, color: (item.selected) ? 'white' : '#778899', margin: 5 }} >{item.describe} </Text>
-                    <Text style={{ color: 'red', fontSize: 15, marginLeft: 5 }} >{fomatPrice(pay)} Đ </Text>
+                    <Text style={{ color: 'red', fontSize: 15, marginLeft: 5 }} >{formatCurrency(pay)} Đ </Text>
                 </TouchableOpacity>
 
 
@@ -188,7 +192,7 @@ const ChonDichVu = (props) => {
 
             let pay = item.price;
 
-            content.push({ name: item.name, price: fomatPrice(pay) });
+            content.push({ name: item.name, price: formatCurrency(pay) });
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -198,7 +202,7 @@ const ChonDichVu = (props) => {
 
             let pay = item.price;
 
-            content.push({ name: item.name, price: fomatPrice(pay) });
+            content.push({ name: item.name, price: formatCurrency(pay) });
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -206,7 +210,7 @@ const ChonDichVu = (props) => {
 
             let pay = item.price;
 
-            content.push({ name: item.name, price: fomatPrice(pay) });
+            content.push({ name: item.name, price: formatCurrency(pay) });
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -215,7 +219,7 @@ const ChonDichVu = (props) => {
 
             let pay = item.price;
 
-            content.push({ name: item.name, price: fomatPrice(pay) });
+            content.push({ name: item.name, price: formatCurrency(pay) });
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -224,7 +228,7 @@ const ChonDichVu = (props) => {
 
             let pay = item.price;
 
-            content.push({ name: item.name, price: fomatPrice(pay) });
+            content.push({ name: item.name, price: formatCurrency(pay) });
             price = Number(price) + Number(item.price);
             idService.push(item._id);
         })
@@ -368,7 +372,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         alignSelf: 'center',
-
+        marginBottom: 10
     },
     text: {
         fontSize: 18,

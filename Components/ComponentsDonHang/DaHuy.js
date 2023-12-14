@@ -37,6 +37,22 @@ const DaHuy = (props) => {
         return unsubscribe;
     }, [props.navigation]);
 
+    const fomatPrice = (pay) => {
+        if (pay.length == 5) {
+            pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+        } else
+            if (pay.length == 6) {
+                pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+            } else
+                if (pay.length == 7) {
+                    pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                } else
+                    if (pay.length == 8) {
+                        pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                    }
+        return pay;
+    }
+
     const renderItem = ({ item }) => {
 
         const product = item.products;
@@ -54,7 +70,7 @@ const DaHuy = (props) => {
                     <View style={{ alignSelf: 'center', width: "100%", marginLeft: 15 }}>
 
                         <Text style={{ fontSize: 15, width: "75%", }}>{product[0].name}</Text>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{product[0].price} đ</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{fomatPrice(product[0].price)} đ</Text>
                         <Text style={{ fontSize: 15, }}> x{product[0].quantity}</Text>
 
                     </View>

@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableHighlight, View, TextInput, Pressable, Platform, TouchableOpacity, SafeAreaView, Image, ScrollView, ActivityIndicator } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -10,6 +10,7 @@ import * as FileSystem from 'expo-file-system';
 import ip from '../IP'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Modal } from 'react-native'
+import { testID } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes'
 const EditProfile = (props) => {
     const [userInfo, setuserInfo] = useState({
     })
@@ -27,6 +28,7 @@ const EditProfile = (props) => {
     const [isDirty, setIsDirty] = useState(false);
 
 
+    const [isDone, setIsDone] = useState(false);
 
     const getLoginInfor = async () => {
 
@@ -122,39 +124,49 @@ const EditProfile = (props) => {
             return;
         }
 
+        if (!isDirty) {
+            return;
+        } else {
 
-        let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
-        let obj = { name: name, phone: phone, email: email, address: address }
-        fetch(url_api, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(obj),
-        })
-            .
-            then(async (res) => {
-                if (res.status === 200) {
-                    alert("Sửa thành công");
-                    const updatedUserInfo = {
-                        ...userInfo, name, phone, email, address,
+            setIsDone(true);
+
+            let url_api = "http://" + ip + ":3000/apiuser/updateUsers/" + userInfo._id
+            let obj = { name: name, phone: phone, email: email, address: address }
+            fetch(url_api, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(obj),
+            })
+                .
+                then(async (res) => {
+                    if (res.status === 200) {
+                        alert("Sửa thành công");
+                        const updatedUserInfo = {
+                            ...userInfo, name, phone, email, address,
+                        }
+
+                        await AsyncStorage.setItem('loginInfo', JSON.stringify(updatedUserInfo));
+
+                        setIsDone(false)
+                        props.navigation.navigate("Home");
+
+                    } else {
+                        alert("Có lỗi xảy ra!")
+                        console.log(res);
+                        setIsDone(false)
+                        return res;
                     }
 
-                    await AsyncStorage.setItem('loginInfo', JSON.stringify(updatedUserInfo));
+                })
+                .catch((err) => {
+                    setIsDone(false)
+                    console.log(err);
+                });
 
-                    props.navigation.navigate("Home");
-
-                } else {
-                    alert("Có lỗi xảy ra!")
-                    console.log(res);
-                    return res;
-                }
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        }
 
     }
     const handleInputChange = (text, field) => {
@@ -287,6 +299,17 @@ const EditProfile = (props) => {
 
     return (
         <SafeAreaView >
+
+            <Modal
+                animationType='fade'
+                visible={isDone}
+                transparent={true}
+            >
+                <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.5 }}>
+
+                    <ActivityIndicator />
+                </View>
+            </Modal>
             <View style={{ alignItems: 'center', backgroundColor: '#666b7b', width: 'auto', height: 100, marginTop: 10 }}>
                 <TouchableOpacity onPress={pickImage}>
                     {img_base64 ? (
@@ -314,17 +337,17 @@ const EditProfile = (props) => {
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
                     <Text>Họ tên {<Text style={{ color: "red" }}>*</Text>}</Text>
 
-                    <TextInput style={styles.textInput} placeholder='Nhập họ tên' value={name}
+                    <TextInput style={styles.textInput} placeholder='Nhập họ tên'
                         onChangeText={(text) => handleInputChange(text, 'name')} />
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
-                    <Text>Số điện thoại {<Text style={{ color: "red" }}>*</Text>}</Text>
-                    <TextInput style={styles.textInput} placeholder='Số điện thoại' value={phone}
-                        onChangeText={(text) => handleInputChange(text, 'phone')} />
+                    <Text>Số điện thoại </Text>
+                    <Text style={{ marginTop: 8, opacity: 0.4 }}>{phone}</Text>
+
                 </View>
                 <View style={{ flexDirection: "column", width: "auto", height: 50, borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
                     <Text>Email</Text>
-                    <Text style={{ marginTop: 8 }}>{email}</Text>
+                    <Text style={{ marginTop: 8, opacity: 0.4 }}>{email}</Text>
                 </View>
 
                 <Modal
@@ -390,7 +413,7 @@ const EditProfile = (props) => {
                 </Modal>
 
                 <View style={{ flexDirection: "column", width: "auto", height: 'auto', borderBottomColor: "gray", borderBottomWidth: 0.5, marginTop: 20 }}>
-                    <Text>Địa chỉ</Text>
+                    <Text>Địa chỉ {<Text style={{ color: "red" }}>*</Text>}</Text>
                     <TouchableOpacity onPress={() => { setOnShow(true) }}>
                         <Text style={{ marginTop: 10 }}>{!address ? <Text style={{ color: 'gray' }} >Nhập địa chỉ</Text> : <Text>{address}</Text>} </Text>
                     </TouchableOpacity>
@@ -469,5 +492,5 @@ const styles = StyleSheet.create({
         zIndex: 100,
         width: 300
     },
-    
+
 })

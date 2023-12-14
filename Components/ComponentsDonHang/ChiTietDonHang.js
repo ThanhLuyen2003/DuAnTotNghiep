@@ -16,7 +16,7 @@ const ChiTietDonHang = (props) => {
 
                 <View style={{ alignSelf: 'center', width: "100%", marginLeft: 10 }}>
                     <Text style={{ fontSize: 15, width: "75%", }}>{item.name}</Text>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.price} đ</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{fomatPrice(item.price)} đ</Text>
                     <Text style={{ fontSize: 15, }}> x{item.quantity}</Text>
 
                 </View>
@@ -29,6 +29,22 @@ const ChiTietDonHang = (props) => {
         setProduct(props.route.params.product);
 
     }, []);
+
+    const fomatPrice = (pay) => {
+        if (pay.length == 5) {
+            pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+        } else
+            if (pay.length == 6) {
+                pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+            } else
+                if (pay.length == 7) {
+                    pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                } else
+                    if (pay.length == 8) {
+                        pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                    }
+        return pay;
+    }
 
     return (
         <ScrollView>

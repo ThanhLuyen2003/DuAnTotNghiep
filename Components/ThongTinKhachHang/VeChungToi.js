@@ -39,45 +39,48 @@ const VeChungToi = (props) => {
       <View style={{ paddingLeft: 20, top: 20 }}>
         <Text>Với Anh em: Fpoly là một môi trường năng động, nơi anh em có thể tự hào, thỏa sức học hỏi, cống hiến để vươn tới cuộc sống sung túc và hạnh phúc.</Text>
       </View>
-      <View style={{ width: "90%", height: 150,padding:5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20,flexDirection:"row",borderRadius:20 }}>
-        <View style={{justifyContent:"center",alignItems:"center",width:"30%"}}>
-          <Icons name='new-box' size={60} style={{fontWeight:"bold"}} color={"#CD853F"}/>
-          <Text style={{fontWeight:"bold"}}>Đổi mới</Text>
+      <View style={{ width: "90%", height: 150, padding: 5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20, flexDirection: "row", borderRadius: 20 }}>
+        <View style={{ justifyContent: "center", alignItems: "center", width: "30%" }}>
+          <Icons name='new-box' size={60} style={{ fontWeight: "bold" }} color={"#CD853F"} />
+          <Text style={{ fontWeight: "bold" }}>Đổi mới</Text>
         </View>
-        <View style={{ flexDirection: "column",alignItems:"center",width:"70%",justifyContent:"center" }}>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Luôn tin có góc nhìn và cách làm khác tốt hơn trong mọi tình huống</Text>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Đề cao những giải pháp CTM-KNR</Text>
-        </View>
-      </View>
-      <View style={{ width: "90%",marginTop:20, height: 150,padding:5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20,flexDirection:"row",borderRadius:20 }}>
-        <View style={{justifyContent:"center",alignItems:"center",width:"30%"}} >
-          <Icons name='account' size={60} style={{fontWeight:"bold"}} color={"#CD853F"}/>
-          <Text style={{fontWeight:"bold"}}>Quan tâm</Text>
-        </View>
-        <View style={{ flexDirection: "column",alignItems:"center",width:"70%",justifyContent:"center" }}>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Làm thêm chút nữa mang lại giá trị cho mọi người</Text>
-          
+        <View style={{ flexDirection: "column", alignItems: "center", width: "70%", justifyContent: "center" }}>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Luôn tin có góc nhìn và cách làm khác tốt hơn trong mọi tình huống</Text>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Đề cao những giải pháp CTM-KNR</Text>
         </View>
       </View>
-      <View style={{ width: "90%",marginTop:20, height: 150,padding:5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20,flexDirection:"row",borderRadius:20 }}>
-        <View style={{justifyContent:"center",alignItems:"center",width:"30%"}}>
-          <Icons name='book' size={60} style={{fontWeight:"bold"}} color={"#CD853F"}/>
-          <Text style={{fontWeight:"bold"}}>Ham học{"\n"}     hỏi</Text>
+      <View style={{ width: "90%", marginTop: 20, height: 150, padding: 5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20, flexDirection: "row", borderRadius: 20 }}>
+        <View style={{ justifyContent: "center", alignItems: "center", width: "30%" }} >
+          <Icons name='account' size={60} style={{ fontWeight: "bold" }} color={"#CD853F"} />
+          <Text style={{ fontWeight: "bold" }}>Quan tâm</Text>
         </View>
-        <View style={{ flexDirection: "column",alignItems:"center",width:"70%",justifyContent:"center" }}>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Chia sẻ kiến thức, kinh nghiệm với mọi người cũng là học tập</Text>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Nhìn nhận lý thuyết, sách vở, kiến thức cũng quan trọng như thực tiễn, kinh nghiệm</Text>
+        <View style={{ flexDirection: "column", alignItems: "center", width: "70%", justifyContent: "center" }}>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Làm thêm chút nữa mang lại giá trị cho mọi người</Text>
+
         </View>
       </View>
-      <View style={{ width: "90%",marginTop:20, height: 150,padding:5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20,flexDirection:"row",borderRadius:20 }}>
-        <View style={{justifyContent:"center",alignItems:"center",width:"30%"}}>
-          <Icons name='comment-plus-outline' size={60} style={{fontWeight:"bold"}} color={"#CD853F"}/>
-          <Text style={{fontWeight:"bold"}}> Chân thành</Text>
+      <View style={{ width: "90%", marginTop: 20, height: 150, padding: 5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20, flexDirection: "row", borderRadius: 20 }}>
+        <View style={{ justifyContent: "center", alignItems: "center", width: "30%" }}>
+          <Icons name='book' size={60} style={{ fontWeight: "bold" }} color={"#CD853F"} />
+          <Text style={{ fontWeight: "bold" }}>Ham học{"\n"}     hỏi</Text>
         </View>
-        <View style={{ flexDirection: "column",alignItems:"center",width:"70%",justifyContent:"center" }}>
-          <Text><Text style={{fontWeight:"bold"}}>*</Text> Tin rằng mọi người đều có thể "tỏa sáng"</Text>
-         
+        <View style={{ flexDirection: "column", alignItems: "center", width: "70%", justifyContent: "center" }}>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Chia sẻ kiến thức, kinh nghiệm với mọi người cũng là học tập</Text>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Nhìn nhận lý thuyết, sách vở, kiến thức cũng quan trọng như thực tiễn, kinh nghiệm</Text>
         </View>
+      </View>
+      <View style={{ width: "90%", marginTop: 20, height: 150, padding: 5, borderWidth: 0.5, borderColor: "#CD853F", top: 40, marginLeft: 20, flexDirection: "row", borderRadius: 20 }}>
+        <View style={{ justifyContent: "center", alignItems: "center", width: "30%" }}>
+          <Icons name='comment-plus-outline' size={60} style={{ fontWeight: "bold" }} color={"#CD853F"} />
+          <Text style={{ fontWeight: "bold" }}> Chân thành</Text>
+        </View>
+        <View style={{ flexDirection: "column", alignItems: "center", width: "70%", justifyContent: "center" }}>
+          <Text><Text style={{ fontWeight: "bold" }}>*</Text> Tin rằng mọi người đều có thể "tỏa sáng"</Text>
+
+        </View>
+      </View>
+      <View style={{ height: 50 }}>
+
       </View>
     </ScrollView>
   )

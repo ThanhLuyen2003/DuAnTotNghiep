@@ -30,12 +30,6 @@ const Profile = (props) => {
     }
 
 
-
-
-
-
-
-
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
@@ -56,7 +50,7 @@ const Profile = (props) => {
                 <View style={{ height: '20.5%', alignItems: "center", justifyContent: "center" }}>
                 </View>
 
-                <View style={{ height: '100%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                <View style={{ height: '80.0%', backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={{ position: "absolute", top: -70, justifyContent: 'center', width: "100%", alignItems: "center" }}>
                         <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }} style={{ borderColor: "white", borderWidth: 3, borderRadius: 100 }}>
                             {isAvatarValid ? (
@@ -77,7 +71,7 @@ const Profile = (props) => {
                         </TouchableOpacity>
 
                     </View>
-                    <ScrollView style={{ marginTop: 60, marginBottom: 60 }}>
+                    <ScrollView style={{ marginTop: 60, }}>
                         <Pressable onPress={tttk}>
                             <View style={styles.accountInfoRow}>
                                 <Icons name='border-color' size={25} color={'#CD853F'} />
@@ -153,6 +147,10 @@ const Profile = (props) => {
                             </View>
                         </Pressable>
                     </ScrollView>
+
+                    <View style={{ height: 70 }}>
+
+                    </View>
                 </View>
             </View>
         </ImageBackground>
@@ -169,12 +167,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#CD853F',
         backgroundColor: '#FFF',
-        borderRadius: 10, 
+        borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 3,
+        alignItems: 'center'
     },
 
 })

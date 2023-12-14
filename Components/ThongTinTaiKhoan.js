@@ -61,7 +61,7 @@ const ThongTinTaiKhoan = (props) => {
 
 
     return (
-        <ScrollView>
+        <View style={{ height: '100%' }}>
 
             <View style={{ backgroundColor: "#666b7b", width: "auto", height: 100, marginTop: 10, alignItems: "center" }}>
                 {isAvatarValid ? (
@@ -117,23 +117,17 @@ const ThongTinTaiKhoan = (props) => {
                     <Text style={{ width: "60%", textAlign: "right" }}>{userInfor.address}</Text>
                 </View>
             </View>
-            <TouchableOpacity onPress={logout} style={styles.logoutButton}>
-                <Text>ĐĂNG XUẤT</Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={() => {
-                    props.navigation.navigate('QuenMatKhau', { userId: userInfor._id, oldPassword: oldPassword });
-                }}
-                style={styles.changePasswordLink}
-            >
-                <Text>Đổi mật khẩu?</Text>
-            </TouchableOpacity>
+            <View style={{ position: 'absolute', bottom: 20, width: '100%' }}>
 
-            <View style={{ width: "100%", height: 30, justifyContent: 'center', alignItems: "center" }}>
+                <TouchableOpacity onPress={logout} style={styles.logoutButton}>
+                    <Text style={{ color: 'white' }}>ĐĂNG XUẤT</Text>
+                </TouchableOpacity>
+
             </View>
 
-        </ScrollView>
+
+        </View>
     )
 }
 
@@ -141,12 +135,13 @@ export default ThongTinTaiKhoan
 
 const styles = StyleSheet.create({
     logoutButton: {
-        width: '100%',
+        width: '90%',
         height: 50,
+        backgroundColor: '#778899',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomWidth: 1,
-        fontWeight: '500',
+        alignSelf: 'center',
+        borderRadius: 20,
     },
     changePasswordLink: {
         width: '100%',
