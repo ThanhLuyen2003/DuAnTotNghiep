@@ -129,7 +129,7 @@ const Order = (props) => {
             message: message,
             price: pay,
             products: products,
-            status: "Đang giao hàng",
+            status: "Có đơn",
             time: time,
             note: "Thanh toán khi nhận hàng"
         }
@@ -276,54 +276,7 @@ const Order = (props) => {
                                 }).then(res => {
                                     if (res.status == 200) {
 
-                                        let url = 'http://' + ip + ':3000/addOrder';
-
-                                        let obj = {
-                                            idUser: userInfor._id,
-                                            nameU: userInfor.name,
-                                            phoneU: userInfor.phone,
-                                            addressU: userInfor.address,
-                                            message: message,
-                                            price: pay,
-                                            products: products,
-                                            status: "Đang giao hàng",
-                                            time: time,
-                                            note: "Đã thanh toán"
-                                        }
-
-                                        fetch(url, {
-                                            method: 'POST',
-                                            headers: {
-                                                Accept: 'application/json',
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify(obj)
-                                        }).catch((ex) => {
-                                            console.log(ex);
-                                        }).then(res => {
-                                            if (res.status == 200) {
-
-                                                products.forEach((item) => {
-
-                                                    const url = 'http://' + ip + ':3000/delCart/' + item.idCart;
-
-                                                    fetch(url, {
-                                                        method: 'DELETE',
-                                                        headers: {
-                                                            Accept: 'application/json',
-                                                            'Content-Type': 'application/json',
-                                                        }
-                                                    })
-                                                })
-                                                setisDone(false)
-                                                alert('Đặt hàng thành công')
-                                                props.navigation.navigate('Home');
-
-                                            } else {
-                                                alert("cut")
-                                            }
-                                        });
-
+                                        datHang();
                                     }
                                 })
 
