@@ -131,6 +131,11 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const addCart = () => {
 
 
+    if (route.params.soLuong == 0) {
+      alert("Đã hết hàng!")
+      return;
+    }
+
     let obj2 = {
       namePro: route.params.name,
       pricePro: route.params.price,
@@ -165,6 +170,12 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const Order = () => {
+
+    if (route.params.soLuong == 0) {
+      alert("Đã hết hàng!")
+      return;
+    }
+
     let products = [];
     let price = route.params.price * soLuong;
 
@@ -452,10 +463,16 @@ const ChiTietItemShop = ({ route, navigation }) => {
               <Icon name='arrow-left' size={20} />
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
 
-              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
+              <View >
+                <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
+                {route.params.soLuong == 0
+                  ? <View><Text>Hết hàng</Text></View>
+                  : <Text>Kho: {route.params.soLuong} </Text>
+                }
+              </View>
 
             </View>
 

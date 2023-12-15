@@ -24,12 +24,30 @@ const ChamSocCoThe = (props) => {
       setisLoading(false); // khong con load nua
     }
   }
+  const [donHang, setDonHang] = useState([]);
+
+  const getDonHang = async () => {
+
+    let apiSalon = 'http://' + ip + ':3000/getOrder';
+
+    try {
+      const response = await fetch(apiSalon);
+      const json = await response.json(); //chuyen du lieu thanh json
+
+      setDonHang(json);// do du lieu vao state
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   React.useEffect(() => {
 
     getList();
+    getDonHang();
 
 
   }, []);
+
   const numColumns = 2; //
   const renderProductSalon = ({ item }) => {
 
@@ -48,17 +66,32 @@ const ChamSocCoThe = (props) => {
           if (item.price.length == 8) {
             price = (item.price.substring(0, 2) + '.' + item.price.slice(2, 5) + '.' + item.price.slice(5, 8));
           }
+    let daBan = 0;
+
+    donHang.forEach(element => {
+      let pro = element.products;
+      if (element.status == 'Đã giao hàng') {
+        pro.forEach(pro => {
+          if (item.name == pro.name) {
+            daBan += Number(pro.quantity);
+          }
+        })
+      }
+    });
+
+    let conLai = item.soluongnhap - daBan;
 
     return (
       <SafeAreaView style={{ height: "89%" }}>
         <View >
-          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type, id: item._id }) }}>
+          <TouchableHighlight onPress={() => { navigation.navigate("ChiTietItemShop", { avatar: item.avatar, name: item.name, trademark: item.trademark, price: item.price, describe: item.describe, ingredient: item.ingredient, type: item.type, id: item._id, soLuong: conLai, }) }}>
             <View style={styles.gridItem}>
               <Image style={{ width: 180, height: 180, alignSelf: "center" }} source={{ uri: item.avatar }} />
               <Text style={{ fontSize: 15 }} numberOfLines={2}>{item.name}</Text>
-              <Text style={{ fontSize: 15, color: "red" }} >{price} Đ</Text>
-              {/* <Text style={{borderBottomWidth:2,borderColor:"#CD853F",width:110,fontSize:20}}>Xem chi tiết</Text> */}
-
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
+                <Text style={{ fontSize: 15, color: "red" }} >{price} Đ</Text>
+                <Text style={{ marginRight: 20 }}>Đã bán: {daBan}</Text>
+              </View>
             </View>
           </TouchableHighlight>
 

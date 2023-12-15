@@ -62,7 +62,7 @@ const ComfirmData = (props) => {
 
     const addBill = async () => {
 
-        setIsDone(true)
+        //setIsDone(true)
         let obj = {
             nameSalon: name,
             addressSalon: address,
@@ -71,12 +71,13 @@ const ComfirmData = (props) => {
             phone: phone,
             imageSalon: image,
             services: props.route.params.content,
-            price: props.route.params.pay,
+            price: props.route.params.price,
             status: "Sắp tới",
             idUser: userInfo._id
 
         }
 
+        console.log(props.route.params.price);
 
         let obj2 = {
             idSalon: idSalon,
@@ -143,6 +144,9 @@ const ComfirmData = (props) => {
         )
     }
 
+    const formatCurrency = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
 
@@ -191,7 +195,7 @@ const ComfirmData = (props) => {
                 <View style={{ borderWidth: 0.5 }}></View>
                 <View style={{ padding: 12, flexDirection: 'row' }} >
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.pay} VNĐ</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{formatCurrency(props.route.params.price)} VNĐ</Text>
                 </View>
 
             </View>
