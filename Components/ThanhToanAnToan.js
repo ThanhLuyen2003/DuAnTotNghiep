@@ -129,7 +129,7 @@ const ThanhToanAnToan = (props) => {
                     </View>
                     <View style={styles.paymentRow}>
                         <Text style={styles.grayText}>Nguồn tiền:</Text>
-                        <Text style={styles.boldText}>MBBank</Text>
+                        <Text style={styles.boldText}>PolyBank</Text>
                     </View>
                     <View style={styles.paymentRow}>
                         <Text style={styles.grayText}>Số tiền:</Text>

@@ -12,10 +12,18 @@ import { useEffect } from "react";
 const Login = (props) => {
 
     const [isDone, setIsDone] = useState(false);
-
+    const [resetPasswordModalVisible, setResetPasswordModalVisible] = useState(false);
     const [phone, setPhone] = useState("");
     const [pass, setPass] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [loginAttempts, setLoginAttempts] = useState(0);
 
+
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
     const checkLogin = () => {
         if (phone.length == 0) {
             alert("Chưa nhập số điện thoại");
@@ -24,30 +32,32 @@ const Login = (props) => {
         if (pass.length == 0) {
             alert("Chưa nhập Password");
             return;
-
         }
         setIsDone(true)
-
         let url = 'http://' + ip + ':3000/login/' + phone;
-
         fetch(url)
             .then((res) => { return res.json(); })
             .then(async (res_json) => {
                 if (res_json.length != 1) {
                     alert("Không tồn tại username hoặc bị trùng lặp dữ liệu");
                     setIsDone(false)
-
                     return;
                 }
                 // đến đây là tồn tại 1 bản ghi, kiểm tra password
                 let objU = res_json[0];
                 if (objU.pass != pass) {
-                    alert("Sai password");
-                    setIsDone(false)
+                    setPasswordError('Mật khẩu không đúng vui lòng thử lại!');
+                    setLoginAttempts(loginAttempts + 1);
+                    if (loginAttempts >= 2) {
+                        // reset pass
+                        setResetPasswordModalVisible(true);
+                    }
+                    setIsDone(false);
                     return;
 
-                }
 
+                }
+                setLoginAttempts(0);
                 // đến đây là đúng thông tin, thì lưu vào storage và chuyển màn hình
                 try {
 
@@ -81,7 +91,10 @@ const Login = (props) => {
         props.navigation.navigate('SignUp');
     }
 
-
+    const quenMatKhau=()=>{
+        props.navigation.navigate("ResetPass")
+        setResetPasswordModalVisible(false);
+    }
     return (
 
         <ImageBackground blurRadius={1} style={{ flex: 1 }} source={require('../Images/nenbarber.jpg')}>
@@ -89,8 +102,8 @@ const Login = (props) => {
 
                 <Modal
                     animationType='fade'
-                    visible={isDone}
                     transparent={true}
+                    visible={isDone}
                 >
                     <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.5 }}>
 
@@ -110,9 +123,22 @@ const Login = (props) => {
 
                 <View style={style.btn}>
                     <Icons name="lock" color="#FFF" size={30} style={{ marginTop: 8 }} />
-                    <TextInput style={style.textinput} placeholder='Password' secureTextEntry={true} textContentType="password" placeholderTextColor='white' onChangeText={(txt) => { setPass(txt) }} />
+                    <TextInput
+                        style={[style.textinput, { borderColor: passwordError ? 'red' : 'white' }]}
+                        placeholder='Password'
+                        secureTextEntry={!showPassword}
+                        textContentType="password"
+                        placeholderTextColor='white'
+                        onChangeText={(txt) => {
+                            setPass(txt);
+                            setPasswordError("");
+                        }}
+                    />
+                    <TouchableOpacity onPress={toggleShowPassword}>
+                        <Icons name={showPassword ? "eye-off" : "eye"} color="#FFF" size={30} style={{ marginTop: 8, marginLeft: 8 }} />
+                    </TouchableOpacity>
                 </View>
-
+                <Text style={{ color: 'red', marginLeft: 70 }}>{passwordError}</Text>
                 <TouchableOpacity onPress={() => { props.navigation.navigate('ResetPass') }} style={{ width: '88%', marginTop: 20, marginRight: 50, alignItems: 'flex-end', }}>
                     <Text style={{ color: 'white', }}>Quên mật khẩu?</Text>
                 </TouchableOpacity>
@@ -124,7 +150,31 @@ const Login = (props) => {
                 </TouchableOpacity>
 
                 <Text style={{ color: 'white', marginTop: 20, alignSelf: 'center' }} onPress={SignUp} >Bạn chưa có tài khoản?</Text>
-
+                <Modal animationType='fade'
+                    transparent={true}
+                    visible={resetPasswordModalVisible}>
+                    <View style={{ backgroundColor: 'white',marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 5,width:"90%",height:"35%" }}>
+                        <View style={{width:"100%",height:55}}>
+                          <Text style={{color:"red",padding:16,fontSize:20}}>Thông báo</Text>
+                          <View style={{borderBottomWidth:0.5,borderBottomColor:"gray"}}></View>
+                        <Text style={{padding:16}}>Bạn nhập mật khẩu không trùng khớp quá nhiều.</Text>
+                        <TouchableOpacity onPress={quenMatKhau} style={{justifyContent:"center",alignItems:"center",width:"90%",height:45,backgroundColor:"#CD853F",marginLeft:"5%",borderRadius:10}}>
+                                <Text style={{padding:10,color:"white"}}>
+                                    Quên mật khẩu
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{setResetPasswordModalVisible(false)}} style={{justifyContent:"center",alignItems:"center",height:45,width:"90%",marginLeft:"5%",borderWidth:0.5,borderColor:"#CD853F",borderRadius:10,marginTop:10}}>
+                                <Text style={{color:"#CD853F"}}>
+                                    Thử lại
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                       
+                            
+                      
+                        
+                    </View>
+                </Modal>
             </SafeAreaView>
 
         </ImageBackground>

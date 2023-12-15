@@ -8,7 +8,8 @@ const Balance = (props) => {
     const [userInfor, setUserInfor] = useState({});
     const [saveImage, setsaveImage] = useState({});
     const [totalBalance, setTotalBalance] = useState(0);
-
+    const [amountValidationError, setAmountValidationError] = useState('');
+    const [isValidAmount, setIsValidAmount] = useState(true);
     const getLoginInfor = async () => {
         const user = await AsyncStorage.getItem('loginInfo');
         const m_saveImage = await AsyncStorage.getItem('savedImage')
@@ -28,23 +29,31 @@ const Balance = (props) => {
         return value.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    const isAmountValid = () => {
+    const validateAmount = () => {
         const depositAmount = parseFloat(amountToDeposit.replace(/,/g, ''));
-        return !isNaN(depositAmount) && depositAmount >= 10000 && depositAmount <= 50000000;
+
+        if (isNaN(depositAmount)) {
+            setIsValidAmount(false);
+        } else if (depositAmount < 10000) {
+            setAmountValidationError('Số tiền bạn nạp phải trên 10.000đ');
+            setIsValidAmount(false);
+        } else if (depositAmount > 50000000) {
+            setAmountValidationError('Số tiền bạn nạp đã quá mức cho phép. Vui lòng thử lại!!!');
+            setIsValidAmount(false);
+        } else {
+            setAmountValidationError('');
+            setIsValidAmount(true);
+        }
     };
+
+    useEffect(() => {
+        validateAmount();
+    }, [amountToDeposit]);
+
 
     const showDepositConfirmation = () => {
         const depositAmount = parseFloat(amountToDeposit.replace(/,/g, ''));
-        if (isNaN(depositAmount)) {
-            console.error('Số tiền gửi đi không hợp lệ');
-            return setAmountToDeposit("");
-        } else if (depositAmount < 10000) {
-            Alert.alert("Lỗi", "Số tiền bạn nạp phải trên 10.000đ");
-            return;
-        } else if (depositAmount > 50000000) {
-            Alert.alert("Lỗi", "Số tiền bạn nạp đã quá mức cho phép. Vui lòng thử lại!!!");
-            return;
-        }
+      
         props.navigation.navigate("ThanhToanAnToan", {
             userId: userInfor._id,
             name: userInfor.name,
@@ -69,13 +78,18 @@ const Balance = (props) => {
                         </View>
                     </TouchableOpacity>
                     <Text style={{ marginLeft: 25, marginTop: 5 }}>Số tiền cần nạp</Text>
+                    
                     <TextInput
-                        style={styles.input}
+                        style={[
+                            styles.input,
+                            { borderColor: amountValidationError ? 'red' : '#CD853F' },
+                        ]}
                         placeholder='Số tiền nạp'
                         value={formatCurrency(amountToDeposit)}
                         onChangeText={(txt) => setAmountToDeposit(formatCurrency(txt))}
                         keyboardType='numeric'
                     />
+                    <Text style={{ marginLeft: 25, marginTop: 5, color: 'red' }}>{amountValidationError}</Text>
                 </View>
 
                 <Text style={{ padding: 16, fontWeight: "bold", fontSize: 20 }}>Tiện ích</Text>
@@ -88,9 +102,9 @@ const Balance = (props) => {
             </ScrollView>
 
             <TouchableOpacity
-                style={[styles.opacitybtn, { opacity: isAmountValid() ? 1 : 0.5 }]}
-                onPress={isAmountValid() ? showDepositConfirmation : null}
-                disabled={!isAmountValid()}
+                style={[styles.opacitybtn, { opacity: isValidAmount ? 1 : 0.5 }]}
+                onPress={isValidAmount ? showDepositConfirmation : null}
+                disabled={!isValidAmount}
             >
                 <Text style={styles.btnText}>Nạp tiền</Text>
             </TouchableOpacity>
@@ -136,7 +150,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 8,
         paddingLeft: 10,
-        marginBottom: 16,
+       
         marginLeft: "5%",
     },
     utilityContainer: {
