@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, TouchableHighlight, } from 'react-native'
+import { View, Image, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, TouchableHighlight, TextInput, } from 'react-native'
 import React from 'react';
 import { useState } from "react";
 import ip from '../../IP';
@@ -6,7 +6,7 @@ const ChamSocDa = (props) => {
   const { navigation } = props;
   const [dsProductChamSocDa, setdsProductChamSocDa] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   const getList = async () => {
 
@@ -104,14 +104,23 @@ const ChamSocDa = (props) => {
     );
 
   }
+  const filteredProducts = dsProductChamSocDa.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <SafeAreaView style={{ height: "88%" }}>
+    <SafeAreaView style={{ height: "77%" }}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Tìm kiếm sản phẩm"
+        onChangeText={(text) => setSearchTerm(text)}
+        value={searchTerm}
+      />
       <View >
         {
           (isLoading)
             ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-            : <FlatList numColumns={numColumns} data={dsProductChamSocDa} renderItem={renderProductSalon} />
+            : <FlatList numColumns={numColumns} data={filteredProducts} renderItem={renderProductSalon} />
 
         }
       </View>
@@ -135,6 +144,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     borderColor: "#F8F8FF",
     borderWidth: 1
+  },
+  searchInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 10,
+    paddingLeft: 10,
+    fontSize: 15,
   },
 
 })
