@@ -53,6 +53,7 @@ const Home = (props) => {
         }
 
     }
+
     React.useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             // cập nhật giao diện ở đây
@@ -76,7 +77,7 @@ const Home = (props) => {
     }
 
     return (
-        <View style={{ height:"90%" }}>
+        <View style={{ height: "90%" }}>
             <Modal
                 transparent={true}
                 animationType="slide"
