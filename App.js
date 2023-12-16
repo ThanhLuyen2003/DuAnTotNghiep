@@ -54,6 +54,7 @@ import DonHangHoanThanh from './Components/ComponentsDonHang/DonHangHoanThanh';
 import LichSuNapTien from './Components/LichSuNapTien';
 import QuenMatKhau from './Components/QuenMatKhau';
 import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
+import FindPro from './Components/FindPro';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -148,6 +149,9 @@ export default function App() {
         <Stack.Screen name="LichSuNapTien" component={LichSuNapTien} options={{ headerShown: false }} />
 
         <Stack.Screen name="QuenMatKhau" component={QuenMatKhau} options={{ headerShown: false }} />
+
+        <Stack.Screen name="FindPro" component={FindPro} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
 
