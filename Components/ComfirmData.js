@@ -1,9 +1,10 @@
-import { ActivityIndicator, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
 import ip from '../IP';
 import * as Notifications from 'expo-notifications';
+import { CommonActions } from '@react-navigation/native';
 
 
 
@@ -62,6 +63,29 @@ const ComfirmData = (props) => {
 
     const addBill = async () => {
 
+        if (userInfo.name == "Khách") {
+            Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+                {
+                    text: "Hủy",
+                    onPress: () => { props.navigation.navigate("Home") }
+
+                }
+                ,
+                {
+                    text: "Đăng nhập",
+                    onPress: () => {
+                        props.navigation.dispatch(
+                            CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: 'Login' }]
+                            })
+                        )
+                    }
+                }
+            ])
+
+            return;
+        }
         //setIsDone(true)
         let obj = {
             nameSalon: name,

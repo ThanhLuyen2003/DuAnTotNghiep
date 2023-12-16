@@ -105,18 +105,13 @@ const NuocHoa = (props) => {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <SafeAreaView style={{ height: "77%" }}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Tìm kiếm sản phẩm"
-        onChangeText={(text) => setSearchTerm(text)}
-        value={searchTerm}
-      />
+    <SafeAreaView style={{ height: "88%" }}>
+
       <View >
         {
           (isLoading)
             ? (<ActivityIndicator style={{ marginTop: 300, }} />)
-            : <FlatList numColumns={numColumns} data={filteredProducts} renderItem={renderProductSalon} />
+            : <FlatList numColumns={numColumns} data={dsProductNuocHoa} renderItem={renderProductSalon} />
 
         }
       </View>
