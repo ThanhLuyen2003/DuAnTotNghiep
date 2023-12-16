@@ -1,16 +1,19 @@
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Onboarding from 'react-native-onboarding-swiper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
+const objU = { _id: "cc", address: "", avatar: "https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg", balance: 0, email: "", name: "Khách", "otp": "", pass: "cc", phone: "" }
 
 const GioiThieu = (props) => {
     const { navigation } = props;
-    const DoneAndSkip = () => {
-        setTimeout(() => {
-            navigation.navigate("Login")
-        }, 1000);
+    const DoneAndSkip = async () => {
+
+        await AsyncStorage.setItem('loginInfo', JSON.stringify(objU));
+        props.navigation.navigate('HomeTab', { id: objU._id });
+
+
     }
     const donButton = ({ ...props }) => {
         return (
@@ -66,6 +69,6 @@ const styles = StyleSheet.create({
     },
 
 
-        
+
 
 })
