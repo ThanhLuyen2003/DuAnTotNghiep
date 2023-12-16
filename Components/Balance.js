@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 
 const Balance = (props) => {
     const [amountToDeposit, setAmountToDeposit] = useState('');
@@ -53,7 +54,32 @@ const Balance = (props) => {
 
     const showDepositConfirmation = () => {
         const depositAmount = parseFloat(amountToDeposit.replace(/,/g, ''));
-      
+
+        if (userInfor.name == "Khách") {
+            Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+                {
+                    text: "Hủy",
+                    onPress: () => { navigation.navigate("Home") }
+
+                }
+                ,
+                {
+                    text: "Đăng nhập",
+                    onPress: () => {
+                        props.navigation.dispatch(
+                            CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: 'Login' }]
+                            })
+                        )
+                    }
+                }
+            ])
+
+            return;
+        }
+
+
         props.navigation.navigate("ThanhToanAnToan", {
             userId: userInfor._id,
             name: userInfor.name,
@@ -78,7 +104,7 @@ const Balance = (props) => {
                         </View>
                     </TouchableOpacity>
                     <Text style={{ marginLeft: 25, marginTop: 5 }}>Số tiền cần nạp</Text>
-                    
+
                     <TextInput
                         style={[
                             styles.input,
@@ -150,7 +176,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 8,
         paddingLeft: 10,
-       
+
         marginLeft: "5%",
     },
     utilityContainer: {
