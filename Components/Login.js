@@ -75,6 +75,7 @@ const Login = (props) => {
                     if (objU.pass) {
                         await AsyncStorage.setItem('pass', objU.pass);
                     }
+                    console.log(objU);
                     props.navigation.navigate('HomeTab', { id: objU._id });
                     setIsDone(false)
 
@@ -91,7 +92,7 @@ const Login = (props) => {
         props.navigation.navigate('SignUp');
     }
 
-    const quenMatKhau=()=>{
+    const quenMatKhau = () => {
         props.navigation.navigate("ResetPass")
         setResetPasswordModalVisible(false);
     }
@@ -153,26 +154,26 @@ const Login = (props) => {
                 <Modal animationType='fade'
                     transparent={true}
                     visible={resetPasswordModalVisible}>
-                    <View style={{ backgroundColor: 'white',marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 5,width:"90%",height:"35%" }}>
-                        <View style={{width:"100%",height:55}}>
-                          <Text style={{color:"red",padding:16,fontSize:20}}>Thông báo</Text>
-                          <View style={{borderBottomWidth:0.5,borderBottomColor:"gray"}}></View>
-                        <Text style={{padding:16}}>Bạn nhập mật khẩu không trùng khớp quá nhiều.</Text>
-                        <TouchableOpacity onPress={quenMatKhau} style={{justifyContent:"center",alignItems:"center",width:"90%",height:45,backgroundColor:"#CD853F",marginLeft:"5%",borderRadius:10}}>
-                                <Text style={{padding:10,color:"white"}}>
+                    <View style={{ backgroundColor: 'white', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 5, width: "90%", height: "35%" }}>
+                        <View style={{ width: "100%", height: 55 }}>
+                            <Text style={{ color: "red", padding: 16, fontSize: 20 }}>Thông báo</Text>
+                            <View style={{ borderBottomWidth: 0.5, borderBottomColor: "gray" }}></View>
+                            <Text style={{ padding: 16 }}>Bạn nhập mật khẩu không trùng khớp quá nhiều.</Text>
+                            <TouchableOpacity onPress={quenMatKhau} style={{ justifyContent: "center", alignItems: "center", width: "90%", height: 45, backgroundColor: "#CD853F", marginLeft: "5%", borderRadius: 10 }}>
+                                <Text style={{ padding: 10, color: "white" }}>
                                     Quên mật khẩu
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>{setResetPasswordModalVisible(false)}} style={{justifyContent:"center",alignItems:"center",height:45,width:"90%",marginLeft:"5%",borderWidth:0.5,borderColor:"#CD853F",borderRadius:10,marginTop:10}}>
-                                <Text style={{color:"#CD853F"}}>
+                            <TouchableOpacity onPress={() => { setResetPasswordModalVisible(false) }} style={{ justifyContent: "center", alignItems: "center", height: 45, width: "90%", marginLeft: "5%", borderWidth: 0.5, borderColor: "#CD853F", borderRadius: 10, marginTop: 10 }}>
+                                <Text style={{ color: "#CD853F" }}>
                                     Thử lại
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                       
-                            
-                      
-                        
+
+
+
+
                     </View>
                 </Modal>
             </SafeAreaView>
