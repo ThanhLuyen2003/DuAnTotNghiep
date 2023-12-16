@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Modal, Alert } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -8,6 +8,7 @@ import Ingredient from './Ingredient';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ip from '../../IP';
+import { CommonActions } from '@react-navigation/native';
 const topTap = createMaterialTopTabNavigator();
 
 const ChiTietItemShop = ({ route, navigation }) => {
@@ -130,6 +131,29 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
   const addCart = () => {
 
+    if (userInfo.name == "Khách") {
+      Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+        {
+          text: "Hủy",
+          onPress: () => { navigation.navigate("Home") }
+
+        }
+        ,
+        {
+          text: "Đăng nhập",
+          onPress: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'Login' }]
+              })
+            )
+          }
+        }
+      ])
+
+      return;
+    }
 
     if (route.params.soLuong == 0) {
       alert("Đã hết hàng!")
@@ -170,6 +194,30 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const Order = () => {
+
+    if (userInfo.name == "Khách") {
+      Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+        {
+          text: "Hủy",
+          onPress: () => { navigation.navigate("Home") }
+
+        }
+        ,
+        {
+          text: "Đăng nhập",
+          onPress: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'Login' }]
+              })
+            )
+          }
+        }
+      ])
+
+      return;
+    }
 
     if (route.params.soLuong == 0) {
       alert("Đã hết hàng!")
@@ -414,8 +462,13 @@ const ChiTietItemShop = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row' }}>
               <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
 
-              <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
-
+              <View >
+                <Text style={{ alignSelf: 'center', fontSize: 20, color: 'red' }}>{price} Đ</Text>
+                {route.params.soLuong == 0
+                  ? <View><Text>Hết hàng</Text></View>
+                  : <Text>Kho: {route.params.soLuong} </Text>
+                }
+              </View>
             </View>
 
             <View style={{ flexDirection: 'row', }}>
