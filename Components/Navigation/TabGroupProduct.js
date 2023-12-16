@@ -65,47 +65,47 @@ const TabGroupProduct = (props) => {
   return (
     <View style={{ height: '90%' }}>
       <View style={{ height: '20%', width: '100%', backgroundColor: "#778899", flexDirection: 'row', alignItems: 'center', padding: 20 }}>
-                <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
-                    {isAvatarValid ? (
-                        <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+        <TouchableOpacity onPress={() => { props.navigation.navigate("ThongTinTaiKhoan") }}>
+          {isAvatarValid ? (
+            <Image source={{ uri: saveImage }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
 
-                    ) :
-                        (
-                            <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
-                        )}
-                </TouchableOpacity>
+          ) :
+            (
+              <Image source={{ uri: userInfo.avatar }} style={{ height: 60, width: 60, borderRadius: 50, marginBottom: '5%' }} />
+            )}
+        </TouchableOpacity>
 
-                <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%', marginTop: 10 }}>
-                    <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
-                    <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
-                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6, flexDirection: "row", marginTop: 5 }}>
-                        <Text style={{ color: "white", }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
-                        <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
-                            <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} style={{ marginLeft: 10 }} />
-                        </TouchableOpacity>
-                    </View>
-
-
-                </View>
-
-                <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20, flexDirection: 'row' }} >
-                    <Icons name="cart" size={25} color="white" />
-
-                    {data.length != 0
-                        ? <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
-                            <Text style={{ color: 'white', fontSize: 10, }} > {data.length} </Text>
-                        </View>
-                        : <View></View>
-                    }
-
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => props.navigation.navigate('ThongTinTaiKhoan')} style={{ position: 'absolute', right: 60 }}>
-                    <Icons name="account" size={25} color="white" />
-                </TouchableOpacity>
+        <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%', marginTop: 10 }}>
+          <Text style={{ fontSize: 20, color: 'white' }} >{userInfo.name} </Text>
+          <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
+          <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6, flexDirection: "row", marginTop: 5 }}>
+            <Text style={{ color: "white", }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
+            <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
+              <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} style={{ marginLeft: 10 }} />
+            </TouchableOpacity>
+          </View>
 
 
+        </View>
+
+        <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfo._id }) }} style={{ position: 'absolute', right: 20, flexDirection: 'row' }} >
+          <Icons name="cart" size={25} color="white" />
+
+          {data.length != 0
+            ? <View style={{ position: 'absolute', bottom: 15, left: 12, height: 18, backgroundColor: 'red', padding: 3, borderRadius: 10, }}>
+              <Text style={{ color: 'white', fontSize: 10, }} > {data.length} </Text>
             </View>
+            : <View></View>
+          }
+
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => props.navigation.navigate('FindPro')} style={{ position: 'absolute', right: 60 }}>
+          <Icons name="magnify" size={25} color="white" />
+        </TouchableOpacity>
+
+
+      </View>
 
       <topTap.Navigator
         style={styles.con2}
