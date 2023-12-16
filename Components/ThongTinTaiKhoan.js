@@ -15,6 +15,22 @@ const ThongTinTaiKhoan = (props) => {
     const [totalBalance, settotalBalance] = useState(0)
     const [oldPassword, setoldPassword] = useState("");
     const editProfile = () => {
+        if (userInfor.name == "Khách") {
+            Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+                {
+                    text: "Hủy",
+                    onPress: () => { props.navigation.navigate("Home") }
+
+                }
+                ,
+                {
+                    text: "Đăng nhập",
+                    onPress: () => { props.navigation.navigate("Login") }
+                }
+            ])
+
+            return;
+        }
         props.navigation.navigate("EditProfile")
     }
     const getLoginInfor = async () => {
@@ -39,6 +55,15 @@ const ThongTinTaiKhoan = (props) => {
     const isAvatarValid = saveImage && typeof saveImage === 'string' && saveImage.trim() !== '';
 
     const logout = async () => {
+        if (userInfor.name == "Khách") {
+            props.navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'Login' }]
+                })
+            )
+            return;
+        }
         try {
             setIsDone(true);
             await AsyncStorage.removeItem('loginInfo');
@@ -50,7 +75,7 @@ const ThongTinTaiKhoan = (props) => {
             props.navigation.dispatch(
                 CommonActions.reset({
                     index: 0,
-                    routes: [{ name: 'GioiThieu' }]
+                    routes: [{ name: 'Login' }]
                 })
             )
 
@@ -121,7 +146,11 @@ const ThongTinTaiKhoan = (props) => {
             <View style={{ position: 'absolute', bottom: 20, width: '100%' }}>
 
                 <TouchableOpacity onPress={logout} style={styles.logoutButton}>
-                    <Text style={{ color: 'white' }}>ĐĂNG XUẤT</Text>
+
+                    {userInfor.name == "Khách"
+                        ? <Text style={{ color: 'white' }}>Đăng nhập</Text>
+                        : <Text style={{ color: 'white' }}>ĐĂNG XUẤT</Text>
+                    }
                 </TouchableOpacity>
 
             </View>
