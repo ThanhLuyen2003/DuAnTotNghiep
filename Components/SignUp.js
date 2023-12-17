@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable,Modal } from "react-native";
+import { View, Image, StyleSheet, ImageBackground, Text, TextInput, Pressable, Modal } from "react-native";
 import { useState } from "react";
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ip from "../IP";
@@ -42,20 +42,27 @@ const SignUp = (props) => {
         setIsDone(true);
         if (!name || !email || !phone || !pass || !rePass) {
             alert("Vui lòng điền đầy đủ thông tin.");
+            setIsDone(false)
             return;
         }
 
         if (pass != rePass) {
             alert("Mật khẩu không khớp. Vui lòng kiểm tra lại.");
+            setIsDone(false)
+
             return;
         }
 
         if (!isValidPhoneNumber(phone)) {
             alert('Số điện thoại không hợp lệ. Vui lòng kiểm tra lại!');
+            setIsDone(false)
+
             return;
         }
         if (!isValidEmail(email)) {
             alert('Email không hợp lệ. Vui lòng kiểm tra lại!');
+            setIsDone(false)
+
             return;
         }
 
@@ -63,6 +70,8 @@ const SignUp = (props) => {
 
         if (name.length < 11) {
             alert("Tên phải nhiều hơn 10 ký tự!");
+            setIsDone(false)
+
             return;
         }
 
@@ -94,7 +103,7 @@ const SignUp = (props) => {
                     .then(response => {
                         if (response.status === 200) {
                             alert("Thêm thành công");
-                            
+
                             navigation.navigate("Login")
                             setIsDone(false);
                         } else if (response.status === 400) {

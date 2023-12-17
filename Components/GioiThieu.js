@@ -4,7 +4,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const objU = { _id: "cc", address: "", avatar: "https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg", balance: 0, email: "", name: "Khách", "otp": "", pass: "cc", phone: "" }
+const objU = { _id: "657ea4bcd88c31e6fe03ebfe", address: "", avatar: "https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg", balance: 0, email: "", name: "Khách", "otp": "", pass: "cc", phone: "" }
 
 const GioiThieu = (props) => {
     const { navigation } = props;

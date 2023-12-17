@@ -142,6 +142,8 @@ const ChiTietItemShop = ({ route, navigation }) => {
         {
           text: "Đăng nhập",
           onPress: () => {
+            setModalCart(false);
+
             navigation.dispatch(
               CommonActions.reset({
                 index: 0,
@@ -206,6 +208,8 @@ const ChiTietItemShop = ({ route, navigation }) => {
         {
           text: "Đăng nhập",
           onPress: () => {
+            setModalOrder(false)
+
             navigation.dispatch(
               CommonActions.reset({
                 index: 0,

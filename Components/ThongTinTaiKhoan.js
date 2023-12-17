@@ -25,7 +25,14 @@ const ThongTinTaiKhoan = (props) => {
                 ,
                 {
                     text: "Đăng nhập",
-                    onPress: () => { props.navigation.navigate("Login") }
+                    onPress: () => {
+                        props.navigation.dispatch(
+                            CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: 'Login' }]
+                            })
+                        )
+                    }
                 }
             ])
 
