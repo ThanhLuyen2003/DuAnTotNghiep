@@ -55,6 +55,9 @@ import LichSuNapTien from './Components/LichSuNapTien';
 import QuenMatKhau from './Components/QuenMatKhau';
 import ThongTinTaiKhoan from './Components/ThongTinTaiKhoan';
 import FindPro from './Components/FindPro';
+import ip from './IP';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -69,6 +72,38 @@ const Stack = createNativeStackNavigator();
 const Tabb = createBottomTabNavigator();
 
 export default function App() {
+
+  async function schedulePushNotification(id, status) {
+
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Thông báo từ PolyShop",
+        body: "Đơn hàng: " + id + " " + status,
+      },
+      trigger: {
+        seconds: 2
+      },
+    });
+  }
+
+  useEffect(() => {
+    // Thiết lập kết nối với máy chủ Node.js
+    const socket = io('http://' + ip + ':9999'); // Đổi địa chỉ IP tại đây
+
+    // Lắng nghe sự kiện 'dataChanged' từ máy chủ
+    socket.on('dataChanged', (id, status) => {
+      // Khi nhận được thông điệp về sự thay đổi dữ liệu từ máy chủ
+      // Hiển thị thông báo, xử lý dữ liệu hoặc thực hiện các hành động khác ở đây
+      schedulePushNotification(id, status);
+
+      console.log('Data changed:', id + status);
+
+    });
+    return () => {
+      // Ngắt kết nối khi component unmount
+      socket.disconnect();
+    };
+  }, []);
 
 
   return (
