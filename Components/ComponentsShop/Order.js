@@ -276,7 +276,63 @@ const Order = (props) => {
                                 }).then(res => {
                                     if (res.status == 200) {
 
-                                        datHang();
+                                        let url = 'http://' + ip + ':3000/addOrder';
+
+                                        let obj = {
+                                            idUser: userInfor._id,
+                                            nameU: userInfor.name,
+                                            phoneU: userInfor.phone,
+                                            addressU: userInfor.address,
+                                            message: message,
+                                            price: pay,
+                                            products: products,
+                                            status: "Có đơn",
+                                            time: time,
+                                            note: "Đã thanh toán"
+                                        }
+
+                                        console.log(obj);
+
+                                        if (userInfor.address == "") {
+                                            alert("Cần cập nhật địa chỉ!");
+                                            return;
+                                        }
+                                        setisDone(true)
+
+                                        fetch(url, {
+                                            method: 'POST',
+                                            headers: {
+                                                Accept: 'application/json',
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(obj)
+                                        }).catch((ex) => {
+                                            console.log(ex);
+                                        }).then(res => {
+                                            if (res.status == 200) {
+
+                                                products.forEach((item) => {
+
+                                                    const url = 'http://' + ip + ':3000/delCart/' + item.idCart;
+
+                                                    fetch(url, {
+                                                        method: 'DELETE',
+                                                        headers: {
+                                                            Accept: 'application/json',
+                                                            'Content-Type': 'application/json',
+                                                        }
+                                                    })
+                                                })
+
+                                                setisDone(false)
+                                                alert('Đặt hàng thành công')
+                                                props.navigation.navigate('Home');
+
+                                            } else {
+                                                alert("cut")
+                                            }
+                                        });
+
                                     }
                                 })
 

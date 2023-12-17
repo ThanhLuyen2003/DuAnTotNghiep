@@ -143,6 +143,11 @@ const ThongTinTaiKhoan = (props) => {
                 </View>
             </View>
 
+            <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold", padding: 8, marginTop: 40, width: "50%" }}>ĐỔI MẬT KHẨU</Text>
+
+                <Text onPress={() => { props.navigation.navigate("QuenMatKhau") }} style={{ color: "#FF9900", padding: 8, marginTop: 40, width: "50%", textAlign: "right" }}>Chỉnh sửa</Text>
+            </View>
             <View style={{ position: 'absolute', bottom: 20, width: '100%' }}>
 
                 <TouchableOpacity onPress={logout} style={styles.logoutButton}>

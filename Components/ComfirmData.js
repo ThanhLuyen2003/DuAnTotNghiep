@@ -86,7 +86,7 @@ const ComfirmData = (props) => {
 
             return;
         }
-        //setIsDone(true)
+        setIsDone(true)
         let obj = {
             nameSalon: name,
             addressSalon: address,

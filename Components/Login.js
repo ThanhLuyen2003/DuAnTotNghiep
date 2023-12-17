@@ -75,7 +75,6 @@ const Login = (props) => {
                     if (objU.pass) {
                         await AsyncStorage.setItem('pass', objU.pass);
                     }
-                    console.log(objU);
                     props.navigation.navigate('HomeTab', { id: objU._id });
                     setIsDone(false)
 

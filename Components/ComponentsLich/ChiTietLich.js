@@ -26,6 +26,25 @@ const ChiTietLich = (props) => {
             </View>
         )
     }
+
+    const fomatPrice = (pay) => {
+
+        if (pay.length == 5) {
+            pay = (pay.substring(0, 2) + '.' + pay.substring(2, 5));
+        } else
+            if (pay.length == 6) {
+                pay = (pay.substring(0, 3) + '.' + pay.substring(3, 6));
+
+            } else
+                if (pay.length == 7) {
+                    pay = (pay.substring(0, 1) + '.' + pay.slice(1, 4) + '.' + pay.slice(4, 7));
+                } else
+                    if (pay.length == 8) {
+                        pay = (pay.substring(0, 2) + '.' + pay.slice(2, 5) + '.' + pay.slice(5, 8));
+                    }
+        return pay;
+    }
+
     return (
         <View style={{ backgroundColor: 'white', height: '100%', padding: 20, }}>
 
@@ -64,7 +83,7 @@ const ChiTietLich = (props) => {
 
                 <View style={{ padding: 12, flexDirection: 'row' }} >
                     <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Thành tiền:  </Text>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{props.route.params.price} VNĐ</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>{fomatPrice(props.route.params.price)} VNĐ</Text>
                 </View>
 
             </View>
