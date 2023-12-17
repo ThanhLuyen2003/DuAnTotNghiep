@@ -39,6 +39,8 @@ const ChiTietItemShop = ({ route, navigation }) => {
   const [userAvatar, setUserAvatar] = useState(null);
 
   const [saveImage, setsaveImage] = useState({});
+
+  const [isDone, setIsDone] = useState(false);
   const getLoginInfor = async () => {
 
     const value = await AsyncStorage.getItem('loginInfo');
@@ -66,6 +68,31 @@ const ChiTietItemShop = ({ route, navigation }) => {
 
 
   const addComment = () => {
+
+    if (userInfo.name == "Khách") {
+      Alert.alert("Thông báo", "Vui lòng đăng nhập", [
+        {
+          text: "Hủy",
+          onPress: () => { navigation.navigate("Home") }
+
+        }
+        ,
+        {
+          text: "Đăng nhập",
+          onPress: () => {
+
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'Login' }]
+              })
+            )
+          }
+        }
+      ])
+    }
+
+    setIsDone(true)
 
     let obj = {
       Comment: Comment,
@@ -98,10 +125,13 @@ const ChiTietItemShop = ({ route, navigation }) => {
             await AsyncStorage.setItem('savedImage', obj.avatarUser);
             setsaveImage(obj.avatarUser);
           }
+          setComment("");
+
+          setIsDone(false)
           getList();
-          setComment('');
         } else {
           alert("Vui lòng cập nhật đầy đủ thông tin")
+          setIsDone(false)
           return res;
 
         }
@@ -283,6 +313,17 @@ const ChiTietItemShop = ({ route, navigation }) => {
   return (
 
     <SafeAreaView>
+
+      <Modal
+        animationType='fade'
+        transparent={true}
+        visible={isDone}
+      >
+        <View style={{ padding: 40, backgroundColor: 'black', marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto', borderRadius: 20, opacity: 0.5 }}>
+
+          <ActivityIndicator />
+        </View>
+      </Modal>
       <ScrollView style={{ height: "92%" }} nestedScrollEnabled={true}>
 
 
