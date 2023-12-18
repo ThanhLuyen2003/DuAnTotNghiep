@@ -193,9 +193,6 @@ const Order = (props) => {
 
     const [selectedId, setSelectedId] = useState("");
 
-    const hi = () => {
-        alert("Chọn phương thức thanh toán");
-    }
 
     const BarberPay = async () => {
 
@@ -416,16 +413,9 @@ const Order = (props) => {
                     </View>
                 </View>
 
-                <View style={styles.note}>
-                    <Text style={{ fontSize: 20, fontWeight: '500' }}>Phương thức thanh toán</Text>
+                <Text style={{ fontSize: 20, fontWeight: '500' }}>Phương thức thanh toán</Text>
+                <Text>Thanh toán khi nhận hàng</Text>
 
-                    <RadioGroup
-                        radioButtons={radioButtons}
-                        onPress={setSelectedId}
-                        selectedId={selectedId}
-                        containerStyle={styles.radio}
-                    />
-                </View>
 
 
                 <View style={styles.note}>
@@ -451,23 +441,10 @@ const Order = (props) => {
             <View style={{ marginTop: '2%', height: '10%', backgroundColor: 'white', alignItems: 'flex-end', flexDirection: 'row-reverse', }}>
 
 
-                {selectedId == ""
-                    ?
-                    <TouchableOpacity onPress={hi} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
-                        <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
-                    </TouchableOpacity>
 
-                    :
-                    selectedId == "1"
-                        ?
-                        <TouchableOpacity onPress={datHang} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
-                            <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity onPress={BarberPay} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
-                            <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
-                        </TouchableOpacity>
-                }
+                <TouchableOpacity onPress={datHang} style={{ width: 80, backgroundColor: '#CD853F', height: '100%', alignItems: 'center' }}>
+                    <Text style={{ marginTop: '32%', color: 'white' }}>Đặt hàng</Text>
+                </TouchableOpacity>
 
                 <Text style={{ marginBottom: 20, marginRight: 20, color: 'red' }}>{pay}đ</Text>
 

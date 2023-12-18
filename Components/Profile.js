@@ -91,13 +91,13 @@ const Profile = (props) => {
                             <Text style={{ marginLeft: 10, width: 200 }}>Sở thích phục vụ</Text>
                             <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                         </View> */}
-                        <Pressable onPress={() => { props.navigation.navigate("Balance", { id: userInfor._id }) }}>
+                        {/* <Pressable onPress={() => { props.navigation.navigate("Balance", { id: userInfor._id }) }}>
                             <View style={styles.accountInfoRow}>
                                 <Icons name='notebook-edit-outline' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Nạp tiền</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
-                        </Pressable>
+                        </Pressable> */}
 
                         <Pressable onPress={() => { props.navigation.navigate("TabHistory", { id: userInfor._id }) }}>
                             <View style={styles.accountInfoRow}>
@@ -106,14 +106,14 @@ const Profile = (props) => {
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
                         </Pressable>
-
+                        {/* 
                         <Pressable onPress={() => { props.navigation.navigate("LichSuNapTien", { avatar: saveImage, name: userInfor.name, userId: userInfor._id }) }}>
                             <View style={styles.accountInfoRow}>
                                 <Icons name='security' size={25} color={'#CD853F'} />
                                 <Text style={{ marginLeft: 10, width: 200 }}>Lịch sử giao dịch</Text>
                                 <Icons style={{ paddingLeft: 120 }} name='chevron-right' size={25} color={'#CD853F'} />
                             </View>
-                        </Pressable>
+                        </Pressable> */}
 
                         <Pressable onPress={() => { props.navigation.navigate("CamKetFpoly", { avatar: saveImage, name: userInfor.name }) }}>
                             <View style={styles.accountInfoRow}>

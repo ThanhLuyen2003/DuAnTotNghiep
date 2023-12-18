@@ -107,12 +107,7 @@ const Home = (props) => {
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%', marginTop: 10 }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
                     <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
-                    <View style={{ height: 30, borderWidth: 1, borderColor: "white", justifyContent: "center", alignItems: "center", borderRadius: 20, padding: 6, flexDirection: "row", marginTop: 5 }}>
-                        <Text style={{ color: "white", }}>Số dư ví: {showTongSoDu ? formatCurrency(totalBalance) : '******'}đ</Text>
-                        <TouchableOpacity onPress={() => setShowTongSoDu(!showTongSoDu)}>
-                            <Icons name={showTongSoDu ? 'eye' : 'eye-off'} size={20} color={'black'} style={{ marginLeft: 10 }} />
-                        </TouchableOpacity>
-                    </View>
+
 
 
                 </View>

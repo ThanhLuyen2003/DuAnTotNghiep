@@ -214,7 +214,7 @@ const KhamPha = (props) => {
                 </TouchableOpacity>
                 <View style={{ alignItems: 'flex-start', marginLeft: 10, marginBottom: '5%' }}>
                     <Text style={{ fontSize: 20, color: 'white' }} >{userInfor.name} </Text>
-                    <Text style={{ color: 'white' }} >Muốn ất ơ đến Fpoly Barber</Text>
+                    <Text style={{ color: 'white' }} >Đẹp như trong mơ đến Fpoly Barber</Text>
                 </View>
 
                 <TouchableOpacity onPress={() => { props.navigation.navigate('Cart', { id: userInfor._id }) }} style={{ position: 'absolute', right: 20 }} >
@@ -251,7 +251,7 @@ const KhamPha = (props) => {
                 {showLikedItems ? (
                     <FlatGrid
                         key={key}
-                        
+
                         itemDimension={150}
                         data={getLikedItems()}
                         renderItem={renderItem}
@@ -263,7 +263,7 @@ const KhamPha = (props) => {
                     <FlatGrid
                         spacing={5}
                         key={key}
-                        
+
                         itemDimension={150}
                         data={data}
                         renderItem={renderItem}

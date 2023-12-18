@@ -291,6 +291,11 @@ const ChiTietItemShop = ({ route, navigation }) => {
   }
 
   const plus = () => {
+
+    if (soLuong == route.params.soLuong) {
+      return;
+    }
+
     setsoLuong(soLuong + 1);
   }
 
@@ -504,7 +509,7 @@ const ChiTietItemShop = ({ route, navigation }) => {
               <Icon name='arrow-left' size={20} />
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image source={{ uri: route.params.avatar }} style={{ width: 100, height: 100, marginLeft: 20, }} />
 
               <View >
