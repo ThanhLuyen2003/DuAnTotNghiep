@@ -181,17 +181,7 @@ const KhamPha = (props) => {
 
 
                 <Text style={{ position: 'absolute', top: 170, left: 20, color: "white", fontWeight: "bold" }}>{item.description}</Text>
-                <TouchableOpacity onPress={() => yeuThich(index)}>
-                    <Icons
-                        name="robot-love-outline"
-                        size={25}
-                        style={[
-                            { position: 'absolute', bottom: 150, left: 130, width: 40, height: 40, paddingLeft: 7, paddingTop: 6, borderRadius: 50 },
-                            { backgroundColor: item.isLiked ? 'yellow' : '#CCCCCC' },
-                        ]}
-                        color={'white'}
-                    />
-                </TouchableOpacity>
+
 
             </View>
         )
@@ -240,13 +230,6 @@ const KhamPha = (props) => {
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>XU HƯỚNG TÓC HOT NHẤT</Text>
                 <View style={{ alignItems: "center", padding: 10 }}>
                 </View>
-                <TouchableOpacity onPress={() => setShowLikedItems(!showLikedItems)}>
-                    <View style={{ width: "100%", height: 45, backgroundColor: "#C0C0C0", padding: 10, borderRadius: 10, flexDirection: "row", alignItems: "center" }}>
-                        <Icon name="robot-love" size={20} />
-                        <Text style={{ marginLeft: 10 }}>Đã thích</Text>
-                        <Text style={{ marginLeft: "auto", backgroundColor: "yellow", width: 20, height: 20, paddingLeft: 6, borderRadius: 50 }}>{getTotalLikes()}</Text>
-                    </View>
-                </TouchableOpacity>
 
                 {showLikedItems ? (
                     <FlatGrid
@@ -322,7 +305,7 @@ const styles = StyleSheet.create({
         opacity: 0.8,
     },
     gridView: {
-        marginTop: 20,
+        marginTop: 0,
         flex: 1,
     },
 })
